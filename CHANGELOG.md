@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.2 — démarrage WebView2 plus rapide et fiable
+- **Connexion au pont js↔Python sondée activement** (au lieu d'attendre un événement
+  lent) → l'interface se peuple dès que le moteur est prêt, plus de longue attente
+  « Ne répond pas ».
+- **Profil WebView2 persistant** + **serveur local interne** → démarrages plus rapides et stables.
+- Indicateur « Chargement du catalogue… » pendant l'initialisation.
+
 ## v1.0.1 — démarrage instantané
 - **Démarrage instantané** : le catalogue local s'affiche immédiatement (plus de gel
   « Ne répond pas » au lancement). La vérification des nouveautés en ligne se fait

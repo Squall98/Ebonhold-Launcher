@@ -131,6 +131,7 @@ function renderGrid(){
 }
 function renderCatalog(){
   const c = CATALOG;
+  const bl = $("#bootLoading"); if (bl) bl.classList.add("hidden");
   renderChips(); renderPacks(); renderGrid();
 
   const upd = c.products.find(p => p.status==="update");
@@ -342,8 +343,17 @@ function bind(){
   $("#modalClose").addEventListener("click", closeModal);
   $("#modal").addEventListener("click", e => { if (e.target.id==="modal") closeModal(); });
 }
-let _bound = false;
-function start(){ if (!_bound){ _bound=true; bind(); } reload(true); }
-window.addEventListener("pywebviewready", start);
-if (window.pywebview && window.pywebview.api) start();
-setTimeout(() => { if (!window.pywebview) start(); }, 1500);
+let _bound = false, _started = false;
+function start(){ if (_started) return; _started = true; if (!_bound){ _bound=true; bind(); } reload(true); }
+
+// Le pont pywebview (window.pywebview.api) est injecté de façon asynchrone par WebView2,
+// et l'événement "pywebviewready" est lent/peu fiable. On SONDE donc activement la
+// disponibilité de l'api et on démarre dès qu'elle répond (au lieu d'attendre l'événement).
+(function waitForBridge(){
+  let tries = 0;
+  const iv = setInterval(() => {
+    if (window.pywebview && window.pywebview.api){ clearInterval(iv); start(); }
+    else if (++tries >= 150){ clearInterval(iv); start(); }   // ~30s : filet (preview navigateur -> MOCK)
+  }, 200);
+})();
+window.addEventListener("pywebviewready", start);   // ceinture + bretelles

@@ -35,8 +35,13 @@ class Api:
         Si check_remote=True, on verifie le catalogue en ligne EN ARRIERE-PLAN (thread)
         et on pousse la mise a jour au JS via onCatalogUpdate quand elle est prete.
         """
+        from .paths import startup_log
+        import time as _t
+        startup_log("get_catalog appele (check_remote=%s)" % check_remote)
+        _t0 = _t.time()
         self._manifest, self._source = catalog.fetch(prefer_remote=False)
         resp = self._build_catalog()
+        startup_log("get_catalog retourne en %d ms" % int((_t.time() - _t0) * 1000))
         if check_remote:
             threading.Thread(target=self._remote_refresh, daemon=True).start()
         return resp
