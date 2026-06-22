@@ -1,0 +1,137 @@
+{
+  "launcher_version": "1.0.0",
+  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.0/EbonholdLauncher.exe",
+  "launcher_sha256": "e49edbdb7a3615e4ca0996e7cbcd74afcbe3d33e149b7fde99072fbb8587be16",
+  "_note": "Manifeste de production : les download_url pointent vers les assets de la release GitHub v1.0.0. Pour tester en local, le launcher peut lire manifest.dev.json (chemins locaux).",
+  "categories": [
+    {
+      "id": "traduction",
+      "label": "Traduction",
+      "icon": "ti-language"
+    },
+    {
+      "id": "interface",
+      "label": "Interface & QoL",
+      "icon": "ti-layout-dashboard"
+    },
+    {
+      "id": "donnees",
+      "label": "Données serveur",
+      "icon": "ti-database"
+    }
+  ],
+  "packs": [
+    {
+      "id": "pack-fr",
+      "name": "Pack FR complet",
+      "description": "Tout ce qu'il faut pour jouer en français : traduction + données custom.",
+      "icon": "ti-flag",
+      "accent": "purple",
+      "products": [
+        "ebonholdfr",
+        "patch-z"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Discord Ebonhold FR",
+      "url": "https://discord.gg/ebonhold",
+      "icon": "ti-brand-discord"
+    },
+    {
+      "label": "Soul Tree Planner",
+      "url": "https://squall98.github.io/ebonhold-skilltree/",
+      "icon": "ti-binary-tree"
+    },
+    {
+      "label": "Guides",
+      "url": "https://github.com/Squall98/Ebonhold-Launcher",
+      "icon": "ti-book"
+    }
+  ],
+  "products": [
+    {
+      "id": "ebonholdfr",
+      "name": "EbonholdFR",
+      "category": "traduction",
+      "description": "Traduction française complète : echoes, skill tree, affixes, tomes.",
+      "long_description": "Traduction communautaire complète du contenu custom d'Ebonhold. Couvre les echoes, l'arbre de talents (skill tree), les affixes et les tomes. S'installe dans Interface\\AddOns et fonctionne avec la config langue FR du launcher.",
+      "version": "3.1",
+      "download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.0/EbonholdFR-v3.1.zip",
+      "sha256": "6b4a8b31caf8c349d9bfb9d1458d7b431271423cd8915d7d58348035e382a828",
+      "install_target": "addons",
+      "extract_root": "EbonholdFR",
+      "icon": "ti-language",
+      "accent": "purple",
+      "notes": "Skill tree et affixes retraduits, corrections de tomes.",
+      "changelog_url": "https://github.com/Squall98/EbonholdFR/releases/tag/v3.1",
+      "history": [
+        {
+          "version": "3.1",
+          "notes": "Skill tree et affixes retraduits, corrections de tomes."
+        },
+        {
+          "version": "3.0",
+          "notes": "Refonte des echoes et des descriptions dynamiques."
+        },
+        {
+          "version": "2.0",
+          "notes": "Passage à la méthode patch-Z non-destructive."
+        }
+      ]
+    },
+    {
+      "id": "checkpoints",
+      "name": "EbonholdCheckpoints",
+      "category": "interface",
+      "description": "Téléportation rapide vers les checkpoints débloqués, avec recherche et favoris (FR/EN).",
+      "long_description": "Fenêtre de téléportation rapide vers les checkpoints débloqués. Liste filtrable, recherche par nom, favoris et catégories. Bilingue FR/EN.",
+      "version": "1.2",
+      "download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.0/EbonholdCheckpoints-v1.2.zip",
+      "sha256": "ed102a84819a5d739cf47a75b682ed001fe4dd1b5678e2bc628327cc1fee6613",
+      "install_target": "addons",
+      "extract_root": "EbonholdCheckpoints",
+      "icon": "ti-map-pin",
+      "accent": "teal",
+      "notes": "Ajout des favoris et de la recherche par nom.",
+      "changelog_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/tag/v1.2",
+      "history": [
+        {
+          "version": "1.2",
+          "notes": "Ajout des favoris et de la recherche par nom."
+        },
+        {
+          "version": "1.1",
+          "notes": "Catégories de checkpoints et tri."
+        },
+        {
+          "version": "1.0",
+          "notes": "Première version."
+        }
+      ]
+    },
+    {
+      "id": "patch-z",
+      "name": "Patch-Z (données custom)",
+      "category": "donnees",
+      "description": "Données custom du serveur (sorts, echoes, affixes). À mettre à jour après chaque patch serveur.",
+      "long_description": "Patch de données client (MPQ) contenant les sorts, echoes et affixes custom d'Ebonhold. Se place dans le dossier Data. À mettre à jour après chaque patch majeur du serveur.",
+      "version": "2026.06",
+      "download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.0/patch-Z.MPQ",
+      "sha256": "858c92ff20693be88d76de8265f0bdad8ae77e2088d133973c98ba862782c60e",
+      "install_target": "data",
+      "filename": "patch-Z.MPQ",
+      "icon": "ti-package",
+      "accent": "coral",
+      "notes": "Données custom synchronisées avec le dernier patch serveur.",
+      "changelog_url": "https://github.com/Squall98/Ebonhold-Launcher",
+      "history": [
+        {
+          "version": "2026.06",
+          "notes": "Données custom synchronisées avec le dernier patch serveur."
+        }
+      ]
+    }
+  ]
+}
