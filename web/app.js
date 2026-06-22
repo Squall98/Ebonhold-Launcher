@@ -314,7 +314,10 @@ window.onPackDone = async (ok,msg) => {
 };
 
 /* ------------------------------------------------------------------ chargement */
-async function reload(){ CATALOG = await api().get_catalog(); renderCatalog(); }
+// reload(false) = local instantané ; reload(true) = local instantané + check réseau en fond.
+async function reload(checkRemote=false){ CATALOG = await api().get_catalog(checkRemote); renderCatalog(); }
+// Poussé par le backend quand le catalogue en ligne a été récupéré en arrière-plan.
+window.onCatalogUpdate = (cat) => { CATALOG = cat; renderCatalog(); };
 async function pickFolder(){
   const r = await api().choose_folder();
   if (r.error){ $("#folderValid").textContent=r.error; $("#folderValid").className="folder-valid bad"; toast(r.error,"err"); }
@@ -325,7 +328,7 @@ async function openAddons(){ const r = await api().open_addons_folder(); if (!r.
 
 function bind(){
   $$(".nav-item").forEach(b => b.addEventListener("click", () => switchTab(b.dataset.tab)));
-  $("#refreshBtn").addEventListener("click", () => { reload(); toast("Catalogue actualisé.","ok"); });
+  $("#refreshBtn").addEventListener("click", () => { reload(true); toast("Vérification des nouveautés…","ok"); });
   $("#updateAllBtn").addEventListener("click", updateAll);
   $("#playBtn").addEventListener("click", play);
   $("#folderBtn").addEventListener("click", pickFolder);
@@ -340,7 +343,7 @@ function bind(){
   $("#modal").addEventListener("click", e => { if (e.target.id==="modal") closeModal(); });
 }
 let _bound = false;
-function start(){ if (!_bound){ _bound=true; bind(); } reload(); }
+function start(){ if (!_bound){ _bound=true; bind(); } reload(true); }
 window.addEventListener("pywebviewready", start);
 if (window.pywebview && window.pywebview.api) start();
 setTimeout(() => { if (!window.pywebview) start(); }, 1500);
