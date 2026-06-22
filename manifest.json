@@ -4,8 +4,13 @@
   "launcher_sha256": "dd4cf32f31a6c04d961434f91a605213e88f5a3b89640d866ec3c1e5e2fc4ee3",
   "_note": "Manifeste de production. Les addons sont telecharges depuis leur propre repo GitHub. La traduction FR (patch-Z) se fait via l'onglet Reglages du launcher, pas comme un mod du catalogue.",
   "fr_config": {
-    "pack_url": "https://drive.google.com/file/d/1j3OuTz1KMUsuUWXQiMJaE0yQXmAobRxu/view",
-    "pack_note": "Pack ~2,4 Go requis uniquement pour mettre les menus/quetes/interface en francais (Jeu = FR). Les sorts/hauts faits/titres fonctionnent sans le pack."
+    "pack_url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
+    "pack_note": "Pack ~2,4 Go requis uniquement pour mettre les menus/quetes/interface en francais (Jeu = FR). Les sorts/hauts faits/titres fonctionnent sans le pack.",
+    "pack_download": {
+      "url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
+      "format": "zip",
+      "sha256": "c0f9302f1bbd9c8224dc6e96ea73dbf2928a910f4b576f6ec0ca9972f56ea58f"
+    }
   },
   "categories": [
     {
