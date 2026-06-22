@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.4 — démarrage instantané (correction racine)
+- **Corrigé le démarrage de plusieurs minutes** : l'objet API exposait un attribut public
+  `window` que pywebview tentait d'introspecter au boot, provoquant une récursion infinie
+  dans l'objet fenêtre WebView2 natif (~4 min de blocage). Renommé en `_window` (ignoré par
+  pywebview) → le pont JS s'initialise instantanément.
+- Icônes embarquées en local (plus de dépendance au CDN).
+
 ## v1.0.3 — correction de la lenteur au démarrage (proxy/réseau)
 - WebView2 attendait l'expiration d'un timeout réseau au lancement (tentatives de
   proxy / services de fond) → plusieurs minutes d'attente. Le moteur est désormais

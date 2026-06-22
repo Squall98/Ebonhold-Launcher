@@ -23,7 +23,10 @@ def _status(product, installed_version):
 
 class Api:
     def __init__(self):
-        self.window = None          # injecte par main.py apres create_window
+        self._window = None          # injecte par main.py ; prefixe _ OBLIGATOIRE :
+        # pywebview introspecte tout attribut PUBLIC non-callable du js_api au boot et
+        # recurse dans l'objet fenetre WebView2 natif (-> "maximum recursion depth" +
+        # blocage de plusieurs minutes). Les noms en _ sont ignores par get_functions().
         self._manifest = None
         self._source = None
 
@@ -35,13 +38,8 @@ class Api:
         Si check_remote=True, on verifie le catalogue en ligne EN ARRIERE-PLAN (thread)
         et on pousse la mise a jour au JS via onCatalogUpdate quand elle est prete.
         """
-        from .paths import startup_log
-        import time as _t
-        startup_log("get_catalog appele (check_remote=%s)" % check_remote)
-        _t0 = _t.time()
         self._manifest, self._source = catalog.fetch(prefer_remote=False)
         resp = self._build_catalog()
-        startup_log("get_catalog retourne en %d ms" % int((_t.time() - _t0) * 1000))
         if check_remote:
             threading.Thread(target=self._remote_refresh, daemon=True).start()
         return resp
@@ -126,7 +124,7 @@ class Api:
     def choose_folder(self):
         """Ouvre le selecteur natif de dossier et memorise le choix s'il est valide."""
         import webview
-        result = self.window.create_file_dialog(webview.FOLDER_DIALOG)
+        result = self._window.create_file_dialog(webview.FOLDER_DIALOG)
         if not result:
             return {"ok": False, "path": state.get_wow_path()}
         path = result[0]
@@ -217,8 +215,8 @@ class Api:
             try:
                 selfupdate.download_and_swap(url, sha, progress)
                 self._emit("onLauncherReady")          # le JS demande la fermeture
-                if self.window is not None:
-                    self.window.destroy()                # quitte pour liberer l'.exe
+                if self._window is not None:
+                    self._window.destroy()                # quitte pour liberer l'.exe
             except Exception as e:
                 self._emit("onLauncherError", str(e))
 
@@ -327,7 +325,7 @@ class Api:
         return None
 
     def _emit(self, fn, *args):
-        if self.window is None:
+        if self._window is None:
             return
         payload = ", ".join(json.dumps(a) for a in args)
-        self.window.evaluate_js("window.%s && window.%s(%s)" % (fn, fn, payload))
+        self._window.evaluate_js("window.%s && window.%s(%s)" % (fn, fn, payload))
