@@ -94,11 +94,26 @@ nouvelle `--version` / `--file` met à jour l'entrée (les joueurs voient alors 
 - [x] **Fiche détaillée** d'un mod (clic carte → description longue + historique des versions)
 - [x] **Réparation** : détection des mods aux fichiers manquants → bouton « Réparer »
 - [x] **Auto-update du launcher** : détection + téléchargement/remplacement auto du `.exe` (`core/selfupdate.py`) ; en dev, ouvre la page
-- [ ] Packaging PyInstaller (`build.spec`) en `.exe` — **en attente du GO**
+- [x] **Packaging PyInstaller** (`build.spec`) → `EbonholdLauncher.exe`
+- [x] **Publié** : repo public + release `v1.0.0` (exe + addons + patch-Z)
 
-> **Démo complète** : `python main.py`. Tout est fonctionnel et autonome. Le catalogue pointe encore sur
-> des fichiers locaux (test hors-ligne) ; prochaine étape après tests : créer le repo `Ebonhold-Launcher`
-> en ligne, puis packager le `.exe`.
+> **v1.0.0 en ligne** : [Ebonhold-Launcher](https://github.com/Squall98/Ebonhold-Launcher) ·
+> [release v1.0.0](https://github.com/Squall98/Ebonhold-Launcher/releases/tag/v1.0.0).
+> Le launcher lit le catalogue **en ligne** (`manifest.json`) : ajouter un mod/catégorie/pack ne nécessite
+> aucun re-téléchargement côté joueur. Pour tester en local, `python main.py` utilise `manifest.dev.json`.
+
+## Compiler l'exe
+
+```bash
+python -m PyInstaller build.spec --noconfirm
+# -> dist/EbonholdLauncher.exe
+```
+
+## Publier une mise à jour
+
+- **Nouveau mod** : `python add_mod.py …` puis commit/push de `manifest.json` + uploader l'asset sur une release.
+- **Nouvelle version du launcher** : bump `APP_VERSION` (`core/version.py`) et `launcher_version` du manifeste,
+  recompiler, recalculer `launcher_sha256`, créer une release → les joueurs reçoivent l'auto-update.
 
 ## Dossier `vendor/` (config FR autonome)
 
