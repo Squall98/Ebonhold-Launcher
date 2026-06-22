@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Build PyInstaller
+build/
+dist/
+*.manifest
+
+# Staging release (assets volumineux, recrees au besoin)
+RELEASE/
+
+# Manifeste de dev (chemins machine locaux) : ne pas publier
+manifest.dev.json
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Captures de test
+*.playwright-mcp/

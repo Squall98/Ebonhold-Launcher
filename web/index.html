@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ebonhold Launcher</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Barre laterale -->
+    <aside class="sidebar">
+      <div class="brand"><i class="ti ti-flame"></i><span>EBONHOLD</span></div>
+      <nav>
+        <button class="nav-item active" data-tab="catalog"><i class="ti ti-layout-grid"></i>Catalogue<span class="nav-badge hidden" id="updBadge"></span></button>
+        <button class="nav-item" data-tab="installed"><i class="ti ti-download"></i>Installés</button>
+        <button class="nav-item" data-tab="news"><i class="ti ti-news"></i>Nouveautés</button>
+        <button class="nav-item" data-tab="links"><i class="ti ti-link"></i>Liens</button>
+        <button class="nav-item" data-tab="settings"><i class="ti ti-settings"></i>Réglages</button>
+      </nav>
+      <div class="wow-status" id="wowStatus">
+        <i class="ti ti-folder"></i><span id="wowPath">Dossier WoW…</span>
+      </div>
+    </aside>
+
+    <!-- Contenu -->
+    <main class="content">
+      <header class="topbar">
+        <h1 id="tabTitle">Catalogue</h1>
+        <div class="topbar-actions">
+          <span class="source-pill" id="sourcePill"></span>
+          <button class="btn ghost" id="refreshBtn"><i class="ti ti-refresh"></i>Vérifier</button>
+          <button class="btn ghost hidden" id="updateAllBtn"><i class="ti ti-arrows-up"></i>Tout mettre à jour</button>
+          <button class="btn play hidden" id="playBtn"><i class="ti ti-player-play"></i>Jouer</button>
+        </div>
+      </header>
+
+      <section class="tab" id="tab-catalog">
+        <div id="launcherUpdate" class="banner update hidden">
+          <div><div class="tag">MISE À JOUR DU LAUNCHER</div><div class="txt" id="launcherUpdateTxt"></div></div>
+          <button class="btn" id="launcherUpdateBtn"><i class="ti ti-download"></i>Télécharger</button>
+        </div>
+        <div id="banner" class="banner hidden"></div>
+        <div class="packs-row" id="packsRow"></div>
+        <div class="cat-toolbar">
+          <div class="search"><i class="ti ti-search"></i><input type="text" id="searchInput" placeholder="Rechercher un mod…"></div>
+          <div class="chips" id="filterChips"></div>
+        </div>
+        <div class="grid" id="catalogGrid"></div>
+        <p class="empty hidden" id="catalogEmpty">Aucun mod ne correspond.</p>
+      </section>
+
+      <section class="tab hidden" id="tab-installed">
+        <div class="grid" id="installedGrid"></div>
+        <p class="empty" id="installedEmpty">Aucun module installé pour l'instant.</p>
+      </section>
+
+      <section class="tab hidden" id="tab-news">
+        <div id="newsList" class="news"></div>
+      </section>
+
+      <section class="tab hidden" id="tab-links">
+        <div class="links-grid" id="linksGrid"></div>
+        <p class="empty hidden" id="linksEmpty">Aucun lien configuré.</p>
+      </section>
+
+      <section class="tab hidden" id="tab-settings">
+        <div class="card-panel">
+          <h2>Dossier d'installation Ebonhold</h2>
+          <p class="muted">Le launcher pose les addons dans <code>Interface\AddOns</code> et les patches dans <code>Data</code>.</p>
+          <div class="folder-row">
+            <input type="text" id="folderInput" readonly placeholder="Aucun dossier sélectionné">
+            <button class="btn" id="folderBtn"><i class="ti ti-folder-open"></i>Parcourir…</button>
+          </div>
+          <p class="folder-valid" id="folderValid"></p>
+          <button class="btn ghost" id="openAddonsBtn" style="margin-top:10px"><i class="ti ti-folder"></i>Ouvrir le dossier AddOns</button>
+        </div>
+        <div class="card-panel" id="frPanel">
+          <h2>Configuration langue française</h2>
+          <p class="muted">Règle chaque catégorie puis applique. Le jeu doit être <strong>fermé</strong> pendant l'opération.</p>
+
+          <div id="frUnavailable" class="fr-warn hidden"></div>
+
+          <div id="frControls">
+            <div class="fr-row">
+              <label>Jeu <span class="muted">(interface, menus, quêtes, voix)</span></label>
+              <select id="frBase"><option value="FR">Français</option><option value="EN">Anglais</option></select>
+              <span class="fr-hint" id="frPackHint"></span>
+            </div>
+            <div class="fr-row">
+              <label>Voix <span class="muted">(si Jeu = FR)</span></label>
+              <select id="frVoices"><option value="FR">Français</option><option value="EN">Anglais</option></select>
+            </div>
+            <div class="fr-row">
+              <label>Sorts, talents &amp; echoes</label>
+              <select id="frSpells"><option value="FR">Français</option><option value="EN">Anglais</option></select>
+            </div>
+            <div class="fr-row">
+              <label>Réputations, hauts faits &amp; titres</label>
+              <select id="frOther"><option value="FR">Français</option><option value="EN">Anglais</option></select>
+            </div>
+
+            <div class="fr-actions">
+              <button class="btn ghost" id="frAllFr">Tout en français</button>
+              <button class="btn ghost" id="frAllEn">Tout en anglais</button>
+              <button class="btn" id="frApply"><i class="ti ti-check"></i>Appliquer</button>
+            </div>
+            <pre id="frLog" class="fr-log hidden"></pre>
+          </div>
+        </div>
+
+        <div class="card-panel about">
+          <h2>À propos</h2>
+          <p class="muted">Ebonhold Launcher <span id="aboutVersion">v1.0.0</span> · <span id="aboutSource"></span></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Fiche détaillée d'un mod -->
+  <div id="modal" class="modal-overlay hidden">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Fermer"><i class="ti ti-x"></i></button>
+      <div class="modal-head">
+        <div class="modal-thumb" id="modalThumb"><i class="ti ti-puzzle"></i></div>
+        <div>
+          <h2 id="modalName">Mod</h2>
+          <div class="modal-sub" id="modalSub"></div>
+        </div>
+      </div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-actions" id="modalActions"></div>
+      <h3 class="modal-h3">Historique des versions</h3>
+      <div class="modal-history" id="modalHistory"></div>
+    </div>
+  </div>
+
+  <div id="toasts"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
