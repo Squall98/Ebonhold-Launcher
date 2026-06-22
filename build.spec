@@ -44,8 +44,9 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=True,
+    upx=False,                  # UPX = gros declencheur de faux positifs antivirus -> desactive
     runtime_tmpdir=None,
     console=False,              # appli fenetree (pas de console)
     icon="assets/icon.ico",
+    version="version_info.txt",  # metadonnees (nom/editeur/version) -> moins suspect
 )
