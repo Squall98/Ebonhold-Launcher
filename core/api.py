@@ -28,12 +28,30 @@ class Api:
         self._source = None
 
     # ----------------------------------------------------------- catalogue
-    def get_catalog(self):
-        """Retourne l'etat complet pour l'UI : dossier WoW + produits avec leur statut."""
-        # Catalogue en ligne d'abord (raw GitHub) pour que les mises a jour de la liste
-        # arrivent sans re-telecharger le launcher ; repli sur le manifeste embarque si
-        # hors-ligne ou repo pas encore publie (le 404 est rapide -> pas de blocage).
-        self._manifest, self._source = catalog.fetch(prefer_remote=True)
+    def get_catalog(self, check_remote=False):
+        """Retourne l'etat complet pour l'UI, INSTANTANEMENT (manifeste local embarque).
+
+        Aucun appel reseau sur ce chemin -> demarrage immediat, pas de "Ne repond pas".
+        Si check_remote=True, on verifie le catalogue en ligne EN ARRIERE-PLAN (thread)
+        et on pousse la mise a jour au JS via onCatalogUpdate quand elle est prete.
+        """
+        self._manifest, self._source = catalog.fetch(prefer_remote=False)
+        resp = self._build_catalog()
+        if check_remote:
+            threading.Thread(target=self._remote_refresh, daemon=True).start()
+        return resp
+
+    def _remote_refresh(self):
+        """Recupere le manifeste en ligne en fond ; pousse onCatalogUpdate si dispo."""
+        try:
+            man = catalog._load_remote()
+        except Exception:
+            return  # hors-ligne ou repo injoignable -> on garde le local, sans bloquer
+        self._manifest, self._source = man, "remote"
+        self._emit("onCatalogUpdate", self._build_catalog())
+
+    def _build_catalog(self):
+        """Construit la reponse catalogue a partir de self._manifest (sans reseau)."""
         wow_path = state.get_wow_path() or wow.autodetect()
         if wow_path and not state.get_wow_path():
             state.set_wow_path(wow_path)
@@ -207,7 +225,7 @@ class Api:
         ok, err = frconfig.is_available()
         wow_path = state.get_wow_path()
         if not self._manifest:
-            self._manifest, self._source = catalog.fetch(prefer_remote=True)
+            self._manifest, self._source = catalog.fetch(prefer_remote=False)
         fr = self._manifest.get("fr_config", {}) if self._manifest else {}
         spec = fr.get("pack_download") or {}
         return {
@@ -225,7 +243,7 @@ class Api:
         if not wow.is_valid_install(wow_path):
             return {"started": False, "error": "Choisis d'abord ton dossier Ebonhold."}
         if not self._manifest:
-            self._manifest, self._source = catalog.fetch(prefer_remote=True)
+            self._manifest, self._source = catalog.fetch(prefer_remote=False)
         spec = (self._manifest.get("fr_config", {}) or {}).get("pack_download") or {}
         if not (spec.get("url") or spec.get("parts")):
             return {"started": False, "error": "Aucune source de pack configuree."}
@@ -297,7 +315,7 @@ class Api:
     # ------------------------------------------------------------ helpers
     def _find(self, product_id):
         if not self._manifest:
-            self._manifest, self._source = catalog.fetch()
+            self._manifest, self._source = catalog.fetch(prefer_remote=False)
         for p in catalog.products(self._manifest):
             if p["id"] == product_id:
                 return p

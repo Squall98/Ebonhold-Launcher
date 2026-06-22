@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Version de l'application + comparaison de versions (semver simplifie)."""
 
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 
 
 def _tuple(v):

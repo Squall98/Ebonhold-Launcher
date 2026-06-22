@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.1 — démarrage instantané
+- **Démarrage instantané** : le catalogue local s'affiche immédiatement (plus de gel
+  « Ne répond pas » au lancement). La vérification des nouveautés en ligne se fait
+  désormais en arrière-plan, sans bloquer la fenêtre.
+- Clarification de la traduction FR : distinction addon (contenu custom) / Patch FR (jeu de base).
+- Base pour l'installation automatique du pack frFR (activable via le manifeste).
+
 ## v1.0.0 — première version
 Launcher desktop type CurseForge pour le serveur Ebonhold : installe et met à jour
 en un clic les addons et patches, au bon endroit dans l'installation WoW.
