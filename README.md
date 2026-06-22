@@ -115,6 +115,38 @@ python -m PyInstaller build.spec --noconfirm
 - **Nouvelle version du launcher** : bump `APP_VERSION` (`core/version.py`) et `launcher_version` du manifeste,
   recompiler, recalculer `launcher_sha256`, créer une release → les joueurs reçoivent l'auto-update.
 
+## Traduction française (intégrée au launcher)
+
+Deux choses complémentaires, toutes deux gérées dans le launcher :
+
+- **Addon EbonholdFR** (catalogue) → contenu custom (echoes, arbre de talents, affixes, tomes).
+- **Patch FR** (onglet Réglages) → jeu de base (sorts, hauts faits, titres, quêtes, menus).
+  Reprend 100% de l'ancien `EbonholdFR-Installer.exe` (`core/frconfig.py` + `vendor/`) : build de
+  `patch-Z.MPQ`, voix, locale, addon `EbonholdFRFix`. Plus besoin de l'exe séparé.
+
+### Pack frFR (~2,4 Go, pour le français complet)
+
+Le launcher peut **télécharger et installer le pack automatiquement** (`core/frpack.py`) : il place
+le dossier `frFR/` dans `Data`. Pour l'activer, renseigne `fr_config.pack_download` dans le manifeste :
+
+```json
+"fr_config": {
+  "pack_url": "https://…/page",            // lien manuel (fallback)
+  "pack_note": "…",
+  "pack_download": {                        // active le bouton « Installer le pack FR »
+    "format": "zip",                        // zip recommandé (rar/7z best-effort via tar système)
+    "url":   "https://…/frFR.zip"           // lien direct unique
+    // —— OU, si > 2 Go (limite GitHub), découpé en parties réassemblées par le launcher : ——
+    // "parts": ["https://…/frFR.zip.001", "https://…/frFR.zip.002"]
+  }
+}
+```
+
+Conseils : **re-empaqueter le pack en `.zip`** (extraction native fiable) ; comme un asset GitHub est
+limité à 2 Go, soit héberger en lien direct unique ailleurs, soit **découper** le `.zip` en parties
+< 2 Go (`split` / `copy /b`) et lister les URLs dans `parts`. Activer ne nécessite **pas** de recompiler
+l'exe — c'est de la config en ligne.
+
 ## Dossier `vendor/` (config FR autonome)
 
 Outils + données embarqués pour que la config FR fonctionne sans dépendance externe :

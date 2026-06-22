@@ -10,7 +10,7 @@ import subprocess
 import threading
 import webbrowser
 
-from . import catalog, frconfig, installer, selfupdate, state, version, wow
+from . import catalog, frconfig, frpack, installer, selfupdate, state, version, wow
 
 
 def _status(product, installed_version):
@@ -209,13 +209,40 @@ class Api:
         if not self._manifest:
             self._manifest, self._source = catalog.fetch(prefer_remote=True)
         fr = self._manifest.get("fr_config", {}) if self._manifest else {}
+        spec = fr.get("pack_download") or {}
         return {
             "available": ok,
             "error": err or "",
             "pack_present": frconfig.pack_present(wow_path) if (ok and wow_path) else False,
             "pack_url": fr.get("pack_url", ""),
             "pack_note": fr.get("pack_note", ""),
+            "pack_installable": bool(spec.get("url") or spec.get("parts")),
         }
+
+    def install_fr_pack(self):
+        """Telecharge + installe le pack frFR en arriere-plan (onFrLog / onPackProgress / onPackDone)."""
+        wow_path = state.get_wow_path()
+        if not wow.is_valid_install(wow_path):
+            return {"started": False, "error": "Choisis d'abord ton dossier Ebonhold."}
+        if not self._manifest:
+            self._manifest, self._source = catalog.fetch(prefer_remote=True)
+        spec = (self._manifest.get("fr_config", {}) or {}).get("pack_download") or {}
+        if not (spec.get("url") or spec.get("parts")):
+            return {"started": False, "error": "Aucune source de pack configuree."}
+
+        def worker():
+            def progress(pct, msg):
+                self._emit("onPackProgress", pct, msg)
+            def log(msg):
+                self._emit("onFrLog", msg)
+            try:
+                frpack.install(wow_path, spec, progress, log)
+                self._emit("onPackDone", True, "Pack frFR installe.")
+            except Exception as e:
+                self._emit("onPackDone", False, str(e))
+
+        threading.Thread(target=worker, daemon=True).start()
+        return {"started": True}
 
     def apply_fr_config(self, base_fr, voices_fr, spells_fr, other_fr):
         """Applique la config langue en arriere-plan. Journal via onFrLog, fin via onFrDone."""

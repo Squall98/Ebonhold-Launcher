@@ -31,7 +31,9 @@ const MOCK = {
   install_pack: async (pid) => { ["ebonholdfr","patch-z"].forEach(id=>MOCK.install_product(id)); return {started:true,ids:["ebonholdfr","patch-z"]}; },
   uninstall_product: async (id) => { delete MOCK._installed[id]; return {ok:true}; },
   update_launcher: async () => ({ok:false, mode:"dev", url:"#"}),
-  get_fr_status: async () => ({available:true, error:"", pack_present:false, pack_url:"#", pack_note:"Pack ~2,4 Go requis pour les menus/quêtes/interface en français (Jeu = FR)."}),
+  get_fr_status: async () => ({available:true, error:"", pack_present:false, pack_url:"#", pack_installable:true, pack_note:"Pack ~2,4 Go requis pour les menus/quêtes/interface en français (Jeu = FR)."}),
+  install_fr_pack: async () => { let p=0; const t=setInterval(()=>{p+=20;window.onPackProgress&&window.onPackProgress(p,"Téléchargement "+p+"%");
+    if(p>=100){clearInterval(t);window.onFrLog&&window.onFrLog("Dossier frFR placé dans Data.");window.onPackDone&&window.onPackDone(true,"Pack frFR installé.");}},250); return {started:true}; },
   apply_fr_config: async () => { let i=0; const L=["Construction de patch-Z…","patch-Z.MPQ écrit (1240 fichiers).","Addon EbonholdFRFix installé.","Jeu=EN Voix=EN Sorts=FR Réput=FR."];
     const t=setInterval(()=>{window.onFrLog&&window.onFrLog(L[i++]); if(i>=L.length){clearInterval(t);window.onFrDone&&window.onFrDone(true,"Configuration appliquée.");}},300); return {started:true}; },
   launch_game: async () => ({ok:true}),
@@ -264,17 +266,25 @@ window.onLauncherError = (msg) => toast(msg,"err","Launcher");
 
 /* ------------------------------------------------------------------ config FR */
 let FR_PACK_URL = "";
+let FR_PACK_INSTALLABLE = false;
 async function loadFrStatus(){
   const s = await api().get_fr_status();
   $("#frControls").classList.toggle("hidden", !s.available);
   const warn = $("#frUnavailable");
   if (!s.available){ warn.textContent = s.error || "Configuration FR indisponible."; warn.classList.remove("hidden"); } else warn.classList.add("hidden");
   $("#frPackHint").textContent = (!s.pack_present) ? "Pack frFR requis pour Jeu = FR" : "";
-  // Bloc pack : visible seulement si le pack n'est pas deja present et qu'on a un lien.
+  // Bloc pack : visible seulement si le pack n'est pas deja present (et qu'on a un lien ou une install auto).
   FR_PACK_URL = s.pack_url || "";
-  const show = s.available && !s.pack_present && !!FR_PACK_URL;
+  FR_PACK_INSTALLABLE = !!s.pack_installable;
+  const show = s.available && !s.pack_present && (FR_PACK_INSTALLABLE || !!FR_PACK_URL);
   $("#frPack").classList.toggle("hidden", !show);
-  if (show) $("#frPackNote").textContent = s.pack_note || "Pack ~2,4 Go requis pour le français complet.";
+  if (show){
+    $("#frPackNote").textContent = s.pack_note || "Pack ~2,4 Go requis pour le français complet.";
+    const btn = $("#frPackBtn");
+    btn.innerHTML = FR_PACK_INSTALLABLE
+      ? '<i class="ti ti-download"></i>Installer le pack FR'
+      : '<i class="ti ti-external-link"></i>Télécharger le pack FR';
+  }
 }
 function frSet(v){ ["frBase","frVoices","frSpells","frOther"].forEach(id => $("#"+id).value=v); }
 async function applyFr(){
@@ -282,8 +292,26 @@ async function applyFr(){
   const r = await api().apply_fr_config($("#frBase").value==="FR", $("#frVoices").value==="FR", $("#frSpells").value==="FR", $("#frOther").value==="FR");
   if (!r.started){ $("#frApply").disabled=false; toast(r.error||"Erreur.","err"); }
 }
-window.onFrLog = (msg) => { const l=$("#frLog"); l.textContent += msg+"\n"; l.scrollTop=l.scrollHeight; };
+window.onFrLog = (msg) => { const l=$("#frLog"); l.classList.remove("hidden"); l.textContent += msg+"\n"; l.scrollTop=l.scrollHeight; };
 window.onFrDone = (ok,msg) => { $("#frApply").disabled=false; window.onFrLog((ok?"✓ ":"✗ ")+msg); toast(msg, ok?"ok":"err", "Config FR"); };
+
+async function installOrOpenPack(){
+  if (!FR_PACK_INSTALLABLE){
+    if (FR_PACK_URL){ api().open_url(FR_PACK_URL); toast("Page de téléchargement du pack ouverte.","ok","Pack FR"); }
+    return;
+  }
+  const btn = $("#frPackBtn"); btn.disabled = true;
+  $("#frPackProgress").textContent = "Préparation…";
+  const r = await api().install_fr_pack();
+  if (!r.started){ btn.disabled=false; $("#frPackProgress").textContent=""; toast(r.error||"Erreur.","err","Pack FR"); }
+}
+window.onPackProgress = (pct,msg) => { $("#frPackProgress").textContent = msg; };
+window.onPackDone = async (ok,msg) => {
+  $("#frPackBtn").disabled = false;
+  $("#frPackProgress").textContent = ok ? "" : msg;
+  toast(msg, ok?"ok":"err", "Pack FR");
+  if (ok){ await loadFrStatus(); }   // le bloc pack disparait si le pack est maintenant present
+};
 
 /* ------------------------------------------------------------------ chargement */
 async function reload(){ CATALOG = await api().get_catalog(); renderCatalog(); }
@@ -305,7 +333,7 @@ function bind(){
   $("#frAllFr").addEventListener("click", () => frSet("FR"));
   $("#frAllEn").addEventListener("click", () => frSet("EN"));
   $("#frApply").addEventListener("click", applyFr);
-  $("#frPackBtn").addEventListener("click", () => { if (FR_PACK_URL){ api().open_url(FR_PACK_URL); toast("Page de téléchargement du pack ouverte.","ok","Pack FR"); } });
+  $("#frPackBtn").addEventListener("click", installOrOpenPack);
   $("#searchInput").addEventListener("input", e => { FILTER.term = e.target.value; renderGrid(); });
   $("#launcherUpdateBtn").addEventListener("click", updateLauncher);
   $("#modalClose").addEventListener("click", closeModal);
