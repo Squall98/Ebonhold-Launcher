@@ -34,17 +34,49 @@ def _drive_id(url):
     return m.group(1) if m else None
 
 
-def _download_url(url, dest, progress=_noop, msg="Telechargement"):
-    """Telecharge une URL (http direct ou Google Drive) vers dest."""
-    import urllib.request
-    drive = "drive.google.com" in url
-    if drive:
+def _onedrive_direct(url):
+    """Convertit un lien de partage OneDrive en URL de telechargement direct (sans auth)."""
+    import base64
+    b64 = base64.urlsafe_b64encode(url.encode("utf-8")).decode("ascii").rstrip("=")
+    return "https://api.onedrive.com/v1.0/shares/u!%s/root/content" % b64
+
+
+def _resolve(url):
+    """Transforme un lien de partage cloud en URL de telechargement direct."""
+    if "drive.google.com" in url:
         fid = _drive_id(url)
         if not fid:
             raise ValueError("Lien Google Drive non reconnu.")
-        url = "https://drive.usercontent.google.com/download?id=%s&export=download&confirm=t" % fid
+        return "https://drive.usercontent.google.com/download?id=%s&export=download&confirm=t" % fid
+    if "1drv.ms" in url or "onedrive.live.com" in url or "sharepoint.com" in url:
+        return _onedrive_direct(url)
+    return url
 
-    req = urllib.request.Request(url, headers={"User-Agent": "EbonholdLauncher"})
+
+def _download_url(url, dest, progress=_noop, msg="Telechargement"):
+    """Telecharge une URL (http direct, Google Drive, OneDrive) ou copie un fichier local."""
+    import urllib.request
+    url = _resolve(url)
+
+    # Chemin local (ex: V:/.../frFR.zip) ou file:// -> copie directe (utile en dev/offline).
+    local = None
+    if url.startswith("file://"):
+        from urllib.parse import urlparse
+        from urllib.request import url2pathname
+        local = url2pathname(urlparse(url).path)
+    elif "://" not in url and os.path.isabs(url):
+        local = url
+    if local:
+        total = os.path.getsize(local)
+        done = 0
+        with open(local, "rb") as fin, open(dest, "wb") as fout:
+            for chunk in iter(lambda: fin.read(1 << 20), b""):
+                fout.write(chunk)
+                done += len(chunk)
+                progress(int(done * 100 / total) if total else 0, "%s (local)" % msg)
+        return dest
+
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 EbonholdLauncher"})
     with urllib.request.urlopen(req, timeout=60) as r, open(dest, "wb") as f:
         total = int(r.headers.get("Content-Length", 0))
         done = 0
