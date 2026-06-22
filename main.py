@@ -21,6 +21,15 @@ def main():
     except OSError:
         pass
     startup_log("=== main() ===")
+
+    # WebView2 (moteur Edge embarque) peut attendre plusieurs minutes au demarrage s'il
+    # tente de joindre un proxy systeme ou ses services reseau. On le force en direct +
+    # on coupe son trafic de fond -> demarrage immediat meme derriere un proxy/pare-feu.
+    os.environ["WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS"] = (
+        "--no-proxy-server "
+        "--disable-background-networking "
+        "--disable-component-update"
+    )
     api = Api()
     startup_log("avant create_window")
     window = webview.create_window(

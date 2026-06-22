@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.3 — correction de la lenteur au démarrage (proxy/réseau)
+- WebView2 attendait l'expiration d'un timeout réseau au lancement (tentatives de
+  proxy / services de fond) → plusieurs minutes d'attente. Le moteur est désormais
+  forcé en **connexion directe** avec le **trafic réseau de fond coupé** → démarrage rapide.
+
 ## v1.0.2 — démarrage WebView2 plus rapide et fiable
 - **Connexion au pont js↔Python sondée activement** (au lieu d'attendre un événement
   lent) → l'interface se peuple dès que le moteur est prêt, plus de longue attente
