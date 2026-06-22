@@ -1,53 +1,29 @@
 # Changelog
 
-## v1.0.4 — démarrage instantané (correction racine)
-- **Corrigé le démarrage de plusieurs minutes** : l'objet API exposait un attribut public
-  `window` que pywebview tentait d'introspecter au boot, provoquant une récursion infinie
-  dans l'objet fenêtre WebView2 natif (~4 min de blocage). Renommé en `_window` (ignoré par
-  pywebview) → le pont JS s'initialise instantanément.
-- Icônes embarquées en local (plus de dépendance au CDN).
-
-## v1.0.3 — correction de la lenteur au démarrage (proxy/réseau)
-- WebView2 attendait l'expiration d'un timeout réseau au lancement (tentatives de
-  proxy / services de fond) → plusieurs minutes d'attente. Le moteur est désormais
-  forcé en **connexion directe** avec le **trafic réseau de fond coupé** → démarrage rapide.
-
-## v1.0.2 — démarrage WebView2 plus rapide et fiable
-- **Connexion au pont js↔Python sondée activement** (au lieu d'attendre un événement
-  lent) → l'interface se peuple dès que le moteur est prêt, plus de longue attente
-  « Ne répond pas ».
-- **Profil WebView2 persistant** + **serveur local interne** → démarrages plus rapides et stables.
-- Indicateur « Chargement du catalogue… » pendant l'initialisation.
-
-## v1.0.1 — démarrage instantané
-- **Démarrage instantané** : le catalogue local s'affiche immédiatement (plus de gel
-  « Ne répond pas » au lancement). La vérification des nouveautés en ligne se fait
-  désormais en arrière-plan, sans bloquer la fenêtre.
-- Clarification de la traduction FR : distinction addon (contenu custom) / Patch FR (jeu de base).
-- Base pour l'installation automatique du pack frFR (activable via le manifeste).
-
-## v1.0.0 — première version
+## v1.0.0 — première version publique
 Launcher desktop type CurseForge pour le serveur Ebonhold : installe et met à jour
-en un clic les addons et patches, au bon endroit dans l'installation WoW.
+en un clic les addons et la traduction, au bon endroit dans l'installation WoW.
 
 ### Catalogue & installation
-- **Catalogue** des mods avec cartes, badges (Installer / Mettre à jour / À jour), bannière
-  « nouvelle version », barre de progression et notifications.
+- **Catalogue** des mods avec cartes, badges (Installer / Mettre à jour / À jour),
+  bannière « nouvelle version », barre de progression et notifications.
 - **Installation** : téléchargement, **vérification SHA256**, extraction des addons dans
-  `Interface\AddOns`, copie des patches dans `Data`, avec **sauvegarde + rollback** en cas d'erreur.
+  `Interface\AddOns`, avec **sauvegarde + rollback** en cas d'erreur.
 - **Recherche** et **filtres par catégorie** (catégories pilotées par le manifeste).
-- **Packs / presets** : installer plusieurs mods en un clic (ex. « Pack FR complet »).
-- **Désinstallation** (avec confirmation) et **réparation** des mods aux fichiers manquants.
-- **Fiche détaillée** d'un mod : description longue + historique des versions.
+- **Packs / presets**, **désinstallation** (avec confirmation), **réparation** des mods
+  aux fichiers manquants, **fiche détaillée** (description + historique des versions).
+- Chaque addon est téléchargé depuis **son propre dépôt GitHub** (source unique).
 
-### Outils & confort
+### Traduction française
+- Onglet **Réglages** : configuration langue FR intégrée (Jeu / Voix / Sorts / Réputations),
+  avec construction de `patch-Z.MPQ`, voix, locale et addon `EbonholdFRFix`.
+- **Installation automatique du pack frFR** (~2,4 Go) : le launcher télécharge, vérifie,
+  extrait et place le dossier `frFR` dans `Data`, sans intervention.
+
+### Confort & technique
 - Barre du haut : **Vérifier**, **Tout mettre à jour**, **Jouer** (lance `Wow.exe`).
 - Onglets **Installés**, **Nouveautés**, **Liens utiles** (Discord, Soul Tree, Guides).
-- **Configuration langue FR** intégrée (remplace l'ancien `EbonholdFR-Installer`) : Jeu / Voix /
-  Sorts / Réputations, avec journal en direct. Outils embarqués → aucune dépendance externe.
-
-### Technique
-- **Auto-update** du launcher : détection de version + téléchargement et remplacement automatique
-  de l'exécutable.
-- Ajout de mods **sans toucher au code** : tout passe par `manifest.json` (script `add_mod.py`).
-- Stack : Python + pywebview + HTML/CSS/JS, packagé en `.exe` via PyInstaller.
+- **Démarrage instantané** (catalogue local affiché immédiatement, vérif en ligne en fond).
+- **Auto-update** du launcher.
+- Ajout de mods **sans toucher au code** (`manifest.json` + `add_mod.py`).
+- Stack : Python + pywebview + HTML/CSS/JS, packagé en `.exe` (PyInstaller, icônes embarquées).
