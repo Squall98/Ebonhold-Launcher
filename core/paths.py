@@ -18,16 +18,6 @@ def resource(rel):
     return os.path.normpath(os.path.join(root, rel))
 
 
-def startup_log(msg):
-    """Trace horodatee de demarrage (diagnostic) -> %APPDATA%\\EbonholdLauncher\\startup.log."""
-    try:
-        import time
-        with open(os.path.join(data_dir(), "startup.log"), "a", encoding="utf-8") as f:
-            f.write("%.3f  %s\n" % (time.time(), msg))
-    except Exception:
-        pass
-
-
 def data_dir():
     """Dossier de donnees persistant du launcher (etat installe, config).
 
