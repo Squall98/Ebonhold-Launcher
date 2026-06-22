@@ -31,7 +31,7 @@ const MOCK = {
   install_pack: async (pid) => { ["ebonholdfr","patch-z"].forEach(id=>MOCK.install_product(id)); return {started:true,ids:["ebonholdfr","patch-z"]}; },
   uninstall_product: async (id) => { delete MOCK._installed[id]; return {ok:true}; },
   update_launcher: async () => ({ok:false, mode:"dev", url:"#"}),
-  get_fr_status: async () => ({available:true, error:"", pack_present:false}),
+  get_fr_status: async () => ({available:true, error:"", pack_present:false, pack_url:"#", pack_note:"Pack ~2,4 Go requis pour les menus/quêtes/interface en français (Jeu = FR)."}),
   apply_fr_config: async () => { let i=0; const L=["Construction de patch-Z…","patch-Z.MPQ écrit (1240 fichiers).","Addon EbonholdFRFix installé.","Jeu=EN Voix=EN Sorts=FR Réput=FR."];
     const t=setInterval(()=>{window.onFrLog&&window.onFrLog(L[i++]); if(i>=L.length){clearInterval(t);window.onFrDone&&window.onFrDone(true,"Configuration appliquée.");}},300); return {started:true}; },
   launch_game: async () => ({ok:true}),
@@ -263,12 +263,18 @@ window.onLauncherReady = () => toast("Mise à jour prête, redémarrage…","ok"
 window.onLauncherError = (msg) => toast(msg,"err","Launcher");
 
 /* ------------------------------------------------------------------ config FR */
+let FR_PACK_URL = "";
 async function loadFrStatus(){
   const s = await api().get_fr_status();
   $("#frControls").classList.toggle("hidden", !s.available);
   const warn = $("#frUnavailable");
   if (!s.available){ warn.textContent = s.error || "Configuration FR indisponible."; warn.classList.remove("hidden"); } else warn.classList.add("hidden");
   $("#frPackHint").textContent = (!s.pack_present) ? "Pack frFR requis pour Jeu = FR" : "";
+  // Bloc pack : visible seulement si le pack n'est pas deja present et qu'on a un lien.
+  FR_PACK_URL = s.pack_url || "";
+  const show = s.available && !s.pack_present && !!FR_PACK_URL;
+  $("#frPack").classList.toggle("hidden", !show);
+  if (show) $("#frPackNote").textContent = s.pack_note || "Pack ~2,4 Go requis pour le français complet.";
 }
 function frSet(v){ ["frBase","frVoices","frSpells","frOther"].forEach(id => $("#"+id).value=v); }
 async function applyFr(){
@@ -299,6 +305,7 @@ function bind(){
   $("#frAllFr").addEventListener("click", () => frSet("FR"));
   $("#frAllEn").addEventListener("click", () => frSet("EN"));
   $("#frApply").addEventListener("click", applyFr);
+  $("#frPackBtn").addEventListener("click", () => { if (FR_PACK_URL){ api().open_url(FR_PACK_URL); toast("Page de téléchargement du pack ouverte.","ok","Pack FR"); } });
   $("#searchInput").addEventListener("input", e => { FILTER.term = e.target.value; renderGrid(); });
   $("#launcherUpdateBtn").addEventListener("click", updateLauncher);
   $("#modalClose").addEventListener("click", closeModal);

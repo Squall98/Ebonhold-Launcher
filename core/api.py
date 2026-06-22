@@ -206,10 +206,15 @@ class Api:
     def get_fr_status(self):
         ok, err = frconfig.is_available()
         wow_path = state.get_wow_path()
+        if not self._manifest:
+            self._manifest, self._source = catalog.fetch(prefer_remote=True)
+        fr = self._manifest.get("fr_config", {}) if self._manifest else {}
         return {
             "available": ok,
             "error": err or "",
             "pack_present": frconfig.pack_present(wow_path) if (ok and wow_path) else False,
+            "pack_url": fr.get("pack_url", ""),
+            "pack_note": fr.get("pack_note", ""),
         }
 
     def apply_fr_config(self, base_fr, voices_fr, spells_fr, other_fr):

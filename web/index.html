@@ -77,8 +77,17 @@
           <button class="btn ghost" id="openAddonsBtn" style="margin-top:10px"><i class="ti ti-folder"></i>Ouvrir le dossier AddOns</button>
         </div>
         <div class="card-panel" id="frPanel">
-          <h2>Configuration langue française</h2>
+          <h2>Patch FR — jeu de base en français</h2>
+          <div class="fr-explain">
+            <p><i class="ti ti-language"></i> <strong>Addon EbonholdFR</strong> (dans le catalogue) → traduit le <strong>contenu custom</strong> du serveur : echoes, arbre de talents, affixes, tomes.</p>
+            <p><i class="ti ti-world"></i> <strong>Patch FR</strong> (ci-dessous) → traduit le <strong>jeu de base</strong> : sorts, hauts faits, titres, quêtes, menus.</p>
+          </div>
           <p class="muted">Règle chaque catégorie puis applique. Le jeu doit être <strong>fermé</strong> pendant l'opération.</p>
+
+          <div id="frPack" class="fr-pack hidden">
+            <div><strong>Français complet (menus, quêtes, interface)</strong><div class="muted" id="frPackNote"></div></div>
+            <button class="btn" id="frPackBtn"><i class="ti ti-download"></i>Télécharger le pack FR</button>
+          </div>
 
           <div id="frUnavailable" class="fr-warn hidden"></div>
 
