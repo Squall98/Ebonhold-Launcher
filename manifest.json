@@ -1,7 +1,7 @@
 {
-  "launcher_version": "1.0.0",
-  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.0/EbonholdLauncher.exe",
-  "launcher_sha256": "834bb94f4ffaec7b67251742837af70f94afa614f2c8fb73f3d2aea76626cf68",
+  "launcher_version": "1.0.1",
+  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.1/EbonholdLauncher.exe",
+  "launcher_sha256": "6474ecbb14b4491f53910bb3d3b3a67efaedd6d5e776a3a234f721bdb79a391a",
   "_note": "Manifeste de production. Les addons sont telecharges depuis leur propre repo GitHub. La traduction FR (patch-Z) se fait via l'onglet Reglages du launcher, pas comme un mod du catalogue.",
   "fr_config": {
     "pack_url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",

@@ -12,6 +12,7 @@ qui surcharge patch-5/6 sans les modifier.
 import json
 import os
 import shutil
+import stat
 import sys
 
 from . import paths
@@ -73,6 +74,16 @@ def pack_present(install_dir):
     return has_pack(os.path.join(install_dir, "Data")) if install_dir else False
 
 
+def _make_writable(path):
+    """Enleve l'attribut lecture seule (Config.wtf/realmlist.wtf sont souvent en read-only
+    sur les serveurs prives pour figer le realmlist)."""
+    if os.path.exists(path):
+        try:
+            os.chmod(path, stat.S_IWRITE | stat.S_IREAD)
+        except OSError:
+            pass
+
+
 def _set_locale(install_dir, locale):
     cfg = os.path.join(install_dir, "WTF", "Config.wtf")
     lines = open(cfg, encoding="latin-1").read().splitlines() if os.path.exists(cfg) else []
@@ -85,14 +96,25 @@ def _set_locale(install_dir, locale):
     if not found:
         out.insert(0, 'SET locale "%s"' % locale)
     os.makedirs(os.path.dirname(cfg), exist_ok=True)
-    open(cfg, "w", encoding="latin-1").write("\n".join(out) + "\n")
+    _make_writable(cfg)
+    try:
+        open(cfg, "w", encoding="latin-1").write("\n".join(out) + "\n")
+    except PermissionError:
+        raise RuntimeError(
+            "Impossible d'ecrire Config.wtf (acces refuse). Ferme COMPLETEMENT le jeu "
+            "et le launcher officiel Ebonhold, puis reessaie. Si le fichier est en lecture "
+            "seule, le launcher l'a normalement deverrouille — reessaie une fois.")
 
 
 def _fix_realmlist(data_dir):
     en = os.path.join(data_dir, "enUS", "realmlist.wtf")
     fr = os.path.join(data_dir, "frFR", "realmlist.wtf")
     if os.path.exists(en) and os.path.isdir(os.path.dirname(fr)):
-        shutil.copy2(en, fr)
+        _make_writable(fr)
+        try:
+            shutil.copy2(en, fr)
+        except (PermissionError, OSError):
+            pass  # realmlist FR non critique pour la traduction
 
 
 def _remove_patchz(data_dir):

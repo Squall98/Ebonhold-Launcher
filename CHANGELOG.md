@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.1 — correctif config FR (lecture seule)
+- Corrige l'erreur « Permission denied » sur `Config.wtf` lors de l'application de la
+  traduction : le fichier est souvent en **lecture seule** sur les serveurs privés
+  (realmlist figé) → le launcher enlève désormais l'attribut avant d'écrire. Même
+  correctif sur `realmlist.wtf`. Message plus clair si le jeu est encore ouvert.
+
 ## v1.0.0 — première version publique
 Launcher desktop type CurseForge pour le serveur Ebonhold : installe et met à jour
 en un clic les addons et la traduction, au bon endroit dans l'installation WoW.
