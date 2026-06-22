@@ -1,27 +1,42 @@
 {
   "launcher_version": "1.0.0",
   "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.0/EbonholdLauncher.exe",
-  "launcher_sha256": "e49edbdb7a3615e4ca0996e7cbcd74afcbe3d33e149b7fde99072fbb8587be16",
+  "launcher_sha256": "4f69bf4e81413ffa0c2af127b71b86702671830b54bce3d3a50754f433111843",
   "_note": "Manifeste de production. Les addons sont telecharges depuis leur propre repo GitHub. La traduction FR (patch-Z) se fait via l'onglet Reglages du launcher, pas comme un mod du catalogue.",
-
   "fr_config": {
     "pack_url": "https://drive.google.com/file/d/1j3OuTz1KMUsuUWXQiMJaE0yQXmAobRxu/view",
     "pack_note": "Pack ~2,4 Go requis uniquement pour mettre les menus/quetes/interface en francais (Jeu = FR). Les sorts/hauts faits/titres fonctionnent sans le pack."
   },
-
   "categories": [
-    {"id": "traduction", "label": "Traduction", "icon": "ti-language"},
-    {"id": "interface", "label": "Interface & QoL", "icon": "ti-layout-dashboard"}
+    {
+      "id": "traduction",
+      "label": "Traduction",
+      "icon": "ti-language"
+    },
+    {
+      "id": "interface",
+      "label": "Interface & QoL",
+      "icon": "ti-layout-dashboard"
+    }
   ],
-
   "packs": [],
-
   "links": [
-    {"label": "Discord Ebonhold FR", "url": "https://discord.gg/ebonhold", "icon": "ti-brand-discord"},
-    {"label": "Soul Tree Planner", "url": "https://squall98.github.io/ebonhold-skilltree/", "icon": "ti-binary-tree"},
-    {"label": "Guides", "url": "https://github.com/Squall98/Ebonhold-Launcher", "icon": "ti-book"}
+    {
+      "label": "Discord Ebonhold FR",
+      "url": "https://discord.gg/ebonhold",
+      "icon": "ti-brand-discord"
+    },
+    {
+      "label": "Soul Tree Planner",
+      "url": "https://squall98.github.io/ebonhold-skilltree/",
+      "icon": "ti-binary-tree"
+    },
+    {
+      "label": "Guides",
+      "url": "https://github.com/Squall98/Ebonhold-Launcher",
+      "icon": "ti-book"
+    }
   ],
-
   "products": [
     {
       "id": "ebonholdfr",
@@ -39,9 +54,18 @@
       "notes": "Skill tree et affixes retraduits, corrections de tomes.",
       "changelog_url": "https://github.com/Squall98/EbonholdFR/releases/tag/v3.1",
       "history": [
-        {"version": "3.1", "notes": "Skill tree et affixes retraduits, corrections de tomes."},
-        {"version": "3.0", "notes": "Refonte des echoes et des descriptions dynamiques."},
-        {"version": "2.0", "notes": "Passage à la méthode patch-Z non-destructive."}
+        {
+          "version": "3.1",
+          "notes": "Skill tree et affixes retraduits, corrections de tomes."
+        },
+        {
+          "version": "3.0",
+          "notes": "Refonte des echoes et des descriptions dynamiques."
+        },
+        {
+          "version": "2.0",
+          "notes": "Passage à la méthode patch-Z non-destructive."
+        }
       ]
     },
     {
@@ -60,9 +84,18 @@
       "notes": "Ajout des favoris et de la recherche par nom.",
       "changelog_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/tag/v1.2",
       "history": [
-        {"version": "1.2", "notes": "Ajout des favoris et de la recherche par nom."},
-        {"version": "1.1", "notes": "Catégories de checkpoints et tri."},
-        {"version": "1.0", "notes": "Première version."}
+        {
+          "version": "1.2",
+          "notes": "Ajout des favoris et de la recherche par nom."
+        },
+        {
+          "version": "1.1",
+          "notes": "Catégories de checkpoints et tri."
+        },
+        {
+          "version": "1.0",
+          "notes": "Première version."
+        }
       ]
     }
   ]
