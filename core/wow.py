@@ -22,6 +22,18 @@ def is_valid_install(install_dir):
 
 def autodetect():
     """Cherche une install Ebonhold sur les emplacements classiques. Renvoie '' si rien."""
+    # 1) Emplacements bases sur les variables d'environnement : le launcher OFFICIEL
+    #    Ebonhold installe le jeu dans %LOCALAPPDATA%\ebonhold\Ebonhold par defaut.
+    for var in ("LOCALAPPDATA", "APPDATA", "ProgramData", "USERPROFILE"):
+        base = os.environ.get(var)
+        if not base:
+            continue
+        for sub in (os.path.join("ebonhold", "Ebonhold"), "Ebonhold",
+                    os.path.join("Games", "Ebonhold")):
+            p = os.path.join(base, sub)
+            if is_valid_install(p):
+                return p
+    # 2) Racines de disques classiques
     for drive in "CDEFGH":
         for sub in (r"\ebonhold\Ebonhold", r"\Ebonhold", r"\Games\Ebonhold",
                     r"\Program Files\Ebonhold", r"\Program Files (x86)\Ebonhold"):
