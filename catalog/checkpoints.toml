@@ -1,0 +1,15 @@
+# Fiche addon du catalogue Ebonhold. Voir catalog/_TEMPLATE.toml pour le detail des champs.
+# La version / le lien / le SHA256 viennent automatiquement de la derniere Release du repo.
+
+id = "checkpoints"
+name = "EbonholdCheckpoints"
+repo = "Squall98/EbonholdCheckpoints"
+category = "interface"
+install_target = "addons"
+extract_root = "EbonholdCheckpoints"
+icon = "ti-map-pin"
+accent = "teal"
+order = 20
+
+description = "Téléportation rapide vers les checkpoints débloqués, avec recherche et favoris (FR/EN)."
+long_description = "Fenêtre de téléportation rapide vers les checkpoints débloqués. Liste filtrable, recherche par nom, favoris et catégories. Bilingue FR/EN."

@@ -1,0 +1,77 @@
+name: Soumission d'addon (formulaire → PR)
+
+# Quand quelqu'un remplit le formulaire "Ajouter un addon" (issue avec le label
+# addon-submission), ce robot :
+#   1. génère la fiche catalog/<id>.toml,
+#   2. vérifie que le repo a bien une Release valide,
+#   3. ouvre une Pull Request que l'admin n'a plus qu'à relire et merger.
+# Rien n'est publié sans la validation de la PR : le catalogue live ne bouge pas tout seul.
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  submit:
+    if: contains(join(github.event.issue.labels.*.name, ','), 'addon-submission')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Génère la fiche TOML depuis le formulaire
+        id: fiche
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: python tools/issue_to_toml.py
+
+      - name: Valide le repo et sa Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python tools/build_manifest.py --only "${{ steps.fiche.outputs.id }}" --strict
+
+      - name: Ouvre la Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ID: ${{ steps.fiche.outputs.id }}
+          NAME: ${{ steps.fiche.outputs.name }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          BRANCH="addon/${ID}"
+          git config user.name "ebonhold-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add "catalog/${ID}.toml"
+          git commit -m "catalog: ajoute ${NAME} (#${ISSUE})"
+          git push -f origin "$BRANCH"
+          PR_URL=$(gh pr create --base main --head "$BRANCH" \
+            --title "Addon : ${NAME}" \
+            --body "Ajout de **${NAME}** au catalogue via le formulaire (clôt #${ISSUE}).
+
+          Fiche : \`catalog/${ID}.toml\`. La validation (repo + Release) est passée ✅.
+          Après merge, \`manifest.json\` est régénéré automatiquement.
+
+          Closes #${ISSUE}")
+          gh issue comment "$ISSUE" --body "✅ Merci ! J'ai créé la Pull Request : ${PR_URL}. Un admin va la relire."
+
+      - name: En cas d'échec, prévient dans l'issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE" --body "⚠️ Je n'ai pas pu traiter la soumission automatiquement. Vérifie que :
+          - le repo existe et a une **Release** avec un fichier **.zip** attaché,
+          - l'**identifiant** est en minuscules/tirets,
+          - le **repo** est bien au format \`owner/repo\`.
+          Détails dans les logs de l'action. Tu peux corriger l'issue : je réessaierai."
