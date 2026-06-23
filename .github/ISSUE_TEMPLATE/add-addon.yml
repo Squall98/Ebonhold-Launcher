@@ -1,0 +1,108 @@
+name: "➕ Ajouter un addon au launcher"
+description: "Propose un nouvel addon pour le catalogue Ebonhold. Un robot s'occupe du reste (SHA256, manifest, PR)."
+title: "[Addon] "
+labels: ["addon-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de proposer un addon ! Remplis ce formulaire : un robot va créer
+        automatiquement la fiche et ouvrir une Pull Request. **Pré-requis :** le mod doit
+        avoir son **propre dépôt GitHub** avec au moins une **Release** contenant le `.zip`.
+
+  - type: input
+    id: repo
+    attributes:
+      label: "Repo GitHub du mod"
+      description: "Au format owner/repo. C'est ici que le launcher lira les Releases."
+      placeholder: "Squall98/MonAddon"
+    validations:
+      required: true
+
+  - type: input
+    id: identifiant
+    attributes:
+      label: "Identifiant unique"
+      description: "En minuscules, sans espace (kebab-case). Sert de nom de fichier."
+      placeholder: "mon-addon"
+    validations:
+      required: true
+
+  - type: input
+    id: nom
+    attributes:
+      label: "Nom affiché"
+      placeholder: "Mon Addon"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: categorie
+    attributes:
+      label: "Catégorie"
+      options:
+        - traduction
+        - interface
+        - donnees
+    validations:
+      required: true
+
+  - type: dropdown
+    id: destination
+    attributes:
+      label: "Destination des fichiers"
+      description: "addons = Interface\\AddOns (cas normal) · data = Data (patch .mpq)"
+      options:
+        - addons
+        - data
+    validations:
+      required: true
+
+  - type: input
+    id: extract_root
+    attributes:
+      label: "Dossier racine du zip (addons)"
+      description: "Nom du dossier à l'intérieur du zip. Laisse vide pour détection automatique."
+      placeholder: "MonAddon"
+    validations:
+      required: false
+
+  - type: input
+    id: icone
+    attributes:
+      label: "Icône (Tabler)"
+      description: "Nom d'une icône https://tabler.io/icons (ex: ti-map-pin). Optionnel."
+      placeholder: "ti-puzzle"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: couleur
+    attributes:
+      label: "Couleur de la carte"
+      options:
+        - purple
+        - teal
+        - coral
+        - blue
+        - amber
+        - pink
+        - green
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description courte"
+      description: "Une phrase, affichée sur la carte."
+    validations:
+      required: true
+
+  - type: textarea
+    id: long_description
+    attributes:
+      label: "Description longue"
+      description: "Texte complet de la fiche détaillée. Optionnel."
+    validations:
+      required: false

@@ -3,6 +3,7 @@
   "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.2/EbonholdLauncher.zip",
   "launcher_sha256": "8dca4237b1f520e913b7b82c297055a18a7da4e06e742efbd6ba61645ac23a74",
   "_note": "launcher_version volontairement laisse a 1.0.1 : la v1.0.2 change le format (one-file -> one-folder/zip) et l'auto-update des anciens .exe one-file ne sait pas gerer le zip. On evite donc de declencher la maj auto (qui casserait leur launcher) ; les joueurs re-telechargent la v1.0.2 manuellement. A partir de la v1.0.2 (format dossier), repasser launcher_version a la vraie version pour reactiver l'auto-update.",
+  "_doc": "Partie GLOBALE du catalogue, editee a la main (par l'admin uniquement). Les addons sont dans catalog/*.toml. manifest.json est GENERE a partir de ces deux sources par tools/build_manifest.py.",
   "fr_config": {
     "pack_url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
     "pack_note": "Pack ~2,4 Go requis uniquement pour mettre les menus/quetes/interface en francais (Jeu = FR). Les sorts/hauts faits/titres fonctionnent sans le pack.",
@@ -56,20 +57,24 @@
       "extract_root": "EbonholdFR",
       "icon": "ti-language",
       "accent": "purple",
-      "notes": "Skill tree et affixes retraduits, corrections de tomes.",
+      "notes": "Merci pour vos retours ! Cette mise à jour corrige plusieurs textes mal traduits ou mal affichés.",
       "changelog_url": "https://github.com/Squall98/EbonholdFR/releases/tag/v3.1",
       "history": [
         {
           "version": "3.1",
-          "notes": "Skill tree et affixes retraduits, corrections de tomes."
+          "notes": "Merci pour vos retours ! Cette mise à jour corrige plusieurs textes mal traduits ou mal affichés."
         },
         {
           "version": "3.0",
-          "notes": "Refonte des echoes et des descriptions dynamiques."
+          "notes": "Clic droit : bascule instantanément entre français et texte d'origine en anglais (l'icône se grise en mode anglais)."
         },
         {
           "version": "2.0",
-          "notes": "Passage à la méthode patch-Z non-destructive."
+          "notes": "Grosse mise à jour : la traduction couvre maintenant bien plus que les Echoes et le Skill Tree."
+        },
+        {
+          "version": "1.0",
+          "notes": "Traduction française des descriptions de Project Ebonhold. Les noms restent en anglais (volontaire) ; seules les descriptions passent en français."
         }
       ]
     },
@@ -86,22 +91,24 @@
       "extract_root": "EbonholdCheckpoints",
       "icon": "ti-map-pin",
       "accent": "teal",
-      "notes": "Ajout des favoris et de la recherche par nom.",
+      "notes": "Mode reduit : la fenetre ne se ferme plus apres une teleportation et se rouvre automatiquement apres l'ecran de chargement. Tu peux enchainer les TP sans rouvrir la mini-barre de favoris.",
       "changelog_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/tag/v1.2",
       "history": [
         {
           "version": "1.2",
-          "notes": "Ajout des favoris et de la recherche par nom."
+          "notes": "Mode reduit : la fenetre ne se ferme plus apres une teleportation et se rouvre automatiquement apres l'ecran de chargement. Tu peux enchainer les TP sans rouvrir la mini-barre de favoris."
         },
         {
           "version": "1.1",
-          "notes": "Catégories de checkpoints et tri."
+          "notes": "Bilingue FR / EN : interface ET noms (villes, zones, donjons, raids) traduits — Hurlevent, Forgefer, Gouffre de Ragefeu... Bouton de bascule. Noms FR extraits du client officiel."
         },
         {
           "version": "1.0",
-          "notes": "Première version."
+          "notes": "Une fenetre qui regroupe tous tes checkpoints debloques : recherche, onglets par continent, sections Points de vol / Donjons / Raids. Un clic = teleportation."
         }
       ]
     }
-  ]
+  ],
+  "_generated": true,
+  "_source": "Genere par tools/build_manifest.py — ne pas editer a la main. Sources: manifest-meta.json + catalog/*.toml"
 }

@@ -1,0 +1,51 @@
+{
+  "launcher_version": "1.0.1",
+  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.2/EbonholdLauncher.zip",
+  "launcher_sha256": "8dca4237b1f520e913b7b82c297055a18a7da4e06e742efbd6ba61645ac23a74",
+  "_note": "launcher_version volontairement laisse a 1.0.1 : la v1.0.2 change le format (one-file -> one-folder/zip) et l'auto-update des anciens .exe one-file ne sait pas gerer le zip. On evite donc de declencher la maj auto (qui casserait leur launcher) ; les joueurs re-telechargent la v1.0.2 manuellement. A partir de la v1.0.2 (format dossier), repasser launcher_version a la vraie version pour reactiver l'auto-update.",
+  "_doc": "Partie GLOBALE du catalogue, editee a la main (par l'admin uniquement). Les addons sont dans catalog/*.toml. manifest.json est GENERE a partir de ces deux sources par tools/build_manifest.py.",
+  "fr_config": {
+    "pack_url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
+    "pack_note": "Pack ~2,4 Go requis uniquement pour mettre les menus/quetes/interface en francais (Jeu = FR). Les sorts/hauts faits/titres fonctionnent sans le pack.",
+    "pack_download": {
+      "url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
+      "format": "zip",
+      "sha256": "c0f9302f1bbd9c8224dc6e96ea73dbf2928a910f4b576f6ec0ca9972f56ea58f"
+    }
+  },
+  "categories": [
+    {
+      "id": "traduction",
+      "label": "Traduction",
+      "icon": "ti-language"
+    },
+    {
+      "id": "interface",
+      "label": "Interface & QoL",
+      "icon": "ti-layout-dashboard"
+    },
+    {
+      "id": "donnees",
+      "label": "Données / Patchs",
+      "icon": "ti-database"
+    }
+  ],
+  "packs": [],
+  "links": [
+    {
+      "label": "Discord Ebonhold FR",
+      "url": "https://discord.gg/ebonhold",
+      "icon": "ti-brand-discord"
+    },
+    {
+      "label": "Soul Tree Planner",
+      "url": "https://squall98.github.io/ebonhold-skilltree/",
+      "icon": "ti-binary-tree"
+    },
+    {
+      "label": "Guides",
+      "url": "https://github.com/Squall98/Ebonhold-Launcher",
+      "icon": "ti-book"
+    }
+  ]
+}

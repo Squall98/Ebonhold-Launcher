@@ -1,0 +1,55 @@
+name: Régénère le catalogue (manifest.json)
+
+# Reconstruit manifest.json a partir de manifest-meta.json + catalog/*.toml.
+# Recupere automatiquement la derniere Release de chaque addon (version, lien, SHA256).
+#
+# Se declenche :
+#   - quand une fiche catalog/ change (ajout/modif d'addon par PR mergee) -> immediat
+#   - toutes les 2 h           -> recupere les nouvelles versions publiees sur les repos des mods
+#   - bouton "Run workflow"    -> regeneration a la demande (instantane)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "catalog/**"
+      - "manifest-meta.json"
+      - "tools/build_manifest.py"
+  schedule:
+    - cron: "17 */2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-manifest
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Régénère manifest.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python tools/build_manifest.py --strict
+
+      - name: Commit si le catalogue a changé
+        run: |
+          if [ -n "$(git status --porcelain manifest.json)" ]; then
+            git config user.name "ebonhold-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add manifest.json
+            git commit -m "catalog: régénère manifest.json [auto]"
+            git push
+            echo "manifest.json mis à jour."
+          else
+            echo "Aucun changement dans le catalogue."
+          fi

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide — Ajouter un addon au launcher Ebonhold</title>
+<style>
+  :root{
+    --bg:#0f1117; --panel:#171a23; --panel2:#1e222e; --line:#2a2f3d;
+    --txt:#e7e9ee; --muted:#9aa3b2; --accent:#8b7bff; --accent2:#34d3c0;
+    --ok:#3ecf8e; --warn:#f5b34a; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);
+       font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;}
+  .wrap{max-width:880px;margin:0 auto;padding:40px 22px 80px}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1{font-size:30px;margin:0 0 6px;letter-spacing:.2px}
+  h2{font-size:21px;margin:42px 0 14px;padding-top:10px}
+  h3{font-size:16px;margin:22px 0 8px;color:var(--accent2)}
+  .sub{color:var(--muted);margin:0 0 26px;font-size:16px}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.6px;text-transform:uppercase;
+       color:var(--accent);border:1px solid var(--line);border-radius:999px;
+       padding:4px 11px;background:var(--panel)}
+  header{border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:8px}
+
+  .callout{background:linear-gradient(180deg,#1b1f2b,#171a23);border:1px solid var(--line);
+           border-left:3px solid var(--accent);border-radius:var(--radius);padding:18px 20px;margin:22px 0}
+  .callout b{color:#fff}
+  .callout .k{color:var(--accent2)}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+  @media(max-width:680px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 6px}
+  .card .ico{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+  .card h3{margin-top:6px;color:var(--txt);font-size:18px}
+  .card p{color:var(--muted);margin:6px 0 14px}
+
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:18px 0}
+  ol.steps>li{position:relative;padding:14px 16px 14px 56px;margin:10px 0;
+              background:var(--panel);border:1px solid var(--line);border-radius:12px}
+  ol.steps>li::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:13px;
+       width:28px;height:28px;border-radius:8px;background:var(--accent);color:#0c0e14;
+       font-weight:700;display:grid;place-items:center;font-size:15px}
+  ol.steps>li b{color:#fff}
+  .muted{color:var(--muted)}
+
+  .btnrow{margin:20px 0}
+  .btn{display:inline-block;background:var(--accent);color:#0c0e14;font-weight:600;
+       padding:11px 18px;border-radius:10px;border:0}
+  .btn:hover{text-decoration:none;filter:brightness(1.07)}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+
+  /* maquette du formulaire */
+  .mock{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+  .mock .ttl{font-weight:600;margin-bottom:12px;color:#fff;display:flex;align-items:center;gap:8px}
+  .field{margin:10px 0}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+  .field .inp{background:#0e1118;border:1px solid var(--line);border-radius:8px;padding:9px 11px;color:var(--txt)}
+  .field .inp.sel::after{content:"▾";float:right;color:var(--muted)}
+  .ph{color:#5b647a}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.4px}
+  td code{background:#0e1118;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
+  .req{color:var(--accent2);font-weight:700}
+
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:2px 16px;margin:10px 0}
+  summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"+ ";color:var(--accent)}
+  details[open] summary::before{content:"– "}
+  details p{margin:0 0 14px;color:var(--muted)}
+
+  code.k{color:var(--accent2);background:#0e1118;border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+  .note{font-size:14px;color:var(--muted)}
+  footer{margin-top:54px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:13.5px}
+
+  @media print{
+    body{background:#fff;color:#111}
+    .wrap{max-width:none}
+    .callout,.card,ol.steps>li,.mock,details,table td,table th{border-color:#ccc}
+    .btn{display:none}
+    a{color:#111}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="tag">Ebonhold Launcher</span>
+  <h1>Ajouter un addon au launcher</h1>
+  <p class="sub">Guide pour l'équipe — ajouter ou mettre à jour un mod dans le catalogue, sans toucher au code.</p>
+</header>
+
+<div class="callout">
+  <b>Le principe en une phrase.</b> Chaque addon a son <b>propre dépôt GitHub</b>. Le catalogue
+  du launcher se construit <b class="k">tout seul</b> à partir des <b class="k">Releases</b> de ces dépôts —
+  tu n'édites jamais de fichier compliqué et tu ne calcules <b>jamais</b> de code de vérification.
+</div>
+
+<h2>1. Mettre à jour un addon existant</h2>
+<p class="muted">C'est le cas le plus courant, et c'est le plus simple : il n'y a rien à faire sur le launcher.</p>
+<ol class="steps">
+  <li>Sur le dépôt GitHub <b>de l'addon</b>, crée une nouvelle <b>Release</b> (ex. <code>v1.3</code>)
+      avec le fichier <code>.zip</code> de l'addon en pièce jointe.</li>
+  <li>C'est tout. Le launcher détecte la nouvelle version <b>automatiquement</b> et la propose aux
+      joueurs (dans les deux heures, ou tout de suite si un admin relance la mise à jour).</li>
+</ol>
+<p class="note">Astuce : si une version n'est pas prête, coche <b>« pre-release »</b> sur la Release —
+elle sera ignorée tant qu'elle reste en pre-release.</p>
+
+<h2>2. Ajouter un nouvel addon</h2>
+<p class="muted">Deux méthodes au choix. Aucune ne demande de connaissances techniques particulières.</p>
+
+<div class="cards">
+  <div class="card">
+    <div class="ico">Méthode A · recommandée</div>
+    <h3>Le formulaire</h3>
+    <p>Tu remplis un formulaire sur GitHub. Un robot vérifie tout et prépare l'ajout à ta place.</p>
+  </div>
+  <div class="card">
+    <div class="ico">Méthode B</div>
+    <h3>Le petit fichier</h3>
+    <p>Tu crées un mini-fichier de quelques lignes via l'éditeur GitHub. Pour les habitués.</p>
+  </div>
+</div>
+
+<h3>Méthode A — Le formulaire</h3>
+<ol class="steps">
+  <li>Ouvre la page de soumission :
+      <div class="btnrow">
+        <a class="btn" href="https://github.com/Squall98/Ebonhold-Launcher/issues/new?template=add-addon.yml">Ouvrir le formulaire « Ajouter un addon »</a>
+      </div>
+      <span class="note">(ou : onglet <b>Issues</b> du dépôt → <b>New issue</b> → « Ajouter un addon au launcher »)</span></li>
+  <li>Remplis les champs (voir la maquette ci-dessous), puis clique sur <b>Submit new issue</b>.</li>
+  <li>Un robot vérifie le dépôt et <b>crée une demande d'ajout (Pull Request)</b> tout seul, puis te
+      répond dans l'issue avec le lien.</li>
+  <li>Un admin relit, valide, et l'addon apparaît dans le launcher. <b>Terminé.</b></li>
+</ol>
+
+<div class="mock" aria-hidden="true">
+  <div class="ttl">Formulaire — Ajouter un addon au launcher</div>
+  <div class="field"><label>Repo GitHub du mod *</label><div class="inp"><span class="ph">Squall98/MonAddon</span></div></div>
+  <div class="field"><label>Identifiant unique *</label><div class="inp"><span class="ph">mon-addon</span></div></div>
+  <div class="field"><label>Nom affiché *</label><div class="inp"><span class="ph">Mon Addon</span></div></div>
+  <div class="field"><label>Catégorie *</label><div class="inp sel">interface</div></div>
+  <div class="field"><label>Destination des fichiers *</label><div class="inp sel">addons</div></div>
+  <div class="field"><label>Description courte *</label><div class="inp"><span class="ph">À quoi sert l'addon, en une phrase.</span></div></div>
+</div>
+<p class="note">Les champs marqués <span class="req">*</span> sont obligatoires. Le reste (icône, couleur,
+description longue) est optionnel.</p>
+
+<h3>Méthode B — Le petit fichier</h3>
+<ol class="steps">
+  <li>Dans le dépôt, va dans le dossier <code>catalog/</code> et ouvre <code>_TEMPLATE.toml</code>
+      pour t'en inspirer.</li>
+  <li>Clique <b>Add file → Create new file</b>, nomme-le <code>catalog/mon-addon.toml</code> et
+      recopie le modèle.</li>
+  <li>Remplis les champs (voir le tableau ci-dessous), puis <b>Propose changes</b> :
+      ça crée automatiquement la demande d'ajout.</li>
+  <li>Un admin la valide. C'est en ligne.</li>
+</ol>
+
+<h2>Les champs d'un addon</h2>
+<table>
+  <tr><th>Champ</th><th>Obligatoire</th><th>À quoi ça sert</th></tr>
+  <tr><td><code>id</code></td><td class="req">oui</td><td>Identifiant unique, en minuscules et tirets (ex. <code>atlas-loot</code>).</td></tr>
+  <tr><td><code>name</code></td><td class="req">oui</td><td>Le nom affiché sur la carte.</td></tr>
+  <tr><td><code>repo</code></td><td class="req">oui</td><td>Le dépôt GitHub du mod, au format <code>proprio/depot</code>.</td></tr>
+  <tr><td><code>category</code></td><td class="req">oui</td><td><code>traduction</code>, <code>interface</code> ou <code>donnees</code>.</td></tr>
+  <tr><td><code>install_target</code></td><td class="req">oui</td><td><code>addons</code> (dans <code>Interface\AddOns</code>) ou <code>data</code> (dans <code>Data</code>).</td></tr>
+  <tr><td><code>extract_root</code></td><td>non</td><td>Nom du dossier à l'intérieur du zip. Laisse vide : il est deviné tout seul.</td></tr>
+  <tr><td><code>icon</code> / <code>accent</code></td><td>non</td><td>Icône et couleur de la carte (apparence).</td></tr>
+  <tr><td><code>description</code></td><td class="req">oui</td><td>Phrase courte affichée sur la carte.</td></tr>
+  <tr><td><code>long_description</code></td><td>non</td><td>Texte complet de la fiche détaillée.</td></tr>
+</table>
+<p class="note">La <b>version</b>, le <b>lien de téléchargement</b>, le <b>code de vérification</b> et
+l'<b>historique</b> ne se renseignent pas : ils viennent automatiquement de la dernière Release du dépôt.</p>
+
+<h2>Questions fréquentes</h2>
+<details>
+  <summary>Il faut quoi sur le dépôt du mod pour qu'il marche ?</summary>
+  <p>Au moins une <b>Release</b> GitHub avec un fichier <b>.zip</b> attaché (ou <b>.mpq</b> pour un patch
+  de données). C'est ce zip que le launcher télécharge et installe.</p>
+</details>
+<details>
+  <summary>Comment je publie une mise à jour plus tard ?</summary>
+  <p>Tu n'as rien à changer dans le catalogue : tu crées simplement une nouvelle <b>Release</b> sur le
+  dépôt du mod. Le launcher prend la dernière version automatiquement.</p>
+</details>
+<details>
+  <summary>Le texte « Nouveautés » vient d'où ?</summary>
+  <p>De la description de ta Release GitHub (sa première phrase). Donc soigne un peu tes notes de Release :
+  elles s'affichent telles quelles dans le launcher.</p>
+</details>
+<details>
+  <summary>Est-ce que mon ajout est publié tout de suite ?</summary>
+  <p>Non. Un ajout passe d'abord par une demande (Pull Request) qu'un admin relit et valide. C'est une
+  sécurité : rien n'arrive aux joueurs sans relecture.</p>
+</details>
+<details>
+  <summary>J'ai fait une erreur dans le formulaire, c'est grave ?</summary>
+  <p>Non. Si quelque chose ne va pas, le robot te le dit directement dans ton issue. Tu corriges, il
+  réessaie. Rien n'est cassé entre-temps.</p>
+</details>
+
+<footer>
+  Dépôt du launcher : <a href="https://github.com/Squall98/Ebonhold-Launcher">github.com/Squall98/Ebonhold-Launcher</a><br>
+  Une question ? Le Discord Ebonhold. — Guide équipe, version 1.
+</footer>
+
+</div>
+</body>
+</html>

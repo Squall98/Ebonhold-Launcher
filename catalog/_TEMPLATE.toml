@@ -1,0 +1,39 @@
+# =============================================================================
+#  MODELE de fiche addon — COPIE ce fichier pour ajouter un mod au launcher.
+# =============================================================================
+#
+#  Pour ajouter un addon :
+#   1. Cree un nouveau fichier  catalog/<id>.toml  (ex: catalog/atlasloot.toml)
+#   2. Remplis les champs ci-dessous.
+#   3. Ouvre une Pull Request. C'est tout.
+#
+#  Tu n'as JAMAIS a calculer de SHA256 ni a editer manifest.json : un robot lit la
+#  derniere Release GitHub du repo indique et remplit version / lien / SHA / historique.
+#  Pour publier une nouvelle version plus tard : il suffit de creer une Release sur le
+#  repo du mod — le catalogue se met a jour tout seul (les pre-releases sont ignorees).
+#
+#  /!\ Le repo du mod DOIT avoir au moins une Release avec un fichier .zip (addon)
+#      ou .mpq (donnees) attache.
+# -----------------------------------------------------------------------------
+
+id = "mon-addon"                       # identifiant unique en kebab-case (= nom du fichier)
+name = "Mon Addon"                     # nom affiche sur la carte
+repo = "Squall98/MonAddon"             # owner/repo GitHub (ou sont publiees les Releases)
+category = "interface"                 # traduction | interface | donnees  (cf. manifest-meta.json)
+install_target = "addons"              # addons -> Interface\AddOns   |   data -> Data
+
+# --- addons uniquement ---
+extract_root = "MonAddon"              # dossier racine DANS le zip (laisse vide = auto-detecte)
+
+# --- data uniquement (sinon supprime ces 2 lignes) ---
+# filename = "patch-W.MPQ"             # nom du fichier copie dans Data (defaut: nom de l'asset)
+
+# --- affichage (optionnel mais recommande) ---
+icon = "ti-puzzle"                     # icone Tabler : https://tabler.io/icons
+accent = "blue"                        # purple | teal | coral | blue | amber | pink | green
+order = 100                            # ordre d'affichage (petit = en premier)
+
+description = "Phrase courte affichee sur la carte."
+long_description = "Description complete affichee dans la fiche detaillee de l'addon."
+
+# notes = "Texte force pour 'Nouveautes'. Par defaut: 1re ligne de la derniere Release."

@@ -1,0 +1,17 @@
+# Fiche addon du catalogue Ebonhold.
+# Le launcher lit AUTOMATIQUEMENT la derniere Release du repo ci-dessous :
+# version, lien de telechargement, SHA256 et historique sont recuperes tout seuls.
+# Ici tu ne renseignes que l'AFFICHAGE. Mettre a jour = publier une Release sur le repo.
+
+id = "ebonholdfr"
+name = "EbonholdFR"
+repo = "Squall98/EbonholdFR"          # owner/repo GitHub — les Releases sont lues ici
+category = "traduction"               # id d'une categorie (voir manifest-meta.json)
+install_target = "addons"             # addons -> Interface\AddOns  |  data -> Data
+extract_root = "EbonholdFR"           # dossier racine du zip (laisse vide = auto-detecte)
+icon = "ti-language"                  # icone Tabler (https://tabler.io/icons)
+accent = "purple"                     # purple | teal | coral | blue | amber | pink | green
+order = 10                            # ordre d'affichage (petit = en premier)
+
+description = "Traduit le contenu custom d'Ebonhold : echoes, arbre de talents, affixes, tomes."
+long_description = "Addon qui traduit le contenu CUSTOM du serveur Ebonhold : echoes, arbre de talents (skill tree), affixes et tomes. Complémentaire du Patch FR (onglet Réglages) qui, lui, traduit le jeu de base (sorts, hauts faits, titres, quêtes, menus). S'installe dans Interface\\AddOns."
