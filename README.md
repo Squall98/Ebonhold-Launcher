@@ -2,7 +2,19 @@
 
 Launcher desktop type CurseForge pour le serveur Ebonhold : installe et met à jour
 en un clic les addons (`EbonholdFR`, `EbonholdCheckpoints`) et le patch de données
-custom (`patch-Z.MPQ`), au bon endroit dans l'installation WoW du joueur.
+custom, au bon endroit dans l'installation WoW du joueur.
+
+---
+
+### 👥 Pour l'équipe — ajouter un addon
+
+- 🧩 **[Ajouter un addon (formulaire)](https://github.com/Squall98/Ebonhold-Launcher/issues/new?template=add-addon.yml)** — tu remplis un formulaire, un robot ouvre la Pull Request.
+- 📖 **[Guide pas-à-pas](https://github.com/Squall98/Ebonhold-Launcher/issues/1)** (issue épinglée) — comment ça marche, en 2 minutes.
+- 🛠️ **[CONTRIBUTING.md](CONTRIBUTING.md)** — la référence technique des champs et du flux.
+
+> **Mettre à jour un addon** = publier une **Release** sur son dépôt : le catalogue se met à jour tout seul.
+
+---
 
 ## Lancer en développement
 
@@ -48,38 +60,36 @@ sa `version`, son `download_url` et son `sha256` (vérification d'intégrité).
 > pour permettre le test hors-ligne. Pour publier : remplacer les `download_url` par les
 > URLs des Releases GitHub et recalculer/garder les `sha256`.
 
-## Ajouter un nouveau mod (zéro code)
+## Ajouter / mettre à jour un mod (catalogue auto-généré)
 
-Le launcher est **piloté par les données** : un mod = une entrée dans `manifest.json`,
-aucune modification de code. Le plus simple est le script `add_mod.py` (calcule le SHA256,
-devine le dossier racine d'un ZIP, écrit l'entrée) :
+Le catalogue (`manifest.json`) est **généré automatiquement** — personne n'édite ce fichier à la
+main ni ne calcule de SHA256. Deux sources : `manifest-meta.json` (partie globale, admin) +
+`catalog/*.toml` (une fiche par addon). Pour chaque fiche, la **dernière Release GitHub** du dépôt
+indiqué fournit la `version`, le `download_url`, le `sha256` et l'historique.
+
+- **Mettre à jour un addon** → publier une nouvelle **Release** sur son dépôt. Le catalogue se
+  régénère tout seul (Action `build-manifest.yml` : sur changement de `catalog/`, toutes les 2 h,
+  ou via le bouton *Run workflow*).
+- **Ajouter un addon** → le [formulaire](https://github.com/Squall98/Ebonhold-Launcher/issues/new?template=add-addon.yml)
+  (un robot ouvre la PR) ou créer une fiche `catalog/<id>.toml` (voir `catalog/_TEMPLATE.toml`).
+  Tout est détaillé dans [CONTRIBUTING.md](CONTRIBUTING.md) et le [guide épinglé](https://github.com/Squall98/Ebonhold-Launcher/issues/1).
+
+Régénérer / valider en local (admin) :
 
 ```bash
-# Addon (ZIP) — --category = id d'affichage (libre), --target = où vont les fichiers
-python add_mod.py --id atlasloot --name "AtlasLoot" --category interface --target addons --version 1.0 \
-    --file "V:/Project/Ebonhold/releases/AtlasLoot-v1.0.zip" \
-    --icon ti-map --accent blue --desc "Tables de butin des donjons."
-
-# Patch (MPQ)
-python add_mod.py --id patch-w --name "Patch W (sons)" --category donnees --target data --version 1.0 \
-    --file "V:/Project/Ebonhold/database/patch-W.MPQ" --icon ti-music --accent amber
+python tools/build_manifest.py            # régénère manifest.json depuis les sources
+python tools/build_manifest.py --check    # montre le résultat sans rien écrire
+python tools/build_manifest.py --only <id> --strict   # valide une seule fiche
 ```
 
-La carte apparaît automatiquement dans le catalogue. Relancer la même commande avec une
-nouvelle `--version` / `--file` met à jour l'entrée (les joueurs voient alors « Mettre à jour »).
+> L'ancien `add_mod.py` (édition directe de `manifest.json`) reste utilisable en local mais n'est
+> plus la méthode recommandée : la source du catalogue est désormais `catalog/*.toml`.
 
-- `--category` : id d'une catégorie du manifeste (libre : `traduction`, `interface`, `donnees`, …) — sert au filtre/affichage.
-- `--target` : `addons` (→ `Interface\AddOns`) ou `data` (→ `Data`) — décide où les fichiers sont posés.
-- `--icon` : nom d'une icône [Tabler](https://tabler.io/icons) (ex. `ti-shield`, `ti-music`).
-- `--accent` : couleur de carte parmi `purple, teal, coral, blue, amber, pink, green`.
-- `--url` : en prod, l'URL de la Release GitHub (sinon le chemin local du `--file` est utilisé, pour le dev).
+### Catégories et packs (pilotés par le manifeste)
 
-### Catégories et packs (pilotés par le manifeste — zéro code)
-
-- `categories` : la liste des filtres du catalogue. Ajouter/réorganiser une catégorie = éditer le manifeste
-  (aucune mise à jour du launcher nécessaire).
-- `packs` : presets installables en un clic (ex. « Pack FR complet » = plusieurs mods). Chaque pack liste
-  des `products` (ids).
+- `categories` (dans `manifest-meta.json`) : filtres du catalogue. Seules celles **réellement
+  utilisées** par un mod s'affichent (pas d'onglet vide).
+- `packs` : presets installables en un clic (ex. « Pack FR complet » = plusieurs mods).
 
 ## État d'avancement
 
