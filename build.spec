@@ -38,15 +38,26 @@ a = Analysis(
 )
 pyz = PYZ(a.pure)
 
+# Build ONE-FOLDER (et non one-file) : les fichiers (python314.dll, runtime VC++, web/,
+# vendor/...) sont poses une fois sur le disque au lieu d'etre re-extraits dans %TEMP% a
+# chaque lancement -> plus de faux "Failed to load Python DLL" causes par l'antivirus qui
+# met en quarantaine l'extraction temporaire, et demarrage plus rapide.
 exe = EXE(
-    pyz, a.scripts, a.binaries, a.datas, [],
+    pyz, a.scripts, [],
+    exclude_binaries=True,      # one-folder : les binaires vont dans COLLECT, pas dans l'exe
     name="EbonholdLauncher",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=False,                  # UPX = gros declencheur de faux positifs antivirus -> desactive
-    runtime_tmpdir=None,
     console=False,              # appli fenetree (pas de console)
     icon="assets/icon.ico",
     version="version_info.txt",  # metadonnees (nom/editeur/version) -> moins suspect
+)
+
+coll = COLLECT(
+    exe, a.binaries, a.datas,
+    strip=False,
+    upx=False,
+    name="EbonholdLauncher",    # -> dist/EbonholdLauncher/ (dossier a distribuer en .zip)
 )
