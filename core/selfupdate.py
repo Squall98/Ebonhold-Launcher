@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
-"""Auto-update du launcher lui-meme.
+"""Auto-update du launcher lui-meme (format ONE-FOLDER).
 
-Cas 'exe' (PyInstaller, sys.frozen) : telecharge le nouveau .exe, verifie son SHA256,
-puis lance un petit script .bat qui attend la fermeture du launcher, remplace l'.exe et
-le relance. Un programme ne pouvant pas se reecrire pendant qu'il tourne, on passe par
-ce relais — c'est la methode standard.
+Cas 'exe' (PyInstaller, sys.frozen) : le launcher est un dossier
+(EbonholdLauncher\\EbonholdLauncher.exe + _internal\\...). On telecharge le nouveau
+ZIP, on l'extrait, puis un petit .bat detache attend la fermeture du launcher, remplace
+le contenu du dossier (robocopy) et relance. Un programme ne pouvant pas se reecrire
+pendant qu'il tourne, ce relais est la methode standard.
 
-Cas 'dev' (lance via python) : pas de .exe a remplacer, on se contente d'ouvrir la page
-de telechargement (gere par l'appelant). is_frozen() permet de distinguer les deux.
+Cas 'dev' (lance via python) : rien a remplacer, l'appelant ouvre la page de
+telechargement. is_frozen() distingue les deux.
 """
 import os
 import subprocess
 import sys
 import tempfile
+import zipfile
 
-from . import installer  # reutilise download() + verification SHA256
+from . import installer  # reutilise download()
 
 
 def is_frozen():
@@ -26,46 +28,68 @@ def exe_path():
     return sys.executable if is_frozen() else ""
 
 
-def download_and_swap(download_url, sha256, progress=None):
-    """Telecharge le nouvel .exe, le verifie, puis declenche le remplacement + relance.
+def app_dir():
+    """Dossier du launcher (qui contient EbonholdLauncher.exe + _internal\\)."""
+    return os.path.dirname(sys.executable) if is_frozen() else ""
 
-    A appeler seulement si is_frozen(). Le launcher doit ensuite QUITTER pour liberer
-    son .exe (l'appelant ferme la fenetre apres le retour).
-    """
+
+def download_and_swap(download_url, sha256, progress=None):
+    """Telecharge le ZIP de la nouvelle version, le verifie, l'extrait, puis declenche
+    le remplacement du dossier + la relance. Le launcher doit ensuite QUITTER."""
     if not is_frozen():
-        raise RuntimeError("Remplacement auto disponible uniquement sur la version .exe.")
+        raise RuntimeError("Mise a jour auto disponible uniquement sur la version installee.")
 
     progress = progress or (lambda *_: None)
-    current = exe_path()
-    new_exe = os.path.join(tempfile.gettempdir(), "EbonholdLauncher.new.exe")
+    cur_dir = app_dir()
+    exe_name = os.path.basename(sys.executable)
 
-    actual = installer.download(download_url, new_exe, progress)
+    tmp = tempfile.mkdtemp(prefix="ebonhold-upd-")
+    zip_path = os.path.join(tmp, "update.zip")
+    actual = installer.download(download_url, zip_path, progress)
     if sha256 and actual.lower() != sha256.lower():
-        os.remove(new_exe)
-        raise ValueError("Checksum du launcher invalide — telechargement abandonne.")
+        raise ValueError("Checksum du launcher invalide — mise a jour abandonnee.")
 
-    _spawn_swapper(current, new_exe)
+    progress(100, "Extraction...")
+    extract_dir = os.path.join(tmp, "x")
+    os.makedirs(extract_dir)
+    with zipfile.ZipFile(zip_path) as z:
+        z.extractall(extract_dir)
+
+    new_dir = _find_app_dir(extract_dir, exe_name)
+    if not new_dir:
+        raise RuntimeError("EbonholdLauncher.exe introuvable dans la mise a jour.")
+
+    _spawn_folder_swapper(cur_dir, new_dir, exe_name, tmp)
     return True
 
 
-def _spawn_swapper(current_exe, new_exe):
-    """Cree et lance un .bat detache qui attend, remplace l'.exe et relance."""
+def _find_app_dir(root, exe_name):
+    """Trouve le dossier (dans l'archive extraite) qui contient l'exe du launcher."""
+    if os.path.isfile(os.path.join(root, exe_name)):
+        return root
+    for cur, _dirs, files in os.walk(root):
+        if exe_name in files:
+            return cur
+    return None
+
+
+def _spawn_folder_swapper(cur_dir, new_dir, exe_name, tmp_dir):
+    """Lance un .bat detache : attend la fermeture, mirroir le nouveau dossier, relance."""
     bat = os.path.join(tempfile.gettempdir(), "ebonhold_update.bat")
+    target_exe = os.path.join(cur_dir, exe_name)
     script = (
         "@echo off\r\n"
-        "ping 127.0.0.1 -n 3 >nul\r\n"                 # laisse le launcher se fermer
-        ':wait\r\n'
+        "ping 127.0.0.1 -n 3 >nul\r\n"                          # laisse le launcher se fermer
+        ":wait\r\n"
         'tasklist /fi "imagename eq %s" | find /i "%s" >nul && (\r\n'
         "  ping 127.0.0.1 -n 2 >nul\r\n"
         "  goto wait\r\n"
         ")\r\n"
-        'move /y "%s" "%s" >nul\r\n'                   # remplace l'ancien par le nouveau
-        'start "" "%s"\r\n'                            # relance
-        'del "%%~f0"\r\n'                              # auto-suppression du .bat
-    ) % (
-        os.path.basename(current_exe), os.path.basename(current_exe),
-        new_exe, current_exe, current_exe,
-    )
+        'robocopy "%s" "%s" /MIR /R:3 /W:1 >nul\r\n'            # remplace le contenu du dossier
+        'start "" "%s"\r\n'                                     # relance
+        'rmdir /s /q "%s"\r\n'                                  # nettoie le temp
+        'del "%%~f0"\r\n'                                       # auto-suppression du .bat
+    ) % (exe_name, exe_name, new_dir, cur_dir, target_exe, tmp_dir)
     with open(bat, "w", encoding="ascii") as f:
         f.write(script)
     subprocess.Popen(["cmd", "/c", bat],

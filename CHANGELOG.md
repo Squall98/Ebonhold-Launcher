@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.2 — format dossier (fiabilité) + détection AppData
+- **Distribution en dossier (zip)** au lieu d'un .exe unique : les fichiers ne sont plus
+  ré-extraits dans `%TEMP%` à chaque lancement → corrige l'erreur **« Failed to load Python
+  DLL »** causée par l'antivirus qui mettait en quarantaine l'extraction temporaire, et
+  **démarrage plus rapide**.
+- **Détection automatique** de l'install dans `%LOCALAPPDATA%\ebonhold` (emplacement par
+  défaut du launcher officiel) — plus besoin de « Parcourir » pour la plupart des joueurs.
+- Auto-update adapté au format dossier.
+
 ## v1.0.1 — correctif config FR (lecture seule)
 - Corrige l'erreur « Permission denied » sur `Config.wtf` lors de l'application de la
   traduction : le fichier est souvent en **lecture seule** sur les serveurs privés
