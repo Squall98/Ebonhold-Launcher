@@ -9,12 +9,18 @@ name: Soumission d'addon (formulaire → PR)
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, edited, labeled]
 
 permissions:
   contents: write
   pull-requests: write
   issues: write
+
+# Un seul traitement par issue à la fois (évite les doublons quand 'opened' et
+# 'labeled' se déclenchent ensemble à la création d'une soumission).
+concurrency:
+  group: addon-submit-${{ github.event.issue.number }}
+  cancel-in-progress: true
 
 jobs:
   submit:

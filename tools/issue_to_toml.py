@@ -64,6 +64,16 @@ def main():
 
     f = parse_issue_form(body)
 
+    # Normalise le repo : accepte une URL GitHub complète (avec ou sans / final, .git)
+    # autant que le format court 'owner/repo'.
+    repo = f.get("repo", "").strip()
+    m = re.search(r"github\.com[/:]([^/\s]+/[^/\s]+?)(?:\.git)?/?$", repo)
+    if m:
+        repo = m.group(1)
+    repo = repo.strip().rstrip("/")
+    if repo:
+        f["repo"] = repo
+
     # Validations.
     errors = []
     fid = f.get("id", "")
