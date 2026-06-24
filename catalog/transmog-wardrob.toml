@@ -4,6 +4,6 @@
 id = "transmog-wardrob"
 name = "Wardrobe"
 repo = "Veronica-Vasilieva/Wardrobe"
-category = "interface"
+category = "personnage"
 install_target = "addons"
 description = "Visualisez vos transomog avec facilité"

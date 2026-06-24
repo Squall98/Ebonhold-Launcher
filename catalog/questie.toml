@@ -4,6 +4,6 @@
 id = "questie"
 name = "Questie"
 repo = "Xurkon/Questie-X"
-category = "interface"
+category = "quetes"
 install_target = "addons"
 description = "Une aide précieuse pour vos aventures en Azeroth"
