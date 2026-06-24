@@ -76,7 +76,7 @@ def install(product, install_dir, progress=_noop):
     os.makedirs(dest_dir, exist_ok=True)
 
     tmp = tempfile.mkdtemp(prefix="ebonhold-dl-")
-    backup = None
+    backups = []
     try:
         # 1. Telechargement + checksum
         blob = os.path.join(tmp, "payload")
@@ -86,25 +86,26 @@ def install(product, install_dir, progress=_noop):
 
         # 2. Pose (avec sauvegarde de l'existant pour rollback)
         if product["install_target"] == "addons":
-            root = product["extract_root"]
-            target = os.path.join(dest_dir, root)
-            backup = _backup(target)
+            # un addon peut poser PLUSIEURS dossiers (ex: GatherMate + GatherMate_Data).
+            roots = product.get("extract_roots") or [product["extract_root"]]
+            backups = [_backup(os.path.join(dest_dir, r)) for r in roots]
             with zipfile.ZipFile(blob) as z:
                 _safe_extract(z, dest_dir)
-            rel = [os.path.join("Interface", "AddOns", root)]
+            rel = [os.path.join("Interface", "AddOns", r) for r in roots]
         else:  # data : copie du MPQ
             fname = product["filename"]
-            target = os.path.join(dest_dir, fname)
-            backup = _backup(target)
-            shutil.copy2(blob, target)
+            backups = [_backup(os.path.join(dest_dir, fname))]
+            shutil.copy2(blob, os.path.join(dest_dir, fname))
             rel = [os.path.join("Data", fname)]
 
         state.mark_installed(product["id"], product["version"], rel)
-        _drop_backup(backup)
+        for b in backups:
+            _drop_backup(b)
         progress(100, "Installe.")
         return rel
     except Exception:
-        _restore_backup(backup)
+        for b in reversed(backups):
+            _restore_backup(b)
         raise
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
