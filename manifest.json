@@ -1,8 +1,8 @@
 {
-  "launcher_version": "1.0.1",
-  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.2/EbonholdLauncher.zip",
-  "launcher_sha256": "8dca4237b1f520e913b7b82c297055a18a7da4e06e742efbd6ba61645ac23a74",
-  "_note": "launcher_version volontairement laisse a 1.0.1 : la v1.0.2 change le format (one-file -> one-folder/zip) et l'auto-update des anciens .exe one-file ne sait pas gerer le zip. On evite donc de declencher la maj auto (qui casserait leur launcher) ; les joueurs re-telechargent la v1.0.2 manuellement. A partir de la v1.0.2 (format dossier), repasser launcher_version a la vraie version pour reactiver l'auto-update.",
+  "launcher_version": "1.0.3",
+  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.3/EbonholdLauncher.zip",
+  "launcher_sha256": "8b392dd3725ade24166f4ba0147b56cdf73a007e0836e6d49f01883a28fc2836",
+  "_note": "Auto-update ACTIF depuis la v1.0.3 (format dossier). Les clients en v1.0.2+ recoivent la maj automatiquement. Pour publier une nouvelle version : rebuild l'exe, recalculer le sha du zip, creer la release GitHub, puis mettre a jour launcher_version + launcher_download_url + launcher_sha256 ici.",
   "_doc": "Partie GLOBALE du catalogue, editee a la main (par l'admin uniquement). Les addons sont dans catalog/*.toml. manifest.json est GENERE a partir de ces deux sources par tools/build_manifest.py.",
   "fr_config": {
     "pack_url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
