@@ -107,6 +107,55 @@
           "notes": "Une fenetre qui regroupe tous tes checkpoints debloques : recherche, onglets par continent, sections Points de vol / Donjons / Raids. Un clic = teleportation."
         }
       ]
+    },
+    {
+      "id": "auto-callboard",
+      "name": "AutoCallboard",
+      "category": "interface",
+      "description": "Recherche et partage de quêtes automatique au callboard",
+      "version": "1.0.7",
+      "download_url": "https://github.com/disarrayed/AutoCallboard/releases/download/v1.0.7/AutoCallboard_v1.0.7.zip",
+      "sha256": "35500c4febbbd36e5f811c2becca081d04fb8c11b84ee38849cbbb5360e8fab1",
+      "install_target": "addons",
+      "extract_root": "AutoCallboard",
+      "icon": "question-mark",
+      "accent": "purple",
+      "notes": "AutoCallboard v1.0.7",
+      "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.7",
+      "history": [
+        {
+          "version": "1.0.7",
+          "notes": "AutoCallboard v1.0.7"
+        },
+        {
+          "version": "1.0.6",
+          "notes": "AutoCallboard v1.0.6"
+        },
+        {
+          "version": "1.0.5",
+          "notes": "AutoCallboard v1.0.5"
+        },
+        {
+          "version": "1.0.4",
+          "notes": "AutoCallboard v1.0.4"
+        },
+        {
+          "version": "1.0.3",
+          "notes": "AutoCallboard v1.0.3"
+        },
+        {
+          "version": "1.0.2",
+          "notes": "AutoCallboard v1.0.2"
+        },
+        {
+          "version": "1.0.1",
+          "notes": "AutoCallboard v1.0.1"
+        },
+        {
+          "version": "1.0",
+          "notes": "AutoCallboard v1.0"
+        }
+      ]
     }
   ],
   "_generated": true,
