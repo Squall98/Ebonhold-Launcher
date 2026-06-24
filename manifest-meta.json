@@ -20,6 +20,31 @@
       "icon": "ti-language"
     },
     {
+      "id": "carte",
+      "label": "Carte & voyage",
+      "icon": "ti-map-pin"
+    },
+    {
+      "id": "quetes",
+      "label": "Quêtes",
+      "icon": "ti-list-check"
+    },
+    {
+      "id": "metiers",
+      "label": "Métiers",
+      "icon": "ti-tools"
+    },
+    {
+      "id": "sacs",
+      "label": "Sacs & inventaire",
+      "icon": "ti-briefcase"
+    },
+    {
+      "id": "personnage",
+      "label": "Personnage",
+      "icon": "ti-user"
+    },
+    {
       "id": "interface",
       "label": "Interface & QoL",
       "icon": "ti-layout-dashboard"

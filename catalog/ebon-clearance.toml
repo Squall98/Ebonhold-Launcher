@@ -4,6 +4,6 @@
 id = "ebon-clearance"
 name = "EbonClearance"
 repo = "powerfulqa/EbonClearance"
-category = "interface"
+category = "sacs"
 install_target = "addons"
 description = "Nettoyez vos sacs à la vitesse de l'éclaire"

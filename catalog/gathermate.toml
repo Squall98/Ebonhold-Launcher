@@ -5,7 +5,7 @@
 id = "gathermate"
 name = "GatherMate"
 repo = "Squall98/GatherMate"
-category = "interface"
+category = "carte"
 install_target = "addons"
 extract_roots = ["GatherMate", "GatherMate_Data"]
 icon = "ti-map-pin"

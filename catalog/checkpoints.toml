@@ -4,7 +4,7 @@
 id = "checkpoints"
 name = "EbonholdCheckpoints"
 repo = "Squall98/EbonholdCheckpoints"
-category = "interface"
+category = "carte"
 install_target = "addons"
 extract_root = "EbonholdCheckpoints"
 icon = "ti-map-pin"

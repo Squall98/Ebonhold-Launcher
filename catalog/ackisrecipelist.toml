@@ -4,7 +4,7 @@
 id = "ackisrecipelist"
 name = "Ackis Recipe List"
 repo = "Squall98/AckisRecipeList"
-category = "interface"
+category = "metiers"
 install_target = "addons"
 extract_root = "AckisRecipeList"
 icon = "ti-notebook"
