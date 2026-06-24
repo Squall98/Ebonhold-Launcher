@@ -165,7 +165,7 @@
         "GatherMate",
         "GatherMate_Data"
       ],
-      "icon": "ti-map-pin",
+      "icon": "ti-leaf",
       "accent": "green",
       "notes": "Affiche herbes, minerais, nuages de gaz et poissons sur la carte (WoW 3.3.5a). Contient GatherMate + GatherMate_Data (base de gisements). Installation via le launcher Ebonhold (Catalogue → Installer),",
       "changelog_url": "https://github.com/Squall98/GatherMate/releases/tag/v1.25",
@@ -235,6 +235,7 @@
       "sha256": "baa8d0db422f36696297d165b5728a27d423007b07fcb956c7b88c37b8f4994e",
       "install_target": "addons",
       "extract_root": "EbonBuilds",
+      "icon": "ti-wand",
       "accent": "blue",
       "notes": "feat: add reroll guard to prevent rerolling when a single echo scores… by @vook in https://github.com/vook/EbonBuilds/pull/11",
       "changelog_url": "https://github.com/vook/EbonBuilds/releases/tag/v1.3.0",
@@ -283,6 +284,8 @@
       "sha256": "e5fbc5c3aaa3283ef6c7a97061892f6772409582421d5d8906702e391a075862",
       "install_target": "addons",
       "extract_root": "EbonClearance",
+      "icon": "ti-trash",
+      "accent": "coral",
       "notes": "Crystallized / Mote condensing via a new Process Bags Convert mode + panel tidy.",
       "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.44.9",
       "history": [
@@ -330,6 +333,8 @@
       "sha256": "621bf504c43da8d7e34c06b48aeb7dd85cb45b568d0f6a8630a7cfea4143f65f",
       "install_target": "addons",
       "extract_root": "Questie-X",
+      "icon": "ti-route",
+      "accent": "amber",
       "notes": "Maintenance + compatibility release. This re-cut backs the v1.6.4 tag with the fully consolidated main (all post-1.6.4 fixes merged) and serves as a stable restore point. Measured performance optimiza",
       "changelog_url": "https://github.com/Xurkon/Questie-X/releases/tag/v1.6.4",
       "history": [
@@ -377,6 +382,8 @@
       "sha256": "b3c6cdadddf478041bce98de902ae89fd807207ae978d00708284d7783511ea0",
       "install_target": "addons",
       "extract_root": "Wardrobe",
+      "icon": "ti-shirt",
+      "accent": "pink",
       "notes": "\"Hide applied items\" checkbox no longer overlaps the",
       "changelog_url": "https://github.com/Veronica-Vasilieva/Wardrobe/releases/tag/v1.29",
       "history": [
