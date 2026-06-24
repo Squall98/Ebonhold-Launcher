@@ -14,8 +14,10 @@ permissions:
   pull-requests: write
   issues: write
 
+# Groupe GLOBAL (pas par issue) : les validations s'exécutent une par une, donc deux
+# validations rapprochées ne se télescopent plus sur le push de main.
 concurrency:
-  group: addon-approve-${{ github.event.issue.number }}
+  group: addon-approve
   cancel-in-progress: false
 
 jobs:
@@ -59,10 +61,19 @@ jobs:
           if [ -n "$(git status --porcelain manifest.json)" ]; then
             git add manifest.json
             git commit -m "catalog: publie l'addon de #${ISSUE} [auto]"
-            git push origin HEAD:main
+            # push robuste : rebase puis retry si un commit concurrent est passé.
+            pushed=""
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push origin HEAD:main && { pushed=1; break; }
+              echo "push retry $i…"; sleep 3
+            done
+            [ -n "$pushed" ] || { echo "Échec du push après 3 tentatives."; exit 1; }
           fi
 
-          gh issue comment "$ISSUE" --body "✅ Validé et publié. L'addon apparaîtra dans le launcher d'ici ~1 min (ou tout de suite via le bouton **Vérifier**)."
+          # Ferme l'issue explicitement (le "Closes #N" ne se déclenche pas toujours quand
+          # le merge est fait par le robot) et retire les labels de traitement.
+          gh issue edit "$ISSUE" --remove-label valider --remove-label addon-submission || true
+          gh issue close "$ISSUE" --comment "✅ Validé et publié. L'addon apparaît dans le launcher (bouton **Vérifier** si besoin)."
 
       - name: En cas d'échec, prévient dans l'issue
         if: failure()
