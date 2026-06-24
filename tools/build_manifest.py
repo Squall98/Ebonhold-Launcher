@@ -48,8 +48,8 @@ UA = {"User-Agent": "EbonholdLauncher-catalog-builder"}
 # Champs autorises dans une fiche catalog/*.toml (le reste est ignore avec un warning).
 KNOWN_KEYS = {
     "id", "name", "repo", "category", "install_target", "extract_root",
-    "filename", "asset", "icon", "accent", "description", "long_description",
-    "notes", "order",
+    "extract_roots", "filename", "asset", "icon", "accent", "description",
+    "long_description", "notes", "order",
 }
 REQUIRED_KEYS = {"id", "name", "repo", "category", "install_target"}
 
@@ -137,6 +137,14 @@ def zip_root(path):
     return next(iter(tops)) if len(tops) == 1 else None
 
 
+def zip_roots(path):
+    """Tous les dossiers racine d'un zip d'addon (gere les addons a plusieurs dossiers,
+    ex: GatherMate + GatherMate_Data)."""
+    with zipfile.ZipFile(path) as z:
+        tops = {n.split("/", 1)[0] for n in z.namelist() if n.strip() and "/" in n}
+    return sorted(tops)
+
+
 def pick_asset(release, fiche):
     """Choisit l'asset a installer dans une release."""
     assets = release.get("assets") or []
@@ -191,10 +199,17 @@ def build_product(fiche):
     product["install_target"] = target
 
     if target == "addons":
-        root = fiche.get("extract_root") or zip_root(local)
-        if not root:
-            raise ValueError("dossier racine du zip indetectable : ajoute extract_root dans la fiche")
-        product["extract_root"] = root
+        if fiche.get("extract_roots"):
+            roots = list(fiche["extract_roots"])
+        elif fiche.get("extract_root"):
+            roots = [fiche["extract_root"]]
+        else:
+            roots = zip_roots(local)
+        if not roots:
+            raise ValueError("dossier(s) racine du zip indetectable(s) : ajoute extract_root dans la fiche")
+        product["extract_root"] = roots[0]
+        if len(roots) > 1:
+            product["extract_roots"] = roots  # addon a plusieurs dossiers
     else:
         product["filename"] = fiche.get("filename") or asset["name"]
 

@@ -1,0 +1,15 @@
+# Fiche addon du catalogue Ebonhold. La version / le lien / le SHA256 viennent de la
+# derniere Release du repo. Voir catalog/_TEMPLATE.toml pour le detail des champs.
+
+id = "ackisrecipelist"
+name = "Ackis Recipe List"
+repo = "Squall98/AckisRecipeList"
+category = "interface"
+install_target = "addons"
+extract_root = "AckisRecipeList"
+icon = "ti-notebook"
+accent = "amber"
+order = 50
+
+description = "Scanne tes métiers et liste les recettes manquantes et où les apprendre."
+long_description = "Ackis Recipe List scanne tous tes métiers et te montre les recettes qu'il te manque, avec leur source (vendeur, butin, quête, réputation…) et où les obtenir. Filtres par source, niveau et réputation. En jeu : commande /arl. WoW 3.3.5a."
