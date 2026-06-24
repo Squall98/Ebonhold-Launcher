@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.0.3 — démarrage plus robuste + interface
+- **Démarrage non bloquant** : la recherche du dossier Ebonhold se fait désormais en
+  arrière-plan. Un disque lent ou déconnecté ne peut plus figer le launcher sur
+  « Chargement du catalogue… ».
+- **Interface rafraîchie après mise à jour** : le launcher vide son cache d'affichage
+  quand sa version change (sinon l'ancienne interface restait servie en cache après un
+  auto-update).
+- **Catalogue** : barre de recherche et filtres répartis sur deux lignes (plus lisible).
+- Nouveaux addons au catalogue : AutoCallboard, EbonBuilds, EbonClearance, Questie, Wardrobe.
+
 ## v1.0.2 — format dossier (fiabilité) + détection AppData
 - **Distribution en dossier (zip)** au lieu d'un .exe unique : les fichiers ne sont plus
   ré-extraits dans `%TEMP%` à chaque lancement → corrige l'erreur **« Failed to load Python
