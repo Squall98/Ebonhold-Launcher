@@ -1,0 +1,73 @@
+name: Valider un addon (label → publier)
+
+# Validation en 1 clic : quand l'admin ajoute le label "valider" à une issue de
+# soumission, on fusionne la PR correspondante PUIS on régénère le catalogue dans
+# la foulée (un merge fait par un robot ne relance pas tout seul build-manifest :
+# on s'en occupe donc ici, en une seule fois). Rien ne part sans ce label.
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: addon-approve-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    if: github.event.label.name == 'valider'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fusionne la PR liée puis régénère le catalogue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "ebonhold-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          # PR créée par le robot de soumission : son corps contient "Closes #<issue>".
+          PRNUM=$(gh pr list --state open --json number,body \
+            --jq "[.[] | select(.body | contains(\"Closes #${ISSUE}\"))][0].number")
+          if [ -z "$PRNUM" ] || [ "$PRNUM" = "null" ]; then
+            echo "Aucune PR liée à l'issue #${ISSUE}."; exit 1
+          fi
+          echo "PR liée : #$PRNUM"
+
+          # 1) fusionne la PR (le toml de l'addon arrive sur main)
+          gh pr merge "$PRNUM" --squash --delete-branch
+
+          # 2) récupère l'état fusionné et régénère manifest.json (le merge par un
+          #    robot ne déclenche pas build-manifest : on le fait ici).
+          git fetch origin main
+          git reset --hard origin/main
+          python tools/build_manifest.py --strict
+          if [ -n "$(git status --porcelain manifest.json)" ]; then
+            git add manifest.json
+            git commit -m "catalog: publie l'addon de #${ISSUE} [auto]"
+            git push origin HEAD:main
+          fi
+
+          gh issue comment "$ISSUE" --body "✅ Validé et publié. L'addon apparaîtra dans le launcher d'ici ~1 min (ou tout de suite via le bouton **Vérifier**)."
+
+      - name: En cas d'échec, prévient dans l'issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE" --body "⚠️ Je n'ai pas pu valider automatiquement (PR introuvable, conflit, ou ce n'est pas une soumission). Tu peux fusionner la PR à la main, ou réessayer en retirant puis remettant le label \`valider\`."
