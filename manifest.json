@@ -20,9 +20,29 @@
       "icon": "ti-language"
     },
     {
-      "id": "interface",
-      "label": "Interface & QoL",
-      "icon": "ti-layout-dashboard"
+      "id": "carte",
+      "label": "Carte & voyage",
+      "icon": "ti-map-pin"
+    },
+    {
+      "id": "quetes",
+      "label": "Quêtes",
+      "icon": "ti-list-check"
+    },
+    {
+      "id": "metiers",
+      "label": "Métiers",
+      "icon": "ti-tools"
+    },
+    {
+      "id": "sacs",
+      "label": "Sacs & inventaire",
+      "icon": "ti-briefcase"
+    },
+    {
+      "id": "personnage",
+      "label": "Personnage",
+      "icon": "ti-user"
     }
   ],
   "packs": [],
@@ -81,7 +101,7 @@
     {
       "id": "checkpoints",
       "name": "EbonholdCheckpoints",
-      "category": "interface",
+      "category": "carte",
       "description": "Téléportation rapide vers les checkpoints débloqués, avec recherche et favoris (FR/EN).",
       "long_description": "Fenêtre de téléportation rapide vers les checkpoints débloqués. Liste filtrable, recherche par nom, favoris et catégories. Bilingue FR/EN.",
       "version": "1.2",
@@ -111,7 +131,7 @@
     {
       "id": "ackisrecipelist",
       "name": "Ackis Recipe List",
-      "category": "interface",
+      "category": "metiers",
       "description": "Scanne tes métiers et liste les recettes manquantes et où les apprendre.",
       "long_description": "Ackis Recipe List scanne tous tes métiers et te montre les recettes qu'il te manque, avec leur source (vendeur, butin, quête, réputation…) et où les obtenir. Filtres par source, niveau et réputation. En jeu : commande /arl. WoW 3.3.5a.",
       "version": "2.01",
@@ -133,7 +153,7 @@
     {
       "id": "gathermate",
       "name": "GatherMate",
-      "category": "interface",
+      "category": "carte",
       "description": "Affiche herbes, minerais, gaz et poissons sur la carte (récolte).",
       "long_description": "GatherMate note les emplacements d'herbes, minerais, nuages de gaz et bancs de poissons et les affiche sur la carte du monde et la minicarte. Base de données de gisements incluse. Pose deux dossiers (GatherMate + GatherMate_Data). WoW 3.3.5a.",
       "version": "1.25",
@@ -159,14 +179,14 @@
     {
       "id": "auto-callboard",
       "name": "AutoCallboard",
-      "category": "interface",
+      "category": "quetes",
       "description": "Recherche et partage de quêtes automatique au callboard",
       "version": "1.0.7",
       "download_url": "https://github.com/disarrayed/AutoCallboard/releases/download/v1.0.7/AutoCallboard_v1.0.7.zip",
       "sha256": "35500c4febbbd36e5f811c2becca081d04fb8c11b84ee38849cbbb5360e8fab1",
       "install_target": "addons",
       "extract_root": "AutoCallboard",
-      "icon": "question-mark",
+      "icon": "ti-clipboard-list",
       "accent": "purple",
       "notes": "AutoCallboard v1.0.7",
       "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.7",
@@ -208,7 +228,7 @@
     {
       "id": "ebon-builds",
       "name": "EbonBuilds",
-      "category": "interface",
+      "category": "personnage",
       "description": "Gérez vos builds d'échoes en toute simplicité",
       "version": "1.3.0",
       "download_url": "https://github.com/vook/EbonBuilds/releases/download/v1.3.0/EbonBuilds.zip",
@@ -256,7 +276,7 @@
     {
       "id": "ebon-clearance",
       "name": "EbonClearance",
-      "category": "interface",
+      "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
       "version": "2.44.9",
       "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.44.9/EbonClearance.zip",
@@ -303,7 +323,7 @@
     {
       "id": "questie",
       "name": "Questie",
-      "category": "interface",
+      "category": "quetes",
       "description": "Une aide précieuse pour vos aventures en Azeroth",
       "version": "1.6.4",
       "download_url": "https://github.com/Xurkon/Questie-X/releases/download/v1.6.4/Questie-X-1.6.4.zip",
@@ -350,7 +370,7 @@
     {
       "id": "transmog-wardrob",
       "name": "Wardrobe",
-      "category": "interface",
+      "category": "personnage",
       "description": "Visualisez vos transomog avec facilité",
       "version": "1.29",
       "download_url": "https://github.com/Veronica-Vasilieva/Wardrobe/releases/download/v1.29/Wardrobe-v1.29.zip",
