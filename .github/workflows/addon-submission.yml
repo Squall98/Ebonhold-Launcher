@@ -68,7 +68,13 @@ jobs:
           Après merge, \`manifest.json\` est régénéré automatiquement.
 
           Closes #${ISSUE}")
-          gh issue comment "$ISSUE" --body "✅ Merci ! J'ai créé la Pull Request : ${PR_URL}. Un admin va la relire."
+          gh issue comment "$ISSUE" --body "✅ Vérifié, Pull Request prête : ${PR_URL}
+
+          **Pour ajouter cet addon au launcher**, un admin valide en 1 clic (au choix) :
+          - ajoute le label \`valider\` à **cette issue**, ou
+          - ouvre la PR et clique **Merge pull request**.
+
+          Rien n'est ajouté tant que ce n'est pas fait."
 
       - name: En cas d'échec, prévient dans l'issue
         if: failure()
