@@ -8,7 +8,7 @@ repo = "Squall98/GatherMate"
 category = "carte"
 install_target = "addons"
 extract_roots = ["GatherMate", "GatherMate_Data"]
-icon = "ti-map-pin"
+icon = "ti-leaf"
 accent = "green"
 order = 51
 
