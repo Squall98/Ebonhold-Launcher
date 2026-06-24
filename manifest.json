@@ -210,14 +210,18 @@
       "name": "EbonClearance",
       "category": "interface",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.44.8",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.44.8/EbonClearance.zip",
-      "sha256": "fd109b5a68947cc7578fc55ec86307093e13236b8d54c67d568a6e7cc9e6bcd4",
+      "version": "2.44.9",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.44.9/EbonClearance.zip",
+      "sha256": "e5fbc5c3aaa3283ef6c7a97061892f6772409582421d5d8906702e391a075862",
       "install_target": "addons",
       "extract_root": "EbonClearance",
-      "notes": "Sharper workaround for the minimap-clash symptom.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.44.8",
+      "notes": "Crystallized / Mote condensing via a new Process Bags Convert mode + panel tidy.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.44.9",
       "history": [
+        {
+          "version": "2.44.9",
+          "notes": "Crystallized / Mote condensing via a new Process Bags Convert mode + panel tidy."
+        },
         {
           "version": "2.44.8",
           "notes": "Sharper workaround for the minimap-clash symptom."
@@ -245,16 +249,12 @@
         {
           "version": "2.44.2",
           "notes": "Tiny QoL tweak adopted from a community fork."
-        },
-        {
-          "version": "2.44.1",
-          "notes": "Patch fix for a v2.44.0 regression that left affixed items stuck in bags."
         }
       ]
     },
     {
       "id": "questie",
-      "name": "Quesit",
+      "name": "Questie",
       "category": "interface",
       "description": "Une aide précieuse pour vos aventures en Azeroth",
       "version": "1.6.4",
