@@ -24,7 +24,12 @@ concurrency:
 
 jobs:
   submit:
-    if: contains(join(github.event.issue.labels.*.name, ','), 'addon-submission')
+    # Ne (re)traiter QUE : une nouvelle issue / une édition portant le label, OU
+    # l'ajout du label addon-submission lui-même. Surtout PAS quand un AUTRE label
+    # est ajouté (ex: 'valider'), sinon on recrée une PR en double.
+    if: >-
+      (github.event.action == 'labeled' && github.event.label.name == 'addon-submission') ||
+      (github.event.action != 'labeled' && contains(join(github.event.issue.labels.*.name, ','), 'addon-submission'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
