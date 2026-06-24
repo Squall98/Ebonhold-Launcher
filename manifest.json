@@ -301,16 +301,28 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.44.11",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.44.11/EbonClearance.zip",
-      "sha256": "9dcb17ed55abbae73c521b23c425232a80f0b9554db1804a583dbb932ddd6962",
+      "version": "2.45.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.45.1/EbonClearance.zip",
+      "sha256": "7a6a35704c165b3a9ad92551e1c0dfb6c31936f92850b12100634d2a7e7f1d96",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Follow-up to v2.44.10: the pattern was anchored to line start; PE wraps proc text in @affix@ markers so the anchor failed.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.44.11",
+      "notes": "Bug fix: offhand drops were labelled \"Keep (possible upgrade)\" when the player wields a 2H.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.45.1",
       "history": [
+        {
+          "version": "2.45.1",
+          "notes": "Bug fix: offhand drops were labelled \"Keep (possible upgrade)\" when the player wields a 2H."
+        },
+        {
+          "version": "2.45.0",
+          "notes": "Unranked PE affix detection. Skoll's Fang of Vampirism / Thunderfury / Viscous Hammer of Resurgence and other PE transferred-proc weapons are now recognised as PE affixes (which is what they ARE in PE"
+        },
+        {
+          "version": "2.44.12",
+          "notes": "Diagnostic command added. The v2.44.10 / v2.44.11 chance-on-hit pattern fixes haven't landed on Zukii's transferred-proc weapons; before guessing a third pattern, capturing what EC's hidden scan toolt"
+        },
         {
           "version": "2.44.11",
           "notes": "Follow-up to v2.44.10: the pattern was anchored to line start; PE wraps proc text in @affix@ markers so the anchor failed."
@@ -330,18 +342,6 @@
         {
           "version": "2.44.7",
           "notes": "Workaround for the minimap-frame clash with magnifier / replacement addons."
-        },
-        {
-          "version": "2.44.6",
-          "notes": "Tooltip-label fix for items the dynamic-cap rule can't evaluate (ammo, bags, tabards, class-restricted relics)."
-        },
-        {
-          "version": "2.44.5",
-          "notes": "Defensive patch for a rare stuck-state in the scavenger -> goblin swap."
-        },
-        {
-          "version": "2.44.4",
-          "notes": "Tiny QoL toggle."
         }
       ]
     },
