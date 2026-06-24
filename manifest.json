@@ -109,6 +109,54 @@
       ]
     },
     {
+      "id": "ackisrecipelist",
+      "name": "Ackis Recipe List",
+      "category": "interface",
+      "description": "Scanne tes métiers et liste les recettes manquantes et où les apprendre.",
+      "long_description": "Ackis Recipe List scanne tous tes métiers et te montre les recettes qu'il te manque, avec leur source (vendeur, butin, quête, réputation…) et où les obtenir. Filtres par source, niveau et réputation. En jeu : commande /arl. WoW 3.3.5a.",
+      "version": "2.01",
+      "download_url": "https://github.com/Squall98/AckisRecipeList/releases/download/v2.01/AckisRecipeList-v2.01.zip",
+      "sha256": "82a32691e479d92d961c91181b158dcad72f6e47df2cf4caef87c6272a3adcf9",
+      "install_target": "addons",
+      "extract_root": "AckisRecipeList",
+      "icon": "ti-notebook",
+      "accent": "amber",
+      "notes": "Addon de suivi des recettes de métiers (WoW 3.3.5a). Installation via le launcher Ebonhold (Catalogue → Installer), ou manuellement en extrayant le dossier AckisRecipeList dans Interface/AddOns.",
+      "changelog_url": "https://github.com/Squall98/AckisRecipeList/releases/tag/v2.01",
+      "history": [
+        {
+          "version": "2.01",
+          "notes": "Addon de suivi des recettes de métiers (WoW 3.3.5a). Installation via le launcher Ebonhold (Catalogue → Installer), ou manuellement en extrayant le dossier AckisRecipeList dans Interface/AddOns."
+        }
+      ]
+    },
+    {
+      "id": "gathermate",
+      "name": "GatherMate",
+      "category": "interface",
+      "description": "Affiche herbes, minerais, gaz et poissons sur la carte (récolte).",
+      "long_description": "GatherMate note les emplacements d'herbes, minerais, nuages de gaz et bancs de poissons et les affiche sur la carte du monde et la minicarte. Base de données de gisements incluse. Pose deux dossiers (GatherMate + GatherMate_Data). WoW 3.3.5a.",
+      "version": "1.25",
+      "download_url": "https://github.com/Squall98/GatherMate/releases/download/v1.25/GatherMate-v1.25.zip",
+      "sha256": "54bc8282a400f1151d6a6e0bcb2260feb4a2a2007faeb3b4ab2f79344b359f8b",
+      "install_target": "addons",
+      "extract_root": "GatherMate",
+      "extract_roots": [
+        "GatherMate",
+        "GatherMate_Data"
+      ],
+      "icon": "ti-map-pin",
+      "accent": "green",
+      "notes": "Affiche herbes, minerais, nuages de gaz et poissons sur la carte (WoW 3.3.5a). Contient GatherMate + GatherMate_Data (base de gisements). Installation via le launcher Ebonhold (Catalogue → Installer),",
+      "changelog_url": "https://github.com/Squall98/GatherMate/releases/tag/v1.25",
+      "history": [
+        {
+          "version": "1.25",
+          "notes": "Affiche herbes, minerais, nuages de gaz et poissons sur la carte (WoW 3.3.5a). Contient GatherMate + GatherMate_Data (base de gisements). Installation via le launcher Ebonhold (Catalogue → Installer),"
+        }
+      ]
+    },
+    {
       "id": "auto-callboard",
       "name": "AutoCallboard",
       "category": "interface",
