@@ -1,0 +1,9 @@
+# Fiche generee depuis le formulaire GitHub. Voir catalog/_TEMPLATE.toml.
+# Version / lien / SHA256 viennent automatiquement de la derniere Release du repo.
+
+id = "ebon-clearance"
+name = "EbonClearance"
+repo = "powerfulqa/EbonClearance"
+category = "interface"
+install_target = "addons"
+description = "Nettoyez vos sacs à la vitesse de l'éclaire"
