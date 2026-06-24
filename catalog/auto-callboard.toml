@@ -1,0 +1,11 @@
+# Fiche generee depuis le formulaire GitHub. Voir catalog/_TEMPLATE.toml.
+# Version / lien / SHA256 viennent automatiquement de la derniere Release du repo.
+
+id = "auto-callboard"
+name = "AutoCallboard"
+repo = "disarrayed/AutoCallboard"
+category = "interface"
+install_target = "addons"
+icon = "question-mark"
+accent = "purple"
+description = "Recherche et partage de quêtes automatique au callboard"
