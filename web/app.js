@@ -101,9 +101,9 @@ function bindCards(scope){
 
 /* ------------------------------------------------------------------ catalogue */
 function renderChips(){
-  const cats = [{id:"all",label:"Tous"}].concat(CATALOG.categories||[]);
+  const cats = [{id:"all",label:"Tous",icon:"ti-apps"}].concat(CATALOG.categories||[]);
   $("#filterChips").innerHTML = cats.map(c =>
-    `<button class="chip ${FILTER.cat===c.id?"active":""}" data-cat="${c.id}">${c.label}</button>`).join("");
+    `<button class="chip ${FILTER.cat===c.id?"active":""}" data-cat="${c.id}">${c.icon?'<i class="ti '+c.icon+'"></i>':''}${c.label}</button>`).join("");
   $$("#filterChips .chip").forEach(ch => ch.addEventListener("click", () => { FILTER.cat=ch.dataset.cat; renderChips(); renderGrid(); }));
 }
 function renderPacks(){

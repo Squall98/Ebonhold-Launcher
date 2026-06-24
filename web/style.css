@@ -108,7 +108,9 @@ nav{display:flex;flex-direction:column;gap:4px}
   font-family:inherit;outline:none}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{background:var(--bg3);border:1px solid var(--line2);color:var(--muted);border-radius:20px;
-  padding:7px 14px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.12s}
+  padding:7px 14px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.12s;
+  display:inline-flex;align-items:center;gap:6px}
+.chip i{font-size:15px}
 .chip:hover{color:var(--txt)}
 .chip.active{background:var(--gold);color:#1a1505;border-color:var(--gold);font-weight:600}
 
