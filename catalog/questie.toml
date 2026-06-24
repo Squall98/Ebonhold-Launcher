@@ -2,7 +2,7 @@
 # Version / lien / SHA256 viennent automatiquement de la derniere Release du repo.
 
 id = "questie"
-name = "Quesit"
+name = "Questie"
 repo = "Xurkon/Questie-X"
 category = "interface"
 install_target = "addons"
