@@ -100,13 +100,13 @@ nav{display:flex;flex-direction:column;gap:4px}
 .banner.update .tag{color:#5dcaca}
 
 /* Barre d'outils catalogue */
-.cat-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.cat-toolbar{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-bottom:16px}
 .search{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--line2);
-  border-radius:8px;padding:0 12px;flex:1;min-width:200px}
+  border-radius:8px;padding:0 12px;min-width:200px}
 .search i{color:var(--muted);font-size:16px}
 .search input{flex:1;background:none;border:none;color:var(--txt);padding:9px 0;font-size:13px;
   font-family:inherit;outline:none}
-.chips{display:flex;gap:6px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{background:var(--bg3);border:1px solid var(--line2);color:var(--muted);border-radius:20px;
   padding:7px 14px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.12s}
 .chip:hover{color:var(--txt)}

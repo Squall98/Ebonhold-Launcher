@@ -42,6 +42,10 @@ class Api:
         resp = self._build_catalog()
         if check_remote:
             threading.Thread(target=self._remote_refresh, daemon=True).start()
+        # Detection du dossier WoW en ARRIERE-PLAN si aucun n'est enregistre : autodetect
+        # peut tester des disques lents/deconnectes, ce qui bloquerait get_catalog.
+        if not state.get_wow_path():
+            threading.Thread(target=self._detect_wow, daemon=True).start()
         return resp
 
     def _remote_refresh(self):
@@ -53,12 +57,24 @@ class Api:
         self._manifest, self._source = man, "remote"
         self._emit("onCatalogUpdate", self._build_catalog())
 
-    def _build_catalog(self):
-        """Construit la reponse catalogue a partir de self._manifest (sans reseau)."""
-        wow_path = state.get_wow_path() or wow.autodetect()
-        if wow_path and not state.get_wow_path():
-            state.set_wow_path(wow_path)
+    def _detect_wow(self):
+        """Detecte le dossier WoW en fond (peut scanner des disques) et rafraichit l'UI
+        si on en trouve un. Jamais sur le chemin bloquant de get_catalog/_build_catalog."""
+        try:
+            path = wow.autodetect()
+        except Exception:
+            return
+        if path and not state.get_wow_path():
+            state.set_wow_path(path)
+            self._emit("onCatalogUpdate", self._build_catalog())
 
+    def _build_catalog(self):
+        """Construit la reponse catalogue a partir de self._manifest (sans reseau).
+
+        N'appelle PAS wow.autodetect() ici : la detection (qui peut scanner des disques
+        lents) tourne en arriere-plan (_detect_wow) pour ne jamais bloquer get_catalog.
+        """
+        wow_path = state.get_wow_path()
         wow_valid = wow.is_valid_install(wow_path)
         items = []
         updates = 0
