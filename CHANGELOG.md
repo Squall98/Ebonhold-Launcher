@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.5 — déblocage automatique des fichiers téléchargés
+- **Déblocage automatique au démarrage** : le launcher retire lui-même la marque « fichier
+  venu d'Internet » de ses fichiers. Corrige le crash au lancement
+  (`Failed to resolve Python.Runtime.Loader.Initialize`) sur les PC où l'app a été téléchargée
+  — plus besoin de « débloquer » le zip à la main.
+
 ## v1.0.4 — addons à plusieurs dossiers
 - **Prise en charge des addons à plusieurs dossiers** (ex. GatherMate + GatherMate_Data) :
   installation **et désinstallation** propres de tous les dossiers (avant, la désinstallation
