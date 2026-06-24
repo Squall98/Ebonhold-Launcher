@@ -6,6 +6,7 @@ Lancer en dev :  python launcher/main.py
 """
 import os
 import shutil
+import sys
 
 import webview
 
@@ -14,6 +15,24 @@ from core import version
 from core.paths import data_dir, resource
 
 WINDOW_TITLE = "Ebonhold Launcher"
+
+
+def _unblock_app_files():
+    """Retire la marque "fichier venu d'Internet" (flux Zone.Identifier) des fichiers de l'app.
+
+    Quand le launcher est telecharge puis extrait, Windows marque ses fichiers ; .NET refuse
+    alors de charger Python.Runtime.dll -> crash au demarrage de la fenetre (clr/pythonnet).
+    On retire ces marques nous-memes (uniquement en .exe), AVANT que WebView2/.NET ne charge
+    ses DLL, pour que les joueurs n'aient rien a "debloquer" a la main apres telechargement."""
+    if not getattr(sys, "frozen", False):
+        return
+    base = os.path.dirname(sys.executable)
+    for root, _dirs, files in os.walk(base):
+        for name in files:
+            try:
+                os.remove(os.path.join(root, name) + ":Zone.Identifier")
+            except OSError:
+                pass
 
 
 def _fresh_webview_cache(wv_dir):
@@ -44,6 +63,9 @@ def _fresh_webview_cache(wv_dir):
 
 
 def main():
+    # AVANT TOUT : debloquer les fichiers de l'app (marque Internet) sinon .NET refuse de
+    # charger ses DLL quand le launcher a ete telecharge -> crash. Doit tourner avant webview.start().
+    _unblock_app_files()
     # WebView2 (moteur Edge embarque) peut attendre plusieurs minutes au demarrage s'il
     # tente de joindre un proxy systeme ou ses services reseau. On le force en direct +
     # on coupe son trafic de fond -> demarrage immediat meme derriere un proxy/pare-feu.
