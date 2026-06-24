@@ -1,0 +1,10 @@
+# Fiche generee depuis le formulaire GitHub. Voir catalog/_TEMPLATE.toml.
+# Version / lien / SHA256 viennent automatiquement de la derniere Release du repo.
+
+id = "ebon-builds"
+name = "EbonBuilds"
+repo = "vook/EbonBuilds"
+category = "interface"
+install_target = "addons"
+accent = "blue"
+description = "Gérez vos builds d'échoes en toute simplicité"
