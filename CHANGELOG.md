@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.4 — addons à plusieurs dossiers
+- **Prise en charge des addons à plusieurs dossiers** (ex. GatherMate + GatherMate_Data) :
+  installation **et désinstallation** propres de tous les dossiers (avant, la désinstallation
+  ne retirait que le dossier principal).
+- Nouveaux addons au catalogue : **Ackis Recipe List** et **GatherMate**.
+
 ## v1.0.3 — démarrage plus robuste + interface
 - **Démarrage non bloquant** : la recherche du dossier Ebonhold se fait désormais en
   arrière-plan. Un disque lent ou déconnecté ne peut plus figer le launcher sur
