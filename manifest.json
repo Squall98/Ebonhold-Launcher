@@ -151,6 +151,28 @@
       ]
     },
     {
+      "id": "advancedtradeskillwindow2",
+      "name": "Advanced Trade Skill Window 2",
+      "category": "metiers",
+      "description": "Fenêtre de métiers améliorée : file d'attente, recherche avancée, catégories perso, suivi des réactifs.",
+      "long_description": "Remplace la fenêtre de métiers par défaut par une version bien plus complète : file d'attente de fabrication, liste de courses, recherche avancée, catégories de recettes personnalisées (tri perso + éditeur), et suivi des réactifs dans tes sacs, ta banque et tes autres persos. L'enchantement passe par la fenêtre normale. En jeu : options via /atsw config. WoW 3.3.5a. Port communautaire de l'addon de Shellyoung — crédit aux auteurs d'origine.",
+      "version": "2.1.16",
+      "download_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/download/v2.1.16/AdvancedTradeSkillWindow2-v2.1.16.zip",
+      "sha256": "8bd569ed1247a95e6d288f08527738f5bda2d92e8a91784d9fa2e86f822a7ed5",
+      "install_target": "addons",
+      "extract_root": "AdvancedTradeSkillWindow2",
+      "icon": "ti-hammer",
+      "accent": "blue",
+      "notes": "Port WotLK 3.3.5a d'Advanced Trade Skill Window 2 pour Ebonhold — fenêtre de métiers améliorée (file d'attente, recherche avancée, catégories de recettes personnalisées, suivi des réactifs sacs/banque",
+      "changelog_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/tag/v2.1.16",
+      "history": [
+        {
+          "version": "2.1.16",
+          "notes": "Port WotLK 3.3.5a d'Advanced Trade Skill Window 2 pour Ebonhold — fenêtre de métiers améliorée (file d'attente, recherche avancée, catégories de recettes personnalisées, suivi des réactifs sacs/banque"
+        }
+      ]
+    },
+    {
       "id": "gathermate",
       "name": "GatherMate",
       "category": "carte",
@@ -279,16 +301,24 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.44.9",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.44.9/EbonClearance.zip",
-      "sha256": "e5fbc5c3aaa3283ef6c7a97061892f6772409582421d5d8906702e391a075862",
+      "version": "2.44.11",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.44.11/EbonClearance.zip",
+      "sha256": "9dcb17ed55abbae73c521b23c425232a80f0b9554db1804a583dbb932ddd6962",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Crystallized / Mote condensing via a new Process Bags Convert mode + panel tidy.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.44.9",
+      "notes": "Follow-up to v2.44.10: the pattern was anchored to line start; PE wraps proc text in @affix@ markers so the anchor failed.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.44.11",
       "history": [
+        {
+          "version": "2.44.11",
+          "notes": "Follow-up to v2.44.10: the pattern was anchored to line start; PE wraps proc text in @affix@ markers so the anchor failed."
+        },
+        {
+          "version": "2.44.10",
+          "notes": "Defensive fix for PE transferred-proc weapons silently selling."
+        },
         {
           "version": "2.44.9",
           "notes": "Crystallized / Mote condensing via a new Process Bags Convert mode + panel tidy."
@@ -312,14 +342,6 @@
         {
           "version": "2.44.4",
           "notes": "Tiny QoL toggle."
-        },
-        {
-          "version": "2.44.3",
-          "notes": "Three Quickstart fixes (latent crash, layout gap, editbox texture layering) + a README pruning pass."
-        },
-        {
-          "version": "2.44.2",
-          "notes": "Tiny QoL tweak adopted from a community fork."
         }
       ]
     },

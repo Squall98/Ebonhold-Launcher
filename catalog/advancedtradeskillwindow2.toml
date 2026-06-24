@@ -1,0 +1,15 @@
+# Fiche addon du catalogue Ebonhold. La version / le lien / le SHA256 viennent de la
+# derniere Release du repo. Voir catalog/_TEMPLATE.toml pour le detail des champs.
+
+id = "advancedtradeskillwindow2"
+name = "Advanced Trade Skill Window 2"
+repo = "Squall98/AdvancedTradeSkillWindow2"
+category = "metiers"
+install_target = "addons"
+extract_root = "AdvancedTradeSkillWindow2"
+icon = "ti-hammer"
+accent = "blue"
+order = 51
+
+description = "Fenêtre de métiers améliorée : file d'attente, recherche avancée, catégories perso, suivi des réactifs."
+long_description = "Remplace la fenêtre de métiers par défaut par une version bien plus complète : file d'attente de fabrication, liste de courses, recherche avancée, catégories de recettes personnalisées (tri perso + éditeur), et suivi des réactifs dans tes sacs, ta banque et tes autres persos. L'enchantement passe par la fenêtre normale. En jeu : options via /atsw config. WoW 3.3.5a. Port communautaire de l'addon de Shellyoung — crédit aux auteurs d'origine."
