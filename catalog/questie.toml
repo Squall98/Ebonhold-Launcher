@@ -1,0 +1,9 @@
+# Fiche generee depuis le formulaire GitHub. Voir catalog/_TEMPLATE.toml.
+# Version / lien / SHA256 viennent automatiquement de la derniere Release du repo.
+
+id = "questie"
+name = "Quesit"
+repo = "Xurkon/Questie-X"
+category = "interface"
+install_target = "addons"
+description = "Une aide précieuse pour vos aventures en Azeroth"
