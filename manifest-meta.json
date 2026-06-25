@@ -1,7 +1,7 @@
 {
-  "launcher_version": "1.0.6",
-  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.6/EbonholdLauncher.zip",
-  "launcher_sha256": "ead06ea460c6a133ae37e3e9aec7946ebd20136a310d4f3d3c8a4435515baf6a",
+  "launcher_version": "1.0.7",
+  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.7/EbonholdLauncher.zip",
+  "launcher_sha256": "95e381ebae4dfd196b3d47736e835882dde3afd1c02ef346749b641898d000ab",
   "_note": "Auto-update ACTIF depuis la v1.0.3 (format dossier). Les clients en v1.0.2+ recoivent la maj automatiquement. Pour publier une nouvelle version : rebuild l'exe, recalculer le sha du zip, creer la release GitHub, puis mettre a jour launcher_version + launcher_download_url + launcher_sha256 ici.",
   "_doc": "Partie GLOBALE du catalogue, editee a la main (par l'admin uniquement). Les addons sont dans catalog/*.toml. manifest.json est GENERE a partir de ces deux sources par tools/build_manifest.py.",
   "fr_config": {
