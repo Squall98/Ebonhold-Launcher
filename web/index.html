@@ -46,7 +46,14 @@
         <div class="packs-row" id="packsRow"></div>
         <div class="cat-toolbar">
           <div class="search"><i class="ti ti-search"></i><input type="text" id="searchInput" placeholder="Rechercher un mod…"></div>
-          <div class="chips" id="filterChips"></div>
+          <div class="chips-row">
+            <div class="chips" id="filterChips"></div>
+            <div class="view-toggle">
+              <button data-view="cards" title="Cartes"><i class="ti ti-layout-grid"></i></button>
+              <button data-view="list" title="Liste"><i class="ti ti-list"></i></button>
+              <button data-view="table" title="Tableau"><i class="ti ti-table"></i></button>
+            </div>
+          </div>
         </div>
         <div class="grid" id="catalogGrid"></div>
         <p class="empty hidden" id="catalogEmpty">Aucun mod ne correspond.</p>

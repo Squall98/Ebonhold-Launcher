@@ -46,6 +46,8 @@ function api(){ return (window.pywebview && window.pywebview.api) || MOCK; }
 /* ------------------------------------------------------------------ état UI */
 let CATALOG = null;
 let FILTER = {term:"", cat:"all"};
+let VIEW = (() => { try { return localStorage.getItem("ebon_view") || "cards"; } catch(e){ return "cards"; } })();
+let SORT = {col:"name", dir:1};
 const $ = (s,r=document) => r.querySelector(s);
 const $$ = (s,r=document) => Array.from(r.querySelectorAll(s));
 const TAB_TITLES = {catalog:"Catalogue", installed:"Mes installations", news:"Nouveautés", links:"Liens utiles", settings:"Réglages"};
@@ -86,7 +88,7 @@ function cardHTML(p){
       <div class="name">${p.name}</div>
       <div class="desc">${p.description||""}</div>
       <div class="meta">${metaLine(p)}</div>
-      <div class="action"><button class="act-${p.status}" ${p.status==="uptodate"?"disabled":""}>${actionLabel(p.status)}</button></div>
+      <div class="action"><button class="actbtn act-${p.status}" ${p.status==="uptodate"?"disabled":""}>${actionLabel(p.status)}</button></div>
       <div class="progress hidden"><i></i></div>
       <div class="progress-msg hidden"></div>
       ${uninstall}
@@ -94,9 +96,50 @@ function cardHTML(p){
   </div>`;
 }
 function bindCards(scope){
-  $$(scope+" .card").forEach(card => card.addEventListener("click", () => openDetail(card.dataset.id)));
-  $$(scope+" .card .action button").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); onAction(b.closest(".card").dataset.id); }));
-  $$(scope+" .card .uninstall").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); onUninstall(b); }));
+  $$(scope+" [data-id]").forEach(el => el.addEventListener("click", e => { if (!e.target.closest("button")) openDetail(el.dataset.id); }));
+  $$(scope+" .actbtn").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); onAction(b.closest("[data-id]").dataset.id); }));
+  $$(scope+" .uninstall").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); onUninstall(b); }));
+}
+
+/* ---- vues alternatives : liste compacte + tableau triable ---- */
+const catLabel = id => ((CATALOG && CATALOG.categories || []).find(c => c.id===id) || {}).label || id;
+const accentName = p => p.accent || DEFAULT_ACCENT[p.category] || "purple";
+function rowHTML(p){
+  const uninstall = p.installed_version!==null ? `<button class="uninstall" data-uid="${p.id}">Désinstaller</button>` : "";
+  return `<div class="row" data-id="${p.id}">
+    <div class="thumb ${thumbAccent(p)}"><i class="ti ${thumbIcon(p)}"></i></div>
+    <div class="rbody"><div class="name">${p.name}</div><div class="desc">${p.description||""}</div></div>
+    <div class="rmeta">${metaLine(p)}</div>
+    <div class="ract"><button class="actbtn act-${p.status}" ${p.status==="uptodate"?"disabled":""}>${actionLabel(p.status)}</button>${uninstall}</div>
+  </div>`;
+}
+const TCOLS = [{k:"name",l:"Nom"},{k:"category",l:"Catégorie"},{k:"version",l:"Version"}];
+function sortList(list){
+  const v = p => SORT.col==="category" ? catLabel(p.category) : SORT.col==="version" ? p.version : p.name;
+  return [...list].sort((a,b) => String(v(a)).localeCompare(String(v(b)), "fr", {numeric:true}) * SORT.dir);
+}
+function tableHTML(list){
+  const head = TCOLS.map(c => `<th data-col="${c.k}" class="${SORT.col===c.k?'sorted '+(SORT.dir>0?'asc':'desc'):''}">${c.l}</th>`).join("") + "<th></th>";
+  const rows = sortList(list).map(p => `<tr data-id="${p.id}">
+    <td class="tn"><i class="ti ${thumbIcon(p)}" style="color:var(--${accentName(p)},#aeb6cc)"></i><span>${p.name}</span></td>
+    <td class="tc">${catLabel(p.category)}</td>
+    <td class="tv">${metaLine(p)}</td>
+    <td class="ta"><button class="actbtn act-${p.status}" ${p.status==="uptodate"?"disabled":""}>${actionLabel(p.status)}</button></td>
+  </tr>`).join("");
+  return `<table class="cat-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+function bindSort(){
+  $$("#catalogGrid th[data-col]").forEach(th => th.addEventListener("click", () => {
+    const k = th.dataset.col;
+    if (SORT.col===k) SORT.dir *= -1; else { SORT.col=k; SORT.dir=1; }
+    renderGrid();
+  }));
+}
+function setView(v){
+  VIEW = v;
+  try { localStorage.setItem("ebon_view", v); } catch(e){}
+  $$(".view-toggle button").forEach(b => b.classList.toggle("active", b.dataset.view===v));
+  renderGrid();
 }
 
 /* ------------------------------------------------------------------ catalogue */
@@ -125,9 +168,14 @@ function filtered(){
 }
 function renderGrid(){
   const list = filtered();
-  $("#catalogGrid").innerHTML = list.map(cardHTML).join("");
+  const g = $("#catalogGrid");
+  g.className = "grid view-" + VIEW;
+  if (VIEW==="list") g.innerHTML = list.map(rowHTML).join("");
+  else if (VIEW==="table") g.innerHTML = list.length ? tableHTML(list) : "";
+  else g.innerHTML = list.map(cardHTML).join("");
   $("#catalogEmpty").classList.toggle("hidden", list.length>0);
   bindCards("#catalogGrid");
+  if (VIEW==="table") bindSort();
 }
 function renderCatalog(){
   const c = CATALOG;
@@ -210,6 +258,7 @@ async function onAction(id){
   if (!p || p.status==="uptodate") return;
   if (!CATALOG.wow_valid){ switchTab("settings"); toast("Choisis d'abord ton dossier Ebonhold.","err"); return; }
   startCardProgress(id);
+  if (VIEW!=="cards") toast("Installation…", "info", p.name);
   const r = await api().install_product(id);
   if (!r.started){ setMsg(id, r.error||"Erreur."); resetAction(id); toast(r.error||"Erreur.","err"); }
 }
@@ -232,15 +281,15 @@ async function doUninstall(id){
   if (r.ok){ toast("Désinstallé.","ok", p?p.name:""); await reload(); } else toast(r.error||"Erreur.","err");
 }
 function startCardProgress(id){
+  $$(`[data-id="${id}"] .actbtn`).forEach(b => b.disabled = true);
   $$(`.card[data-id="${id}"]`).forEach(card => {
-    card.querySelector(".action button").disabled = true;
     card.querySelector(".progress").classList.remove("hidden");
     card.querySelector(".progress-msg").classList.remove("hidden");
   });
 }
 const setBar = (id,pct) => $$(`.card[data-id="${id}"] .progress > i`).forEach(b => b.style.width=pct+"%");
 const setMsg = (id,msg) => $$(`.card[data-id="${id}"] .progress-msg`).forEach(m => m.textContent=msg);
-const resetAction = id => $$(`.card[data-id="${id}"] .action button`).forEach(b => b.disabled=false);
+const resetAction = id => $$(`[data-id="${id}"] .actbtn`).forEach(b => b.disabled=false);
 
 window.onProgress = (id,pct,msg) => { setBar(id,pct); setMsg(id,msg); };
 window.onDone = async (id,ok,msg) => {
@@ -339,6 +388,7 @@ function bind(){
   $("#frApply").addEventListener("click", applyFr);
   $("#frPackBtn").addEventListener("click", installOrOpenPack);
   $("#searchInput").addEventListener("input", e => { FILTER.term = e.target.value; renderGrid(); });
+  $$(".view-toggle button").forEach(b => { b.classList.toggle("active", b.dataset.view===VIEW); b.addEventListener("click", () => setView(b.dataset.view)); });
   $("#launcherUpdateBtn").addEventListener("click", updateLauncher);
   $("#modalClose").addEventListener("click", closeModal);
   $("#modal").addEventListener("click", e => { if (e.target.id==="modal") closeModal(); });
