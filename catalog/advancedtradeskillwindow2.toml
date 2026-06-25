@@ -3,10 +3,10 @@
 
 id = "advancedtradeskillwindow2"
 name = "Métiers+"
-repo = "Squall98/AdvancedTradeSkillWindow2"
+repo = "Squall98/MetiersPlus"
 category = "metiers"
 install_target = "addons"
-extract_root = "AdvancedTradeSkillWindow2"
+extract_root = "MetiersPlus"
 icon = "ti-hammer"
 accent = "blue"
 order = 51

@@ -183,18 +183,18 @@
       "description": "Fenêtre de métiers améliorée : file d'attente, recherche avancée, catégories perso, suivi des réactifs.",
       "long_description": "Remplace la fenêtre de métiers par défaut par une version bien plus complète : file d'attente de fabrication, liste de courses, recherche avancée, catégories de recettes personnalisées (tri perso + éditeur), et suivi des réactifs dans tes sacs, ta banque et tes autres persos. L'enchantement passe par la fenêtre normale. En jeu : options via /atsw config. WoW 3.3.5a. Port communautaire de l'addon de Shellyoung — crédit aux auteurs d'origine.",
       "version": "1.0",
-      "download_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/download/v1.0/AdvancedTradeSkillWindow2-v1.0.zip",
-      "sha256": "e9e502d65df254359378878bdc8bc1d0c2b66e8e55fbab831bc06c4c191fb24d",
+      "download_url": "https://github.com/Squall98/MetiersPlus/releases/download/v1.0/MetiersPlus-v1.0.zip",
+      "sha256": "6530353917d4914ff8c9de4d4ade9d6b309b84833c8f9857b1a2c3cf0d144656",
       "install_target": "addons",
-      "extract_root": "AdvancedTradeSkillWindow2",
+      "extract_root": "MetiersPlus",
       "icon": "ti-hammer",
       "accent": "blue",
-      "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — renommé Métiers+.",
-      "changelog_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/tag/v1.0",
+      "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — Métiers+.",
+      "changelog_url": "https://github.com/Squall98/MetiersPlus/releases/tag/v1.0",
       "history": [
         {
           "version": "1.0",
-          "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — renommé Métiers+."
+          "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — Métiers+."
         }
       ]
     },
