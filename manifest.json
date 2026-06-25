@@ -182,19 +182,23 @@
       "category": "metiers",
       "description": "Fenêtre de métiers améliorée : file d'attente, recherche avancée, catégories perso, suivi des réactifs.",
       "long_description": "Remplace la fenêtre de métiers par défaut par une version bien plus complète : file d'attente de fabrication, liste de courses, recherche avancée, catégories de recettes personnalisées (tri perso + éditeur), et suivi des réactifs dans tes sacs, ta banque et tes autres persos. L'enchantement passe par la fenêtre normale. En jeu : options via /atsw config. WoW 3.3.5a. Port communautaire de l'addon de Shellyoung — crédit aux auteurs d'origine.",
-      "version": "2.1.17",
-      "download_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/download/v2.1.17/AdvancedTradeSkillWindow2-v2.1.17.zip",
-      "sha256": "a0fb54af2fa562adb164c154e74c423e7b3bf569b461d6140bc7dc6f9be03b84",
+      "version": "1.0",
+      "download_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/download/v1.0/AdvancedTradeSkillWindow2-v1.0.zip",
+      "sha256": "e9e502d65df254359378878bdc8bc1d0c2b66e8e55fbab831bc06c4c191fb24d",
       "install_target": "addons",
       "extract_root": "AdvancedTradeSkillWindow2",
       "icon": "ti-hammer",
       "accent": "blue",
-      "notes": "Correctif important + renommage « Métiers+ ».",
-      "changelog_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/tag/v2.1.17",
+      "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — renommé Métiers+.",
+      "changelog_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/tag/v1.0",
       "history": [
         {
           "version": "2.1.17",
           "notes": "Correctif important + renommage « Métiers+ »."
+        },
+        {
+          "version": "1.0",
+          "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — renommé Métiers+."
         },
         {
           "version": "2.1.16",
