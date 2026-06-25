@@ -2,7 +2,7 @@
 # derniere Release du repo. Voir catalog/_TEMPLATE.toml pour le detail des champs.
 
 id = "advancedtradeskillwindow2"
-name = "Advanced Trade Skill Window 2"
+name = "Métiers+"
 repo = "Squall98/AdvancedTradeSkillWindow2"
 category = "metiers"
 install_target = "addons"
