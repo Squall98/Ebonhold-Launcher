@@ -1,0 +1,15 @@
+# Fiche addon du catalogue Ebonhold. Version / lien / SHA256 viennent de la derniere
+# Release du repo indique (genere par tools/build_manifest.py).
+
+id = "gatherhud"
+name = "GatherHud"
+repo = "Squall98/GatherHud-Ebonhold"
+category = "carte"
+install_target = "addons"
+extract_root = "GatherHud"
+icon = "ti-3d-cube-sphere"
+accent = "teal"
+order = 52
+
+description = "HUD de récolte en vue 3D : les gisements affichés autour de toi."
+long_description = "GatherHud affiche les nœuds de minage et d'herboristerie en perspective 3D tout autour de ton personnage, comme posés dans le monde devant toi. Idéal pour farmer en suivant ta route sans quitter l'écran des yeux. Affiche aussi ta route Routes dans le HUD. Cette version Ebonhold ajoute une icône sur la minicarte (clic gauche = options, clic droit = activer/désactiver) et complète la traduction française. Nécessite GatherMate (et GatherMate_Data pour les gisements pré-remplis) ; Routes est optionnel. WoW 3.3.5a."

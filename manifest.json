@@ -199,6 +199,28 @@
       ]
     },
     {
+      "id": "gatherhud",
+      "name": "GatherHud",
+      "category": "carte",
+      "description": "HUD de récolte en vue 3D : les gisements affichés autour de toi.",
+      "long_description": "GatherHud affiche les nœuds de minage et d'herboristerie en perspective 3D tout autour de ton personnage, comme posés dans le monde devant toi. Idéal pour farmer en suivant ta route sans quitter l'écran des yeux. Affiche aussi ta route Routes dans le HUD. Cette version Ebonhold ajoute une icône sur la minicarte (clic gauche = options, clic droit = activer/désactiver) et complète la traduction française. Nécessite GatherMate (et GatherMate_Data pour les gisements pré-remplis) ; Routes est optionnel. WoW 3.3.5a.",
+      "version": "1.1.6-fr1",
+      "download_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/download/v1.1.6-fr1/GatherHud-v1.1.6-fr1.zip",
+      "sha256": "3d67d099e40408360531fcfa20a0ca7caed8ebc9bdffcec7ea018794f9b3a7bb",
+      "install_target": "addons",
+      "extract_root": "GatherHud",
+      "icon": "ti-3d-cube-sphere",
+      "accent": "teal",
+      "notes": "Version Ebonhold de GatherHud (HUD de recolte en vue 3D, WoW 3.3.5a).",
+      "changelog_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/tag/v1.1.6-fr1",
+      "history": [
+        {
+          "version": "1.1.6-fr1",
+          "notes": "Version Ebonhold de GatherHud (HUD de recolte en vue 3D, WoW 3.3.5a)."
+        }
+      ]
+    },
+    {
       "id": "auto-callboard",
       "name": "AutoCallboard",
       "category": "quetes",
