@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.7 — détection des addons déjà installés
+- Le launcher **détecte les addons déjà présents** dans `Interface\AddOns` (posés à la main)
+  et les affiche comme **Installé** au lieu de « Installer », en lisant leur version sur le disque.
+
 ## v1.0.6 — affichages du catalogue
 - **Bouton de bascule** en haut du catalogue : vue **Cartes**, **Liste compacte** ou
   **Tableau** (triable par colonne). Le choix d'affichage est mémorisé.

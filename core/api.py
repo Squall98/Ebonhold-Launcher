@@ -16,9 +16,11 @@ from . import catalog, frconfig, frpack, installer, selfupdate, state, version, 
 def _status(product, installed_version):
     if installed_version is None:
         return "install"
-    if installed_version == product["version"]:
+    if version.normalize(installed_version) == version.normalize(product["version"]):
         return "uptodate"
-    return "update"
+    if version.is_newer(product["version"], installed_version):
+        return "update"
+    return "uptodate"  # version sur disque >= catalogue -> considere a jour
 
 
 class Api:
@@ -81,7 +83,14 @@ class Api:
         by_id = {}
         for p in catalog.products(self._manifest):
             entry = state.get_installed(p["id"])
-            installed_version = entry["version"] if entry else None
+            if entry:
+                installed_version = entry["version"]
+            else:
+                installed_version = None
+                if wow_valid:
+                    dv = installer.disk_version(p, wow_path)
+                    if dv is not None:                       # deja present (pose a la main)
+                        installed_version = dv or p["version"]
             st = _status(p, installed_version)
             # Un mod installe dont des fichiers ont disparu -> a reparer.
             if installed_version is not None and wow_valid and installer.is_broken(p["id"], wow_path):
@@ -175,7 +184,7 @@ class Api:
     def uninstall_product(self, product_id):
         wow_path = state.get_wow_path()
         try:
-            installer.uninstall(product_id, wow_path)
+            installer.uninstall(product_id, wow_path, self._find(product_id))
             return {"ok": True}
         except Exception as e:
             return {"ok": False, "error": str(e)}

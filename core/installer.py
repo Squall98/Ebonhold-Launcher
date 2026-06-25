@@ -9,6 +9,7 @@ la cible existante est sauvegardee avant ecriture et restauree si une erreur sur
 """
 import hashlib
 import os
+import re
 import shutil
 import tempfile
 import zipfile
@@ -122,12 +123,49 @@ def is_broken(product_id, install_dir):
     return False
 
 
-def uninstall(product_id, install_dir):
-    """Supprime les fichiers poses pour un produit, selon l'etat local."""
+def _toc_version(path):
+    """Lit la ligne '## Version:' d'un .toc d'addon. Renvoie '' si absent/illisible."""
+    try:
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:
+                m = re.search(r"##\s*Version:\s*(.+)", line)
+                if m:
+                    return m.group(1).strip()
+    except OSError:
+        pass
+    return ""
+
+
+def disk_version(product, install_dir):
+    """Detecte un addon DEJA present dans Interface\\AddOns mais non installe par le launcher.
+
+    Renvoie sa version (lue dans le .toc), '' si present mais version illisible, ou None s'il
+    n'est pas (completement) present. Addons seulement (pas les patchs data)."""
+    if product.get("install_target") != "addons":
+        return None
+    roots = product.get("extract_roots") or ([product["extract_root"]] if product.get("extract_root") else [])
+    if not roots:
+        return None
+    addons = wow.addons_dir(install_dir)
+    for r in roots:
+        if not os.path.isdir(os.path.join(addons, r)):
+            return None
+    primary = roots[0]
+    return _toc_version(os.path.join(addons, primary, primary + ".toc"))
+
+
+def uninstall(product_id, install_dir, product=None):
+    """Supprime les fichiers d'un produit. Selon l'etat local s'il a ete installe par le
+    launcher ; sinon (addon present sur disque mais non suivi) selon ses dossiers du manifeste."""
     entry = state.get_installed(product_id)
-    if not entry:
+    if entry:
+        rels = entry.get("files", [])
+    elif product and product.get("install_target") == "addons":
+        roots = product.get("extract_roots") or ([product["extract_root"]] if product.get("extract_root") else [])
+        rels = [os.path.join("Interface", "AddOns", r) for r in roots]
+    else:
         return
-    for rel in entry.get("files", []):
+    for rel in rels:
         path = os.path.join(install_dir, rel)
         if os.path.isdir(path):
             shutil.rmtree(path, ignore_errors=True)
