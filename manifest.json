@@ -203,16 +203,24 @@
       "name": "AutoCallboard",
       "category": "quetes",
       "description": "Recherche et partage de quêtes automatique au callboard",
-      "version": "1.0.7",
-      "download_url": "https://github.com/disarrayed/AutoCallboard/releases/download/v1.0.7/AutoCallboard_v1.0.7.zip",
-      "sha256": "35500c4febbbd36e5f811c2becca081d04fb8c11b84ee38849cbbb5360e8fab1",
+      "version": "1.0.9",
+      "download_url": "https://github.com/disarrayed/AutoCallboard/releases/download/v1.0.9/AutoCallboard_v1.0.9.zip",
+      "sha256": "5d381be12dea629c3cdcefb306ccd40e7acbac5eb6fbe6c4d016b29f35630a71",
       "install_target": "addons",
       "extract_root": "AutoCallboard",
       "icon": "ti-clipboard-list",
       "accent": "purple",
-      "notes": "AutoCallboard v1.0.7",
-      "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.7",
+      "notes": "AutoCallboard v1.0.9",
+      "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.9",
       "history": [
+        {
+          "version": "1.0.9",
+          "notes": "AutoCallboard v1.0.9"
+        },
+        {
+          "version": "1.0.8",
+          "notes": "AutoCallboard v1.0.8"
+        },
         {
           "version": "1.0.7",
           "notes": "AutoCallboard v1.0.7"
@@ -236,14 +244,6 @@
         {
           "version": "1.0.2",
           "notes": "AutoCallboard v1.0.2"
-        },
-        {
-          "version": "1.0.1",
-          "notes": "AutoCallboard v1.0.1"
-        },
-        {
-          "version": "1.0",
-          "notes": "AutoCallboard v1.0"
         }
       ]
     },
