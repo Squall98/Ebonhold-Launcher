@@ -8,7 +8,10 @@
     "pack_url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
     "pack_note": "Pack ~2,4 Go requis uniquement pour mettre les menus/quetes/interface en francais (Jeu = FR). Les sorts/hauts faits/titres fonctionnent sans le pack.",
     "pack_download": {
-      "url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
+      "parts": [
+        "https://github.com/Squall98/Ebonhold-Launcher/releases/download/frfr-pack/frFR.zip.001",
+        "https://github.com/Squall98/Ebonhold-Launcher/releases/download/frfr-pack/frFR.zip.002"
+      ],
       "format": "zip",
       "sha256": "c0f9302f1bbd9c8224dc6e96ea73dbf2928a910f4b576f6ec0ca9972f56ea58f"
     }
