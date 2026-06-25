@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.6 — affichages du catalogue
+- **Bouton de bascule** en haut du catalogue : vue **Cartes**, **Liste compacte** ou
+  **Tableau** (triable par colonne). Le choix d'affichage est mémorisé.
+
 ## v1.0.5 — déblocage automatique des fichiers téléchargés
 - **Déblocage automatique au démarrage** : le launcher retire lui-même la marque « fichier
   venu d'Internet » de ses fichiers. Corrige le crash au lancement
