@@ -193,16 +193,8 @@
       "changelog_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/tag/v1.0",
       "history": [
         {
-          "version": "2.1.17",
-          "notes": "Correctif important + renommage « Métiers+ »."
-        },
-        {
           "version": "1.0",
           "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — renommé Métiers+."
-        },
-        {
-          "version": "2.1.16",
-          "notes": "Port WotLK 3.3.5a d'Advanced Trade Skill Window 2 pour Ebonhold — fenêtre de métiers améliorée (file d'attente, recherche avancée, catégories de recettes personnalisées, suivi des réactifs sacs/banque"
         }
       ]
     },
