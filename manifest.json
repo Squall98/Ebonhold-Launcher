@@ -151,28 +151,6 @@
       ]
     },
     {
-      "id": "advancedtradeskillwindow2",
-      "name": "Advanced Trade Skill Window 2",
-      "category": "metiers",
-      "description": "Fenêtre de métiers améliorée : file d'attente, recherche avancée, catégories perso, suivi des réactifs.",
-      "long_description": "Remplace la fenêtre de métiers par défaut par une version bien plus complète : file d'attente de fabrication, liste de courses, recherche avancée, catégories de recettes personnalisées (tri perso + éditeur), et suivi des réactifs dans tes sacs, ta banque et tes autres persos. L'enchantement passe par la fenêtre normale. En jeu : options via /atsw config. WoW 3.3.5a. Port communautaire de l'addon de Shellyoung — crédit aux auteurs d'origine.",
-      "version": "2.1.16",
-      "download_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/download/v2.1.16/AdvancedTradeSkillWindow2-v2.1.16.zip",
-      "sha256": "8bd569ed1247a95e6d288f08527738f5bda2d92e8a91784d9fa2e86f822a7ed5",
-      "install_target": "addons",
-      "extract_root": "AdvancedTradeSkillWindow2",
-      "icon": "ti-hammer",
-      "accent": "blue",
-      "notes": "Port WotLK 3.3.5a d'Advanced Trade Skill Window 2 pour Ebonhold — fenêtre de métiers améliorée (file d'attente, recherche avancée, catégories de recettes personnalisées, suivi des réactifs sacs/banque",
-      "changelog_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/tag/v2.1.16",
-      "history": [
-        {
-          "version": "2.1.16",
-          "notes": "Port WotLK 3.3.5a d'Advanced Trade Skill Window 2 pour Ebonhold — fenêtre de métiers améliorée (file d'attente, recherche avancée, catégories de recettes personnalisées, suivi des réactifs sacs/banque"
-        }
-      ]
-    },
-    {
       "id": "gathermate",
       "name": "GatherMate",
       "category": "carte",
@@ -195,6 +173,32 @@
         {
           "version": "1.25",
           "notes": "Affiche herbes, minerais, nuages de gaz et poissons sur la carte (WoW 3.3.5a). Contient GatherMate + GatherMate_Data (base de gisements). Installation via le launcher Ebonhold (Catalogue → Installer),"
+        }
+      ]
+    },
+    {
+      "id": "advancedtradeskillwindow2",
+      "name": "Métiers+",
+      "category": "metiers",
+      "description": "Fenêtre de métiers améliorée : file d'attente, recherche avancée, catégories perso, suivi des réactifs.",
+      "long_description": "Remplace la fenêtre de métiers par défaut par une version bien plus complète : file d'attente de fabrication, liste de courses, recherche avancée, catégories de recettes personnalisées (tri perso + éditeur), et suivi des réactifs dans tes sacs, ta banque et tes autres persos. L'enchantement passe par la fenêtre normale. En jeu : options via /atsw config. WoW 3.3.5a. Port communautaire de l'addon de Shellyoung — crédit aux auteurs d'origine.",
+      "version": "2.1.17",
+      "download_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/download/v2.1.17/AdvancedTradeSkillWindow2-v2.1.17.zip",
+      "sha256": "a0fb54af2fa562adb164c154e74c423e7b3bf569b461d6140bc7dc6f9be03b84",
+      "install_target": "addons",
+      "extract_root": "AdvancedTradeSkillWindow2",
+      "icon": "ti-hammer",
+      "accent": "blue",
+      "notes": "Correctif important + renommage « Métiers+ ».",
+      "changelog_url": "https://github.com/Squall98/AdvancedTradeSkillWindow2/releases/tag/v2.1.17",
+      "history": [
+        {
+          "version": "2.1.17",
+          "notes": "Correctif important + renommage « Métiers+ »."
+        },
+        {
+          "version": "2.1.16",
+          "notes": "Port WotLK 3.3.5a d'Advanced Trade Skill Window 2 pour Ebonhold — fenêtre de métiers améliorée (file d'attente, recherche avancée, catégories de recettes personnalisées, suivi des réactifs sacs/banque"
         }
       ]
     },
