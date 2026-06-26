@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.8 — pack FR téléchargé depuis GitHub (même hors-ligne)
+- Le **manifeste embarqué** (celui utilisé quand le launcher ne joint pas le catalogue
+  en ligne, mode « Catalogue local ») pointait encore vers l'ancien lien **Google Drive**
+  pour le pack FR → téléchargements **bloqués à 0 %** ou **« archive corrompue »** dès que
+  le quota Drive était atteint. Le pack est désormais récupéré depuis **GitHub** (en deux
+  parties, sans quota), y compris quand le launcher est en mode hors-ligne. Plus besoin
+  d'installation manuelle du pack.
+
 ## v1.0.7 — détection des addons déjà installés
 - Le launcher **détecte les addons déjà présents** dans `Interface\AddOns` (posés à la main)
   et les affiche comme **Installé** au lieu de « Installer », en lisant leur version sur le disque.

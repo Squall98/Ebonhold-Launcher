@@ -1,8 +1,8 @@
 # Metadonnees de l'executable (reduit les faux positifs antivirus).
 VSVersionInfo(
   ffi=FixedFileInfo(
-    filevers=(1, 0, 7, 0),
-    prodvers=(1, 0, 7, 0),
+    filevers=(1, 0, 8, 0),
+    prodvers=(1, 0, 8, 0),
     mask=0x3f,
     flags=0x0,
     OS=0x40004,
@@ -17,12 +17,12 @@ VSVersionInfo(
         [
           StringStruct('CompanyName', 'Ebonhold'),
           StringStruct('FileDescription', 'Ebonhold Launcher - gestionnaire d\'addons'),
-          StringStruct('FileVersion', '1.0.7'),
+          StringStruct('FileVersion', '1.0.8'),
           StringStruct('InternalName', 'EbonholdLauncher'),
           StringStruct('LegalCopyright', '(c) 2026 Ebonhold'),
           StringStruct('OriginalFilename', 'EbonholdLauncher.exe'),
           StringStruct('ProductName', 'Ebonhold Launcher'),
-          StringStruct('ProductVersion', '1.0.7')
+          StringStruct('ProductVersion', '1.0.8')
         ]
       )
     ]),

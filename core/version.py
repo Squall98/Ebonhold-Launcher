@@ -2,7 +2,7 @@
 """Version de l'application + comparaison de versions (semver simplifie)."""
 import re
 
-APP_VERSION = "1.0.7"
+APP_VERSION = "1.0.8"
 
 
 def normalize(v):
