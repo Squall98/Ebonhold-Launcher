@@ -330,16 +330,28 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.46.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.46.0/EbonClearance.zip",
-      "sha256": "e1cf223de82ab4891ca3a0015f490dc1fe4cd37667748b2a0e753e1603d9f76c",
+      "version": "2.46.3",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.46.3/EbonClearance.zip",
+      "sha256": "30476dd06a5beb09bedc3c196d2e99bbf763ed5edf696705fd4cb67494f7032e",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Sell Known Recipes, a Loot Log, and a searchable Help panel.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.46.0",
+      "notes": "Help: every Merchant and Scavenger setting now has a [?], and the bind-filter icon points to the right place.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.46.3",
       "history": [
+        {
+          "version": "2.46.3",
+          "notes": "Help: every Merchant and Scavenger setting now has a [?], and the bind-filter icon points to the right place."
+        },
+        {
+          "version": "2.46.2",
+          "notes": "Help: documented the last two Merchant Settings controls."
+        },
+        {
+          "version": "2.46.1",
+          "notes": "Fix: the Loot Log counted items taken from the mailbox (and the auction house, trade, guild bank, and crafting)."
+        },
         {
           "version": "2.46.0",
           "notes": "Sell Known Recipes, a Loot Log, and a searchable Help panel."
@@ -359,18 +371,6 @@
         {
           "version": "2.44.11",
           "notes": "Follow-up to v2.44.10: the pattern was anchored to line start; PE wraps proc text in @affix@ markers so the anchor failed."
-        },
-        {
-          "version": "2.44.10",
-          "notes": "Defensive fix for PE transferred-proc weapons silently selling."
-        },
-        {
-          "version": "2.44.9",
-          "notes": "Crystallized / Mote condensing via a new Process Bags Convert mode + panel tidy."
-        },
-        {
-          "version": "2.44.8",
-          "notes": "Sharper workaround for the minimap-clash symptom."
         }
       ]
     },
