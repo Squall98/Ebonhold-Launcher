@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.45.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.45.1/EbonClearance.zip",
-      "sha256": "7a6a35704c165b3a9ad92551e1c0dfb6c31936f92850b12100634d2a7e7f1d96",
+      "version": "2.46.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.46.0/EbonClearance.zip",
+      "sha256": "e1cf223de82ab4891ca3a0015f490dc1fe4cd37667748b2a0e753e1603d9f76c",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Bug fix: offhand drops were labelled \"Keep (possible upgrade)\" when the player wields a 2H.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.45.1",
+      "notes": "Sell Known Recipes, a Loot Log, and a searchable Help panel.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.46.0",
       "history": [
+        {
+          "version": "2.46.0",
+          "notes": "Sell Known Recipes, a Loot Log, and a searchable Help panel."
+        },
         {
           "version": "2.45.1",
           "notes": "Bug fix: offhand drops were labelled \"Keep (possible upgrade)\" when the player wields a 2H."
@@ -367,10 +371,6 @@
         {
           "version": "2.44.8",
           "notes": "Sharper workaround for the minimap-clash symptom."
-        },
-        {
-          "version": "2.44.7",
-          "notes": "Workaround for the minimap-frame clash with magnifier / replacement addons."
         }
       ]
     },
