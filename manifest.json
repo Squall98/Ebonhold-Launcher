@@ -330,16 +330,28 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.46.3",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.46.3/EbonClearance.zip",
-      "sha256": "30476dd06a5beb09bedc3c196d2e99bbf763ed5edf696705fd4cb67494f7032e",
+      "version": "2.46.6",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.46.6/EbonClearance.zip",
+      "sha256": "9ea3d463eb56c8d01c0a54126d6d7c023bb054d683f6bae9557442140713f395",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Help: every Merchant and Scavenger setting now has a [?], and the bind-filter icon points to the right place.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.46.3",
+      "notes": "Bug fix: Loot Log no longer leaves ghost rows for items the addon destroys.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.46.6",
       "history": [
+        {
+          "version": "2.46.6",
+          "notes": "Bug fix: Loot Log no longer leaves ghost rows for items the addon destroys."
+        },
+        {
+          "version": "2.46.5",
+          "notes": "Loot Log: gold value per item, sort by gold, and hide-an-entry."
+        },
+        {
+          "version": "2.46.4",
+          "notes": "Bug fix: vendor-refused items no longer wedge the sell loop."
+        },
         {
           "version": "2.46.3",
           "notes": "Help: every Merchant and Scavenger setting now has a [?], and the bind-filter icon points to the right place."
@@ -359,18 +371,6 @@
         {
           "version": "2.45.1",
           "notes": "Bug fix: offhand drops were labelled \"Keep (possible upgrade)\" when the player wields a 2H."
-        },
-        {
-          "version": "2.45.0",
-          "notes": "Unranked PE affix detection. Skoll's Fang of Vampirism / Thunderfury / Viscous Hammer of Resurgence and other PE transferred-proc weapons are now recognised as PE affixes (which is what they ARE in PE"
-        },
-        {
-          "version": "2.44.12",
-          "notes": "Diagnostic command added. The v2.44.10 / v2.44.11 chance-on-hit pattern fixes haven't landed on Zukii's transferred-proc weapons; before guessing a third pattern, capturing what EC's hidden scan toolt"
-        },
-        {
-          "version": "2.44.11",
-          "notes": "Follow-up to v2.44.10: the pattern was anchored to line start; PE wraps proc text in @affix@ markers so the anchor failed."
         }
       ]
     },
