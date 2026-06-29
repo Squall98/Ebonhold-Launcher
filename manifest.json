@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.46.6",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.46.6/EbonClearance.zip",
-      "sha256": "9ea3d463eb56c8d01c0a54126d6d7c023bb054d683f6bae9557442140713f395",
+      "version": "2.47.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.47.0/EbonClearance.zip",
+      "sha256": "86f847348cd168a8307d8888ad1d2327af4d2647588c40d4cbdb78a09baa43f8",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Bug fix: Loot Log no longer leaves ghost rows for items the addon destroys.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.46.6",
+      "notes": "New option: auto-clear affixed items you can't sell. For players who've collected the affixes they want and keep getting soulbound affix drops that have no vendor value and just clutter the bag. Off b",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.47.0",
       "history": [
+        {
+          "version": "2.47.0",
+          "notes": "New option: auto-clear affixed items you can't sell. For players who've collected the affixes they want and keep getting soulbound affix drops that have no vendor value and just clutter the bag. Off b"
+        },
         {
           "version": "2.46.6",
           "notes": "Bug fix: Loot Log no longer leaves ghost rows for items the addon destroys."
@@ -367,10 +371,6 @@
         {
           "version": "2.46.0",
           "notes": "Sell Known Recipes, a Loot Log, and a searchable Help panel."
-        },
-        {
-          "version": "2.45.1",
-          "notes": "Bug fix: offhand drops were labelled \"Keep (possible upgrade)\" when the player wields a 2H."
         }
       ]
     },
