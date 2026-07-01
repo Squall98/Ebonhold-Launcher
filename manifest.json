@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.49.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.49.0/EbonClearance.zip",
-      "sha256": "5a51ca5016969d8c15b405652c25d12b36652e71cec464b8b438748ff4a1af54",
+      "version": "2.49.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.49.1/EbonClearance.zip",
+      "sha256": "fa612fec04c66d993fb14470ab62696b1951942272a0b62a75ee66da5c3cdcda",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Auto-release chance-on-hit weapons whose proc you've extracted at the Anvil (experimental).",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.49.0",
+      "notes": "Autolearn: chance-on-hit proc pairings from your extractions.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.49.1",
       "history": [
+        {
+          "version": "2.49.1",
+          "notes": "Autolearn: chance-on-hit proc pairings from your extractions."
+        },
         {
           "version": "2.49.0",
           "notes": "Auto-release chance-on-hit weapons whose proc you've extracted at the Anvil (experimental)."
@@ -367,10 +371,6 @@
         {
           "version": "2.46.6",
           "notes": "Bug fix: Loot Log no longer leaves ghost rows for items the addon destroys."
-        },
-        {
-          "version": "2.46.5",
-          "notes": "Loot Log: gold value per item, sort by gold, and hide-an-entry."
         }
       ]
     },
