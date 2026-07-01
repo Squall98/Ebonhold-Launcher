@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.48.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.48.0/EbonClearance.zip",
-      "sha256": "f88d628830687958a5c4232a1a0db206d00b0c8b4c8db99c27c23b5e630025cc",
+      "version": "2.48.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.48.1/EbonClearance.zip",
+      "sha256": "c25930408bbbea8e768043a953d8677d529814f08030806aa8421402b1952553",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Help panel style refresh, inspired by BarWarden's cleaner section-header collapse, blue question text, and blue flash-pulse deep-link.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.48.0",
+      "notes": "Chance-on-hit proc groundwork: /ec captureproc diagnostic, a protection-gate bug fix reported by Serv, and a /ec sellinfo readability pass.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.48.1",
       "history": [
+        {
+          "version": "2.48.1",
+          "notes": "Chance-on-hit proc groundwork: /ec captureproc diagnostic, a protection-gate bug fix reported by Serv, and a /ec sellinfo readability pass."
+        },
         {
           "version": "2.48.0",
           "notes": "Help panel style refresh, inspired by BarWarden's cleaner section-header collapse, blue question text, and blue flash-pulse deep-link."
@@ -367,10 +371,6 @@
         {
           "version": "2.46.4",
           "notes": "Bug fix: vendor-refused items no longer wedge the sell loop."
-        },
-        {
-          "version": "2.46.3",
-          "notes": "Help: every Merchant and Scavenger setting now has a [?], and the bind-filter icon points to the right place."
         }
       ]
     },
