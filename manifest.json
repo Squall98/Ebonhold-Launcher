@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.48.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.48.1/EbonClearance.zip",
-      "sha256": "c25930408bbbea8e768043a953d8677d529814f08030806aa8421402b1952553",
+      "version": "2.49.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.49.0/EbonClearance.zip",
+      "sha256": "5a51ca5016969d8c15b405652c25d12b36652e71cec464b8b438748ff4a1af54",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Chance-on-hit proc groundwork: /ec captureproc diagnostic, a protection-gate bug fix reported by Serv, and a /ec sellinfo readability pass.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.48.1",
+      "notes": "Auto-release chance-on-hit weapons whose proc you've extracted at the Anvil (experimental).",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.49.0",
       "history": [
+        {
+          "version": "2.49.0",
+          "notes": "Auto-release chance-on-hit weapons whose proc you've extracted at the Anvil (experimental)."
+        },
         {
           "version": "2.48.1",
           "notes": "Chance-on-hit proc groundwork: /ec captureproc diagnostic, a protection-gate bug fix reported by Serv, and a /ec sellinfo readability pass."
@@ -367,10 +371,6 @@
         {
           "version": "2.46.5",
           "notes": "Loot Log: gold value per item, sort by gold, and hide-an-entry."
-        },
-        {
-          "version": "2.46.4",
-          "notes": "Bug fix: vendor-refused items no longer wedge the sell loop."
         }
       ]
     },
