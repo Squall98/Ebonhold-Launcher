@@ -330,16 +330,28 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.47.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.47.0/EbonClearance.zip",
-      "sha256": "86f847348cd168a8307d8888ad1d2327af4d2647588c40d4cbdb78a09baa43f8",
+      "version": "2.48.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.48.0/EbonClearance.zip",
+      "sha256": "f88d628830687958a5c4232a1a0db206d00b0c8b4c8db99c27c23b5e630025cc",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "New option: auto-clear affixed items you can't sell. For players who've collected the affixes they want and keep getting soulbound affix drops that have no vendor value and just clutter the bag. Off b",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.47.0",
+      "notes": "Help panel style refresh, inspired by BarWarden's cleaner section-header collapse, blue question text, and blue flash-pulse deep-link.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.48.0",
       "history": [
+        {
+          "version": "2.48.0",
+          "notes": "Help panel style refresh, inspired by BarWarden's cleaner section-header collapse, blue question text, and blue flash-pulse deep-link."
+        },
+        {
+          "version": "2.47.2",
+          "notes": "Delete List split into two panels + every setting has an explanatory note."
+        },
+        {
+          "version": "2.47.1",
+          "notes": "Per-quality bind-type filter for Sell Known Recipes."
+        },
         {
           "version": "2.47.0",
           "notes": "New option: auto-clear affixed items you can't sell. For players who've collected the affixes they want and keep getting soulbound affix drops that have no vendor value and just clutter the bag. Off b"
@@ -359,18 +371,6 @@
         {
           "version": "2.46.3",
           "notes": "Help: every Merchant and Scavenger setting now has a [?], and the bind-filter icon points to the right place."
-        },
-        {
-          "version": "2.46.2",
-          "notes": "Help: documented the last two Merchant Settings controls."
-        },
-        {
-          "version": "2.46.1",
-          "notes": "Fix: the Loot Log counted items taken from the mailbox (and the auction house, trade, guild bank, and crafting)."
-        },
-        {
-          "version": "2.46.0",
-          "notes": "Sell Known Recipes, a Loot Log, and a searchable Help panel."
         }
       ]
     },
