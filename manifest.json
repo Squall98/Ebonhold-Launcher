@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.49.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.49.1/EbonClearance.zip",
-      "sha256": "fa612fec04c66d993fb14470ab62696b1951942272a0b62a75ee66da5c3cdcda",
+      "version": "2.50.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.0/EbonClearance.zip",
+      "sha256": "af1427ffd0cf3c8edfb27284a7d0c8d0cf1c1f722cfc9500d02e3828e6ffa675",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Autolearn: chance-on-hit proc pairings from your extractions.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.49.1",
+      "notes": "Auto-delete grey drops, a warning when another delete addon is running, and a settings reshuffle: \"Protection Settings\" is now \"Keep Settings\".",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.0",
       "history": [
+        {
+          "version": "2.50.0",
+          "notes": "Auto-delete grey drops, a warning when another delete addon is running, and a settings reshuffle: \"Protection Settings\" is now \"Keep Settings\"."
+        },
         {
           "version": "2.49.1",
           "notes": "Autolearn: chance-on-hit proc pairings from your extractions."
@@ -367,10 +371,6 @@
         {
           "version": "2.47.0",
           "notes": "New option: auto-clear affixed items you can't sell. For players who've collected the affixes they want and keep getting soulbound affix drops that have no vendor value and just clutter the bag. Off b"
-        },
-        {
-          "version": "2.46.6",
-          "notes": "Bug fix: Loot Log no longer leaves ghost rows for items the addon destroys."
         }
       ]
     },
