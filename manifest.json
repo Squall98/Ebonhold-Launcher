@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.50.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.0/EbonClearance.zip",
-      "sha256": "af1427ffd0cf3c8edfb27284a7d0c8d0cf1c1f722cfc9500d02e3828e6ffa675",
+      "version": "2.50.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.1/EbonClearance.zip",
+      "sha256": "ca5890ce7bde182443062424b29354d3c5aff5eeb4470099fc856f22384dc9ab",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Auto-delete grey drops, a warning when another delete addon is running, and a settings reshuffle: \"Protection Settings\" is now \"Keep Settings\".",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.0",
+      "notes": "Nine more chance-on-hit weapon pairings from a fresh Anvil pass.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.1",
       "history": [
+        {
+          "version": "2.50.1",
+          "notes": "Nine more chance-on-hit weapon pairings from a fresh Anvil pass."
+        },
         {
           "version": "2.50.0",
           "notes": "Auto-delete grey drops, a warning when another delete addon is running, and a settings reshuffle: \"Protection Settings\" is now \"Keep Settings\"."
@@ -367,10 +371,6 @@
         {
           "version": "2.47.1",
           "notes": "Per-quality bind-type filter for Sell Known Recipes."
-        },
-        {
-          "version": "2.47.0",
-          "notes": "New option: auto-clear affixed items you can't sell. For players who've collected the affixes they want and keep getting soulbound affix drops that have no vendor value and just clutter the bag. Off b"
         }
       ]
     },
