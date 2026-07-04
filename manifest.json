@@ -281,16 +281,20 @@
       "name": "EbonBuilds",
       "category": "personnage",
       "description": "Gérez vos builds d'échoes en toute simplicité",
-      "version": "1.3.5",
-      "download_url": "https://github.com/vook/EbonBuilds/releases/download/v1.3.5/EbonBuilds.zip",
-      "sha256": "0668c15701a2cd4a069c75d8a55f289c653ee7e42360310d4f8514e0b21a1dba",
+      "version": "1.3.6",
+      "download_url": "https://github.com/vook/EbonBuilds/releases/download/v1.3.6/EbonBuilds.zip",
+      "sha256": "4fbcbd9464a8fb1a0d9ff1e0976bdc4cc98b830d3010205129c3050d980e41c4",
       "install_target": "addons",
       "extract_root": "EbonBuilds",
       "icon": "ti-wand",
       "accent": "blue",
-      "notes": "fix: strip hardcore prefix and colour codes from sync channel messages by @vook in https://github.com/vook/EbonBuilds/pull/16",
-      "changelog_url": "https://github.com/vook/EbonBuilds/releases/tag/v1.3.5",
+      "notes": "Feature/sync by @vook in https://github.com/vook/EbonBuilds/pull/17",
+      "changelog_url": "https://github.com/vook/EbonBuilds/releases/tag/v1.3.6",
       "history": [
+        {
+          "version": "1.3.6",
+          "notes": "Feature/sync by @vook in https://github.com/vook/EbonBuilds/pull/17"
+        },
         {
           "version": "1.3.5",
           "notes": "fix: strip hardcore prefix and colour codes from sync channel messages by @vook in https://github.com/vook/EbonBuilds/pull/16"
@@ -318,10 +322,6 @@
         {
           "version": "1.1.5",
           "notes": "fix: increase automation tab content height so freeze penalty slider … by @vook in https://github.com/vook/EbonBuilds/pull/9"
-        },
-        {
-          "version": "1.1.4",
-          "notes": "feat: redesign automation tab layout with flavor texts and improved s… by @vook in https://github.com/vook/EbonBuilds/pull/8"
         }
       ]
     },
