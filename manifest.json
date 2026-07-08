@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.50.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.1/EbonClearance.zip",
-      "sha256": "ca5890ce7bde182443062424b29354d3c5aff5eeb4470099fc856f22384dc9ab",
+      "version": "2.50.2",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.2/EbonClearance.zip",
+      "sha256": "ec0053017723a0a8c30a2f92f3ad44699480d772f7245482459564c782bee76d",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Nine more chance-on-hit weapon pairings from a fresh Anvil pass.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.1",
+      "notes": "Bug fix: soulbound shirts with known affixes could be silently auto-deleted despite being in equipment sets and manually added to the Keep List.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.2",
       "history": [
+        {
+          "version": "2.50.2",
+          "notes": "Bug fix: soulbound shirts with known affixes could be silently auto-deleted despite being in equipment sets and manually added to the Keep List."
+        },
         {
           "version": "2.50.1",
           "notes": "Nine more chance-on-hit weapon pairings from a fresh Anvil pass."
@@ -367,10 +371,6 @@
         {
           "version": "2.47.2",
           "notes": "Delete List split into two panels + every setting has an explanatory note."
-        },
-        {
-          "version": "2.47.1",
-          "notes": "Per-quality bind-type filter for Sell Known Recipes."
         }
       ]
     },
