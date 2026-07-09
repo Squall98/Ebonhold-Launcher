@@ -330,16 +330,24 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.51.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.51.0/EbonClearance.zip",
-      "sha256": "bf1b483cc2d6575da14fe5d72d87002e9ff5b22d25549d868258659b55c3764e",
+      "version": "2.51.2",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.51.2/EbonClearance.zip",
+      "sha256": "2c24ab48f7c3b69e841335d06b490f5de76ec757ab36528f393a3b8e5030ec28",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Diagnostic-hooks release. /ec bugreport gains six new sections + an at-a-glance Issue Summary; Sell Info popup leads with the verdict; resizable copy frame; every rejection reason names the toggle to ",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.51.0",
+      "notes": "Bug fix: adding a learnt recipe to the Sell List with Protect all tomes on made it silently refuse to sell.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.51.2",
       "history": [
+        {
+          "version": "2.51.2",
+          "notes": "Bug fix: adding a learnt recipe to the Sell List with Protect all tomes on made it silently refuse to sell."
+        },
+        {
+          "version": "2.51.1",
+          "notes": "Quickstart expansion + typo fix in the v2.51.0 diagnostic hook."
+        },
         {
           "version": "2.51.0",
           "notes": "Diagnostic-hooks release. /ec bugreport gains six new sections + an at-a-glance Issue Summary; Sell Info popup leads with the verdict; resizable copy frame; every rejection reason names the toggle to "
@@ -363,14 +371,6 @@
         {
           "version": "2.50.1",
           "notes": "Nine more chance-on-hit weapon pairings from a fresh Anvil pass."
-        },
-        {
-          "version": "2.50.0",
-          "notes": "Auto-delete grey drops, a warning when another delete addon is running, and a settings reshuffle: \"Protection Settings\" is now \"Keep Settings\"."
-        },
-        {
-          "version": "2.49.1",
-          "notes": "Autolearn: chance-on-hit proc pairings from your extractions."
         }
       ]
     },
