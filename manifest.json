@@ -330,16 +330,28 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.50.3",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.3/EbonClearance.zip",
-      "sha256": "04eedd328175e6371221eca729e529ee74bfaee1b9279a94d71794709eeb5270",
+      "version": "2.51.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.51.0/EbonClearance.zip",
+      "sha256": "bf1b483cc2d6575da14fe5d72d87002e9ff5b22d25549d868258659b55c3764e",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Bug reports pack more diagnostic detail. Motivated by Bizzaro's v2.50.1 report where the tooltip said \"Will Delete\" but no destruction actually happened - the pre-v2.50.3 bugreport didn't surface enou",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.3",
+      "notes": "Diagnostic-hooks release. /ec bugreport gains six new sections + an at-a-glance Issue Summary; Sell Info popup leads with the verdict; resizable copy frame; every rejection reason names the toggle to ",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.51.0",
       "history": [
+        {
+          "version": "2.51.0",
+          "notes": "Diagnostic-hooks release. /ec bugreport gains six new sections + an at-a-glance Issue Summary; Sell Info popup leads with the verdict; resizable copy frame; every rejection reason names the toggle to "
+        },
+        {
+          "version": "2.50.5",
+          "notes": "Sell Info opens a copyable popup + the recipe bind-filter reject label now tells the truth."
+        },
+        {
+          "version": "2.50.4",
+          "notes": "Bug fix: soulbound recipes with a mismatched bind-filter setting showed \"Will Sell (known recipe)\" but the vendor cycle refused."
+        },
         {
           "version": "2.50.3",
           "notes": "Bug reports pack more diagnostic detail. Motivated by Bizzaro's v2.50.1 report where the tooltip said \"Will Delete\" but no destruction actually happened - the pre-v2.50.3 bugreport didn't surface enou"
@@ -359,18 +371,6 @@
         {
           "version": "2.49.1",
           "notes": "Autolearn: chance-on-hit proc pairings from your extractions."
-        },
-        {
-          "version": "2.49.0",
-          "notes": "Auto-release chance-on-hit weapons whose proc you've extracted at the Anvil (experimental)."
-        },
-        {
-          "version": "2.48.1",
-          "notes": "Chance-on-hit proc groundwork: /ec captureproc diagnostic, a protection-gate bug fix reported by Serv, and a /ec sellinfo readability pass."
-        },
-        {
-          "version": "2.48.0",
-          "notes": "Help panel style refresh, inspired by BarWarden's cleaner section-header collapse, blue question text, and blue flash-pulse deep-link."
         }
       ]
     },
