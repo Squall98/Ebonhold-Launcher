@@ -330,16 +330,24 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.51.2",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.51.2/EbonClearance.zip",
-      "sha256": "2c24ab48f7c3b69e841335d06b490f5de76ec757ab36528f393a3b8e5030ec28",
+      "version": "2.53.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.53.0/EbonClearance.zip",
+      "sha256": "c58367169e78c34979e3cf6a8d74f4c12eb8e07401cac7e2d8051954d6335c46",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Bug fix: adding a learnt recipe to the Sell List with Protect all tomes on made it silently refuse to sell.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.51.2",
+      "notes": "Chance-on-hit proc pairings can now propagate anonymously across a guild via NS.Comms.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.53.0",
       "history": [
+        {
+          "version": "2.53.0",
+          "notes": "Chance-on-hit proc pairings can now propagate anonymously across a guild via NS.Comms."
+        },
+        {
+          "version": "2.52.0",
+          "notes": "Affix highlight rework: Known vs Needed split now honest + rank VI supported."
+        },
         {
           "version": "2.51.2",
           "notes": "Bug fix: adding a learnt recipe to the Sell List with Protect all tomes on made it silently refuse to sell."
@@ -363,14 +371,6 @@
         {
           "version": "2.50.3",
           "notes": "Bug reports pack more diagnostic detail. Motivated by Bizzaro's v2.50.1 report where the tooltip said \"Will Delete\" but no destruction actually happened - the pre-v2.50.3 bugreport didn't surface enou"
-        },
-        {
-          "version": "2.50.2",
-          "notes": "Bug fix: soulbound shirts with known affixes could be silently auto-deleted despite being in equipment sets and manually added to the Keep List."
-        },
-        {
-          "version": "2.50.1",
-          "notes": "Nine more chance-on-hit weapon pairings from a fresh Anvil pass."
         }
       ]
     },
