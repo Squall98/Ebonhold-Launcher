@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.50.2",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.2/EbonClearance.zip",
-      "sha256": "ec0053017723a0a8c30a2f92f3ad44699480d772f7245482459564c782bee76d",
+      "version": "2.50.3",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.50.3/EbonClearance.zip",
+      "sha256": "04eedd328175e6371221eca729e529ee74bfaee1b9279a94d71794709eeb5270",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Bug fix: soulbound shirts with known affixes could be silently auto-deleted despite being in equipment sets and manually added to the Keep List.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.2",
+      "notes": "Bug reports pack more diagnostic detail. Motivated by Bizzaro's v2.50.1 report where the tooltip said \"Will Delete\" but no destruction actually happened - the pre-v2.50.3 bugreport didn't surface enou",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.50.3",
       "history": [
+        {
+          "version": "2.50.3",
+          "notes": "Bug reports pack more diagnostic detail. Motivated by Bizzaro's v2.50.1 report where the tooltip said \"Will Delete\" but no destruction actually happened - the pre-v2.50.3 bugreport didn't surface enou"
+        },
         {
           "version": "2.50.2",
           "notes": "Bug fix: soulbound shirts with known affixes could be silently auto-deleted despite being in equipment sets and manually added to the Keep List."
@@ -367,10 +371,6 @@
         {
           "version": "2.48.0",
           "notes": "Help panel style refresh, inspired by BarWarden's cleaner section-header collapse, blue question text, and blue flash-pulse deep-link."
-        },
-        {
-          "version": "2.47.2",
-          "notes": "Delete List split into two panels + every setting has an explanatory note."
         }
       ]
     },
