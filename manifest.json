@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.53.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.53.0/EbonClearance.zip",
-      "sha256": "c58367169e78c34979e3cf6a8d74f4c12eb8e07401cac7e2d8051954d6335c46",
+      "version": "2.54.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.54.0/EbonClearance.zip",
+      "sha256": "c047d6d7c31bc0c158601df902403a8500522b5ea46fd84d88c1f48c67d33813",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Chance-on-hit proc pairings can now propagate anonymously across a guild via NS.Comms.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.53.0",
+      "notes": "Sold History: see exactly what EbonClearance sold or deleted this session, and why.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.54.0",
       "history": [
+        {
+          "version": "2.54.0",
+          "notes": "Sold History: see exactly what EbonClearance sold or deleted this session, and why."
+        },
         {
           "version": "2.53.0",
           "notes": "Chance-on-hit proc pairings can now propagate anonymously across a guild via NS.Comms."
@@ -367,10 +371,6 @@
         {
           "version": "2.50.4",
           "notes": "Bug fix: soulbound recipes with a mismatched bind-filter setting showed \"Will Sell (known recipe)\" but the vendor cycle refused."
-        },
-        {
-          "version": "2.50.3",
-          "notes": "Bug reports pack more diagnostic detail. Motivated by Bizzaro's v2.50.1 report where the tooltip said \"Will Delete\" but no destruction actually happened - the pre-v2.50.3 bugreport didn't surface enou"
         }
       ]
     },
