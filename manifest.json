@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.55.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.55.1/EbonClearance.zip",
-      "sha256": "b1eb6bbad02414f9550581fe0d4c5e63e0523b606aaa944c02d60a59460a4668",
+      "version": "2.56.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.56.0/EbonClearance.zip",
+      "sha256": "28a3ed187797136a7c97afc3d1dc2bfbe4c0fb460a46d0026b171abfa0ac25ec",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Patch release.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.55.1",
+      "notes": "Affix protection now survives even if Project Ebonhold moves its affix data.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.56.0",
       "history": [
+        {
+          "version": "2.56.0",
+          "notes": "Affix protection now survives even if Project Ebonhold moves its affix data."
+        },
         {
           "version": "2.55.1",
           "notes": "Patch release."
@@ -367,10 +371,6 @@
         {
           "version": "2.51.1",
           "notes": "Quickstart expansion + typo fix in the v2.51.0 diagnostic hook."
-        },
-        {
-          "version": "2.51.0",
-          "notes": "Diagnostic-hooks release. /ec bugreport gains six new sections + an at-a-glance Issue Summary; Sell Info popup leads with the verdict; resizable copy frame; every rejection reason names the toggle to "
         }
       ]
     },
