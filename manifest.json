@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.55.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.55.0/EbonClearance.zip",
-      "sha256": "3961747b780abcef7867d6773929cef3d2652310b3bb5b097a355aa09035fc35",
+      "version": "2.55.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.55.1/EbonClearance.zip",
+      "sha256": "b1eb6bbad02414f9550581fe0d4c5e63e0523b606aaa944c02d60a59460a4668",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Frame-hitch diagnostic: find out if a stutter was EbonClearance, and which part.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.55.0",
+      "notes": "Patch release.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.55.1",
       "history": [
+        {
+          "version": "2.55.1",
+          "notes": "Patch release."
+        },
         {
           "version": "2.55.0",
           "notes": "Frame-hitch diagnostic: find out if a stutter was EbonClearance, and which part."
@@ -367,10 +371,6 @@
         {
           "version": "2.51.0",
           "notes": "Diagnostic-hooks release. /ec bugreport gains six new sections + an at-a-glance Issue Summary; Sell Info popup leads with the verdict; resizable copy frame; every rejection reason names the toggle to "
-        },
-        {
-          "version": "2.50.5",
-          "notes": "Sell Info opens a copyable popup + the recipe bind-filter reject label now tells the truth."
         }
       ]
     },
