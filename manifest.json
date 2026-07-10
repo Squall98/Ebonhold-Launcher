@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.54.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.54.0/EbonClearance.zip",
-      "sha256": "c047d6d7c31bc0c158601df902403a8500522b5ea46fd84d88c1f48c67d33813",
+      "version": "2.55.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.55.0/EbonClearance.zip",
+      "sha256": "3961747b780abcef7867d6773929cef3d2652310b3bb5b097a355aa09035fc35",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Sold History: see exactly what EbonClearance sold or deleted this session, and why.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.54.0",
+      "notes": "Frame-hitch diagnostic: find out if a stutter was EbonClearance, and which part.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.55.0",
       "history": [
+        {
+          "version": "2.55.0",
+          "notes": "Frame-hitch diagnostic: find out if a stutter was EbonClearance, and which part."
+        },
         {
           "version": "2.54.0",
           "notes": "Sold History: see exactly what EbonClearance sold or deleted this session, and why."
@@ -367,10 +371,6 @@
         {
           "version": "2.50.5",
           "notes": "Sell Info opens a copyable popup + the recipe bind-filter reject label now tells the truth."
-        },
-        {
-          "version": "2.50.4",
-          "notes": "Bug fix: soulbound recipes with a mismatched bind-filter setting showed \"Will Sell (known recipe)\" but the vendor cycle refused."
         }
       ]
     },
