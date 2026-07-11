@@ -330,16 +330,24 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.56.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.56.0/EbonClearance.zip",
-      "sha256": "28a3ed187797136a7c97afc3d1dc2bfbe4c0fb460a46d0026b171abfa0ac25ec",
+      "version": "2.57.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.57.1/EbonClearance.zip",
+      "sha256": "6f1e3f28a6c7ca654b975da4c8ed33dd13f9b1fd920f63a5c2cd954d7f09670b",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Affix protection now survives even if Project Ebonhold moves its affix data.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.56.0",
+      "notes": "Patch release. Chance-on-hit proc-pairing seed data (confirmed via /ec captureproc + in-game verification):",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.57.1",
       "history": [
+        {
+          "version": "2.57.1",
+          "notes": "Patch release. Chance-on-hit proc-pairing seed data (confirmed via /ec captureproc + in-game verification):"
+        },
+        {
+          "version": "2.57.0",
+          "notes": "Sold History is now a real window that records your whole session, not just the last 20 actions."
+        },
         {
           "version": "2.56.0",
           "notes": "Affix protection now survives even if Project Ebonhold moves its affix data."
@@ -363,14 +371,6 @@
         {
           "version": "2.52.0",
           "notes": "Affix highlight rework: Known vs Needed split now honest + rank VI supported."
-        },
-        {
-          "version": "2.51.2",
-          "notes": "Bug fix: adding a learnt recipe to the Sell List with Protect all tomes on made it silently refuse to sell."
-        },
-        {
-          "version": "2.51.1",
-          "notes": "Quickstart expansion + typo fix in the v2.51.0 diagnostic hook."
         }
       ]
     },
