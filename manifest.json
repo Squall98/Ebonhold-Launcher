@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.57.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.57.1/EbonClearance.zip",
-      "sha256": "6f1e3f28a6c7ca654b975da4c8ed33dd13f9b1fd920f63a5c2cd954d7f09670b",
+      "version": "2.57.2",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.57.2/EbonClearance.zip",
+      "sha256": "24f59ebff1e5b3706829f2d35364426ca9a9512597f45cfd52412065778404bd",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Patch release. Chance-on-hit proc-pairing seed data (confirmed via /ec captureproc + in-game verification):",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.57.1",
+      "notes": "Safety fix: your item-level cap is now a hard ceiling the affix rules can't override.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.57.2",
       "history": [
+        {
+          "version": "2.57.2",
+          "notes": "Safety fix: your item-level cap is now a hard ceiling the affix rules can't override."
+        },
         {
           "version": "2.57.1",
           "notes": "Patch release. Chance-on-hit proc-pairing seed data (confirmed via /ec captureproc + in-game verification):"
@@ -367,10 +371,6 @@
         {
           "version": "2.53.0",
           "notes": "Chance-on-hit proc pairings can now propagate anonymously across a guild via NS.Comms."
-        },
-        {
-          "version": "2.52.0",
-          "notes": "Affix highlight rework: Known vs Needed split now honest + rank VI supported."
         }
       ]
     },
