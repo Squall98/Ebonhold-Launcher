@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.57.2",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.57.2/EbonClearance.zip",
-      "sha256": "24f59ebff1e5b3706829f2d35364426ca9a9512597f45cfd52412065778404bd",
+      "version": "2.58.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.0/EbonClearance.zip",
+      "sha256": "d74a625fefb554875ddea78d91d868bfb42b485e264bdf0ad8b4325eb92800b9",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Safety fix: your item-level cap is now a hard ceiling the affix rules can't override.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.57.2",
+      "notes": "New: a realm-wide \"Stats - Server\" odometer, plus realm-wide update checks. Both opt-in, off by default.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.0",
       "history": [
+        {
+          "version": "2.58.0",
+          "notes": "New: a realm-wide \"Stats - Server\" odometer, plus realm-wide update checks. Both opt-in, off by default."
+        },
         {
           "version": "2.57.2",
           "notes": "Safety fix: your item-level cap is now a hard ceiling the affix rules can't override."
@@ -367,10 +371,6 @@
         {
           "version": "2.54.0",
           "notes": "Sold History: see exactly what EbonClearance sold or deleted this session, and why."
-        },
-        {
-          "version": "2.53.0",
-          "notes": "Chance-on-hit proc pairings can now propagate anonymously across a guild via NS.Comms."
         }
       ]
     },
