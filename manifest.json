@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.0/EbonClearance.zip",
-      "sha256": "54300dd2c2289cddbe17cac203e608ff8a41427177705fec21f3a59b2479e659",
+      "version": "2.59.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.1/EbonClearance.zip",
+      "sha256": "99d3f042975cd771ef02160013a776c1fd4129337bcffa26cf15a09750372e5b",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Performance: bag bursts now cost one bag scan instead of up to nine. Plus a Loot Log button on the main page.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.0",
+      "notes": "Two chance-on-hit pairings pinned, five items marked non-extractable, and Stats - Server sharing flipped to ON by default.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.1",
       "history": [
+        {
+          "version": "2.59.1",
+          "notes": "Two chance-on-hit pairings pinned, five items marked non-extractable, and Stats - Server sharing flipped to ON by default."
+        },
         {
           "version": "2.59.0",
           "notes": "Performance: bag bursts now cost one bag scan instead of up to nine. Plus a Loot Log button on the main page."
@@ -367,10 +371,6 @@
         {
           "version": "2.57.1",
           "notes": "Patch release. Chance-on-hit proc-pairing seed data (confirmed via /ec captureproc + in-game verification):"
-        },
-        {
-          "version": "2.57.0",
-          "notes": "Sold History is now a real window that records your whole session, not just the last 20 actions."
         }
       ]
     },
