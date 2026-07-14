@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.58.2",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.2/EbonClearance.zip",
-      "sha256": "3b34e6ad9b427e764e9e66b525ef9030fbc9d788c43965c53aac515398bba3ee",
+      "version": "2.58.3",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.3/EbonClearance.zip",
+      "sha256": "c38b623d8363a9304bcd2698cc5ac8014b3bdaddcaca28553d6696e5371591dd",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Performance patch: less repeated work on loading screens, bag bursts, and idle windows. No behaviour change.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.2",
+      "notes": "Fix: the Scavenger's new \"Beep. Configuration loaded...\" resummon bubble now stays muted. Plus comms hardening from the audit's second batch.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.3",
       "history": [
+        {
+          "version": "2.58.3",
+          "notes": "Fix: the Scavenger's new \"Beep. Configuration loaded...\" resummon bubble now stays muted. Plus comms hardening from the audit's second batch."
+        },
         {
           "version": "2.58.2",
           "notes": "Performance patch: less repeated work on loading screens, bag bursts, and idle windows. No behaviour change."
@@ -367,10 +371,6 @@
         {
           "version": "2.56.0",
           "notes": "Affix protection now survives even if Project Ebonhold moves its affix data."
-        },
-        {
-          "version": "2.55.1",
-          "notes": "Patch release."
         }
       ]
     },
