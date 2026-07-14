@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.58.3",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.3/EbonClearance.zip",
-      "sha256": "c38b623d8363a9304bcd2698cc5ac8014b3bdaddcaca28553d6696e5371591dd",
+      "version": "2.59.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.0/EbonClearance.zip",
+      "sha256": "54300dd2c2289cddbe17cac203e608ff8a41427177705fec21f3a59b2479e659",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Fix: the Scavenger's new \"Beep. Configuration loaded...\" resummon bubble now stays muted. Plus comms hardening from the audit's second batch.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.3",
+      "notes": "Performance: bag bursts now cost one bag scan instead of up to nine. Plus a Loot Log button on the main page.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.0",
       "history": [
+        {
+          "version": "2.59.0",
+          "notes": "Performance: bag bursts now cost one bag scan instead of up to nine. Plus a Loot Log button on the main page."
+        },
         {
           "version": "2.58.3",
           "notes": "Fix: the Scavenger's new \"Beep. Configuration loaded...\" resummon bubble now stays muted. Plus comms hardening from the audit's second batch."
@@ -367,10 +371,6 @@
         {
           "version": "2.57.0",
           "notes": "Sold History is now a real window that records your whole session, not just the last 20 actions."
-        },
-        {
-          "version": "2.56.0",
-          "notes": "Affix protection now survives even if Project Ebonhold moves its affix data."
         }
       ]
     },
