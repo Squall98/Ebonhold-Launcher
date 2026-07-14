@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.1/EbonClearance.zip",
-      "sha256": "99d3f042975cd771ef02160013a776c1fd4129337bcffa26cf15a09750372e5b",
+      "version": "2.59.2",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.2/EbonClearance.zip",
+      "sha256": "0a6992a01fd693bb66b61515e212c1cac214c2c90fdbca3c6afe2e4b7afcb889",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Two chance-on-hit pairings pinned, five items marked non-extractable, and Stats - Server sharing flipped to ON by default.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.1",
+      "notes": "Two more items marked non-extractable from a fresh captureproc + Anvil verification.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.2",
       "history": [
+        {
+          "version": "2.59.2",
+          "notes": "Two more items marked non-extractable from a fresh captureproc + Anvil verification."
+        },
         {
           "version": "2.59.1",
           "notes": "Two chance-on-hit pairings pinned, five items marked non-extractable, and Stats - Server sharing flipped to ON by default."
@@ -367,10 +371,6 @@
         {
           "version": "2.57.2",
           "notes": "Safety fix: your item-level cap is now a hard ceiling the affix rules can't override."
-        },
-        {
-          "version": "2.57.1",
-          "notes": "Patch release. Chance-on-hit proc-pairing seed data (confirmed via /ec captureproc + in-game verification):"
         }
       ]
     },
