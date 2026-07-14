@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.2",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.2/EbonClearance.zip",
-      "sha256": "0a6992a01fd693bb66b61515e212c1cac214c2c90fdbca3c6afe2e4b7afcb889",
+      "version": "2.59.3",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.3/EbonClearance.zip",
+      "sha256": "35709f68d62a23123757d0d92e91d86719d21e011e4783876281b73c9124d64e",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Two more items marked non-extractable from a fresh captureproc + Anvil verification.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.2",
+      "notes": "Bug fix: Process Bags Lockpick + Auto-Open loop when multiple same-type lockboxes are in bags.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.3",
       "history": [
+        {
+          "version": "2.59.3",
+          "notes": "Bug fix: Process Bags Lockpick + Auto-Open loop when multiple same-type lockboxes are in bags."
+        },
         {
           "version": "2.59.2",
           "notes": "Two more items marked non-extractable from a fresh captureproc + Anvil verification."
@@ -367,10 +371,6 @@
         {
           "version": "2.58.0",
           "notes": "New: a realm-wide \"Stats - Server\" odometer, plus realm-wide update checks. Both opt-in, off by default."
-        },
-        {
-          "version": "2.57.2",
-          "notes": "Safety fix: your item-level cap is now a hard ceiling the affix rules can't override."
         }
       ]
     },
