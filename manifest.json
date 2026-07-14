@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.58.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.1/EbonClearance.zip",
-      "sha256": "65865ab126195bb26bc31c2278a1e5c90531911e98dd5b90affaeb2dbe704921",
+      "version": "2.58.2",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.2/EbonClearance.zip",
+      "sha256": "3b34e6ad9b427e764e9e66b525ef9030fbc9d788c43965c53aac515398bba3ee",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "UI fix: \"Sell affixes below rank\" slider now labels its max as VI (6), matching the actual range.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.1",
+      "notes": "Performance patch: less repeated work on loading screens, bag bursts, and idle windows. No behaviour change.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.2",
       "history": [
+        {
+          "version": "2.58.2",
+          "notes": "Performance patch: less repeated work on loading screens, bag bursts, and idle windows. No behaviour change."
+        },
         {
           "version": "2.58.1",
           "notes": "UI fix: \"Sell affixes below rank\" slider now labels its max as VI (6), matching the actual range."
@@ -367,10 +371,6 @@
         {
           "version": "2.55.1",
           "notes": "Patch release."
-        },
-        {
-          "version": "2.55.0",
-          "notes": "Frame-hitch diagnostic: find out if a stutter was EbonClearance, and which part."
         }
       ]
     },
