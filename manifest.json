@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.58.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.0/EbonClearance.zip",
-      "sha256": "d74a625fefb554875ddea78d91d868bfb42b485e264bdf0ad8b4325eb92800b9",
+      "version": "2.58.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.58.1/EbonClearance.zip",
+      "sha256": "65865ab126195bb26bc31c2278a1e5c90531911e98dd5b90affaeb2dbe704921",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "New: a realm-wide \"Stats - Server\" odometer, plus realm-wide update checks. Both opt-in, off by default.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.0",
+      "notes": "UI fix: \"Sell affixes below rank\" slider now labels its max as VI (6), matching the actual range.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.58.1",
       "history": [
+        {
+          "version": "2.58.1",
+          "notes": "UI fix: \"Sell affixes below rank\" slider now labels its max as VI (6), matching the actual range."
+        },
         {
           "version": "2.58.0",
           "notes": "New: a realm-wide \"Stats - Server\" odometer, plus realm-wide update checks. Both opt-in, off by default."
@@ -367,10 +371,6 @@
         {
           "version": "2.55.0",
           "notes": "Frame-hitch diagnostic: find out if a stutter was EbonClearance, and which part."
-        },
-        {
-          "version": "2.54.0",
-          "notes": "Sold History: see exactly what EbonClearance sold or deleted this session, and why."
         }
       ]
     },
