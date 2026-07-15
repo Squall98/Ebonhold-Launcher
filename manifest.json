@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.4",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.4/EbonClearance.zip",
-      "sha256": "3cd653eeb4a3c4ef36ba239f1e653a99c3d571b7f727e6efc43432bc7f88f689",
+      "version": "2.59.5",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.5/EbonClearance.zip",
+      "sha256": "a58c4c671e9434d68d3676276d5db194df8a0c7b6869116ea0d68e3b37e62c85",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Two changes: /ec bugreport gains a Recent Processed section, and Process Bags DE now agrees with the sell path on ranked owned-affix items.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.4",
+      "notes": "Stats: cities dropped from Top Zones, viewer now included in the Stats - Guild panel, duplicate Refresh button removed.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.5",
       "history": [
+        {
+          "version": "2.59.5",
+          "notes": "Stats: cities dropped from Top Zones, viewer now included in the Stats - Guild panel, duplicate Refresh button removed."
+        },
         {
           "version": "2.59.4",
           "notes": "Two changes: /ec bugreport gains a Recent Processed section, and Process Bags DE now agrees with the sell path on ranked owned-affix items."
@@ -367,10 +371,6 @@
         {
           "version": "2.58.2",
           "notes": "Performance patch: less repeated work on loading screens, bag bursts, and idle windows. No behaviour change."
-        },
-        {
-          "version": "2.58.1",
-          "notes": "UI fix: \"Sell affixes below rank\" slider now labels its max as VI (6), matching the actual range."
         }
       ]
     },
