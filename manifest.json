@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.5",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.5/EbonClearance.zip",
-      "sha256": "a58c4c671e9434d68d3676276d5db194df8a0c7b6869116ea0d68e3b37e62c85",
+      "version": "2.59.6",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.6/EbonClearance.zip",
+      "sha256": "55b6b2d8648a5f8895871f10c197c1c629cda2b2a01e59ba34fab44f2e51ada2",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Stats: cities dropped from Top Zones, viewer now included in the Stats - Guild panel, duplicate Refresh button removed.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.5",
+      "notes": "Two fixes: Quickstart Q13 \"(default)\" label + Stats - Guild \"Sold by Quality\" wrap.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.6",
       "history": [
+        {
+          "version": "2.59.6",
+          "notes": "Two fixes: Quickstart Q13 \"(default)\" label + Stats - Guild \"Sold by Quality\" wrap."
+        },
         {
           "version": "2.59.5",
           "notes": "Stats: cities dropped from Top Zones, viewer now included in the Stats - Guild panel, duplicate Refresh button removed."
@@ -367,10 +371,6 @@
         {
           "version": "2.58.3",
           "notes": "Fix: the Scavenger's new \"Beep. Configuration loaded...\" resummon bubble now stays muted. Plus comms hardening from the audit's second batch."
-        },
-        {
-          "version": "2.58.2",
-          "notes": "Performance patch: less repeated work on loading screens, bag bursts, and idle windows. No behaviour change."
         }
       ]
     },
