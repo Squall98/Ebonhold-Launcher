@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.7",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.7/EbonClearance.zip",
-      "sha256": "0b691f73ac9ee6eca8b1121e3958d1946016299c0fcffc3f5a1c2caa26fe9953",
+      "version": "2.59.8",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.8/EbonClearance.zip",
+      "sha256": "b2497b3b02550a7b425e7ce08f3071e1aa89755b655807db31e9862c6fa8239d",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Four new Anvil-verified chance-on-hit pairings + /ec sellinfo now names the proc.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.7",
+      "notes": "Delete Settings + other checkbox labels now scale with the Interface Options window + lock the invariant.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.8",
       "history": [
+        {
+          "version": "2.59.8",
+          "notes": "Delete Settings + other checkbox labels now scale with the Interface Options window + lock the invariant."
+        },
         {
           "version": "2.59.7",
           "notes": "Four new Anvil-verified chance-on-hit pairings + /ec sellinfo now names the proc."
@@ -367,10 +371,6 @@
         {
           "version": "2.59.1",
           "notes": "Two chance-on-hit pairings pinned, five items marked non-extractable, and Stats - Server sharing flipped to ON by default."
-        },
-        {
-          "version": "2.59.0",
-          "notes": "Performance: bag bursts now cost one bag scan instead of up to nine. Plus a Loot Log button on the main page."
         }
       ]
     },
