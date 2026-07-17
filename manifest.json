@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.8",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.8/EbonClearance.zip",
-      "sha256": "b2497b3b02550a7b425e7ce08f3071e1aa89755b655807db31e9862c6fa8239d",
+      "version": "2.59.9",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.9/EbonClearance.zip",
+      "sha256": "a50c8cebb0e0a4e841d49dd417feeb3c2713b7f733028503f52f2ce559cdf464",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Delete Settings + other checkbox labels now scale with the Interface Options window + lock the invariant.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.8",
+      "notes": "Owned-affix auto-sell no longer supersedes an iLvl upgrade.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.9",
       "history": [
+        {
+          "version": "2.59.9",
+          "notes": "Owned-affix auto-sell no longer supersedes an iLvl upgrade."
+        },
         {
           "version": "2.59.8",
           "notes": "Delete Settings + other checkbox labels now scale with the Interface Options window + lock the invariant."
@@ -367,10 +371,6 @@
         {
           "version": "2.59.2",
           "notes": "Two more items marked non-extractable from a fresh captureproc + Anvil verification."
-        },
-        {
-          "version": "2.59.1",
-          "notes": "Two chance-on-hit pairings pinned, five items marked non-extractable, and Stats - Server sharing flipped to ON by default."
         }
       ]
     },
