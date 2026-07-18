@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.11",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.11/EbonClearance.zip",
-      "sha256": "6b3419336e2ec38717e30449f4281598969a85447828e8c49e17baeaf566a523",
+      "version": "2.59.12",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.12/EbonClearance.zip",
+      "sha256": "1518ca1e0f3d8b60597facde8aea095e14c519fa9a1d36a6220426f440225f64",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Locale drift on the realm-wide aggregates: cities AND items now render in the receiver's locale.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.11",
+      "notes": "Item cache warming on payload decode so first-render name resolution catches localized entries.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.12",
       "history": [
+        {
+          "version": "2.59.12",
+          "notes": "Item cache warming on payload decode so first-render name resolution catches localized entries."
+        },
         {
           "version": "2.59.11",
           "notes": "Locale drift on the realm-wide aggregates: cities AND items now render in the receiver's locale."
@@ -367,10 +371,6 @@
         {
           "version": "2.59.5",
           "notes": "Stats: cities dropped from Top Zones, viewer now included in the Stats - Guild panel, duplicate Refresh button removed."
-        },
-        {
-          "version": "2.59.4",
-          "notes": "Two changes: /ec bugreport gains a Recent Processed section, and Process Bags DE now agrees with the sell path on ranked owned-affix items."
         }
       ]
     },
