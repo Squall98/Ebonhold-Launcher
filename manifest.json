@@ -330,16 +330,24 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.59.9",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.9/EbonClearance.zip",
-      "sha256": "a50c8cebb0e0a4e841d49dd417feeb3c2713b7f733028503f52f2ce559cdf464",
+      "version": "2.59.11",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.59.11/EbonClearance.zip",
+      "sha256": "6b3419336e2ec38717e30449f4281598969a85447828e8c49e17baeaf566a523",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Owned-affix auto-sell no longer supersedes an iLvl upgrade.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.9",
+      "notes": "Locale drift on the realm-wide aggregates: cities AND items now render in the receiver's locale.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.59.11",
       "history": [
+        {
+          "version": "2.59.11",
+          "notes": "Locale drift on the realm-wide aggregates: cities AND items now render in the receiver's locale."
+        },
+        {
+          "version": "2.59.10",
+          "notes": "Bug-hunt sweep across the recently-changed surface. One critical trace/vendor divergence + one high-severity affix mirror gap + two medium regressions + a batch of defensive tightening."
+        },
         {
           "version": "2.59.9",
           "notes": "Owned-affix auto-sell no longer supersedes an iLvl upgrade."
@@ -363,14 +371,6 @@
         {
           "version": "2.59.4",
           "notes": "Two changes: /ec bugreport gains a Recent Processed section, and Process Bags DE now agrees with the sell path on ranked owned-affix items."
-        },
-        {
-          "version": "2.59.3",
-          "notes": "Bug fix: Process Bags Lockpick + Auto-Open loop when multiple same-type lockboxes are in bags."
-        },
-        {
-          "version": "2.59.2",
-          "notes": "Two more items marked non-extractable from a fresh captureproc + Anvil verification."
         }
       ]
     },
