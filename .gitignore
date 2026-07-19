@@ -8,6 +8,9 @@ build/
 dist/
 *.manifest
 
+# Build installeur (Inno Setup)
+dist_installer/
+
 # Staging release (assets volumineux, recrees au besoin)
 RELEASE/
 
