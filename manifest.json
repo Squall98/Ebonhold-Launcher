@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.60.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.60.0/EbonClearance.zip",
-      "sha256": "420207a6ffbe522cfe14805ab88ef90dd968b8c7ef25879143a71665070b9626",
+      "version": "2.62.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.62.0/EbonClearance.zip",
+      "sha256": "26bae1cbbbfc5368c4c1cc26ea58136a5888494583c79bcdfa1e33b3fb71bdd9",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Per-rarity chat-announce filter for auto-delete / auto-mark events.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.60.0",
+      "notes": "Pick which skills Process Bags uses.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.62.0",
       "history": [
+        {
+          "version": "2.62.0",
+          "notes": "Pick which skills Process Bags uses."
+        },
         {
           "version": "2.60.0",
           "notes": "Per-rarity chat-announce filter for auto-delete / auto-mark events."
@@ -367,10 +371,6 @@
         {
           "version": "2.59.7",
           "notes": "Four new Anvil-verified chance-on-hit pairings + /ec sellinfo now names the proc."
-        },
-        {
-          "version": "2.59.6",
-          "notes": "Two fixes: Quickstart Q13 \"(default)\" label + Stats - Guild \"Sold by Quality\" wrap."
         }
       ]
     },
