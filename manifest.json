@@ -330,16 +330,24 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.64.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.64.0/EbonClearance.zip",
-      "sha256": "f53dc3b2c2b0ae4af538fc65c86dd58c31a692179e755f58543bbcd83d1ded13",
+      "version": "2.65.1",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.65.1/EbonClearance.zip",
+      "sha256": "56d25f8aad458e4a89702a2309619b660c19d1493e038c60231fdf0bcab8f9f6",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Four new chance-on-hit pairings + trace tip now names the specific safety net + Help/FAQ plain-language pass.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.64.0",
+      "notes": "Rate-limit the Scavenger recovery announce + add a session counter to /ec bugreport.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.65.1",
       "history": [
+        {
+          "version": "2.65.1",
+          "notes": "Rate-limit the Scavenger recovery announce + add a session counter to /ec bugreport."
+        },
+        {
+          "version": "2.65.0",
+          "notes": "Re-summon the Scavenger after loading screens (opt-in, only if the pet was out beforehand)."
+        },
         {
           "version": "2.64.0",
           "notes": "Four new chance-on-hit pairings + trace tip now names the specific safety net + Help/FAQ plain-language pass."
@@ -363,14 +371,6 @@
         {
           "version": "2.59.12",
           "notes": "Item cache warming on payload decode so first-render name resolution catches localized entries."
-        },
-        {
-          "version": "2.59.11",
-          "notes": "Locale drift on the realm-wide aggregates: cities AND items now render in the receiver's locale."
-        },
-        {
-          "version": "2.59.10",
-          "notes": "Bug-hunt sweep across the recently-changed surface. One critical trace/vendor divergence + one high-severity affix mirror gap + two medium regressions + a batch of defensive tightening."
         }
       ]
     },
