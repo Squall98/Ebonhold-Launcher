@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.63.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.63.0/EbonClearance.zip",
-      "sha256": "7ce139ab10176240a4b6ca0e1d1c94809389ab7fdfd63524a12f5012de379071",
+      "version": "2.64.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.64.0/EbonClearance.zip",
+      "sha256": "f53dc3b2c2b0ae4af538fc65c86dd58c31a692179e755f58543bbcd83d1ded13",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Internal cleanup release from the second audit: shared stats-panel widgets and a lazier bag snapshot. Nothing changes in how the addon looks or behaves.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.63.0",
+      "notes": "Four new chance-on-hit pairings + trace tip now names the specific safety net + Help/FAQ plain-language pass.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.64.0",
       "history": [
+        {
+          "version": "2.64.0",
+          "notes": "Four new chance-on-hit pairings + trace tip now names the specific safety net + Help/FAQ plain-language pass."
+        },
         {
           "version": "2.63.0",
           "notes": "Internal cleanup release from the second audit: shared stats-panel widgets and a lazier bag snapshot. Nothing changes in how the addon looks or behaves."
@@ -367,10 +371,6 @@
         {
           "version": "2.59.10",
           "notes": "Bug-hunt sweep across the recently-changed surface. One critical trace/vendor divergence + one high-severity affix mirror gap + two medium regressions + a batch of defensive tightening."
-        },
-        {
-          "version": "2.59.9",
-          "notes": "Owned-affix auto-sell no longer supersedes an iLvl upgrade."
         }
       ]
     },
