@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.65.1",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.65.1/EbonClearance.zip",
-      "sha256": "56d25f8aad458e4a89702a2309619b660c19d1493e038c60231fdf0bcab8f9f6",
+      "version": "2.66.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.66.0/EbonClearance.zip",
+      "sha256": "9da7ecd40cf210fab0e37cf5e4ec0fc7a2f9e70019ca2f0232bfcd46a41368a1",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Rate-limit the Scavenger recovery announce + add a session counter to /ec bugreport.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.65.1",
+      "notes": "Keep BoE affixes below rank floor for auction + BoE-toggle rename pass + shorter labels + panel reorder + red \"PE not detected\" warning + specific BoE tooltip labels.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.66.0",
       "history": [
+        {
+          "version": "2.66.0",
+          "notes": "Keep BoE affixes below rank floor for auction + BoE-toggle rename pass + shorter labels + panel reorder + red \"PE not detected\" warning + specific BoE tooltip labels."
+        },
         {
           "version": "2.65.1",
           "notes": "Rate-limit the Scavenger recovery announce + add a session counter to /ec bugreport."
@@ -367,10 +371,6 @@
         {
           "version": "2.60.0",
           "notes": "Per-rarity chat-announce filter for auto-delete / auto-mark events."
-        },
-        {
-          "version": "2.59.12",
-          "notes": "Item cache warming on payload decode so first-render name resolution catches localized entries."
         }
       ]
     },
