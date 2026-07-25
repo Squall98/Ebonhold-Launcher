@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.66.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.66.0/EbonClearance.zip",
-      "sha256": "9da7ecd40cf210fab0e37cf5e4ec0fc7a2f9e70019ca2f0232bfcd46a41368a1",
+      "version": "2.67.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.67.0/EbonClearance.zip",
+      "sha256": "0f04152db21f2ddccd0096f1352e92c7f370152542e817f7bc4739b46c7ebf70",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Keep BoE affixes below rank floor for auction + BoE-toggle rename pass + shorter labels + panel reorder + red \"PE not detected\" warning + specific BoE tooltip labels.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.66.0",
+      "notes": "Stats read like a spreadsheet + the available update stays on screen + quality names replace colour words + eleven new chance-on-hit pairings.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.67.0",
       "history": [
+        {
+          "version": "2.67.0",
+          "notes": "Stats read like a spreadsheet + the available update stays on screen + quality names replace colour words + eleven new chance-on-hit pairings."
+        },
         {
           "version": "2.66.0",
           "notes": "Keep BoE affixes below rank floor for auction + BoE-toggle rename pass + shorter labels + panel reorder + red \"PE not detected\" warning + specific BoE tooltip labels."
@@ -367,10 +371,6 @@
         {
           "version": "2.62.0",
           "notes": "Pick which skills Process Bags uses."
-        },
-        {
-          "version": "2.60.0",
-          "notes": "Per-rarity chat-announce filter for auto-delete / auto-mark events."
         }
       ]
     },
