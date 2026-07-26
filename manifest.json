@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.67.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.67.0/EbonClearance.zip",
-      "sha256": "0f04152db21f2ddccd0096f1352e92c7f370152542e817f7bc4739b46c7ebf70",
+      "version": "2.68.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.68.0/EbonClearance.zip",
+      "sha256": "b5eb34d8d82b472795a28b76b17fbe6e628d9320358f6e0a9adc75ddb85ea2cd",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Stats read like a spreadsheet + the available update stays on screen + quality names replace colour words + eleven new chance-on-hit pairings.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.67.0",
+      "notes": "The Loot Log no longer slows the game down + rarity and search filters on both pop-out windows.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.68.0",
       "history": [
+        {
+          "version": "2.68.0",
+          "notes": "The Loot Log no longer slows the game down + rarity and search filters on both pop-out windows."
+        },
         {
           "version": "2.67.0",
           "notes": "Stats read like a spreadsheet + the available update stays on screen + quality names replace colour words + eleven new chance-on-hit pairings."
@@ -367,10 +371,6 @@
         {
           "version": "2.62.1",
           "notes": "Performance and polish patch from a second full-addon audit. Plus: the Process Bags selection now stays put after processing an item."
-        },
-        {
-          "version": "2.62.0",
-          "notes": "Pick which skills Process Bags uses."
         }
       ]
     },
