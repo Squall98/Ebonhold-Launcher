@@ -232,16 +232,20 @@
       "name": "AutoCallboard",
       "category": "quetes",
       "description": "Recherche et partage de quêtes automatique au callboard",
-      "version": "1.0.9",
-      "download_url": "https://github.com/disarrayed/AutoCallboard/releases/download/v1.0.9/AutoCallboard_v1.0.9.zip",
-      "sha256": "5d381be12dea629c3cdcefb306ccd40e7acbac5eb6fbe6c4d016b29f35630a71",
+      "version": "1.0.10",
+      "download_url": "https://github.com/disarrayed/AutoCallboard/releases/download/v1.0.10/AutoCallboard_v1.0.10.zip",
+      "sha256": "797515b4806acf260d4260ee2d74ff78e61822979bd56f1f0805bc4a9cfda599",
       "install_target": "addons",
       "extract_root": "AutoCallboard",
       "icon": "ti-clipboard-list",
       "accent": "purple",
-      "notes": "AutoCallboard v1.0.9",
-      "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.9",
+      "notes": "Added a persistent Minimap Button option and /acb minimap on|off.",
+      "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.10",
       "history": [
+        {
+          "version": "1.0.10",
+          "notes": "Added a persistent Minimap Button option and /acb minimap on|off."
+        },
         {
           "version": "1.0.9",
           "notes": "AutoCallboard v1.0.9"
@@ -269,10 +273,6 @@
         {
           "version": "1.0.3",
           "notes": "AutoCallboard v1.0.3"
-        },
-        {
-          "version": "1.0.2",
-          "notes": "AutoCallboard v1.0.2"
         }
       ]
     },
