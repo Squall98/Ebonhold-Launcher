@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.68.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.68.0/EbonClearance.zip",
-      "sha256": "b5eb34d8d82b472795a28b76b17fbe6e628d9320358f6e0a9adc75ddb85ea2cd",
+      "version": "2.73.3",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.73.3/EbonClearance.zip",
+      "sha256": "e073481a38c3e54d2db409878955e8551f81bcbf9214e3ebe9b3ba955fcc34d0",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "The Loot Log no longer slows the game down + rarity and search filters on both pop-out windows.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.68.0",
+      "notes": "This release rolls up everything since v2.68.0 - twelve versions of work. Full per-version detail is in [CHANGELOG.md](https://github.com/powerfulqa/EbonClearance/blob/master/CHANGELOG.md).",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.73.3",
       "history": [
+        {
+          "version": "2.73.3",
+          "notes": "This release rolls up everything since v2.68.0 - twelve versions of work. Full per-version detail is in [CHANGELOG.md](https://github.com/powerfulqa/EbonClearance/blob/master/CHANGELOG.md)."
+        },
         {
           "version": "2.68.0",
           "notes": "The Loot Log no longer slows the game down + rarity and search filters on both pop-out windows."
@@ -367,10 +371,6 @@
         {
           "version": "2.63.0",
           "notes": "Internal cleanup release from the second audit: shared stats-panel widgets and a lazier bag snapshot. Nothing changes in how the addon looks or behaves."
-        },
-        {
-          "version": "2.62.1",
-          "notes": "Performance and polish patch from a second full-addon audit. Plus: the Process Bags selection now stays put after processing an item."
         }
       ]
     },
