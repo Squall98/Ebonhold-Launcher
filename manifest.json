@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.74.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.74.0/EbonClearance.zip",
-      "sha256": "3bb9cd8f7bbfc8e9bdc598b848183a9ec50af83dfa5a4c4a2f75f921bbf8e028",
+      "version": "2.75.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.75.0/EbonClearance.zip",
+      "sha256": "e33dea7b16247d3a3e633b4742abc552232de10f55ab9cd64c9d54900eca5c59",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "Affix settings now hide themselves on a realm that has no affix system.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.74.0",
+      "notes": "A full source audit found and fixed a way to lose an item, plus four more correctness bugs.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.75.0",
       "history": [
+        {
+          "version": "2.75.0",
+          "notes": "A full source audit found and fixed a way to lose an item, plus four more correctness bugs."
+        },
         {
           "version": "2.74.0",
           "notes": "Affix settings now hide themselves on a realm that has no affix system."
@@ -367,10 +371,6 @@
         {
           "version": "2.65.0",
           "notes": "Re-summon the Scavenger after loading screens (opt-in, only if the pet was out beforehand)."
-        },
-        {
-          "version": "2.64.0",
-          "notes": "Four new chance-on-hit pairings + trace tip now names the specific safety net + Help/FAQ plain-language pass."
         }
       ]
     },
