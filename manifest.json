@@ -330,16 +330,20 @@
       "name": "EbonClearance",
       "category": "sacs",
       "description": "Nettoyez vos sacs à la vitesse de l'éclaire",
-      "version": "2.75.0",
-      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.75.0/EbonClearance.zip",
-      "sha256": "e33dea7b16247d3a3e633b4742abc552232de10f55ab9cd64c9d54900eca5c59",
+      "version": "2.76.0",
+      "download_url": "https://github.com/powerfulqa/EbonClearance/releases/download/v2.76.0/EbonClearance.zip",
+      "sha256": "2c2a88f1c4e7df09324544263811f6ecf4410e6511546d9398d0e93e38e9c712",
       "install_target": "addons",
       "extract_root": "EbonClearance",
       "icon": "ti-trash",
       "accent": "coral",
-      "notes": "A full source audit found and fixed a way to lose an item, plus four more correctness bugs.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.75.0",
+      "notes": "/ec spike now proves whose stutter it was.",
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.76.0",
       "history": [
+        {
+          "version": "2.76.0",
+          "notes": "/ec spike now proves whose stutter it was."
+        },
         {
           "version": "2.75.0",
           "notes": "A full source audit found and fixed a way to lose an item, plus four more correctness bugs."
@@ -367,10 +371,6 @@
         {
           "version": "2.65.1",
           "notes": "Rate-limit the Scavenger recovery announce + add a session counter to /ec bugreport."
-        },
-        {
-          "version": "2.65.0",
-          "notes": "Re-summon the Scavenger after loading screens (opt-in, only if the pet was out beforehand)."
         }
       ]
     },
