@@ -25,6 +25,7 @@ Usage :
 """
 import argparse
 import hashlib
+import http.client
 import io
 import json
 import os
@@ -32,6 +33,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import tomllib
 import urllib.error
 import urllib.request
@@ -73,6 +75,26 @@ def gh_token():
 _TOKEN = None
 
 
+def _retry(fn, tries=4, base_delay=1.5):
+    """Reessaie fn() sur alea reseau (GitHub ferme parfois la connexion en plein
+    telechargement : 'Remote end closed connection without response'). Ne reessaie
+    PAS sur une vraie erreur HTTP (404 pas de release, 403, etc.)."""
+    delay = base_delay
+    for attempt in range(1, tries + 1):
+        try:
+            return fn()
+        except urllib.error.HTTPError:
+            raise  # erreur HTTP explicite : pas un alea reseau, inutile de reessayer
+        except (urllib.error.URLError, http.client.HTTPException,
+                ConnectionError, TimeoutError) as e:
+            if attempt >= tries:
+                raise
+            print("    reseau (%s) — nouvel essai %d/%d dans %.0fs..." % (
+                type(e).__name__, attempt + 1, tries, delay))
+            time.sleep(delay)
+            delay *= 2
+
+
 def api_get(path):
     global _TOKEN
     if _TOKEN is None:
@@ -81,18 +103,23 @@ def api_get(path):
     headers["Accept"] = "application/vnd.github+json"
     if _TOKEN:
         headers["Authorization"] = "Bearer " + _TOKEN
-    req = urllib.request.Request(API + path, headers=headers)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)
+
+    def once():
+        req = urllib.request.Request(API + path, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.load(r)
+    return _retry(once)
 
 
 def download(url, dest):
     # Pas d'Authorization ici : browser_download_url redirige vers une URL signee,
     # renvoyer le header casserait certains telechargements.
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=120) as r, open(dest, "wb") as f:
-        for chunk in iter(lambda: r.read(1 << 16), b""):
-            f.write(chunk)
+    def once():
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=120) as r, open(dest, "wb") as f:
+            for chunk in iter(lambda: r.read(1 << 16), b""):
+                f.write(chunk)
+    return _retry(once)
 
 
 # --------------------------------------------------------------------------- #
