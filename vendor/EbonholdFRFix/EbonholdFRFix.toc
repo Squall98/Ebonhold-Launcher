@@ -2,4 +2,5 @@
 ## Title: Ebonhold FR Fix
 ## Notes: Reactive les interfaces custom (forge / call board) quand le client est en francais
 ## Dependencies: ProjectEbonhold
+EbonholdFRCompat.lua
 EbonholdFRFix.lua

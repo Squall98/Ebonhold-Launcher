@@ -163,6 +163,76 @@ def _group_of(dbc_name):
     return "spells" if dbc_name.lower().endswith("spell.dbc") else "other"
 
 
+_PROF_NAMES = {
+    "PROFESSION_FIRST_AID": "Secourisme", "PROFESSION_COOKING": "Cuisine",
+    "PROFESSION_FISHING": "Pêche", "TRADESKILL_ALCHEMY": "Alchimie",
+    "TRADESKILL_BLACKSMITHING": "Forge", "TRADESKILL_ENCHANTING": "Enchantement",
+    "TRADESKILL_ENGINEERING": "Ingénierie", "TRADESKILL_HERBALISM": "Herboristerie",
+    "TRADESKILL_INSCRIPTION": "Calligraphie", "TRADESKILL_JEWELCRAFTING": "Joaillerie",
+    "TRADESKILL_LEATHERWORKING": "Travail du cuir", "TRADESKILL_MINING": "Minage",
+    "TRADESKILL_SKINNING": "Dépeçage", "TRADESKILL_TAILORING": "Couture",
+}
+_SBF_GUARDS = [
+    '_frame.button1:SetAttribute("spell", v.downSpell)',
+    '_frame.button2:SetAttribute("spell", v.upSpell)',
+    '_frame.button1:SetAttribute("spell", c.downSpell)',
+    '_frame.button2:SetAttribute("spell", c["Up"])',
+]
+_TDB_REPL = {
+    'computedDesc = "Increases your Stamina by %s."':
+        'computedDesc = "Augmente votre Endurance de %s."',
+    'computedDesc = "Increases your Strength, Agility, Intellect or Spirit by %s, whichever is highest."':
+        'computedDesc = "Augmente votre Force, Agilite, Intelligence ou Esprit de %s (la plus elevee)."',
+    'computedDesc = "Increases your attack power by %s or your spell power by %s, whichever is higher."':
+        'computedDesc = "Augmente votre puissance d\'attaque de %s ou des sorts de %s (la plus elevee)."',
+    'name = "Default Soul Tree"': 'name = "Arbre d\'ames par defaut"',
+    'description = "Universal soul tree for all classes"':
+        'description = "Arbre d\'ames universel pour toutes les classes"',
+}
+_ROOT_PATCHES = ["patch-D.mpq", "patch-M.MPQ", "patch-8.MPQ", "patch-4.MPQ", "patch.MPQ"]
+
+
+def _read_from_patches(mpyq, data_dir, inner, patches):
+    for rel in patches:
+        p = os.path.join(data_dir, rel)
+        if not os.path.exists(p):
+            continue
+        try:
+            d = mpyq.MPQArchive(p, listfile=False).read_file(inner)
+            if d:
+                return d
+        except Exception:
+            pass
+    return None
+
+
+def _add_addon_fixes(mpyq, data_dir, patchz, log):
+    SBF = r"Interface\FrameXML\SpellBookFrame.lua"
+    d = _read_from_patches(mpyq, data_dir, SBF, _ROOT_PATCHES)
+    if d:
+        body = d.decode("utf-8", "replace")
+        prefix = "-- [EbonholdFR] noms de metiers FR + anti-taint\n"
+        for c, name in _PROF_NAMES.items():
+            prefix += 'if not %s then %s = "%s" end\n' % (c, c, name)
+        body = prefix + "\n" + body
+        for g in _SBF_GUARDS:
+            if body.count(g) == 1:
+                body = body.replace(g, "if issecure() then " + g + " end")
+        patchz[SBF] = body.encode("utf-8")
+        log("Fix metiers (SpellBookFrame) ajoute a patch-Z.")
+    TDB = r"Interface\AddOns\ProjectEbonhold\modules\skillTree\TalentDatabase.lua"
+    d = _read_from_patches(mpyq, data_dir, TDB, ["patch-4.MPQ", "patch-M.MPQ", "patch-D.mpq"])
+    if d:
+        body = d.decode("utf-8", "replace")
+        n = 0
+        for en, fr in _TDB_REPL.items():
+            if body.count(en) == 1:
+                body = body.replace(en, fr); n += 1
+        if n:
+            patchz[TDB] = body.encode("utf-8")
+            log("Fix skill tree (TalentDatabase) ajoute a patch-Z.")
+
+
 def _build_patchz(data_dir, base_fr, spells_fr, other_fr, log):
     mpyq, mpqwrite, dbc_localize = _deps()
     fr_col = 2 if base_fr else 0
@@ -212,6 +282,11 @@ def _build_patchz(data_dir, base_fr, spells_fr, other_fr, log):
                 merged = None
             if merged:
                 patchz[n] = merged
+    if base_fr:                       # fixes interface custom (metiers, skill tree)
+        try:
+            _add_addon_fixes(mpyq, data_dir, patchz, log)
+        except Exception as e:
+            log("Fixes interface non ajoutes (%s)." % e)
     if patchz:
         mpqwrite.create_mpq(os.path.join(data_dir, "patch-Z.MPQ"), patchz)
         log("patch-Z.MPQ ecrit (%d fichiers)." % len(patchz))
