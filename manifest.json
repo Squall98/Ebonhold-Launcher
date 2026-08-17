@@ -1,7 +1,7 @@
 {
-  "launcher_version": "1.0.8",
-  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.8/EbonholdLauncher.zip",
-  "launcher_sha256": "49323f1deeb066f00917e5ab4a6b12b6c81fd7e86503b19881f9024b2ba0442e",
+  "launcher_version": "1.0.9",
+  "launcher_download_url": "https://github.com/Squall98/Ebonhold-Launcher/releases/download/v1.0.9/EbonholdLauncher.zip",
+  "launcher_sha256": "9c746dd7b99b0213cc36828b0d870d12c1ceda91054a4d16fc1fa39593267eda",
   "_note": "Auto-update ACTIF depuis la v1.0.3 (format dossier). Les clients en v1.0.2+ recoivent la maj automatiquement. Pour publier une nouvelle version : rebuild l'exe, recalculer le sha du zip, creer la release GitHub, puis mettre a jour launcher_version + launcher_download_url + launcher_sha256 ici.",
   "_doc": "Partie GLOBALE du catalogue, editee a la main (par l'admin uniquement). Les addons sont dans catalog/*.toml. manifest.json est GENERE a partir de ces deux sources par tools/build_manifest.py.",
   "fr_config": {
@@ -81,7 +81,25 @@
       "icon": "ti-language",
       "accent": "purple",
       "notes": "Merci pour vos retours ! Cette mise à jour corrige plusieurs textes mal traduits ou mal affichés.",
-      "changelog_url": "https://github.com/Squall98/EbonholdFR/releases/tag/v3.1"
+      "changelog_url": "https://github.com/Squall98/EbonholdFR/releases/tag/v3.1",
+      "history": [
+        {
+          "version": "3.1",
+          "notes": "Merci pour vos retours ! Cette mise à jour corrige plusieurs textes mal traduits ou mal affichés."
+        },
+        {
+          "version": "3.0",
+          "notes": "Clic droit : bascule instantanément entre français et texte d'origine en anglais (l'icône se grise en mode anglais)."
+        },
+        {
+          "version": "2.0",
+          "notes": "Grosse mise à jour : la traduction couvre maintenant bien plus que les Echoes et le Skill Tree."
+        },
+        {
+          "version": "1.0",
+          "notes": "Traduction française des descriptions de Project Ebonhold. Les noms restent en anglais (volontaire) ; seules les descriptions passent en français."
+        }
+      ]
     },
     {
       "id": "checkpoints",
@@ -97,7 +115,21 @@
       "icon": "ti-map-pin",
       "accent": "teal",
       "notes": "Mode reduit : la fenetre ne se ferme plus apres une teleportation et se rouvre automatiquement apres l'ecran de chargement. Tu peux enchainer les TP sans rouvrir la mini-barre de favoris.",
-      "changelog_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/tag/v1.2"
+      "changelog_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/tag/v1.2",
+      "history": [
+        {
+          "version": "1.2",
+          "notes": "Mode reduit : la fenetre ne se ferme plus apres une teleportation et se rouvre automatiquement apres l'ecran de chargement. Tu peux enchainer les TP sans rouvrir la mini-barre de favoris."
+        },
+        {
+          "version": "1.1",
+          "notes": "Bilingue FR / EN : interface ET noms (villes, zones, donjons, raids) traduits — Hurlevent, Forgefer, Gouffre de Ragefeu... Bouton de bascule. Noms FR extraits du client officiel."
+        },
+        {
+          "version": "1.0",
+          "notes": "Une fenetre qui regroupe tous tes checkpoints debloques : recherche, onglets par continent, sections Points de vol / Donjons / Raids. Un clic = teleportation."
+        }
+      ]
     },
     {
       "id": "ackisrecipelist",
@@ -113,7 +145,13 @@
       "icon": "ti-notebook",
       "accent": "amber",
       "notes": "Addon de suivi des recettes de métiers (WoW 3.3.5a). Installation via le launcher Ebonhold (Catalogue → Installer), ou manuellement en extrayant le dossier AckisRecipeList dans Interface/AddOns.",
-      "changelog_url": "https://github.com/Squall98/AckisRecipeList/releases/tag/v2.01"
+      "changelog_url": "https://github.com/Squall98/AckisRecipeList/releases/tag/v2.01",
+      "history": [
+        {
+          "version": "2.01",
+          "notes": "Addon de suivi des recettes de métiers (WoW 3.3.5a). Installation via le launcher Ebonhold (Catalogue → Installer), ou manuellement en extrayant le dossier AckisRecipeList dans Interface/AddOns."
+        }
+      ]
     },
     {
       "id": "gathermate",
@@ -155,7 +193,17 @@
       "icon": "ti-hammer",
       "accent": "blue",
       "notes": "Correctifs de stabilité 3.3.5a + deux nouvelles fonctions, après tests en jeu sur Ebonhold.",
-      "changelog_url": "https://github.com/Squall98/MetiersPlus/releases/tag/v1.1"
+      "changelog_url": "https://github.com/Squall98/MetiersPlus/releases/tag/v1.1",
+      "history": [
+        {
+          "version": "1.1",
+          "notes": "Correctifs de stabilité 3.3.5a + deux nouvelles fonctions, après tests en jeu sur Ebonhold."
+        },
+        {
+          "version": "1.0",
+          "notes": "Première version du portage d'Advanced Trade Skill Window 2 vers le client 3.3.5a, pour Ebonhold — Métiers+."
+        }
+      ]
     },
     {
       "id": "gatherhud",
@@ -171,7 +219,13 @@
       "icon": "ti-3d-cube-sphere",
       "accent": "teal",
       "notes": "Version Ebonhold de GatherHud (HUD de recolte en vue 3D, WoW 3.3.5a).",
-      "changelog_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/tag/v1.1.6-fr1"
+      "changelog_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/tag/v1.1.6-fr1",
+      "history": [
+        {
+          "version": "1.1.6-fr1",
+          "notes": "Version Ebonhold de GatherHud (HUD de recolte en vue 3D, WoW 3.3.5a)."
+        }
+      ]
     },
     {
       "id": "auto-callboard",
@@ -186,7 +240,41 @@
       "icon": "ti-clipboard-list",
       "accent": "purple",
       "notes": "Added a persistent Minimap Button option and /acb minimap on|off.",
-      "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.10"
+      "changelog_url": "https://github.com/disarrayed/AutoCallboard/releases/tag/v1.0.10",
+      "history": [
+        {
+          "version": "1.0.10",
+          "notes": "Added a persistent Minimap Button option and /acb minimap on|off."
+        },
+        {
+          "version": "1.0.9",
+          "notes": "AutoCallboard v1.0.9"
+        },
+        {
+          "version": "1.0.8",
+          "notes": "AutoCallboard v1.0.8"
+        },
+        {
+          "version": "1.0.7",
+          "notes": "AutoCallboard v1.0.7"
+        },
+        {
+          "version": "1.0.6",
+          "notes": "AutoCallboard v1.0.6"
+        },
+        {
+          "version": "1.0.5",
+          "notes": "AutoCallboard v1.0.5"
+        },
+        {
+          "version": "1.0.4",
+          "notes": "AutoCallboard v1.0.4"
+        },
+        {
+          "version": "1.0.3",
+          "notes": "AutoCallboard v1.0.3"
+        }
+      ]
     },
     {
       "id": "ebon-builds",
@@ -201,7 +289,41 @@
       "icon": "ti-wand",
       "accent": "blue",
       "notes": "Feature/sync by @vook in https://github.com/vook/EbonBuilds/pull/17",
-      "changelog_url": "https://github.com/vook/EbonBuilds/releases/tag/v1.3.6"
+      "changelog_url": "https://github.com/vook/EbonBuilds/releases/tag/v1.3.6",
+      "history": [
+        {
+          "version": "1.3.6",
+          "notes": "Feature/sync by @vook in https://github.com/vook/EbonBuilds/pull/17"
+        },
+        {
+          "version": "1.3.5",
+          "notes": "fix: strip hardcore prefix and colour codes from sync channel messages by @vook in https://github.com/vook/EbonBuilds/pull/16"
+        },
+        {
+          "version": "1.3.4",
+          "notes": "fix: replace GetChannelName with GetChannelList for sync channel disc… by @vook in https://github.com/vook/EbonBuilds/pull/15"
+        },
+        {
+          "version": "1.3.3",
+          "notes": "revert: remove auto-disable automation at max level by @vook in https://github.com/vook/EbonBuilds/pull/14"
+        },
+        {
+          "version": "1.3.2",
+          "notes": "Feature/sync by @vook in https://github.com/vook/EbonBuilds/pull/13"
+        },
+        {
+          "version": "1.3.0",
+          "notes": "feat: add reroll guard to prevent rerolling when a single echo scores… by @vook in https://github.com/vook/EbonBuilds/pull/11"
+        },
+        {
+          "version": "1.2.0",
+          "notes": "Feature/sync by @vook in https://github.com/vook/EbonBuilds/pull/10"
+        },
+        {
+          "version": "1.1.5",
+          "notes": "fix: increase automation tab content height so freeze penalty slider … by @vook in https://github.com/vook/EbonBuilds/pull/9"
+        }
+      ]
     },
     {
       "id": "ebon-clearance",
@@ -216,7 +338,41 @@
       "icon": "ti-trash",
       "accent": "coral",
       "notes": "/ec spike now proves whose stutter it was.",
-      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.76.0"
+      "changelog_url": "https://github.com/powerfulqa/EbonClearance/releases/tag/v2.76.0",
+      "history": [
+        {
+          "version": "2.76.0",
+          "notes": "/ec spike now proves whose stutter it was."
+        },
+        {
+          "version": "2.75.0",
+          "notes": "A full source audit found and fixed a way to lose an item, plus four more correctness bugs."
+        },
+        {
+          "version": "2.74.0",
+          "notes": "Affix settings now hide themselves on a realm that has no affix system."
+        },
+        {
+          "version": "2.73.3",
+          "notes": "This release rolls up everything since v2.68.0 - twelve versions of work. Full per-version detail is in [CHANGELOG.md](https://github.com/powerfulqa/EbonClearance/blob/master/CHANGELOG.md)."
+        },
+        {
+          "version": "2.68.0",
+          "notes": "The Loot Log no longer slows the game down + rarity and search filters on both pop-out windows."
+        },
+        {
+          "version": "2.67.0",
+          "notes": "Stats read like a spreadsheet + the available update stays on screen + quality names replace colour words + eleven new chance-on-hit pairings."
+        },
+        {
+          "version": "2.66.0",
+          "notes": "Keep BoE affixes below rank floor for auction + BoE-toggle rename pass + shorter labels + panel reorder + red \"PE not detected\" warning + specific BoE tooltip labels."
+        },
+        {
+          "version": "2.65.1",
+          "notes": "Rate-limit the Scavenger recovery announce + add a session counter to /ec bugreport."
+        }
+      ]
     },
     {
       "id": "questie",
@@ -231,7 +387,41 @@
       "icon": "ti-route",
       "accent": "amber",
       "notes": "Maintenance + compatibility release. This re-cut backs the v1.6.4 tag with the fully consolidated main (all post-1.6.4 fixes merged) and serves as a stable restore point. Measured performance optimiza",
-      "changelog_url": "https://github.com/Xurkon/Questie-X/releases/tag/v1.6.4"
+      "changelog_url": "https://github.com/Xurkon/Questie-X/releases/tag/v1.6.4",
+      "history": [
+        {
+          "version": "1.6.4",
+          "notes": "Maintenance + compatibility release. This re-cut backs the v1.6.4 tag with the fully consolidated main (all post-1.6.4 fixes merged) and serves as a stable restore point. Measured performance optimiza"
+        },
+        {
+          "version": "1.6.3",
+          "notes": "Questie-X v1.6.3 is the release that lands the arrow redesign, the minimap pin drift fix, and the Sunstrider / tooltip stability pass."
+        },
+        {
+          "version": "1.6.2",
+          "notes": "[MapIconTooltip] _GetLevelString Guard — Resolved 'attempt to concatenate local minLevel (a nil value)' crash in MapIconTooltip.lua:494. Creature names like 'Uneasy Citizen' existed in creatureLevels "
+        },
+        {
+          "version": "1.6.1",
+          "notes": "[Fix — Map Icon Completion] Resolved a bug where quest objective icons (map pins and minimap markers) persisted on the world map and minimap after objectives were fulfilled, only disappearing after sp"
+        },
+        {
+          "version": "1.6.0",
+          "notes": "This release resolves a critical issue with search result rendering and database integrity, ensuring accurate map pins for high-density objects like \"Blood of Heroes\"."
+        },
+        {
+          "version": "1.5.8",
+          "notes": "Arrow Font Options: Added font family and size settings for the arrow:"
+        },
+        {
+          "version": "1.5.7",
+          "notes": "Arrow Font Options: Added font family and size settings for the arrow:"
+        },
+        {
+          "version": "1.5.6",
+          "notes": "Added new Arrow tab in Questie options with the following settings:"
+        }
+      ]
     },
     {
       "id": "transmog-wardrob",
@@ -246,7 +436,13 @@
       "icon": "ti-shirt",
       "accent": "pink",
       "notes": "\"Hide applied items\" checkbox no longer overlaps the",
-      "changelog_url": "https://github.com/Veronica-Vasilieva/Wardrobe/releases/tag/v1.29"
+      "changelog_url": "https://github.com/Veronica-Vasilieva/Wardrobe/releases/tag/v1.29",
+      "history": [
+        {
+          "version": "1.29",
+          "notes": "\"Hide applied items\" checkbox no longer overlaps the"
+        }
+      ]
     }
   ],
   "_generated": true,
