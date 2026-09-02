@@ -116,14 +116,32 @@ python tools/build_manifest.py --only <id> --strict   # valide une seule fiche
 
 ```bash
 python -m PyInstaller build.spec --noconfirm
-# -> dist/EbonholdLauncher.exe
+# -> dist/EbonholdLauncher/EbonholdLauncher.exe (+ _internal/)
 ```
+
+## Compiler l'installeur (Inno Setup)
+
+Nécessite [Inno Setup 6](https://jrsoftware.org/isdl.php) installé (`winget install JRSoftware.InnoSetup`).
+`ISCC.exe` n'est pas ajouté au PATH par défaut : l'appeler par son chemin complet
+(`%LOCALAPPDATA%\Programs\Inno Setup 6\ISCC.exe` ou `C:\Program Files (x86)\Inno Setup 6\ISCC.exe`
+selon le mode d'installation), ou l'ajouter au PATH.
+
+```bash
+ISCC.exe installer.iss /DAppVersion=1.0.8
+# -> dist_installer/EbonholdLauncherSetup.exe
+```
+
+Installation par utilisateur (pas d'admin/UAC), raccourci Menu Démarrer/Bureau, désinstalleur
+listé dans « Applications installées ».
 
 ## Publier une mise à jour
 
 - **Nouveau mod** : `python add_mod.py …` puis commit/push de `manifest.json` + uploader l'asset sur une release.
 - **Nouvelle version du launcher** : bump `APP_VERSION` (`core/version.py`) et `launcher_version` du manifeste,
-  recompiler, recalculer `launcher_sha256`, créer une release → les joueurs reçoivent l'auto-update.
+  recompiler l'exe et l'installeur, recalculer `launcher_sha256` à partir du **zip** de
+  `dist/EbonholdLauncher/` (c'est ce zip que `core/selfupdate.py` télécharge pour l'auto-update).
+  Créer une release GitHub avec deux assets : `EbonholdLauncherSetup.exe` (téléchargement manuel)
+  et `EbonholdLauncher.zip` (auto-update).
 
 ## Traduction française (intégrée au launcher)
 
