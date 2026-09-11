@@ -114,7 +114,10 @@ def merge(custom_buf, base_buf, tr=None, fr_col=2):
             if fr_col == 0:
                 rec[b0+0] = intern(frbytes)   # français dans la colonne enUS (client anglais, sans pack frFR)
             else:
-                rec[b0+0] = intern(en)
+                # français dans enUS ET frFR : robuste quel que soit le locale reel du client
+                # (un client regle en frFR mais SANS pack retombe en enUS a l'execution ->
+                #  il lit la colonne enUS ; on y met donc aussi le francais).
+                rec[b0+0] = intern(frbytes)
                 rec[b0+fr_col] = intern(frbytes)
         if src == "tr": st_tr += 1
         elif src == "base": st_base += 1
