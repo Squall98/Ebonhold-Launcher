@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.10 — traduction FR à jour (nouvelle MAJ serveur)
+- Traduction FR embarquée mise à jour : **+205 noms & +296 descriptions** custom traduits
+  (echoes, arbre de compétences, affixes de gravure) → **2060 noms + 2718 descriptions**.
+- Après auto-mise à jour du launcher, il suffit de **réappliquer le patch FR** (Réglages →
+  Traduction) pour reconstruire `patch-Z` avec les nouvelles traductions.
+
 ## v1.0.8 — pack FR téléchargé depuis GitHub (même hors-ligne)
 - Le **manifeste embarqué** (celui utilisé quand le launcher ne joint pas le catalogue
   en ligne, mode « Catalogue local ») pointait encore vers l'ancien lien **Google Drive**
