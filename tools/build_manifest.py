@@ -132,7 +132,22 @@ def download(url, dest):
 # Petites transformations
 # --------------------------------------------------------------------------- #
 def strip_v(tag):
-    return str(tag or "").strip().lstrip("vV").strip() or str(tag)
+    v = str(tag or "").strip().lstrip("vV").strip() or str(tag)
+    # Le launcher insere la version dans sa page : rien d'autre que des caracteres de version.
+    return re.sub(r"[^0-9A-Za-z._+-]", "", v) or "0"
+
+
+def safe_text(s):
+    """Texte affiche par le launcher : sans balise ni chevron (une release tierce ne doit
+    jamais pouvoir injecter du HTML dans la page du launcher)."""
+    s = re.sub(r"<[^>]*>", "", str(s or ""))
+    return s.replace("<", "").replace(">", "")
+
+
+ICON_RE = re.compile(r"^ti-[a-z0-9-]+$")
+ACCENTS = {"purple", "teal", "coral", "blue", "amber", "pink", "green"}
+ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+ROOT_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
 
 
 def first_line(body, fallback=""):
@@ -146,14 +161,15 @@ def first_line(body, fallback=""):
         s = re.sub(r"^[-*+]\s+", "", s)        # puce de liste
         s = s.replace("**", "").replace("`", "")  # gras / code inline
         s = re.sub(r"\s+", " ", s).strip()
+        s = safe_text(s).strip()
         if s:
             return s[:200]
     # corps fait uniquement de titres -> prend le premier titre nettoye
     for raw in body.replace("\r", "").split("\n"):
-        s = raw.strip().lstrip("#").strip()
+        s = safe_text(raw.strip().lstrip("#")).strip()
         if s:
             return s[:200]
-    return fallback
+    return safe_text(fallback)
 
 
 def sha256_file(path):
@@ -206,6 +222,11 @@ def build_product(fiche):
     for k in fiche:
         if k not in KNOWN_KEYS and not k.startswith("_"):
             print("  ! champ inconnu ignore: %s" % k)
+    if not ID_RE.match(str(fiche["id"])):
+        raise ValueError("id invalide (minuscules, chiffres, tirets) : %r" % fiche["id"])
+    for r in ([fiche["extract_root"]] if fiche.get("extract_root") else []) + list(fiche.get("extract_roots") or []):
+        if not ROOT_RE.match(str(r)):
+            raise ValueError("dossier racine invalide : %r" % r)
 
     latest = api_get("/repos/%s/releases/latest" % repo)
     asset = pick_asset(latest, fiche)
@@ -220,12 +241,12 @@ def build_product(fiche):
     target = fiche["install_target"]
     product = {
         "id": fiche["id"],
-        "name": fiche["name"],
+        "name": safe_text(fiche["name"]),
         "category": fiche["category"],
-        "description": fiche.get("description", ""),
+        "description": safe_text(fiche.get("description", "")),
     }
     if fiche.get("long_description"):
-        product["long_description"] = fiche["long_description"]
+        product["long_description"] = safe_text(fiche["long_description"])
     product["version"] = strip_v(latest["tag_name"])
     product["download_url"] = asset["browser_download_url"]
     product["sha256"] = sha
@@ -247,11 +268,17 @@ def build_product(fiche):
         product["filename"] = fiche.get("filename") or asset["name"]
 
     if fiche.get("icon"):
-        product["icon"] = fiche["icon"]
+        if ICON_RE.match(str(fiche["icon"])):
+            product["icon"] = fiche["icon"]
+        else:
+            print("  ! icone invalide ignoree: %r" % fiche["icon"])
     if fiche.get("accent"):
-        product["accent"] = fiche["accent"]
+        if fiche["accent"] in ACCENTS:
+            product["accent"] = fiche["accent"]
+        else:
+            print("  ! couleur invalide ignoree: %r" % fiche["accent"])
 
-    product["notes"] = fiche.get("notes") or first_line(latest.get("body"), latest.get("name", ""))
+    product["notes"] = safe_text(fiche.get("notes")) or first_line(latest.get("body"), latest.get("name", ""))
     product["changelog_url"] = latest.get("html_url", "https://github.com/%s/releases" % repo)
 
     # Historique = toutes les releases publiques (hors pre-release/brouillon), 8 max.

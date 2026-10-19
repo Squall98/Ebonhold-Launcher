@@ -42,9 +42,11 @@ jobs:
           git config user.name "ebonhold-bot"
           git config user.email "actions@users.noreply.github.com"
 
-          # PR créée par le robot de soumission : son corps contient "Closes #<issue>".
-          PRNUM=$(gh pr list --state open --json number,body \
-            --jq "[.[] | select(.body | contains(\"Closes #${ISSUE}\"))][0].number")
+          # PR créée par le robot de soumission : branche addon/<id>, auteur = le robot,
+          # corps qui contient exactement "Closes #<issue>" (pas #<issue>0, #<issue>1...).
+          # Une PR ouverte par quelqu'un d'autre n'est jamais fusionnée par ce robot.
+          PRNUM=$(gh pr list --state open --app github-actions --json number,body,headRefName \
+            --jq "[.[] | select((.headRefName | startswith(\"addon/\")) and (.body | test(\"Closes #${ISSUE}([^0-9]|\$)\")))][0].number")
           if [ -z "$PRNUM" ] || [ "$PRNUM" = "null" ]; then
             echo "Aucune PR liée à l'issue #${ISSUE}."; exit 1
           fi

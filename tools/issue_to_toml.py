@@ -27,6 +27,20 @@ LABEL_TO_KEY = {
 ORDER = ["id", "name", "repo", "category", "install_target", "extract_root",
          "icon", "accent", "order", "description", "long_description"]
 EMPTY = {"", "_No response_", "_Aucune réponse_", "None"}
+# Champs d'une seule ligne : le texte de l'issue est libre (n'importe qui peut l'editer),
+# on n'en garde qu'une ligne, sans caractere de controle.
+ONE_LINE = ("repo", "id", "name", "category", "install_target", "extract_root", "icon", "accent")
+ACCENTS = {"purple", "teal", "coral", "blue", "amber", "pink", "green"}
+META_FILE = os.path.join(ROOT, "manifest-meta.json")
+
+
+def categories():
+    try:
+        import json
+        with open(META_FILE, encoding="utf-8") as f:
+            return {c["id"] for c in json.load(f).get("categories", [])}
+    except (OSError, ValueError, KeyError):
+        return set()
 
 
 def parse_issue_form(body):
@@ -63,6 +77,9 @@ def main():
         sys.exit("ISSUE_BODY vide.")
 
     f = parse_issue_form(body)
+    for k in ONE_LINE:
+        if k in f:
+            f[k] = re.sub(r"[\x00-\x1f\x7f]+", " ", f[k]).strip()
 
     # Normalise le repo : accepte une URL GitHub complète (avec ou sans / final, .git)
     # autant que le format court 'owner/repo'.
@@ -81,11 +98,25 @@ def main():
         errors.append("Identifiant invalide (minuscules, chiffres et tirets uniquement) : '%s'" % fid)
     if not re.match(r"^[\w.-]+/[\w.-]+$", f.get("repo", "")):
         errors.append("Repo invalide, attendu 'owner/repo' : '%s'" % f.get("repo", ""))
-    if f.get("install_target") not in ("addons", "data"):
-        errors.append("Destination invalide : '%s'" % f.get("install_target", ""))
+    # Un patch .mpq (destination Data) peut remplacer n'importe quel fichier du jeu :
+    # reserve a l'admin (fiche ecrite a la main), jamais via le formulaire public.
+    if f.get("install_target") != "addons":
+        errors.append("Destination invalide : '%s' (le formulaire n'accepte que 'addons')" % f.get("install_target", ""))
     for req in ("name", "category", "description"):
         if not f.get(req):
             errors.append("Champ requis manquant : %s" % req)
+    name = f.get("name", "")
+    if len(name) > 60 or re.search(r'[<>"`$\\]', name):
+        errors.append("Nom invalide (60 caracteres max, sans < > \" ` $ \\) : '%s'" % name[:60])
+    cats = categories()
+    if cats and f.get("category") and f["category"] not in cats:
+        errors.append("Categorie inconnue : '%s'" % f["category"])
+    if f.get("extract_root") and not re.match(r"^[A-Za-z0-9_.-]+$", f["extract_root"]):
+        errors.append("Dossier racine invalide : '%s'" % f["extract_root"])
+    if f.get("icon") and not re.match(r"^ti-[a-z0-9-]+$", f["icon"]):
+        errors.append("Icone invalide (format ti-nom) : '%s'" % f["icon"])
+    if f.get("accent") and f["accent"] not in ACCENTS:
+        errors.append("Couleur invalide : '%s'" % f["accent"])
     if errors:
         sys.exit("Formulaire invalide :\n- " + "\n- ".join(errors))
 
@@ -105,9 +136,11 @@ def main():
     print("Fiche ecrite : catalog/%s.toml" % fid)
     gh_out = os.environ.get("GITHUB_OUTPUT")
     if gh_out:
+        # Valeurs deja validees ci-dessus : une seule ligne chacune, impossible d'ajouter
+        # une autre cle (ex: redefinir 'id') dans GITHUB_OUTPUT.
         with open(gh_out, "a", encoding="utf-8") as o:
             o.write("id=%s\n" % fid)
-            o.write("name=%s\n" % f.get("name", fid))
+            o.write("name=%s\n" % name)
 
 
 if __name__ == "__main__":

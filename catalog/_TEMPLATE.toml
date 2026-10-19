@@ -19,7 +19,7 @@
 id = "mon-addon"                       # identifiant unique en kebab-case (= nom du fichier)
 name = "Mon Addon"                     # nom affiche sur la carte
 repo = "Squall98/MonAddon"             # owner/repo GitHub (ou sont publiees les Releases)
-category = "interface"                 # traduction | interface | donnees  (cf. manifest-meta.json)
+category = "interface"                 # traduction | carte | quetes | metiers | sacs | personnage | interface | donnees (cf. manifest-meta.json)
 install_target = "addons"              # addons -> Interface\AddOns   |   data -> Data
 
 # --- addons uniquement ---

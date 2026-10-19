@@ -46,10 +46,13 @@ jobs:
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: python tools/issue_to_toml.py
 
+      # Les valeurs venues de l'issue passent TOUJOURS par l'environnement, jamais par
+      # ${{ }} dans un script : sinon un texte piégé deviendrait une commande.
       - name: Valide le repo et sa Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python tools/build_manifest.py --only "${{ steps.fiche.outputs.id }}" --strict
+          ID: ${{ steps.fiche.outputs.id }}
+        run: python tools/build_manifest.py --only "$ID" --strict
 
       - name: Ouvre la Pull Request
         env:

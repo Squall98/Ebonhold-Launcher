@@ -42,6 +42,11 @@ body:
       label: "Catégorie"
       options:
         - traduction
+        - carte
+        - quetes
+        - metiers
+        - sacs
+        - personnage
         - interface
         - donnees
     validations:
@@ -51,10 +56,9 @@ body:
     id: destination
     attributes:
       label: "Destination des fichiers"
-      description: "addons = Interface\\AddOns (cas normal) · data = Data (patch .mpq)"
+      description: "Interface\\AddOns. Les patchs .mpq (dossier Data) sont réservés à l'admin."
       options:
         - addons
-        - data
     validations:
       required: true
 
