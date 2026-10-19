@@ -17,6 +17,12 @@ du repo indique et on en deduit automatiquement :
 Les pre-releases et brouillons GitHub sont ignores (releases/latest) : un mod auteur
 peut donc tester une build sans qu'elle parte dans le catalogue.
 
+Si un addon deja publie ne peut plus etre lu (repo supprime, passe en prive, release
+retiree), il garde sa derniere version connue du manifest.json actuel : un seul addon
+casse ne bloque plus la mise a jour de tous les autres. L'echec est signale en
+avertissement dans le resume de l'automatisation. --strict n'echoue (exit 1) que pour un
+addon qui n'a encore jamais ete publie.
+
 Usage :
   python tools/build_manifest.py            # regenere manifest.json
   python tools/build_manifest.py --strict   # echoue (exit 1) si un addon est invalide (CI)
@@ -290,6 +296,22 @@ def load_fiches(only=None):
     return fiches
 
 
+def anciens_produits():
+    """Les addons du manifest.json deja publie, par id (vide s'il n'existe pas ou ne se lit pas)."""
+    try:
+        with io.open(OUT_FILE, encoding="utf-8") as f:
+            return {p["id"]: p for p in json.load(f).get("products", []) if "id" in p}
+    except (OSError, ValueError, TypeError):
+        return {}
+
+
+def avertir(message):
+    """Un avertissement visible dans l'automatisation GitHub, sans la faire echouer."""
+    print("  ! " + message)
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        print("::warning::" + message.replace("\n", " "))
+
+
 def main():
     ap = argparse.ArgumentParser(description="Genere manifest.json depuis catalog/*.toml")
     ap.add_argument("--strict", action="store_true", help="exit 1 si une fiche est invalide (CI)")
@@ -306,7 +328,8 @@ def main():
         if args.strict:
             sys.exit(1)
 
-    products, errors = [], []
+    products, errors, gardes = [], [], []
+    anciens = {} if args.only else anciens_produits()
     for fiche in fiches:
         fid = fiche.get("id", fiche.get("_file"))
         print("- %s (%s)" % (fid, fiche.get("repo", "?")))
@@ -318,6 +341,13 @@ def main():
         except Exception as e:  # noqa: BLE001 — on veut regrouper toutes les erreurs
             errors.append((fid, str(e)))
             print("    ECHEC: %s" % e)
+            if fid in anciens:
+                garde = dict(anciens[fid])
+                garde["_order"] = fiche.get("order", 100)
+                products.append(garde)
+                gardes.append(fid)
+                avertir("%s (%s) : %s. Derniere version connue gardee (v%s)." % (
+                    fid, fiche.get("repo", "?"), e, garde.get("version", "?")))
 
     products.sort(key=lambda p: (p.pop("_order", 100), p["name"].lower()))
 
@@ -349,8 +379,8 @@ def main():
             old_text = f.read()
 
     changed = new_text != old_text
-    print("\n%d addon(s), %d erreur(s). manifest.json: %s" % (
-        len(products), len(errors), "MODIFIE" if changed else "inchange"))
+    print("\n%d addon(s), %d erreur(s) dont %d couverte(s) par la derniere version connue. manifest.json: %s" % (
+        len(products), len(errors), len(gardes), "MODIFIE" if changed else "inchange"))
 
     if not args.check:
         if changed:
@@ -360,7 +390,10 @@ def main():
         else:
             print("-> rien a ecrire.")
 
-    if errors and args.strict:
+    # Seul un addon jamais publie, et donc absent du catalogue, fait echouer l'automatisation.
+    bloquants = [fid for fid, _ in errors if fid not in gardes]
+    if bloquants and args.strict:
+        print("Bloquant : %s" % ", ".join(bloquants))
         sys.exit(1)
 
 
