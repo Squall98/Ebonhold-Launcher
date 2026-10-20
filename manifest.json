@@ -73,16 +73,20 @@
       "category": "traduction",
       "description": "Traduit le contenu custom d'Ebonhold : echoes, arbre de talents, affixes, tomes.",
       "long_description": "Addon qui traduit le contenu CUSTOM du serveur Ebonhold : echoes, arbre de talents (skill tree), affixes et tomes. Complémentaire du Patch FR (onglet Réglages) qui, lui, traduit le jeu de base (sorts, hauts faits, titres, quêtes, menus). S'installe dans Interface\\AddOns.",
-      "version": "3.1",
-      "download_url": "https://github.com/Squall98/EbonholdFR/releases/download/v3.1/EbonholdFR-v3.1.zip",
-      "sha256": "6b4a8b31caf8c349d9bfb9d1458d7b431271423cd8915d7d58348035e382a828",
+      "version": "4.0",
+      "download_url": "https://github.com/Squall98/EbonholdFR/releases/download/v4.0/EbonholdFR-v4.0.zip",
+      "sha256": "336eb7d13707e3fa2cb0c36b51cf0b9f425a4fc7b940fd89c126bd024be67329",
       "install_target": "addons",
       "extract_root": "EbonholdFR",
       "icon": "ti-language",
       "accent": "purple",
-      "notes": "Merci pour vos retours ! Cette mise à jour corrige plusieurs textes mal traduits ou mal affichés.",
-      "changelog_url": "https://github.com/Squall98/EbonholdFR/releases/tag/v3.1",
+      "notes": "Interface du serveur traduite en direct (EbonholdFR_Interface.lua) : fenêtres Echoes / Character Progression, Soul Tree, Prestige, Objectifs, Enclume enchantée, Hardcore / Torment, Collections, boîtes",
+      "changelog_url": "https://github.com/Squall98/EbonholdFR/releases/tag/v4.0",
       "history": [
+        {
+          "version": "4.0",
+          "notes": "Interface du serveur traduite en direct (EbonholdFR_Interface.lua) : fenêtres Echoes / Character Progression, Soul Tree, Prestige, Objectifs, Enclume enchantée, Hardcore / Torment, Collections, boîtes"
+        },
         {
           "version": "3.1",
           "notes": "Merci pour vos retours ! Cette mise à jour corrige plusieurs textes mal traduits ou mal affichés."
@@ -107,16 +111,20 @@
       "category": "carte",
       "description": "Téléportation rapide vers les checkpoints débloqués, avec recherche et favoris (FR/EN).",
       "long_description": "Fenêtre de téléportation rapide vers les checkpoints débloqués. Liste filtrable, recherche par nom, favoris et catégories. Bilingue FR/EN.",
-      "version": "1.2",
-      "download_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/download/v1.2/EbonholdCheckpoints-v1.2.zip",
-      "sha256": "ed102a84819a5d739cf47a75b682ed001fe4dd1b5678e2bc628327cc1fee6613",
+      "version": "1.3",
+      "download_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/download/v1.3/EbonholdCheckpoints-v1.3.zip",
+      "sha256": "e82fdcef7b03bcaa2836391c8f49a01822541952e5eb0c9d8d841c77d4a96a2e",
       "install_target": "addons",
       "extract_root": "EbonholdCheckpoints",
       "icon": "ti-map-pin",
       "accent": "teal",
-      "notes": "Mode reduit : la fenetre ne se ferme plus apres une teleportation et se rouvre automatiquement apres l'ecran de chargement. Tu peux enchainer les TP sans rouvrir la mini-barre de favoris.",
-      "changelog_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/tag/v1.2",
+      "notes": "Mode réduit : la réouverture après une téléportation vers un autre continent est fiable (l'intention de réouverture est conservée même si l'interface est rechargée pendant l'écran de chargement ; plus",
+      "changelog_url": "https://github.com/Squall98/EbonholdCheckpoints/releases/tag/v1.3",
       "history": [
+        {
+          "version": "1.3",
+          "notes": "Mode réduit : la réouverture après une téléportation vers un autre continent est fiable (l'intention de réouverture est conservée même si l'interface est rechargée pendant l'écran de chargement ; plus"
+        },
         {
           "version": "1.2",
           "notes": "Mode reduit : la fenetre ne se ferme plus apres une teleportation et se rouvre automatiquement apres l'ecran de chargement. Tu peux enchainer les TP sans rouvrir la mini-barre de favoris."
@@ -185,16 +193,20 @@
       "category": "metiers",
       "description": "Fenêtre de métiers améliorée : file d'attente, recherche avancée, catégories perso, suivi des réactifs.",
       "long_description": "Remplace la fenêtre de métiers par défaut par une version bien plus complète : file d'attente de fabrication, liste de courses, recherche avancée, catégories de recettes personnalisées (tri perso + éditeur), et suivi des réactifs dans tes sacs, ta banque et tes autres persos. L'enchantement passe par la fenêtre normale. En jeu : options via /atsw config. WoW 3.3.5a. Port communautaire de l'addon de Shellyoung — crédit aux auteurs d'origine.",
-      "version": "1.1",
-      "download_url": "https://github.com/Squall98/MetiersPlus/releases/download/v1.1/MetiersPlus-v1.1.zip",
-      "sha256": "bcdcf8cfc50e062c1ce12e098b1b5ddcbec4b289bcd89124e21f4b2a7275e8cc",
+      "version": "1.2",
+      "download_url": "https://github.com/Squall98/MetiersPlus/releases/download/v1.2/MetiersPlus-v1.2.zip",
+      "sha256": "6a6202eef019b9910f0d72955b7eb7c9c65d368fc5f88a1e5587bb058c3e6e09",
       "install_target": "addons",
       "extract_root": "MetiersPlus",
       "icon": "ti-hammer",
       "accent": "blue",
-      "notes": "Correctifs de stabilité 3.3.5a + deux nouvelles fonctions, après tests en jeu sur Ebonhold.",
-      "changelog_url": "https://github.com/Squall98/MetiersPlus/releases/tag/v1.1",
+      "notes": "Les fonctions de secours de l'ancienne API Craft (GetNumCrafts, GetCraftName,",
+      "changelog_url": "https://github.com/Squall98/MetiersPlus/releases/tag/v1.2",
       "history": [
+        {
+          "version": "1.2",
+          "notes": "Les fonctions de secours de l'ancienne API Craft (GetNumCrafts, GetCraftName,"
+        },
         {
           "version": "1.1",
           "notes": "Correctifs de stabilité 3.3.5a + deux nouvelles fonctions, après tests en jeu sur Ebonhold."
@@ -211,16 +223,20 @@
       "category": "carte",
       "description": "HUD de récolte en vue 3D : les gisements affichés autour de toi.",
       "long_description": "GatherHud affiche les nœuds de minage et d'herboristerie en perspective 3D tout autour de ton personnage, comme posés dans le monde devant toi. Idéal pour farmer en suivant ta route sans quitter l'écran des yeux. Affiche aussi ta route Routes dans le HUD. Cette version Ebonhold ajoute une icône sur la minicarte (clic gauche = options, clic droit = activer/désactiver) et complète la traduction française. Nécessite GatherMate (et GatherMate_Data pour les gisements pré-remplis) ; Routes est optionnel. WoW 3.3.5a.",
-      "version": "1.1.6-fr1",
-      "download_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/download/v1.1.6-fr1/GatherHud-v1.1.6-fr1.zip",
-      "sha256": "3d67d099e40408360531fcfa20a0ca7caed8ebc9bdffcec7ea018794f9b3a7bb",
+      "version": "1.2.0",
+      "download_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/download/v1.2.0/GatherHud-v1.2.0.zip",
+      "sha256": "e6088980d23d1ff02001c6993ed238bc5fadd68194a45e139183a78135aaa955",
       "install_target": "addons",
       "extract_root": "GatherHud",
       "icon": "ti-3d-cube-sphere",
       "accent": "teal",
-      "notes": "Version Ebonhold de GatherHud (HUD de recolte en vue 3D, WoW 3.3.5a).",
-      "changelog_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/tag/v1.1.6-fr1",
+      "notes": "Les textes ajoutés pour l'édition Ebonhold (option « Masquer l'icône minimap » et infobulle de l'icône) passent par la table de traduction : anglais par défaut, français sur un client frFR. Ils n'étai",
+      "changelog_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/tag/v1.2.0",
       "history": [
+        {
+          "version": "1.2.0",
+          "notes": "Les textes ajoutés pour l'édition Ebonhold (option « Masquer l'icône minimap » et infobulle de l'icône) passent par la table de traduction : anglais par défaut, français sur un client frFR. Ils n'étai"
+        },
         {
           "version": "1.1.6-fr1",
           "notes": "Version Ebonhold de GatherHud (HUD de recolte en vue 3D, WoW 3.3.5a)."
