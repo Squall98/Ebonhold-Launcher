@@ -78,8 +78,14 @@ def noms_dans_desc(names, descs, noms_ebonhold):
     return out
 
 
+def _codes(txt):
+    # « $lsecond:seconds; » se traduit (« $lseconde:secondes; ») : seul compte sa presence.
+    txt = re.sub(r"\$l[^;]*;", "$l;", txt)
+    return sorted(c.rstrip(".") for c in TOKENS.findall(txt))
+
+
 def verifier_codes(en, fr):
-    return sorted(TOKENS.findall(en)) == sorted(TOKENS.findall(fr))
+    return _codes(en) == _codes(fr)
 
 
 def main():
