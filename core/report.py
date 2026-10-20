@@ -150,7 +150,7 @@ def _record_sent(kind, number, now=None):
 
 
 def _rate_message(wait):
-    return ("Tu as déjà envoyé %d signalements en une heure. Réessaie dans %d min." % (RATE_MAX, wait))
+    return "Tu as déjà envoyé plusieurs signalements cette heure-ci. Réessaie dans %d min." % wait
 
 
 # ---------------------------------------------------------------- infos jointes
@@ -160,9 +160,9 @@ _EXTRA_LABELS = {
     "launcher_version": "Version du launcher",
     "catalog_source": "Source du catalogue",
     "catalog_version": "Version du catalogue",
-    "addons": "Addons installes par le launcher",
-    "fr_settings": "Reglages FR",
-    "fr_state": "Etat du patch FR",
+    "addons": "Addons installés par le launcher",
+    "fr_settings": "Réglages FR",
+    "fr_state": "État du patch FR",
     "fr_pack": "Pack FR",
 }
 
@@ -701,7 +701,7 @@ def make_body(kind, text, files, infos, log_lines, full_url=""):
         parts.append("_Signalement trop long pour GitHub : version complete dans "
                      "[signalement-complet.md](%s)._" % full_url)
     if files:
-        lines = ["", "---", "**Pieces jointes (%d)**" % len(files), ""]
+        lines = ["", "---", "**Pièces jointes (%d)**" % len(files), ""]
         for f in files:
             if f["ext"] in SHOWN_IMAGE_EXT:
                 lines.append("![%s](%s?raw=true)" % (f["name"], f["url"]))
@@ -710,9 +710,9 @@ def make_body(kind, text, files, infos, log_lines, full_url=""):
     parts.append("<details><summary>Infos du jeu et du launcher</summary>\n\n````text\n%s\n````\n</details>"
                  % _fence(infos))
     if log_lines is not None:
-        parts.append("<details><summary>Journal du launcher (%d dernieres lignes, anonymise)</summary>\n\n"
+        parts.append("<details><summary>Journal du launcher (%d dernières lignes, anonymisé)</summary>\n\n"
                      "````text\n%s\n````\n</details>" % (len(log_lines), _fence("\n".join(log_lines))))
-    parts.append("<sub>Envoye par Ebonhold Launcher %s — %s</sub>" % (version.APP_VERSION, kind))
+    parts.append("<sub>Envoyé par Ebonhold Launcher %s — %s</sub>" % (version.APP_VERSION, kind))
     return "\n\n".join(parts)
 
 

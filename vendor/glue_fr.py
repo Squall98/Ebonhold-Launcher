@@ -590,11 +590,11 @@ def construire(data_dir, ouvrir_mpq, log=print, alias_categories=False, dialogue
         en, en_arc = S.en(gs)
         R["sources"] = {"serveur": srv_arc, "frFR": fr_arc, "enUS": en_arc or "empreintes ref_enUS_sha1.json"}
         if fr is None:
-            log("Pack FR absent : ecrans glue laisses en anglais.")
+            log("Pack FR absent : écrans de connexion laissés en anglais.")
             R["alertes"].append("pack frFR absent")
             return {}, R
         if srv is None:
-            log("Le serveur ne remplace pas GlueStrings.lua : le pack FR s'applique deja tout seul.")
+            log("Écrans de connexion : le pack FR s'applique déjà tout seul.")
             R["alertes"].append("pas de GlueStrings serveur")
             return {}, R
         try:
@@ -602,7 +602,7 @@ def construire(data_dir, ouvrir_mpq, log=print, alias_categories=False, dialogue
             F = {k: v for k, v, _, _ in lire_glue_strings(fr)}
             U = {k: v for k, v, _, _ in lire_glue_strings(en)} if en else None
         except FormeInattendue as e:
-            log("GlueStrings.lua : forme inattendue (%s) : ecrans laisses en anglais." % e)
+            log("Écrans de connexion laissés en anglais (fichier du serveur inattendu : %s)." % e)
             R["alertes"].append("GlueStrings forme inattendue : %s" % e)
             return {}, R
         if U is None:
@@ -651,7 +651,7 @@ def construire(data_dir, ouvrir_mpq, log=print, alias_categories=False, dialogue
         info = "%s | serveur %s:GlueStrings.lua md5 %s | FR %s | traductions %s" % (
             R["date"], srv_arc, md5(srv), fr_arc, tr.get("version"))
         fichiers[GX + NOM_TEXTES] = generer_textes(poser, info)
-        log("Ecrans glue : %d textes Blizzard FR + %d textes Ebonhold traduits, %d restent en anglais."
+        log("Écrans de connexion : %d textes Blizzard en français + %d textes Ebonhold traduits, %d restent en anglais."
             % (stats["blizzard_fr"], stats["ebonhold_fr"], len(stats["anglais_serveur_sans_trad"]) + len(stats["trad_ebonhold_perimees"])))
 
         # --- 2. point d'entree precoce : GlueLocalization.xml (fichier Blizzard)
@@ -726,7 +726,7 @@ def construire(data_dir, ouvrir_mpq, log=print, alias_categories=False, dialogue
                                "RealmList.lua": {"archive": rl_arc, "md5": md5(rl) if rl else None}}
         return fichiers, R
     except Exception as e:  # jamais bloquant : on rend "rien" (anglais du serveur)
-        log("Ecrans glue FR non construits (%s) : anglais conserve." % e)
+        log("Écrans de connexion non traduits (%s) : ils restent en anglais." % e)
         R["alertes"].append("ECHEC : %s" % e)
         return {}, R
     finally:
@@ -738,7 +738,7 @@ def verifier_lua(fichiers, log=print):
     try:
         import lupa
     except ImportError:
-        log("lupa absent : verification syntaxique sautee (fichiers generes par construction).")
+        pass  # verification syntaxique sautee (lupa absent de l'exe) : fichiers generes par construction
         return None
     res = {}
     for modname in ("lua51", "luajit21"):

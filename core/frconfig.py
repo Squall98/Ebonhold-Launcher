@@ -171,9 +171,16 @@ def _deploy_addon(install_dir, log):
         if os.path.isdir(dst):
             shutil.rmtree(dst, ignore_errors=True)
         shutil.copytree(_ADDON_SRC, dst)
-        log("Addon EbonholdFRFix installe (forge custom OK en francais).")
+        log("Correctif EbonholdFRFix installé (fenêtres du serveur en français).")
     except Exception as e:
-        log("Addon non installe (%s)." % e)
+        log("Correctif EbonholdFRFix non installé (%s)." % e)
+
+
+def _remove_addon(install_dir, log):
+    dst = os.path.join(install_dir, "Interface", "AddOns", "EbonholdFRFix")
+    if os.path.isdir(dst):
+        shutil.rmtree(dst, ignore_errors=True)
+        log("Jeu en anglais : correctif EbonholdFRFix retiré.")
 
 
 def _manage_voices(data_dir, voices_fr, log):
@@ -188,12 +195,12 @@ def _manage_voices(data_dir, voices_fr, log):
                 if os.path.exists(frp):
                     os.remove(frp)
                 os.rename(bak, frp)
-                log("Voix FR restaurees : %s" % frname)
+                log("Voix françaises remises : %s" % frname)
         else:
             if os.path.exists(enp):
                 if os.path.exists(frp) and not os.path.exists(bak):
                     os.rename(frp, bak)
-                log("Copie voix anglaises -> %s (peut prendre 1 min)..." % frname)
+                log("Copie des voix anglaises (%s), ça peut prendre une minute..." % frname)
                 shutil.copy2(enp, frp)
 
 
@@ -652,6 +659,8 @@ def apply_v2(install_dir, settings, log, extra=(), deploy_fix=True):
     _build_patchz_v2(data, s, log, extra)
     if deploy_fix and jeu_fr:
         _deploy_addon(install_dir, log)
+    elif not jeu_fr:
+        _remove_addon(install_dir, log)       # le correctif ne sert qu'avec le jeu en francais
     _set_locale(install_dir, "frFR" if jeu_fr else "enUS")
     import time
     _ecrire_etat({

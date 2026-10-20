@@ -211,7 +211,7 @@ def _extract_frfr_zip(archive, data_dir, progress=_noop, log=_noop):
                     done += len(c)
                     progress(int(done * 100 / total), "Extraction %d%%" % int(done * 100 / total))
             os.replace(part, out)
-    log("Dossier frFR place dans Data.")
+    log("Pack FR posé dans le dossier Data.")
     return True
 
 
@@ -223,7 +223,7 @@ def _extract(archive, fmt, dest, log=_noop):
             z.extractall(dest)
         return
     # rar / 7z : on tente le tar systeme (libarchive sait lire rar/7z sur Win10+).
-    log("Extraction (%s) via tar systeme..." % fmt)
+    log("Extraction (%s)..." % fmt)
     try:
         subprocess.run(["tar", "-xf", archive, "-C", dest], check=True,
                        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
@@ -254,7 +254,7 @@ def _merge_into_data(frfr_src, data_dir, log=_noop):
             shutil.copytree(s, d, dirs_exist_ok=True)
         else:
             shutil.copy2(s, d)
-    log("Dossier frFR place dans Data.")
+    log("Pack FR posé dans le dossier Data.")
 
 
 # ----------------------------------------------------------------- point d'entree
@@ -270,12 +270,12 @@ def install(install_dir, spec, progress=_noop, log=_noop):
     tmp = tempfile.mkdtemp(prefix="ebon-frpack-")
     try:
         _check_space(tmp, data_dir, int(spec.get("size") or PACK_SIZE))
-        log("Telechargement du pack frFR (~2,6 Go, ca peut etre long)...")
+        log("Téléchargement du pack FR (2,6 Go, ça peut être long)...")
         archive = _download_pack_archive(spec, tmp, progress)
 
         sha = spec.get("sha256")
         if sha:
-            log("Verification de l'archive...")
+            log("Vérification de l'archive...")
             if _sha256(archive, progress).lower() != sha.lower():
                 raise ValueError("Archive du pack corrompue (checksum invalide). Recommence l'installation.")
 
@@ -292,7 +292,7 @@ def install(install_dir, spec, progress=_noop, log=_noop):
 
         if not frconfig.has_pack(data_dir):
             raise RuntimeError("Le pack semble incomplet (locale-frFR.MPQ manquant).")
-        log("Pack frFR installe. Tu peux maintenant mettre le Jeu en francais.")
+        log("Pack FR installé. Tu peux maintenant mettre le jeu en français.")
         return True
     finally:
         shutil.rmtree(tmp, ignore_errors=True)

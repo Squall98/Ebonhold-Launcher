@@ -64,7 +64,7 @@ def download(url, dest_path, progress=_noop):
                     fout.write(chunk)
                     h.update(chunk)
                     done += len(chunk)
-                    progress(int(done * 100 / total) if total else 0, "Telechargement...")
+                    progress(int(done * 100 / total) if total else 0, "Téléchargement...")
             if total and done < total:
                 raise IOError("telechargement incomplet")
             return h.hexdigest()
@@ -75,7 +75,7 @@ def download(url, dest_path, progress=_noop):
         except (OSError, urllib.error.URLError, http.client.HTTPException) as e:
             last_err = e
         time.sleep(1.5 * (attempt + 1))
-    raise RuntimeError("Telechargement impossible : %s" % last_err)
+    raise RuntimeError("Téléchargement impossible : %s" % last_err)
 
 
 def _verify(actual_sha, expected_sha):
@@ -128,7 +128,7 @@ def install(product, install_dir, progress=_noop):
         state.mark_installed(product["id"], product["version"], rel)
         for b in backups:
             _drop_backup(b)
-        progress(100, "Installe.")
+        progress(100, "Installé.")
         return rel
     except Exception:
         for b in reversed(backups):

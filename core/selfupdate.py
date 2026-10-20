@@ -59,7 +59,7 @@ def download_and_swap(download_url, sha256, progress=None):
 
     new_dir = _find_app_dir(extract_dir, exe_name)
     if not new_dir:
-        raise RuntimeError("EbonholdLauncher.exe introuvable dans la mise a jour.")
+        raise RuntimeError("EbonholdLauncher.exe introuvable dans la mise à jour.")
 
     _spawn_folder_swapper(cur_dir, new_dir, exe_name, tmp)
     return True

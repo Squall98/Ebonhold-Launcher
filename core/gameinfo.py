@@ -281,7 +281,7 @@ def _logs(game_dir, accounts):
     if eb:
         st = _stat(eb)
         logs.append({"name": "ebonhold.log", "mtime": st["mtime"] if st else 0,
-                     "what": "%d dernieres lignes" % EBONHOLD_LOG_LINES,
+                     "what": "%d dernières lignes" % EBONHOLD_LOG_LINES,
                      "lines": [anonymize.text(l, accounts) for l in tail_lines(eb, EBONHOLD_LOG_LINES)]})
     ldir = _find_child(game_dir, "Logs")
     for name in GAME_LOGS:
@@ -290,7 +290,7 @@ def _logs(game_dir, accounts):
             continue
         st = _stat(p)
         logs.append({"name": "Logs\\" + name, "mtime": st["mtime"] if st else 0,
-                     "what": "%d dernieres lignes" % GAME_LOG_LINES,
+                     "what": "%d dernières lignes" % GAME_LOG_LINES,
                      "lines": [anonymize.text(l, accounts) for l in tail_lines(p, GAME_LOG_LINES)]})
     edir = _find_child(game_dir, "Errors")
     if edir:
@@ -299,7 +299,7 @@ def _logs(game_dir, accounts):
             last = max(files, key=lambda p: os.path.getmtime(p))
             kept = [l for l in head_lines(last, 400) if not _ERROR_DROP.match(l)][:ERROR_LINES]
             logs.append({"name": "Errors\\" + os.path.basename(last), "mtime": os.path.getmtime(last),
-                         "what": "debut du dernier rapport d'erreur (%d lignes)" % ERROR_LINES,
+                         "what": "début du dernier rapport d'erreur (%d lignes)" % ERROR_LINES,
                          "lines": [anonymize.text(l, accounts) for l in kept]})
     return logs
 
@@ -407,7 +407,7 @@ def to_text(info):
         out += [_mpq_line(e) for e in loc["mpq"]] or ["  aucun MPQ"]
     if not any(l["name"] == "frFR" for l in info.get("locales", [])):
         out.append("")
-        out.append("Data\\frFR : absent (pas de pack de langue francais)")
+        out.append("Data\\frFR : absent (pas de pack de langue français)")
 
     out.append("")
     addons = info.get("addons", [])
@@ -424,6 +424,6 @@ def to_text(info):
 
     for lg in info.get("logs", []):
         out.append("")
-        out.append("--- %s (%s, modifie le %s) ---" % (lg["name"], lg["what"], fmt_date(lg.get("mtime"))))
+        out.append("--- %s (%s, modifié le %s) ---" % (lg["name"], lg["what"], fmt_date(lg.get("mtime"))))
         out += lg["lines"] or ["(vide)"]
     return "\n".join(out)

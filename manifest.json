@@ -6,7 +6,7 @@
   "_doc": "Partie GLOBALE du catalogue, editee a la main (par l'admin uniquement). Les addons sont dans catalog/*.toml. manifest.json est GENERE a partir de ces deux sources par tools/build_manifest.py.",
   "fr_config": {
     "pack_url": "https://drive.google.com/file/d/1fOQfOkkqUOcPw6kDAD7LxnU3hJDEua-a/view?usp=sharing",
-    "pack_note": "Pack ~2,4 Go requis uniquement pour mettre les menus/quetes/interface en francais (Jeu = FR). Les sorts/hauts faits/titres fonctionnent sans le pack.",
+    "pack_note": "Le téléchargement du pack FR est momentanément indisponible.",
     "pack_download": {
       "parts": [
         "https://github.com/Squall98/Ebonhold-Launcher/releases/download/frfr-pack/frFR.zip.001",

@@ -13,5 +13,5 @@ icon = "ti-language"                  # icone Tabler (https://tabler.io/icons)
 accent = "purple"                     # purple | teal | coral | blue | amber | pink | green
 order = 10                            # ordre d'affichage (petit = en premier)
 
-description = "Traduit le contenu custom d'Ebonhold : echoes, arbre de talents, affixes, tomes."
-long_description = "Addon qui traduit le contenu CUSTOM du serveur Ebonhold : echoes, arbre de talents (skill tree), affixes et tomes. Complémentaire du Patch FR (onglet Réglages) qui, lui, traduit le jeu de base (sorts, hauts faits, titres, quêtes, menus). S'installe dans Interface\\AddOns."
+description = "Traduit l'interface du serveur et le contenu Ebonhold : echoes, Soul Tree, affixes, tomes."
+long_description = "Traduit l'interface du serveur Ebonhold (fenêtres, infobulles, boîtes de confirmation) et son contenu : echoes, Soul Tree, affixes et tomes. Installé et réglé automatiquement par l'onglet Français du launcher. S'installe dans Interface\\AddOns."

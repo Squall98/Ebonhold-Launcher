@@ -78,6 +78,7 @@ class Api:
         self._startup_done = False
         self._fr_busy = threading.Lock()   # une seule application des reglages FR a la fois
         self._scan_busy = threading.Lock()     # une seule recherche du jeu a la fois
+        self._scan_cancel = threading.Event()
         self._report_busy = threading.Lock()   # un seul envoi de signalement a la fois
 
     # ----------------------------------------------------------- catalogue
@@ -116,6 +117,35 @@ class Api:
         log("catalogue en ligne recu (%d produits, launcher %s)" % (
             len(catalog.products(man)), catalog.launcher_version(man)))
         self._emit("onCatalogUpdate", self._build_catalog())
+        self._maj_addon_fr()
+
+    def _maj_addon_fr(self):
+        """EbonholdFR n'a pas de carte dans le catalogue : s'il est installe et qu'une version
+        plus recente est en ligne, on l'installe tout de suite (jeu ferme), avec ses reglages."""
+        try:
+            wow_path = state.get_wow_path()
+            product = self._find(FR_ADDON)
+            entry = state.get_installed(FR_ADDON)
+            if not (product and entry and wow.is_valid_install(wow_path)):
+                return
+            if _status(product, entry["version"]) == "uptodate" and not installer.is_broken(FR_ADDON, wow_path):
+                return
+            if wow.game_running() or not self._fr_busy.acquire(blocking=False):
+                log("EbonholdFR v%s : mise a jour au prochain demarrage (jeu ouvert ou reglages en cours)"
+                    % product["version"])
+                return
+            try:
+                log("EbonholdFR : mise a jour automatique vers v%s" % product["version"])
+                installer.install(product, wow_path)
+                ok, _ = frconfig.is_available()
+                if ok:
+                    self._ecrire_reglages_addon(wow_path, frconfig._fr_patch().normaliser(
+                        frconfig.reglages_enregistres()))
+            finally:
+                self._fr_busy.release()
+            self._emit("onCatalogUpdate", self._build_catalog())
+        except Exception as e:
+            log("echec mise a jour EbonholdFR : %r" % e)
 
     def _detect_wow(self):
         """Detecte le dossier WoW en fond (peut scanner des disques) et rafraichit l'UI
@@ -163,7 +193,9 @@ class Api:
             # Un mod installe dont des fichiers ont disparu -> a reparer.
             if installed_version is not None and wow_valid and installer.is_broken(p["id"], wow_path):
                 st = "repair"
-            if st in ("update", "repair"):   # "install" (jamais installe) n'est pas une MAJ
+            # "install" (jamais installe) n'est pas une MAJ ; EbonholdFR (gere par l'onglet
+            # Francais, invisible dans le catalogue) se met a jour tout seul (_maj_addon_fr).
+            if st in ("update", "repair") and p["id"] not in MANAGED:
                 updates += 1
             row = {
                 "id": p["id"],
@@ -224,7 +256,7 @@ class Api:
         path = result[0]
         if not wow.is_valid_install(path):
             return {"ok": False, "path": path,
-                    "error": "Ce dossier n'est pas une install Ebonhold (Data\\ introuvable)."}
+                    "error": "Ce dossier n'est pas une installation du jeu (Data\\ introuvable)."}
         state.set_wow_path(path)
         return {"ok": True, "path": path}
 
@@ -241,10 +273,13 @@ class Api:
         if not self._scan_busy.acquire(blocking=False):
             return {"started": False, "error": "Recherche déjà en cours."}
 
+        self._scan_cancel.clear()
+
         def worker():
             cands = []
             try:
-                cands = gamescan.scan(progress=lambda m: self._emit("onScanProgress", m))
+                cands = gamescan.scan(progress=lambda m: self._emit("onScanProgress", m),
+                                      cancel=self._scan_cancel)
             except Exception as e:
                 log("recherche du jeu impossible : %r" % e)
             finally:
@@ -254,6 +289,10 @@ class Api:
 
         threading.Thread(target=worker, daemon=True).start()
         return {"started": True}
+
+    def cancel_scan(self):
+        self._scan_cancel.set()
+        return {"ok": True}
 
     def set_wow_path(self, path):
         """Dossier choisi dans la liste des installations trouvees."""
@@ -318,7 +357,7 @@ class Api:
             log("installe : %s v%s" % (product_id, product["version"]))
             if product_id == FR_ADDON:      # le dossier vient d'etre remplace : ses reglages aussi
                 self._ecrire_reglages_addon(wow_path, frconfig.reglages_enregistres())
-            self._emit("onDone", product_id, True, "Installe (v%s)." % product["version"])
+            self._emit("onDone", product_id, True, "Installé (v%s)." % product["version"])
         except Exception as e:
             log("echec installation %s : %r" % (product_id, e))
             self._emit("onDone", product_id, False, str(e))
@@ -374,7 +413,7 @@ class Api:
                     "error": "Disponible uniquement sur la version .exe ; page ouverte."}
         if not url or not sha:
             return {"ok": False, "mode": "exe",
-                    "error": "Mise a jour indisponible (catalogue incomplet). Reessaie plus tard."}
+                    "error": "Mise à jour indisponible (catalogue incomplet). Réessaie plus tard."}
 
         def worker():
             progress = _throttled(lambda pct, msg: self._emit("onLauncherProgress", pct, msg), 0.25)
@@ -429,7 +468,7 @@ class Api:
                 self._emit("onFrLog", msg)
             try:
                 frpack.install(wow_path, spec, progress, flog)
-                self._emit("onPackDone", True, "Pack frFR installe.")
+                self._emit("onPackDone", True, "Pack FR installé.")
             except Exception as e:
                 log("echec pack FR : %r" % e)
                 self._emit("onPackDone", False, str(e))
@@ -451,7 +490,7 @@ class Api:
                 self._emit("onFrLog", msg)
             try:
                 frconfig.apply(wow_path, base_fr, voices_fr, spells_fr, other_fr, flog)
-                self._emit("onFrDone", True, "Configuration appliquee. Lance le jeu.")
+                self._emit("onFrDone", True, "Configuration appliquée. Lance le jeu.")
             except Exception as e:
                 log("echec patch FR : %r" % e)
                 self._emit("onFrDone", False, str(e))
@@ -570,6 +609,7 @@ class Api:
             wow_path = state.get_wow_path()
             if not wow.is_valid_install(wow_path):
                 return
+            self._maj_addon_fr()
             ok, _ = frconfig.is_available()
             if not ok:
                 return
@@ -651,7 +691,8 @@ class Api:
                 wp = state.get_wow_path()
                 if wow.is_valid_install(wp):
                     st = frconfig.status(wp, self._fr_extra(wp))
-                    extra["fr_state"] = {k: st.get(k) for k in ("applied", "up_to_date", "last_applied")}
+                    extra["fr_state"] = {"appliqué": st.get("applied"), "à jour": st.get("up_to_date"),
+                                         "le": st.get("last_applied")}
         except Exception:
             pass
         return extra
@@ -751,7 +792,7 @@ class Api:
     def open_url(self, url):
         # Jamais un chemin local ni un programme : seulement une page web des sites connus.
         if not _url_ok(url):
-            return {"ok": False, "error": "Lien refuse."}
+            return {"ok": False, "error": "Lien refusé."}
         webbrowser.open(url)
         return {"ok": True}
 
