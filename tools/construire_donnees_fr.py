@@ -52,14 +52,48 @@ def categories_depuis_capture(chemin):
 
 
 ARTICLES = ("le ", "la ", "les ", "l'", "l’", "du ", "des ", "de la ", "de l'", "au ", "aux ")
+RANG = re.compile(r"\s*\((?:Rank|Rang) \d+\)$")
+REMPLACE_EN = re.compile(r"Replace (.+?) \(Rank (\d+)\)\.?\s*$")
+REMPLACE_FR = re.compile(r"Remplace\b[^\r\n]*$")
+
+
+def _nom_fr_rang(names, nom, rang):
+    for n in (nom, nom.replace("’", "'"), nom.replace("'", "’")):
+        fr = names.get("%s (Rank %s)" % (n, rang))
+        if fr:
+            return fr
+    for n in (nom, nom.replace("’", "'"), nom.replace("'", "’")):
+        if names.get(n):
+            return "%s (Rang %s)" % (names[n], rang)
+    return "%s (Rang %s)" % (nom, rang)
+
+
+def normaliser_remplace(names, descs):
+    """« Replace <noeud> (Rank N). » en fin de description : meme nom francais que la table
+    des noms (sinon Rang/Niveau et noms melanges selon le traducteur, ex. « Exécuteur's Oath »)."""
+    n = 0
+    for en, fr in list(descs.items()):
+        m = REMPLACE_EN.search(en)
+        if not m:
+            continue
+        cible = "Remplace %s." % _nom_fr_rang(names, m.group(1), m.group(2))
+        if REMPLACE_FR.search(fr):
+            nouveau = REMPLACE_FR.sub(lambda _: cible, fr)
+        else:
+            nouveau = fr.rstrip() + ("\r\n\r\n" if "\r\n" in fr else "\n\n") + cible
+        if nouveau != fr:
+            descs[en] = nouveau
+            n += 1
+    return n
 
 
 def noms_dans_desc(names, descs, noms_ebonhold):
     """Pour chaque description : les noms Ebonhold (anglais -> francais) qu'elle cite.
     Seulement les noms d'echoes, de noeuds, d'affixes et de tomes (jamais un sort Blizzard
-    ni un mot courant comme « Shadow » : « dégâts d'Ombre » doit rester tel quel)."""
+    ni un mot courant comme « Shadow » : « dégâts d'Ombre » doit rester tel quel).
+    Un nom avec son rang (« Lifebond (Rank 4) ») est assez precis pour etre gardé meme en un mot."""
     paires = [(en, fr) for en, fr in names.items()
-              if en in noms_ebonhold and fr and fr != en and len(fr) >= 4 and len(en) >= 4
+              if RANG.sub("", en) in noms_ebonhold and fr and fr != en and len(fr) >= 4 and len(en) >= 4
               and " " in en and not TOKENS.search(en)]
     paires.sort(key=lambda p: -len(p[1]))
     out = {}
@@ -114,6 +148,8 @@ def main():
                     continue
                 cible[en] = fr
         print("  + %s : %d noms, %d descriptions" % (os.path.basename(p), len(x.get("names") or {}), len(x.get("descs") or {})))
+    nrem = normaliser_remplace(names, descs)
+    print("  « Remplace <noeud> (Rang N). » harmonise dans %d descriptions" % nrem)
     cats, noms_ebonhold = categories_depuis_capture(a.capture)
     ndd = noms_dans_desc(names, descs, noms_ebonhold)
     out = {

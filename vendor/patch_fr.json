@@ -1,6 +1,6 @@
 {
 "version": "4.0",
-"genere": "2026-10-20 11:41",
+"genere": "2026-10-20 11:57",
 "categories": {
 "echo": [
 200000,
@@ -4316,11 +4316,11 @@
 "$s1% full.": "Rempli à $s1%.",
 "$s1% increased damage.": "Dégâts augmentés de $s1%.",
 "$s1% of all healing you deal to allies also heals you.": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.",
-"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 1).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lien de vie (Niveau 1).",
-"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 2).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lien de Vie (Niveau 2).",
-"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 3).": "$s1% de tout soin que vous infligez à vos alliés vous soigne également.\r\n\r\nRemplace Lien de vie (Niveau 3).",
-"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 4).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lifebond (Niveau 4).",
-"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 5).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lien de Vie (Niveau 5).",
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 1).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lien de vie (Rang 1).",
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 2).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lien de vie (Rang 2).",
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 3).": "$s1% de tout soin que vous infligez à vos alliés vous soigne également.\r\n\r\nRemplace Lien de vie (Rang 3).",
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 4).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lien de vie (Rang 4).",
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 5).": "$s1% de toute guérison que vous infligez à vos alliés vous guérit également.\n\nRemplace Lien de vie (Rang 5).",
 "$s1% of damage taken is dealt to the linked source.": "$s1% des dégâts subis sont infligés à la source liée.",
 "$s1% of your overhealing on allies is stored. Every $t2 sec, the stored healing is redistributed to up to 3 nearby injured allies.": "$s1% de votre soin en excès sur les alliés est stocké. Tous les $t2 sec, le soin stocké est redistribué auprès de jusqu'à 3 alliés blessés à proximité.",
 "$s2 Fire damage every $t2 sec.": "$s2 points de dégâts de Feu toutes les $t2 sec.",
@@ -4328,13 +4328,13 @@
 "$s2 Fire damage every $t2.": "$s2 points de dégâts de Feu toutes les $t2 sec.",
 "$s2 Shadow damage every $t2 seconds. Priest's party or raid members gain 1% of their maximum mana per 5 sec when the priest deals damage from Mind Blast.": "$s2 points de dégâts d'Ombre toutes les $t2 secondes. Les membres du groupe ou du raid du prêtre gagnent 1% de leur mana maximum toutes les 5 sec. quand le prêtre inflige des dégâts avec Mind Blast.",
 "$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.",
-"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 1).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douloureuse Attente (Niveau 1).",
-"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 2).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douloureuse Attente (Niveau 2).",
-"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 3).": "$s2% de los dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\r\n\r\nRemplace Délai de Douleur (Niveau 3).",
-"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 4).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douloureuse Attente (Niveau 4).",
-"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 5).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\r\n\r\nRemplace Douloureuse Attente (Niveau 5).",
-"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 6).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\r\n\r\nRemplace Douloureuse Différence (Niveau 6).",
-"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 7).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douloureuse Attente (Niveau 7).",
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 1).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douleur différée (Rang 1).",
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 2).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douleur différée (Rang 2).",
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 3).": "$s2% de los dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\r\n\r\nRemplace Douleur différée (Rang 3).",
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 4).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douleur différée (Rang 4).",
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 5).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\r\n\r\nRemplace Douleur différée (Rang 5).",
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 6).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\r\n\r\nRemplace Douleur différée (Rang 6).",
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 7).": "$s2% des dégâts que vous subissez sont reportés, infligeant leurs dégâts sur 5 secondes au lieu de tout de suite.\n\nRemplace Douleur différée (Rang 7).",
 "$s3 Nature damage inflicted every $t3 sec.": "$s3 points de dégâts de Nature infligés toutes les $t3 sec.",
 "$u charges of Stormwell.": "$u charges de Stormwell.",
 "%s the Apex Predator": "%s, Prédateur alpha",
@@ -5610,13 +5610,13 @@
 "Gathering Storm finder: dummy caster-centered AoE target-finder on Thunderstorm release; picks one random enemy per charge (no-aggro/no-log).": "Chercheur de Tempête grandissante : chercheur de cible de zone factice centré sur l'incantateur au déclenchement de Orage ; choisit un ennemi aléatoire par charge (sans aggro/sans log).",
 "Gathering Storm storm bolt: single-target Nature sky-strike on a random enemy per released Storm Charge (script-valued).": "Trait de tempête de Tempête grandissante : frappe céleste de Nature monocible sur un ennemi aléatoire par Charge de tempête libérée (valeur scriptée).",
 "Gathering from a node increases your movement speed by $s1% for $101619d.": "Recueillir des ressources à partir d'un nœud augmente votre vitesse de déplacement de $s1% pendant $101619d.",
-"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 1).": "Récupérer des ressources depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Harvest Rush (Niveau 1).",
-"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 2).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Harvest Rush (Rang 2).",
-"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 3).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Harvest Rush (Rang 3).",
-"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 4).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Harvest Rush (Rang 4).",
-"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 5).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Harvest Rush (Rang 5).",
-"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 6).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Harvest Rush (Rang 6).",
-"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 7).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Harvest Rush (Rang 7).",
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 1).": "Récupérer des ressources depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Rush de récolte (Rang 1).",
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 2).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Rush de récolte (Rang 2).",
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 3).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Rush de récolte (Rang 3).",
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 4).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Rush de récolte (Rang 4).",
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 5).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Rush de récolte (Rang 5).",
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 6).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Rush de récolte (Rang 6).",
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 7).": "Génération depuis un point d'accumulation augmente votre vitesse de déplacement de $s1% pendant $101619d.\n\nRemplace Rush de récolte (Rang 7).",
 "Generate 2 rage.": "Génère 2 fureur.",
 "Generate 20 rage.": "Génère 20 fureur.",
 "Generate rage for the caster.": "Génère de la rage pour le lanceur.",
@@ -6416,11 +6416,11 @@
 "Ossuary bone-shard burst around the Death Knight (script-scaled).": "Explosion d'éclats d'os de Ossuaire autour du Chevalier de la mort (valeur scriptée).",
 "Overhealing from your Death Strike forms a Blood Shield around you, absorbing that much damage for $1050001d and storing up to $s1% of your maximum health; overhealing beyond that is lost. While your Blood Shield holds, Rune Strike can be used without having dodged or parried.": "Le surplus de soins de votre Frappe de mort forme un Bouclier de sang autour de vous, absorbant ces dégâts pendant $1050001d et stockant jusqu'à $s1 % de votre santé maximale ; le surplus au-delà est perdu. Tant que votre Bouclier de sang tient, Frappe runique peut être utilisée sans avoir esquivé ou paré.",
 "Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.": "Vous vous protégez avec des boucliers équivalents à $s1% des soins excédentaires infligés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.",
-"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 1).": "Boucliers qui vous soignent de $s1% des dégâts d'excès causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surplus de vie (Niveau 1).",
-"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 2).": "Boucliers qui vous soignent de $s1% des dégâts de sursoin causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surabondance de Vie (Niveau 2).",
-"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 3).": "Boucliers de sursoin vous soignent à hauteur de $s1% du sursoin causé par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surabondance de vie (Niveau 3).",
-"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 4).": "Boucliers qui vous soignent de $s1% des dégâts de sursoin causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surabondance de Vie (Niveau 4).",
-"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 5).": "Boucliers qui vous soignent de $s1% des dégâts d'excès causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surplus de vie (Niveau 5).",
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 1).": "Boucliers qui vous soignent de $s1% des dégâts d'excès causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surplus de vie (Rang 1).",
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 2).": "Boucliers qui vous soignent de $s1% des dégâts de sursoin causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surplus de vie (Rang 2).",
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 3).": "Boucliers de sursoin vous soignent à hauteur de $s1% du sursoin causé par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surplus de vie (Rang 3).",
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 4).": "Boucliers qui vous soignent de $s1% des dégâts de sursoin causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surplus de vie (Rang 4).",
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 5).": "Boucliers qui vous soignent de $s1% des dégâts d'excès causés par des sorts de soin directs, jusqu'à 20% de votre santé maximale.\r\n\r\nRemplace Surplus de vie (Rang 5).",
 "Overpower refreshes the remaining duration of your Rend on the target.": "Overpower rafraîchit la durée restante de votre Rend sur la cible.",
 "Overspill arc damage.": "Dégâts d'arc de Débordement.",
 "Overspill proc worker.": "Ouvrier de proc de Débordement.",
@@ -7203,17 +7203,17 @@
 "Taking direct damage inflict @armor0.1@ Nature damage back to enemies.\r\n\r\nDamage scales with your Armor and deals at least 5 damage.": "Prendre des dégâts directs inflige @armor0.1@ dégâts Nature aux ennemis.\n\nLes dégâts augmentent en fonction de votre Armure et infligent au moins 5 dégâts.",
 "Taking direct damage inflict Nature damage back to enemies. Damage scales with your Armor and deals at least 5 damage.": "Subir des dégâts directs renvoie des dégâts de Nature aux ennemis. Les dégâts augmentent avec votre Armure et infligent au moins 5 dégâts.",
 "Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.": "Prendre des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts augmentent en fonction de votre Résilience.",
-"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 1).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts augmentent en fonction de votre Résilience.\n\nRemplace Vengeful Momentum (Niveau 1).",
-"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 2).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts dépendent de votre Endurance.\n\nRemplace Vengeful Momentum (Niveau 2).",
-"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 3).": "Prendre des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts dépendent de votre Endurance.\n\nRemplace Vengeful Momentum (Niveau 3).",
-"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 4).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts augmentent en fonction de votre Endurance.\n\nRemplace Vengeful Momentum (Niveau 4).",
-"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 5).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts dépendent de votre Endurance.\n\nRemplace Vengeful Momentum (Niveau 5).",
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 1).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts augmentent en fonction de votre Résilience.\n\nRemplace Momentum vengeur (Rang 1).",
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 2).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts dépendent de votre Endurance.\n\nRemplace Momentum vengeur (Rang 2).",
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 3).": "Prendre des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts dépendent de votre Endurance.\n\nRemplace Momentum vengeur (Rang 3).",
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 4).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts augmentent en fonction de votre Endurance.\n\nRemplace Momentum vengeur (Rang 4).",
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 5).": "Encaisser des coups directs en mêlée confère un cumul de Momentum. Cet effet ne peut survenir plus d'une fois toutes les 0,3 sec. \n\nÀ $s1 cumuls, vous infligez ${$101438m1} dégâts physiques et générez une quantité importante de menace. Les dégâts dépendent de votre Endurance.\n\nRemplace Momentum vengeur (Rang 5).",
 "Taking magical damage reduces damage taken from that school by $s1% for $101020d.": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.",
-"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 1).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace la Résilience adaptative (Niveau 1).",
-"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 2).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace la Résilience adaptative (Niveau 2).",
-"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 3).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace la Résilience adaptative (Niveau 3).",
-"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 4).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace la Résilience adaptative (Niveau 4).",
-"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 5).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace la Résilience adaptative (Niveau 5).",
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 1).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace Résilience adaptative (Rang 1).",
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 2).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace Résilience adaptative (Rang 2).",
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 3).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace Résilience adaptative (Rang 3).",
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 4).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace Résilience adaptative (Rang 4).",
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 5).": "Prendre des dégâts magiques réduit les dégâts subis de ce type de $s1% pendant $101020d.\r\n\r\nRemplace Résilience adaptative (Rang 5).",
 "Target Finder": "Cible des ennemis.",
 "Target Finder: nearest hostile target for Breakwater.": "Cible des ennemis : cible hostile la plus proche pour Brise-lames.",
 "Target Finder: nearest hostile target for Stormbound Well.": "Cible des ennemis : cible hostile la plus proche pour Puits de la tempête.",
@@ -7373,13 +7373,13 @@
 "When casting a melee ability, you have $h% chance to launch $s2 missiles at a random location, dealing  Arcane damage to enemies hit. \r\n\r\nThis effect deals at least 30 damage.": "Quand vous utilisez une capacité de mêlée, vous avez $h% de chances de lancer $s2 missiles à un endroit aléatoire, infligeant des dégâts des Arcanes aux ennemis touchés.\n\nCet effet inflige au moins 30 dégâts.",
 "When crafting an item, you have a $s1% chance to grant it a random additional stat.": "Lors de la fabrication d'un objet, vous avez $s1% de chances de lui octroyer une statistique supplémentaire aléatoire.",
 "When crafting items, you have a $s1% chance to recover some of the reagents used.": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.",
-"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 1).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage Efficace (Niveau 1).",
-"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 2).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage Efficace (Niveau 2).",
-"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 3).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage Efficace (Niveau 3).",
-"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 4).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage Efficace (Niveau 4).",
-"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 5).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage Efficace (Niveau 5).",
-"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 6).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage Efficace (Niveau 6).",
-"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 7).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace L'Assemblage Efficace (Rang 7).",
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 1).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage efficace (Rang 1).",
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 2).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage efficace (Rang 2).",
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 3).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage efficace (Rang 3).",
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 4).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage efficace (Rang 4).",
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 5).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage efficace (Rang 5).",
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 6).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage efficace (Rang 6).",
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 7).": "Lors de la fabrication d'objets, vous avez une chance de $s1% de récupérer une partie des réactifs utilisés.\n\nRemplace Assemblage efficace (Rang 7).",
 "When damage would bring you below $s1% health, you gain a Mana Barrier for $201345d, absorbing damage equal to $s2% of your maximum mana. \r\nIf you have no mana, Mana Barrier instead absorbs damage equal to $/2;s2% of your maximum health. \r\n\r\nWhile active, Mana Barrier deals ${$201345m2+$SPS*0.4+$AP*0.2} Shadow damage every 1 sec to nearby enemies.\r\n\r\nThis effect cannot occur more than once every $201346d.": "Quand des dégâts vous feraient passer sous $s1% de vie, vous gagnez une Barrière de mana pendant $201345d, absorbant des dégâts égaux à $s2% de votre mana maximum.\nSi vous n'avez pas de mana, la Barrière de mana absorbe à la place des dégâts égaux à $/2;s2% de vos points de vie maximum.\n\nTant qu'elle est active, la Barrière de mana inflige ${$201345m2+$SPS*0.4+$AP*0.2} points de dégâts de l'Ombre toutes les 1 sec aux ennemis proches.\n\nCet effet ne peut pas se produire plus d'une fois toutes les $201346d.",
 "When one of your absorption effects absorbs an enemy's attack, you have a high chance to sear the attacker with @sp0.06@ Holy damage. This effect deals at least 20 damage.": "Quand l'un de vos effets d'absorption absorbe une attaque ennemie, vous avez de fortes chances de brûler l'attaquant avec @sp0.06@ de dégâts Saints. Cet effet inflige au moins 20 points de dégâts.",
 "When one of your absorption effects absorbs an enemy's attack, you have a high chance to sear the attacker with @sp0.12@ Holy damage. This effect deals at least 20 damage.": "Quand l'un de vos effets d'absorption absorbe une attaque ennemie, vous avez de fortes chances de brûler l'attaquant avec @sp0.12@ de dégâts Saints. Cet effet inflige au moins 20 points de dégâts.",
@@ -7447,11 +7447,11 @@
 "When you fall below $s2% health, your movement speed is greatly increased for a short time. \r\n\r\nThis effect cannot occur more than once every $200420d.": "Lorsque vous tombez en dessous de $s2% de vie, votre vitesse de déplacement est considérablement augmentée pendant un court instant. \n\nCet effet ne peut survenir plus d'une fois toutes les $200420d.",
 "When you fall below 50% health, damage taken is reduced by @flat15@% for $200444d.\r\n\r\nThis effect cannot occur more than once every $200445d.": "Lorsque vous tombez en dessous de 50 % de vie, les dégâts subis sont réduits de @flat15@ % pour $200444d.\n\nCet effet ne peut survenir plus d'une fois toutes les $200445d.",
 "When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.": "Quand vous soignez un allié, un ennemi proche subit des dégâts Divins égaux à $s1% des soins infligés.",
-"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 1).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts divins équivalents à $s1% des soins effectués.\n\nRemplace Atoning Radiance (Niveau 1).",
-"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 2).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins égaux à $s1% des soins effectués.\r\n\r\nRemplace Atoning Radiance (Rang 2).",
-"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 3).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins égaux à $s1% des dégâts de soin infligés.\r\n\r\nRemplace Atoning Radiance (Rang 3).",
-"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 4).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins équivalents à $s1% des dégâts de soin infligés.\r\n\r\nRemplace Atoning Radiance (Niveau 4).",
-"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 5).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins égaux à $s1% des soins effectués.\n\nRemplace Atoning Radiance (Rang 5).",
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 1).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts divins équivalents à $s1% des soins effectués.\n\nRemplace Radiance d'expiation (Rang 1).",
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 2).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins égaux à $s1% des soins effectués.\r\n\r\nRemplace Radiance d'expiation (Rang 2).",
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 3).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins égaux à $s1% des dégâts de soin infligés.\r\n\r\nRemplace Radiance d'expiation (Rang 3).",
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 4).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins équivalents à $s1% des dégâts de soin infligés.\r\n\r\nRemplace Radiance d'expiation (Rang 4).",
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 5).": "Lorsque vous soignez un allié, un ennemi proche subit des dégâts Divins égaux à $s1% des soins effectués.\n\nRemplace Radiance d'expiation (Rang 5).",
 "When you kill a target, all your remaining damage-over-time on it instantly detonate, dealing $s1% of their combined remaining damage to enemies within $200757a1 yards.": "Lorsque vous tuez une cible, tous vos dégâts par effet de durée restants sur elle explosent instantanément, infligeant $s1% des dégâts restants combinés à tous les ennemis à portée de $200757a1 yards.",
 "When you or one of your beasts kills an enemy, the remaining cooldown of Kill Command is reduced by @flat0.15@ sec.": "Quand vous ou l'un de vos animaux tue un ennemi, le temps restant de recharge de Commande de tuer est réduit de @flat0.15@ sec.",
 "When you take damage that leaves you below $s2% health, you are affected by a random heal-over-time spell from another class. \r\n\r\nThis effect cannot occur more than once every $/1000;s3 sec.": "Lorsque vous subissez des dégâts qui vous laissent en dessous de $s2% de vie, vous êtes affecté par un sort de soin au fil du temps aléatoire d'une autre classe. \n\nCet effet ne peut survenir plus d'une fois toutes les $/1000;s3 sec.",
@@ -7539,11 +7539,11 @@
 "While above $s2% health, damage taken from direct hits is reduced by $s3%.": "Tant que vous avez plus de $s2% de vie, les dégâts subis par des coups directs sont réduits de $s3%.",
 "While above $s3% mana, your melee and ranged basic attacks deal an additional $s1% Arcane damage, but consume $s2% of your base mana.": "Tant que vous avez plus de $s3% de mana, vos attaques de base en mêlée et à distance infligent un dégât supplémentaire de $s1% de type Arcane, mais consomment $s2% de votre mana de base.",
 "While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.": "Tant que votre mana est supérieur à 75 %, vous gagnez Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par Flot Réparateur.\n\nFlot Réparateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par Puissance Montante.",
-"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 1).": "Tant que votre mana est supérieur à 75 %, vous gagnez Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par Flot Réparateur.\n\nFlot Réparateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par Puissance Montante.\n\nRemplace Équilibre Arcanique (Niveau 1).",
-"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 2).": "Tant que votre mana est supérieur à 75 %, vous gagnez Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par Flot Restaurateur.\n\nFlot Restaurateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par Puissance Montante.\n\nRemplace Équilibre Arcanique (Niveau 2).",
-"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 3).": "Tant que vous avez plus de 75 % de mana, vous gagnez Puissance Montante, augmentant vos dégâts de sorts de $s2%. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par Flot Restaurateur.\n\nFlot Restaurateur augmente votre régénération de mana de $s3% et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par Puissance Montante.\n\nRemplace Équilibre Arcanique (Niveau 3).",
-"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 4).": "Tant que votre mana est supérieur à 75 %, vous gagnez la Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par le Flot Réparateur.\n\nLe Flot Réparateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par la Puissance Montante.\n\nRemplace l'Équilibre Arcane (Niveau 4).",
-"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 5).": "Tant que votre mana est supérieur à 75 %, vous gagnez la Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par le Flot Restaurateur.\n\nLe Flot Restaurateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par la Puissance Montante.\n\nRemplace l'Équilibre Arcanique (Niveau 5).",
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 1).": "Tant que votre mana est supérieur à 75 %, vous gagnez Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par Flot Réparateur.\n\nFlot Réparateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par Puissance Montante.\n\nRemplace Équilibre arcanique (Rang 1).",
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 2).": "Tant que votre mana est supérieur à 75 %, vous gagnez Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par Flot Restaurateur.\n\nFlot Restaurateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par Puissance Montante.\n\nRemplace Équilibre arcanique (Rang 2).",
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 3).": "Tant que vous avez plus de 75 % de mana, vous gagnez Puissance Montante, augmentant vos dégâts de sorts de $s2%. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par Flot Restaurateur.\n\nFlot Restaurateur augmente votre régénération de mana de $s3% et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par Puissance Montante.\n\nRemplace Équilibre arcanique (Rang 3).",
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 4).": "Tant que votre mana est supérieur à 75 %, vous gagnez la Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par le Flot Réparateur.\n\nLe Flot Réparateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par la Puissance Montante.\n\nRemplace Équilibre arcanique (Rang 4).",
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 5).": "Tant que votre mana est supérieur à 75 %, vous gagnez la Puissance Montante, augmentant vos dégâts de sorts de $s2 %. Cet effet persiste jusqu'à ce que votre mana tombe en dessous de 25 %, auquel moment il est remplacé par le Flot Restaurateur.\n\nLe Flot Restaurateur augmente votre régénération de mana de $s3 % et persiste jusqu'à ce que votre mana dépasse 75 %, auquel moment il est remplacé par la Puissance Montante.\n\nRemplace Équilibre arcanique (Rang 5).",
 "While active, the next Kill Shot cast by the caster ignores its health requirement.": "Tant qu'il est actif, le prochain Kill Shot lancé par le lanceur ignore ses exigences en santé.",
 "While at $s1 stacks or more of Deathbound Focus, your damage done to targets below 35% health is increased by $s2%.": "Tant que vous avez $s1 piles ou plus de Focus de Mort, vos dégâts infligés aux cibles dont la santé est inférieure à 35 % sont augmentés de $s2 %.",
 "While below $s1% Energy, your Energy regeneration is increased by $200871s1%. \r\nWhile above $s1% Energy, your damage done is increased by $200872s1%.": "Tant que votre Énergie est inférieure à $s1%, la régénération d'Énergie est augmentée de $200871s1%. \r\nTant que votre Énergie est supérieure à $s1%, les dégâts infligés sont augmentés de $200872s1%.",
@@ -7608,11 +7608,11 @@
 "While in combat, you restore $100901s1% of your maximum health every $t1 seconds.": "Tant que vous êtes en combat, vous restaurez $100901s1% de votre santé maximale toutes les $t1 secondes.",
 "While in combat, you restore $100902s1% of your maximum health every $t1 seconds.": "Tant que vous êtes en combat, vous restaurez $100902s1% de votre santé maximale toutes les $t1 secondes.",
 "While moving, damage taken is reduced by $s1%.": "Tant que vous vous déplacez, les dégâts subis sont réduits de $s1%.",
-"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 1).": "Tant que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Niveau 1).",
-"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 2).": "Tant que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Niveau 2).",
-"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 3).": "Alors que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Niveau 3).",
-"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 4).": "Alors que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Niveau 4).",
-"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 5).": "Alors que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Niveau 5).",
+"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 1).": "Tant que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Rang 1).",
+"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 2).": "Tant que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Rang 2).",
+"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 3).": "Alors que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Rang 3).",
+"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 4).": "Alors que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Rang 4).",
+"While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 5).": "Alors que vous vous déplacez, les dégâts subis sont réduits de $s1%.\r\n\r\nRemplace Défense fluide (Rang 5).",
 "While out of combat, damage and healing done is increased by $200203s1%. This effect persists for $200204d after you enter combat.": "Hors combat, les dégâts et les soins infligés sont augmentés de $200203s1%. Cet effet persiste pendant $200204d après votre entrée en combat.",
 "While out of combat, you restore $100940s1% of your maximum health every $t1 seconds.": "Hors combat, vous restaurez $100940s1% de votre vie maximale toutes les $t1 secondes.",
 "While out of combat, you restore $100941s1% of your maximum health every $t1 seconds.": "Hors combat, vous restaurez $100941s1% de votre vie maximale toutes les $t1 secondes.",
@@ -7628,11 +7628,11 @@
 "While you are stealthed or Shadow Dance is active, your melee attacks and abilities have a high chance to strike from the darkness, dealing @ap0.06@ Shadow damage. This effect deals at least 20 damage.": "Tant que vous êtes en mode furtif ou que la Danse d'ombre est active, vos attaques de mêlée et vos capacités ont de fortes chances de frapper depuis l'ombre, infligeant @ap0.06@ dégâts Shadow. Cet effet inflige au moins 20 dégâts.",
 "While you are stealthed or Shadow Dance is active, your melee attacks and abilities have a high chance to strike from the darkness, dealing @ap0.3@ Shadow damage. This effect deals at least 20 damage.": "Tant que vous êtes en mode furtif ou que la Danse d'ombre est active, vos attaques de mêlée et vos capacités ont de fortes chances de frapper depuis l'ombre, infligeant @ap0.3@ dégâts Shadow. Cet effet inflige au moins 20 dégâts.",
 "While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.",
-"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 1).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Dans la mêlée (Niveau 1).",
-"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 2).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Rang 2).",
-"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 3).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Rang 3).",
-"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 4).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Niveau 4).",
-"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 5).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Rang 5).",
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 1).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Dans la mêlée (Niveau 1).\n\nRemplace Dans la bataille (Rang 1).",
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 2).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Rang 2).\n\nRemplace Dans la bataille (Rang 2).",
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 3).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Rang 3).\n\nRemplace Dans la bataille (Rang 3).",
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 4).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Niveau 4).\n\nRemplace Dans la bataille (Rang 4).",
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 5).": "Tant que vous avez $s1 ou plus d'ennemis à 8 yd de vous, vous générez $s2% de menace accrue et infligez $s3% de dégâts supplémentaires.\n\nRemplacez par Into the Fray (Rang 5).\n\nRemplace Dans la bataille (Rang 5).",
 "While you have $s1 stacks of Butcher’s Tempo, your melee and ranged critical strikes also strike up to 3 nearby enemies for ${$111300m1+$AP*0.05} damage.": "Tant que vous avez $s1 piles de Butcher’s Tempo, vos frappes critiques en mêlée et à distance frappent également jusqu'à 3 ennemis proches pour ${$111300m1+$AP*0.05} de dégâts.",
 "While you have at least 3 different Base Stat Echo types active (Strength, Agility, Intellect, Spirit, or Stamina), your damage is increased by $200963s1%.": "Tant que vous avez au moins 3 types différents d'écho de statistique de base actifs (Force, Agilité, Intellect, Esprit ou Endurance), vos dégâts sont augmentés de $200963s1%.",
 "While your Adrenaline Rush or Blade Flurry is active, your melee attacks and abilities have a chance to make your blood boil over, dealing @ap0.05@ Physical damage to the target. This effect deals at least 20 damage.": "Tant que votre Poussée d'adrénaline ou votre Tempête de lame est active, vos attaques de mêlée et vos capacités ont une chance de faire bouillir votre sang, infligeant @ap0.05@ dégâts physiques au cible. Cet effet inflige au moins 20 dégâts.",
@@ -7691,11 +7691,11 @@
 "You constantly harvest the souls of nearby enemies, gaining a stack of Harvested Soul. Each stack increases your damage done by $200604s1%. Up to $s2% increase.\r\n\r\nWhen an enemy with its soul harvested dies, you regain ${$200605m1+$BH*0.5+$AP*0.25} health.": "Vous harvestez constamment les âmes des ennemis proches, gagnant un tas de Âme Harvestée. Chaque tas augmente vos dégâts infligés de $200604s1%. Jusqu'à $s2% d'augmentation.\n\nQuand un ennemi dont l'âme a été harvestée meurt, vous regagnez ${$200605m1+$BH*0.5+$AP*0.25} de vie.",
 "You deal $s1% increased damage to a target for each of your damage over time effects active on it. Also increases your spell power and attack power by $200289s1.": "Vous infligez $s1% de dégâts supplémentaires à une cible pour chaque effet de dégâts au fil du temps actif sur elle. Augmente également votre puissance de sorts et votre puissance d'attaque de $200289s1.",
 "You deal $s1% increased damage to enemies below 35% health.": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35%.",
-"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 1).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace l'Engagement de l'exécuteur (Niveau 1).",
-"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 2).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace l'Engagement de l'exécuteur (Niveau 2).",
-"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 3).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace l'Engagement de l'exécuteur (Niveau 3).",
-"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 4).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace l'Engagement de l'exécuteur (Niveau 4).",
-"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 5).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace Exécuteur's Oath (Rang 5).",
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 1).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace Serment du bourreau (Rang 1).",
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 2).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace Serment du bourreau (Rang 2).",
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 3).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace Serment du bourreau (Rang 3).",
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 4).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace Serment du bourreau (Rang 4).",
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 5).": "Vous infligez $s1% de dégâts supplémentaires aux ennemis dont la santé est inférieure à 35 %.\n\nRemplace Serment du bourreau (Rang 5).",
 "You deal 20% additional damage to enemies affected by crowd control.": "Vous infligez 20 % de dégâts supplémentaires aux ennemis affectés par un contrôle de foule.",
 "You have $s1 stack of Aether Attunement.": "Vous avez $s1 cumul(s) d'Aether Attunement.",
 "You have a $200260h% to cast the same ability twice. Only work with some healing and damaging class abilities.": "Vous avez un $200260h% de chances de lancer la même capacité deux fois. Fonctionne uniquement avec certaines capacités de classes de soin et de dommages.",
@@ -7774,11 +7774,11 @@
 "Your Frostbolt and Frostfire Bolt critical strikes have a high chance to deepen the cold, reducing the remaining cooldown of Deep Freeze by @flat0.2@ sec.": "Les coups critiques de vos Frostbolt et Frostfire Bolt ont de fortes chances d'intensifier le froid, réduisant le temps de recharge restant de Deep Freeze de @flat0.2@ sec.",
 "Your Garrote's periodic damage has a chance to apply a dose of your Deadly Poison to the victim.": "Les dégâts périodiques de votre Garrote ont une chance d'appliquer une dose de votre Poison mortel à la cible.",
 "Your Hearthstone cools down $/5;s1% faster.": "Votre Pierre de Retour refroidit $/5;s1% plus rapidement.",
-"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 1).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace le Rappel du Voyageur (Niveau 1).",
-"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 2).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace le Rappel du Voyageur (Niveau 2).",
-"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 3).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace le Rappel du Voyageur (Niveau 3).",
-"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 4).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace le Rappel du Voyageur (Niveau 4).",
-"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 5).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace le Rappel du Voyageur (Niveau 5).",
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 1).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace Rappel du voyageur (Rang 1).",
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 2).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace Rappel du voyageur (Rang 2).",
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 3).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace Rappel du voyageur (Rang 3).",
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 4).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace Rappel du voyageur (Rang 4).",
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 5).": "Votre Pierre de Retour se refroidit $/5;s1% plus rapidement.\r\n\r\nRemplace Rappel du voyageur (Rang 5).",
 "Your HoTs tick for 100 additional healing per second, increased by Spirit.": "Vos soins sur la durée rendent 100 points de vie supplémentaires par seconde, augmentés par l'Esprit.",
 "Your HoTs tick for 150 additional healing per second, increased by Spirit.": "Vos soins sur la durée rendent 150 points de vie supplémentaires par seconde, augmentés par l'Esprit.",
 "Your HoTs tick for 300 additional healing per second, increased by Spirit.": "Vos soins sur la durée rendent 300 points de vie supplémentaires par seconde, augmentés par l'Esprit.",
@@ -7962,11 +7962,11 @@
 "Your melee and ranged attacks wound the target, dealing @ap0.3@ damage over $200422d. \r\n\r\nThis effect deals at least 30 damage.": "Vos attaques de mêlée et à distance infligent des dégâts au cible, infligeant @ap0.3@ de dégâts sur $200422d. \n\nCet effet inflige au moins 30 points de dégâts.",
 "Your melee and ranged basic attack critical strikes increase your attack power by $700035s1, stacking up to $700035u times. One stack is lost every 2 seconds.": "Vos coups critiques d'attaque de base au corps à corps et à distance augmentent votre puissance d'attaque de $700035s1, cumulable jusqu'à $700035u fois. Un cumul est perdu toutes les 2 secondes.",
 "Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101300s1% for $101300d. This effect stacks up to $101300u times.": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101300s1% pendant $101300d. Cet effet peut s'accumuler jusqu'à $101300u fois.",
-"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101301s1% for $101301d. This effect stacks up to $101301u times.\r\n\r\nReplace Butcher's Tempo (Rank 1).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre vitesse d'attaque de $101301s1% pendant $101301d. Cet effet peut s'accumuler jusqu'à $101301u fois.\n\nRemplace Butcher's Tempo (Niveau 1).",
-"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101302s1% for $101302d. This effect stacks up to $101302u times.\r\n\r\nReplace Butcher's Tempo (Rank 2).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101302s1% pendant $101302d. Cet effet peut s'accumuler jusqu'à $101302u fois.\n\nRemplace Butcher's Tempo (Rang 2).",
-"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101303s1% for $101303d. This effect stacks up to $101303u times.\r\n\r\nReplace Butcher's Tempo (Rank 3).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101303s1% pendant $101303d. Cet effet peut s'accumuler jusqu'à $101303u fois.\n\nRemplace Butcher's Tempo (Rang 3).",
-"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101304s1% for $101304d. This effect stacks up to $101304u times.\r\n\r\nReplace Butcher's Tempo (Rank 4).": "Vos frappes critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101304s1% pendant $101304d. Cet effet peut s'accumuler jusqu'à $101304u fois.\n\nRemplace Butcher's Tempo (Niveau 4).",
-"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101305s1% for $101305d. This effect stacks up to $101305u times.\r\n\r\nReplace Butcher's Tempo (Rank 5).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101305s1% pendant $101305d. Cet effet peut s'accumuler jusqu'à $101305u fois.\n\nRemplace Butcher's Tempo (Rang 5).",
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101301s1% for $101301d. This effect stacks up to $101301u times.\r\n\r\nReplace Butcher's Tempo (Rank 1).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre vitesse d'attaque de $101301s1% pendant $101301d. Cet effet peut s'accumuler jusqu'à $101301u fois.\n\nRemplace Tempo du boucher (Rang 1).",
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101302s1% for $101302d. This effect stacks up to $101302u times.\r\n\r\nReplace Butcher's Tempo (Rank 2).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101302s1% pendant $101302d. Cet effet peut s'accumuler jusqu'à $101302u fois.\n\nRemplace Tempo du boucher (Rang 2).",
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101303s1% for $101303d. This effect stacks up to $101303u times.\r\n\r\nReplace Butcher's Tempo (Rank 3).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101303s1% pendant $101303d. Cet effet peut s'accumuler jusqu'à $101303u fois.\n\nRemplace Tempo du boucher (Rang 3).",
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101304s1% for $101304d. This effect stacks up to $101304u times.\r\n\r\nReplace Butcher's Tempo (Rank 4).": "Vos frappes critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101304s1% pendant $101304d. Cet effet peut s'accumuler jusqu'à $101304u fois.\n\nRemplace Tempo du boucher (Rang 4).",
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101305s1% for $101305d. This effect stacks up to $101305u times.\r\n\r\nReplace Butcher's Tempo (Rank 5).": "Vos coups critiques en mêlée et à distance confèrent Butcher’s Tempo, augmentant votre Vitesse d'attaque de $101305s1% pendant $101305d. Cet effet peut s'accumuler jusqu'à $101305u fois.\n\nRemplace Tempo du boucher (Rang 5).",
 "Your melee and ranged critical strikes have a 20% chance to deal Physical damage to the target.  Proc chance tripled against target under 35% health. This effect deals at least 20 damage.": "Vos coups critiques de mêlée et à distance ont 20% de chances d'infliger des dégâts physiques à la cible. Chance de déclenchement triplée contre les cibles sous 35% de vie. Cet effet inflige au moins 20 dégâts.",
 "Your melee attacks also strike enemies in front of you.": "Vos attaques en mêlée frappent aussi les ennemis devant vous.",
 "Your melee attacks and abilities have a chance to lash the poison in the target's veins, dealing @ap0.01@ Nature damage for each of your Deadly Poison doses afflicting it. This effect deals at least 15 damage.": "Vos attaques de mêlée et vos capacités ont une chance de faire lâcher le poison dans les veines de la cible, infligeant @ap0.01@ dégâts Nature pour chaque dose de poison mortel que vous lui avez appliquée. Cet effet inflige au moins 15 dégâts.",
@@ -8184,7 +8184,216 @@ null
 "la Combustion Crépusculaire"
 ]
 ],
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 1).": [
+[
+"Lifebond (Rank 1)",
+"Lien de vie (Rang 1)",
+null
+]
+],
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 2).": [
+[
+"Lifebond (Rank 2)",
+"Lien de vie (Rang 2)",
+null
+]
+],
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 3).": [
+[
+"Lifebond (Rank 3)",
+"Lien de vie (Rang 3)",
+null
+]
+],
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 4).": [
+[
+"Lifebond (Rank 4)",
+"Lien de vie (Rang 4)",
+null
+]
+],
+"$s1% of all healing you deal to allies also heals you.\r\n\r\nReplace Lifebond (Rank 5).": [
+[
+"Lifebond (Rank 5)",
+"Lien de vie (Rang 5)",
+null
+]
+],
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 1).": [
+[
+"Deferred Pain (Rank 1)",
+"Douleur différée (Rang 1)",
+null
+],
+[
+"Deferred Pain",
+"Douleur différée",
+null
+]
+],
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 2).": [
+[
+"Deferred Pain (Rank 2)",
+"Douleur différée (Rang 2)",
+null
+],
+[
+"Deferred Pain",
+"Douleur différée",
+null
+]
+],
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 3).": [
+[
+"Deferred Pain (Rank 3)",
+"Douleur différée (Rang 3)",
+null
+],
+[
+"Deferred Pain",
+"Douleur différée",
+null
+]
+],
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 4).": [
+[
+"Deferred Pain (Rank 4)",
+"Douleur différée (Rang 4)",
+null
+],
+[
+"Deferred Pain",
+"Douleur différée",
+null
+]
+],
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 5).": [
+[
+"Deferred Pain (Rank 5)",
+"Douleur différée (Rang 5)",
+null
+],
+[
+"Deferred Pain",
+"Douleur différée",
+null
+]
+],
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 6).": [
+[
+"Deferred Pain (Rank 6)",
+"Douleur différée (Rang 6)",
+null
+],
+[
+"Deferred Pain",
+"Douleur différée",
+null
+]
+],
+"$s2% of the damage you take is delayed, dealing its damage over 5 seconds instead.\r\n\r\nReplace Deferred Pain (Rank 7).": [
+[
+"Deferred Pain (Rank 7)",
+"Douleur différée (Rang 7)",
+null
+],
+[
+"Deferred Pain",
+"Douleur différée",
+null
+]
+],
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 1).": [
+[
+"Harvest Rush (Rank 1)",
+"Rush de récolte (Rang 1)",
+null
+]
+],
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 2).": [
+[
+"Harvest Rush (Rank 2)",
+"Rush de récolte (Rang 2)",
+null
+]
+],
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 3).": [
+[
+"Harvest Rush (Rank 3)",
+"Rush de récolte (Rang 3)",
+null
+]
+],
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 4).": [
+[
+"Harvest Rush (Rank 4)",
+"Rush de récolte (Rang 4)",
+null
+]
+],
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 5).": [
+[
+"Harvest Rush (Rank 5)",
+"Rush de récolte (Rang 5)",
+null
+]
+],
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 6).": [
+[
+"Harvest Rush (Rank 6)",
+"Rush de récolte (Rang 6)",
+null
+]
+],
+"Gathering from a node increases your movement speed by $s1% for $101619d.\r\n\r\nReplace Harvest Rush (Rank 7).": [
+[
+"Harvest Rush (Rank 7)",
+"Rush de récolte (Rang 7)",
+null
+]
+],
 "Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 1).": [
+[
+"Life Surplus (Rank 1)",
+"Surplus de vie (Rang 1)",
+null
+],
+[
+"Life Surplus",
+"Surplus de vie",
+null
+]
+],
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 2).": [
+[
+"Life Surplus (Rank 2)",
+"Surplus de vie (Rang 2)",
+null
+],
+[
+"Life Surplus",
+"Surplus de vie",
+null
+]
+],
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 3).": [
+[
+"Life Surplus (Rank 3)",
+"Surplus de vie (Rang 3)",
+null
+],
+[
+"Life Surplus",
+"Surplus de vie",
+null
+]
+],
+"Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 4).": [
+[
+"Life Surplus (Rank 4)",
+"Surplus de vie (Rang 4)",
+null
+],
 [
 "Life Surplus",
 "Surplus de vie",
@@ -8193,12 +8402,211 @@ null
 ],
 "Overhealing shields you for $s1% of the overhealing done by direct healing spells, up to 20% of your maximum health.\r\n\r\nReplace Life Surplus (Rank 5).": [
 [
+"Life Surplus (Rank 5)",
+"Surplus de vie (Rang 5)",
+null
+],
+[
 "Life Surplus",
 "Surplus de vie",
 null
 ]
 ],
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 1).": [
+[
+"Vengeful Momentum (Rank 1)",
+"Momentum vengeur (Rang 1)",
+null
+]
+],
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 2).": [
+[
+"Vengeful Momentum (Rank 2)",
+"Momentum vengeur (Rang 2)",
+null
+]
+],
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 3).": [
+[
+"Vengeful Momentum (Rank 3)",
+"Momentum vengeur (Rang 3)",
+null
+]
+],
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 4).": [
+[
+"Vengeful Momentum (Rank 4)",
+"Momentum vengeur (Rang 4)",
+null
+]
+],
+"Taking direct melee hits grants a stack of Momentum. This effect cannot occur more than once every 0.3 sec. \r\n\r\nAt $s1 stacks, you deal ${$101438m1} Physical damage and generate a massive amount of threat. Damage scales with your Stamina.\r\n\r\nReplace Vengeful Momentum (Rank 5).": [
+[
+"Vengeful Momentum (Rank 5)",
+"Momentum vengeur (Rang 5)",
+null
+]
+],
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 1).": [
+[
+"Adaptive Resilience (Rank 1)",
+"Résilience adaptative (Rang 1)",
+null
+]
+],
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 2).": [
+[
+"Adaptive Resilience (Rank 2)",
+"Résilience adaptative (Rang 2)",
+null
+]
+],
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 3).": [
+[
+"Adaptive Resilience (Rank 3)",
+"Résilience adaptative (Rang 3)",
+null
+]
+],
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 4).": [
+[
+"Adaptive Resilience (Rank 4)",
+"Résilience adaptative (Rang 4)",
+null
+]
+],
+"Taking magical damage reduces damage taken from that school by $s1% for $101020d.\r\n\r\nReplace Adaptive Resilience (Rank 5).": [
+[
+"Adaptive Resilience (Rank 5)",
+"Résilience adaptative (Rang 5)",
+null
+]
+],
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 1).": [
+[
+"Efficient Assembly (Rank 1)",
+"Assemblage efficace (Rang 1)",
+null
+]
+],
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 2).": [
+[
+"Efficient Assembly (Rank 2)",
+"Assemblage efficace (Rang 2)",
+null
+]
+],
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 3).": [
+[
+"Efficient Assembly (Rank 3)",
+"Assemblage efficace (Rang 3)",
+null
+]
+],
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 4).": [
+[
+"Efficient Assembly (Rank 4)",
+"Assemblage efficace (Rang 4)",
+null
+]
+],
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 5).": [
+[
+"Efficient Assembly (Rank 5)",
+"Assemblage efficace (Rang 5)",
+null
+]
+],
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 6).": [
+[
+"Efficient Assembly (Rank 6)",
+"Assemblage efficace (Rang 6)",
+null
+]
+],
+"When crafting items, you have a $s1% chance to recover some of the reagents used.\r\n\r\nReplace Efficient Assembly (Rank 7).": [
+[
+"Efficient Assembly (Rank 7)",
+"Assemblage efficace (Rang 7)",
+null
+]
+],
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 1).": [
+[
+"Atoning Radiance (Rank 1)",
+"Radiance d'expiation (Rang 1)",
+null
+]
+],
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 2).": [
+[
+"Atoning Radiance (Rank 2)",
+"Radiance d'expiation (Rang 2)",
+null
+]
+],
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 3).": [
+[
+"Atoning Radiance (Rank 3)",
+"Radiance d'expiation (Rang 3)",
+null
+]
+],
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 4).": [
+[
+"Atoning Radiance (Rank 4)",
+"Radiance d'expiation (Rang 4)",
+null
+]
+],
+"When you heal an ally, a nearby enemy takes Holy damage equal to $s1% of the healing done.\r\n\r\nReplace Atoning Radiance (Rank 5).": [
+[
+"Atoning Radiance (Rank 5)",
+"Radiance d'expiation (Rang 5)",
+null
+]
+],
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 1).": [
+[
+"Arcane Equilibrium (Rank 1)",
+"Équilibre arcanique (Rang 1)",
+null
+]
+],
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 2).": [
+[
+"Arcane Equilibrium (Rank 2)",
+"Équilibre arcanique (Rang 2)",
+null
+]
+],
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 3).": [
+[
+"Arcane Equilibrium (Rank 3)",
+"Équilibre arcanique (Rang 3)",
+null
+]
+],
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 4).": [
+[
+"Arcane Equilibrium (Rank 4)",
+"Équilibre arcanique (Rang 4)",
+null
+]
+],
+"While above 75% mana, you gain Surging Power, increasing your spell damage by $s2%. This effect persists until your mana falls below 25%, at which point it is replaced by Restorative Flow.\r\n\nRestorative Flow increases your mana regeneration by $s3% and persists until your mana rises above 75%, at which point it is replaced by Surging Power.\r\n\r\nReplace Arcane Equilibrium (Rank 5).": [
+[
+"Arcane Equilibrium (Rank 5)",
+"Équilibre arcanique (Rang 5)",
+null
+]
+],
 "While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 1).": [
+[
+"Flowing Defense (Rank 1)",
+"Défense fluide (Rang 1)",
+null
+],
 [
 "Flowing Defense",
 "Défense fluide",
@@ -8207,12 +8615,22 @@ null
 ],
 "While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 2).": [
 [
+"Flowing Defense (Rank 2)",
+"Défense fluide (Rang 2)",
+null
+],
+[
 "Flowing Defense",
 "Défense fluide",
 null
 ]
 ],
 "While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 3).": [
+[
+"Flowing Defense (Rank 3)",
+"Défense fluide (Rang 3)",
+null
+],
 [
 "Flowing Defense",
 "Défense fluide",
@@ -8221,6 +8639,11 @@ null
 ],
 "While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 4).": [
 [
+"Flowing Defense (Rank 4)",
+"Défense fluide (Rang 4)",
+null
+],
+[
 "Flowing Defense",
 "Défense fluide",
 null
@@ -8228,8 +8651,153 @@ null
 ],
 "While moving, damage taken is reduced by $s1%.\r\n\r\nReplace Flowing Defense (Rank 5).": [
 [
+"Flowing Defense (Rank 5)",
+"Défense fluide (Rang 5)",
+null
+],
+[
 "Flowing Defense",
 "Défense fluide",
+null
+]
+],
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 1).": [
+[
+"Into the Fray (Rank 1)",
+"Dans la bataille (Rang 1)",
+null
+]
+],
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 2).": [
+[
+"Into the Fray (Rank 2)",
+"Dans la bataille (Rang 2)",
+null
+]
+],
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 3).": [
+[
+"Into the Fray (Rank 3)",
+"Dans la bataille (Rang 3)",
+null
+]
+],
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 4).": [
+[
+"Into the Fray (Rank 4)",
+"Dans la bataille (Rang 4)",
+null
+]
+],
+"While you have $s1 or more enemies within 8 yds of you, you generate $s2% increased threat and deal $s3% increased damage.\r\n\r\nReplace Into the Fray (Rank 5).": [
+[
+"Into the Fray (Rank 5)",
+"Dans la bataille (Rang 5)",
+null
+]
+],
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 1).": [
+[
+"Executioner’s Oath (Rank 1)",
+"Serment du bourreau (Rang 1)",
+null
+]
+],
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 2).": [
+[
+"Executioner’s Oath (Rank 2)",
+"Serment du bourreau (Rang 2)",
+null
+]
+],
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 3).": [
+[
+"Executioner’s Oath (Rank 3)",
+"Serment du bourreau (Rang 3)",
+null
+]
+],
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 4).": [
+[
+"Executioner’s Oath (Rank 4)",
+"Serment du bourreau (Rang 4)",
+null
+]
+],
+"You deal $s1% increased damage to enemies below 35% health.\r\n\r\nReplace Executioner’s Oath (Rank 5).": [
+[
+"Executioner’s Oath (Rank 5)",
+"Serment du bourreau (Rang 5)",
+null
+]
+],
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 1).": [
+[
+"Traveler’s Recall (Rank 1)",
+"Rappel du voyageur (Rang 1)",
+null
+]
+],
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 2).": [
+[
+"Traveler’s Recall (Rank 2)",
+"Rappel du voyageur (Rang 2)",
+null
+]
+],
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 3).": [
+[
+"Traveler’s Recall (Rank 3)",
+"Rappel du voyageur (Rang 3)",
+null
+]
+],
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 4).": [
+[
+"Traveler’s Recall (Rank 4)",
+"Rappel du voyageur (Rang 4)",
+null
+]
+],
+"Your Hearthstone cools down $/5;s1% faster.\r\n\r\nReplace Traveler’s Recall (Rank 5).": [
+[
+"Traveler’s Recall (Rank 5)",
+"Rappel du voyageur (Rang 5)",
+null
+]
+],
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101301s1% for $101301d. This effect stacks up to $101301u times.\r\n\r\nReplace Butcher's Tempo (Rank 1).": [
+[
+"Butcher’s Tempo",
+"Tempo du boucher",
+null
+]
+],
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101302s1% for $101302d. This effect stacks up to $101302u times.\r\n\r\nReplace Butcher's Tempo (Rank 2).": [
+[
+"Butcher’s Tempo",
+"Tempo du boucher",
+null
+]
+],
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101303s1% for $101303d. This effect stacks up to $101303u times.\r\n\r\nReplace Butcher's Tempo (Rank 3).": [
+[
+"Butcher’s Tempo",
+"Tempo du boucher",
+null
+]
+],
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101304s1% for $101304d. This effect stacks up to $101304u times.\r\n\r\nReplace Butcher's Tempo (Rank 4).": [
+[
+"Butcher’s Tempo",
+"Tempo du boucher",
+null
+]
+],
+"Your melee and ranged critical strikes grant Butcher’s Tempo, increasing your Attack Speed by $101305s1% for $101305d. This effect stacks up to $101305u times.\r\n\r\nReplace Butcher's Tempo (Rank 5).": [
+[
+"Butcher’s Tempo",
+"Tempo du boucher",
 null
 ]
 ],
