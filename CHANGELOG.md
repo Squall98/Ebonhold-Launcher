@@ -25,6 +25,9 @@
   List) ; versions des addons tiers figées sur une version testée.
 - **Traductions** : +1 088 descriptions et +361 noms, « Remplace <nœud> (Rang N) »
   harmonisé dans le Soul Tree.
+- **Textes du serveur en français** (grimoire, fiche du personnage, inspection, champs de
+  bataille, transmogrification…) : en jeu français ils étaient vides, d'où une erreur Lua au
+  survol du grimoire.
 
 ### Fiabilité et sécurité
 - **Catalogue** : après une installation, le launcher ne revient plus à son catalogue
