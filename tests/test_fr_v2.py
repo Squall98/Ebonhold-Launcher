@@ -3,11 +3,9 @@
 import os
 import struct
 import sys
-import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.environ.setdefault("APPDATA", tempfile.mkdtemp(prefix="ebl-frv2-"))
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "vendor"))
 
