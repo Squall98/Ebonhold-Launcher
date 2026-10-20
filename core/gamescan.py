@@ -423,10 +423,13 @@ def scan(progress=None, stop_after=90.0, max_depth=6, drives=None, cancel=None,
     # meme si le temps imparti est atteint avant la fin.
     queue = collections.deque((d, 0) for d in drives)
     visited = 0
-    stopped = False
+    stopped = ""
     while queue:
-        if time.monotonic() >= deadline or (cancel is not None and cancel.is_set()):
-            stopped = True
+        if cancel is not None and cancel.is_set():
+            stopped = " (arrete par le joueur)"
+            break
+        if time.monotonic() >= deadline:
+            stopped = " (arrete : temps ecoule)"
             break
         cur, depth = queue.popleft()
         visited += 1
@@ -459,8 +462,8 @@ def scan(progress=None, stop_after=90.0, max_depth=6, drives=None, cancel=None,
     try:
         from .journal import log
         log("Scan du jeu : %d dossier(s) vus en %.1f s, %d trouve(s)%s"
-            % (visited, time.monotonic() - t0, len(items), " (arrete : temps ecoule)" if stopped else ""))
+            % (visited, time.monotonic() - t0, len(items), stopped))
     except Exception:        # noqa: BLE001
         pass
-    tell("Recherche terminee : %d dossier(s) trouve(s)." % len(items), force=True)
+    tell("Recherche terminée : %d dossier(s) trouvé(s)." % len(items), force=True)
     return items

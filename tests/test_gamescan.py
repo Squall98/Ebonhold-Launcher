@@ -259,7 +259,7 @@ class ScanComplet(unittest.TestCase):
         self.assertNotIn("SansExe", names)        # le scan cherche Wow.exe
         self.assertNotIn("Jeu", names)            # trop profond, node_modules, $Recycle.Bin
         self.assertTrue(msgs)
-        self.assertIn("Recherche terminee", msgs[-1][1])
+        self.assertIn("Recherche terminée", msgs[-1][1])
         times = [t for t, _m in msgs[:-1]]
         self.assertTrue(all(b - a >= 0.19 for a, b in zip(times, times[1:])))   # 5 par seconde maxi
 
