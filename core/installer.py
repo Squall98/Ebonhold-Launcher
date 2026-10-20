@@ -100,7 +100,7 @@ def install(product, install_dir, progress=_noop):
         blob = os.path.join(tmp, "payload")
         actual = download(product["download_url"], blob, progress)
         _verify(actual, product.get("sha256"))
-        progress(100, "Verifie. Installation...")
+        progress(100, "Vérifié. Installation...")
 
         # 2. Pose (avec sauvegarde de l'existant pour rollback)
         if product["install_target"] == "addons":

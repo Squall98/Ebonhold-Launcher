@@ -35,7 +35,22 @@ def _valid(man):
     return isinstance(man, dict) and isinstance(man.get("products"), list)
 
 
+def _test_catalogue():
+    """Session de test avant publication : EBONHOLD_CATALOGUE=<manifeste local> remplace le
+    catalogue en ligne (addons pas encore publies, installes depuis des zips locaux)."""
+    p = os.environ.get("EBONHOLD_CATALOGUE", "")
+    if p and os.path.isfile(p):
+        with open(p, encoding="utf-8") as f:
+            man = json.load(f)
+        if _valid(man):
+            return man
+    return None
+
+
 def _load_remote(timeout=5):
+    test = _test_catalogue()
+    if test is not None:
+        return test
     import urllib.request
     req = urllib.request.Request(MANIFEST_URL, headers={"User-Agent": "EbonholdLauncher"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
@@ -70,6 +85,9 @@ def fetch_offline():
     """Catalogue sans reseau : le dernier catalogue en ligne garde sur le disque, sauf s'il
     date d'avant cette version du launcher (le catalogue embarque est alors plus recent)."""
     from . import version
+    test = _test_catalogue()
+    if test is not None:
+        return test, "local"
     local = _load_local()
     cache = _load_cache()
     if cache and not version.is_newer(launcher_version(local), launcher_version(cache)):

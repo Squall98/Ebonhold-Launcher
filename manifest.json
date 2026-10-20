@@ -48,7 +48,30 @@
       "icon": "ti-user"
     }
   ],
-  "packs": [],
+  "packs": [
+    {
+      "id": "recolte",
+      "name": "Récolte",
+      "icon": "ti-pick",
+      "accent": "green",
+      "description": "GatherMate et GatherHud : les gisements sur la carte et autour de toi.",
+      "products": [
+        "gathermate",
+        "gatherhud"
+      ]
+    },
+    {
+      "id": "metiers",
+      "name": "Métiers",
+      "icon": "ti-hammer",
+      "accent": "amber",
+      "description": "Métiers+ et Ackis Recipe List : une meilleure fenêtre de métiers et les recettes qui te manquent.",
+      "products": [
+        "advancedtradeskillwindow2",
+        "ackisrecipelist"
+      ]
+    }
+  ],
   "links": [
     {
       "label": "Discord Ebonhold FR",
@@ -71,8 +94,8 @@
       "id": "ebonholdfr",
       "name": "EbonholdFR",
       "category": "traduction",
-      "description": "Traduit le contenu custom d'Ebonhold : echoes, arbre de talents, affixes, tomes.",
-      "long_description": "Addon qui traduit le contenu CUSTOM du serveur Ebonhold : echoes, arbre de talents (skill tree), affixes et tomes. Complémentaire du Patch FR (onglet Réglages) qui, lui, traduit le jeu de base (sorts, hauts faits, titres, quêtes, menus). S'installe dans Interface\\AddOns.",
+      "description": "Traduit l'interface du serveur et le contenu Ebonhold : echoes, Soul Tree, affixes, tomes.",
+      "long_description": "Traduit l'interface du serveur Ebonhold (fenêtres, infobulles, boîtes de confirmation) et son contenu : echoes, Soul Tree, affixes et tomes. Installé et réglé automatiquement par l'onglet Français du launcher. S'installe dans Interface\\AddOns.",
       "version": "3.1",
       "download_url": "https://github.com/Squall98/EbonholdFR/releases/download/v3.1/EbonholdFR-v3.1.zip",
       "sha256": "6b4a8b31caf8c349d9bfb9d1458d7b431271423cd8915d7d58348035e382a828",
