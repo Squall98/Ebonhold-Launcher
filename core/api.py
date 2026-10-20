@@ -7,6 +7,7 @@ leur progression au JS via window.evaluate_js(onProgress / onDone).
 import json
 import os
 import queue
+import shutil
 import subprocess
 import threading
 import time
@@ -15,6 +16,10 @@ import webbrowser
 
 from . import catalog, frconfig, frpack, installer, selfupdate, state, version, wow
 from .journal import log
+
+# Produits geres par l'onglet Francais (installes / retires selon les reglages).
+FR_ADDON = "ebonholdfr"
+MANAGED = {FR_ADDON}
 
 # Liens que le launcher accepte d'ouvrir : du web, et seulement ces sites.
 _URL_HOSTS = ("github.com", "raw.githubusercontent.com", "squall98.github.io",
@@ -66,6 +71,8 @@ class Api:
         self._queued = set()
         self._qlock = threading.Lock()
         self._worker = None
+        self._startup_done = False
+        self._fr_busy = threading.Lock()   # une seule application des reglages FR a la fois
 
     # ----------------------------------------------------------- catalogue
     def get_catalog(self, check_remote=False):
@@ -83,6 +90,9 @@ class Api:
         resp = self._build_catalog()
         if check_remote:
             threading.Thread(target=self._remote_refresh, daemon=True).start()
+        if not self._startup_done:
+            self._startup_done = True
+            threading.Thread(target=self._startup_checks, daemon=True).start()
         # Detection du dossier WoW en ARRIERE-PLAN si aucun n'est enregistre : autodetect
         # peut tester des disques lents/deconnectes, ce qui bloquerait get_catalog.
         if not state.get_wow_path():
@@ -141,6 +151,7 @@ class Api:
                 updates += 1
             row = {
                 "id": p["id"],
+                "managed": p["id"] in MANAGED,    # gere par l'onglet Francais, pas une carte du catalogue
                 "name": p["name"],
                 "category": p["category"],
                 "description": p.get("description", ""),
@@ -245,6 +256,8 @@ class Api:
         try:
             installer.install(product, wow_path, progress)
             log("installe : %s v%s" % (product_id, product["version"]))
+            if product_id == FR_ADDON:      # le dossier vient d'etre remplace : ses reglages aussi
+                self._ecrire_reglages_addon(wow_path, frconfig.reglages_enregistres())
             self._emit("onDone", product_id, True, "Installe (v%s)." % product["version"])
         except Exception as e:
             log("echec installation %s : %r" % (product_id, e))
@@ -382,6 +395,180 @@ class Api:
             except Exception as e:
                 log("echec patch FR : %r" % e)
                 self._emit("onFrDone", False, str(e))
+
+        threading.Thread(target=worker, daemon=True).start()
+        return {"started": True}
+
+    # ------------------------------------------------- onglet Francais (v2)
+    def _fr_addon_dir(self, wow_path):
+        return os.path.join(wow.addons_dir(wow_path), "EbonholdFR")
+
+    def _fr_addon_version(self, wow_path):
+        return installer._toc_version(os.path.join(self._fr_addon_dir(wow_path), "EbonholdFR.toc"))
+
+    def _fr_extra(self, wow_path):
+        """Traductions plus recentes livrees avec l'addon EbonholdFR installe (4.0+)."""
+        p = os.path.join(self._fr_addon_dir(wow_path), "data", "patch_fr.json") if wow_path else ""
+        return (p,) if p and os.path.isfile(p) else ()
+
+    def get_fr_settings(self):
+        P = frconfig._fr_patch()
+        wow_path = state.get_wow_path()
+        if not self._manifest:
+            self._manifest, self._source = catalog.fetch_offline()
+        fr = self._manifest.get("fr_config", {}) or {}
+        spec = fr.get("pack_download") or {}
+        ok, err = frconfig.is_available()
+        st = frconfig.status(wow_path, self._fr_extra(wow_path)) if (ok and wow_path) else {
+            "applied": False, "up_to_date": False, "server_changed": False, "needs_pack": False,
+            "last_applied": None, "message": err or "Choisis d'abord ton dossier Ebonhold."}
+        return {
+            "settings": frconfig.reglages_enregistres() if ok else P.normaliser({}),
+            "presets": P.PRESETS,
+            "available": ok, "error": err or "",
+            "pack_present": frconfig.pack_present(wow_path) if (ok and wow_path) else False,
+            "pack_installable": bool(spec.get("url") or spec.get("parts")),
+            "pack_note": fr.get("pack_note", ""),
+            "state": st,
+        }
+
+    def _ecrire_reglages_addon(self, wow_path, s):
+        """Fichier lu par EbonholdFR 4.0 au demarrage du jeu (reglages choisis dans le launcher)."""
+        P = frconfig._fr_patch()
+        d = self._fr_addon_dir(wow_path)
+        if not os.path.isdir(d):
+            return
+        patch = os.path.exists(os.path.join(wow_path, "Data", "patch-Z.MPQ"))
+        b = lambda k: "true" if P.fr(s, k) else "false"
+        lua = ("-- Ecrit par Ebonhold Launcher : reglages de l'onglet Francais. Ne pas modifier a la main.\n"
+               "EbonholdFR_Reglages = { version = 1, interface = %s, echoes_desc = %s, soultree_desc = %s,\n"
+               "  affixes_desc = %s, tomes = %s, nom_anglais = %s, patch = %s }\n") % (
+            b("interface"), b("echoes_desc"), b("soultree_desc"), b("affixes_desc"), b("tomes"),
+            "true" if s.get("nom_anglais") else "false", "true" if patch else "false")
+        with open(os.path.join(d, "EbonholdFR_Reglages.lua"), "w", encoding="utf-8") as f:
+            f.write(lua)
+
+    def _gerer_addon_fr(self, wow_path, s, flog):
+        """Installe (ou retire) l'addon EbonholdFR selon les reglages, puis ecrit ses reglages.
+        Renvoie True si EbonholdFR 4.0+ est en place (il contient alors le correctif de la forge)."""
+        P = frconfig._fr_patch()
+        besoin = any(P.fr(s, k) for k in P.CLES_FR_EN if k != "voix")
+        product = self._find(FR_ADDON)
+        if besoin and product:
+            entry = state.get_installed(FR_ADDON)
+            iv = entry["version"] if entry else installer.disk_version(product, wow_path)
+            if iv is None or _status(product, iv) != "uptodate" or installer.is_broken(FR_ADDON, wow_path):
+                flog("Installation de l'addon EbonholdFR v%s..." % product["version"])
+                installer.install(product, wow_path)
+        elif not besoin and state.get_installed(FR_ADDON):
+            flog("Tout est en anglais : addon EbonholdFR retiré.")
+            installer.uninstall(FR_ADDON, wow_path, product)
+        self._ecrire_reglages_addon(wow_path, s)
+        v4 = version.is_newer(self._fr_addon_version(wow_path) or "0", "3.99")
+        if v4:
+            ancien = os.path.join(wow.addons_dir(wow_path), "EbonholdFRFix")
+            if os.path.isdir(ancien):
+                shutil.rmtree(ancien, ignore_errors=True)
+                flog("Ancien correctif EbonholdFRFix retiré (intégré à EbonholdFR).")
+        return v4
+
+    def _appliquer_fr(self, wow_path, settings, flog):
+        with self._fr_busy:
+            P = frconfig._fr_patch()
+            s = P.normaliser(settings)
+            v4 = self._gerer_addon_fr(wow_path, s, flog)
+            frconfig.apply_v2(wow_path, s, flog, extra=self._fr_extra(wow_path), deploy_fix=not v4)
+            self._ecrire_reglages_addon(wow_path, s)      # « patch » vaut maintenant l'etat reel
+
+    def apply_fr(self, settings):
+        """Applique les reglages de l'onglet Francais en arriere-plan (onFrLog / onFrDone)."""
+        wow_path = state.get_wow_path()
+        if not wow.is_valid_install(wow_path):
+            return {"started": False, "error": "Choisis d'abord ton dossier Ebonhold."}
+        if wow.game_running():
+            return {"started": False, "error": "Ferme d'abord le jeu (Wow.exe), puis recommence."}
+
+        def worker():
+            def flog(msg):
+                log("patch FR : %s" % msg)
+                self._emit("onFrLog", msg)
+            try:
+                self._appliquer_fr(wow_path, settings, flog)
+                self._emit("onFrDone", True, "Réglages appliqués. Tu peux lancer le jeu.")
+                self._emit("onFrState", frconfig.status(wow_path, self._fr_extra(wow_path)))
+            except Exception as e:
+                log("echec reglages FR : %r" % e)
+                self._emit("onFrDone", False, str(e))
+
+        threading.Thread(target=worker, daemon=True).start()
+        return {"started": True}
+
+    def _startup_checks(self):
+        """Au demarrage : si le serveur a ete mis a jour (ou le patch efface), on reapplique les
+        reglages FR tout seul, puis on previent l'interface."""
+        try:
+            wow_path = state.get_wow_path()
+            if not wow.is_valid_install(wow_path):
+                return
+            ok, _ = frconfig.is_available()
+            if not ok:
+                return
+            st = frconfig.status(wow_path, self._fr_extra(wow_path))
+            if not st["applied"] or st["up_to_date"]:
+                return
+            if st["needs_pack"] or wow.game_running():
+                log("reglages FR a reappliquer plus tard : %s" % st["message"])
+                self._emit("onFrState", st)
+                return
+            log("reapplication automatique des reglages FR : %s" % st["message"])
+            self._emit("onFrLog", "Mise à jour détectée : réapplication de tes réglages FR...")
+            self._appliquer_fr(wow_path, frconfig.reglages_enregistres(),
+                               lambda m: log("patch FR (auto) : %s" % m))
+            st2 = frconfig.status(wow_path, self._fr_extra(wow_path))
+            st2["message"] = "Réglages FR réappliqués après la mise à jour."
+            self._emit("onFrState", st2)
+        except Exception as e:
+            log("echec verification au demarrage : %r" % e)
+
+    # ---------------------------------------------------------------- jouer
+    def check_before_play(self):
+        """Ce qui empeche de bien jouer : jeu deja ouvert, FR a refaire, addons a jour."""
+        wow_path = state.get_wow_path()
+        issues = []
+        if not wow.is_valid_install(wow_path):
+            return {"ok": False, "issues": [{"id": "dossier", "label": "Dossier du jeu introuvable.",
+                                             "fix_label": "Choisir le dossier"}]}
+        if wow.game_running():
+            issues.append({"id": "deja_ouvert", "label": "Le jeu est déjà ouvert.", "fix_label": ""})
+        ok, _ = frconfig.is_available()
+        if ok:
+            st = frconfig.status(wow_path, self._fr_extra(wow_path))
+            if st["applied"] and not st["up_to_date"]:
+                issues.append({"id": "fr", "label": st["message"],
+                               "fix_label": "" if st["needs_pack"] else "Réappliquer le français"})
+        cat = self._build_catalog()
+        n = sum(1 for r in cat["products"] if r["status"] in ("update", "repair"))
+        if n:
+            issues.append({"id": "addons", "label": "%d addon(s) à mettre à jour." % n,
+                           "fix_label": "Mettre à jour"})
+        return {"ok": not issues, "issues": issues}
+
+    def fix_issues(self, ids):
+        wow_path = state.get_wow_path()
+
+        def worker():
+            try:
+                if "addons" in ids:
+                    for r in self._build_catalog()["products"]:
+                        if r["status"] in ("update", "repair"):
+                            self._install_one(r["id"])
+                if "fr" in ids and not wow.game_running():
+                    self._appliquer_fr(wow_path, frconfig.reglages_enregistres(),
+                                       lambda m: self._emit("onFrLog", m))
+                self._emit("onFixDone", True, "C'est corrigé.")
+            except Exception as e:
+                log("echec correction : %r" % e)
+                self._emit("onFixDone", False, str(e))
 
         threading.Thread(target=worker, daemon=True).start()
         return {"started": True}

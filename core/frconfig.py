@@ -385,24 +385,268 @@ def _collect_patchz(data_dir, mpqread, dbc_localize, tr, want, base_fr, fr_col, 
 
 
 def apply(install_dir, base_fr, voices_fr, spells_fr, other_fr, log):
-    """Applique la config langue. `log` = callable(str) pour le journal en direct."""
+    """Ancienne entree (4 reglages) : convertie vers les reglages detailles de la v2."""
+    v = lambda b: "fr" if b else "en"
+    settings = {"jeu": v(base_fr), "voix": v(voices_fr and base_fr)}
+    for k in ("sorts_blizzard", "echoes_desc", "echoes_noms", "soultree_desc", "soultree_noms",
+              "affixes_desc", "affixes_noms", "tomes"):
+        settings[k] = v(spells_fr)
+    for k in ("reputations", "hauts_faits", "metiers"):
+        settings[k] = v(other_fr)
+    if not base_fr:
+        settings["sorts_blizzard"] = "en"
+    apply_v2(install_dir, settings, log)
+
+
+# ============================================================================ v2 : reglages detailles
+_DONNEES = os.path.join(_VENDOR, "patch_fr.json")
+_ETAT = os.path.join(paths.data_dir(), "fr_state.json")
+
+
+def _fr_patch():
+    import fr_patch      # vendor/
+    return fr_patch
+
+
+def donnees_fr(extra=()):
+    """Base de traductions : celle embarquee, completee par les plus recentes (ex. fournies par
+    l'addon EbonholdFR installe)."""
+    return _fr_patch().charger_donnees(_STORE, _DONNEES, *extra)
+
+
+def version_donnees(extra=()):
+    return donnees_fr(extra).get("version", "0")
+
+
+def empreinte_serveur(install_dir):
+    """Taille et date des patchs du serveur : si elles changent, le serveur a ete mis a jour."""
+    data = os.path.join(install_dir, "Data")
+    out = {}
+    try:
+        for n in sorted(os.listdir(data)):
+            if n.lower().endswith(".mpq") and n.upper() != "PATCH-Z.MPQ":
+                st = os.stat(os.path.join(data, n))
+                out[n.lower()] = [st.st_size, int(st.st_mtime)]
+    except OSError:
+        pass
+    return out
+
+
+def _lire_etat():
+    try:
+        with open(_ETAT, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return {}
+
+
+def _ecrire_etat(etat):
+    tmp = _ETAT + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(etat, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, _ETAT)
+
+
+def reglages_enregistres():
+    """Derniers reglages appliques (ou ceux par defaut « Recommande »)."""
+    return _fr_patch().normaliser(_lire_etat().get("settings"))
+
+
+def _locale_actuelle(install_dir):
+    cfg = os.path.join(install_dir, "WTF", "Config.wtf")
+    try:
+        with open(cfg, encoding="latin-1") as f:
+            for ln in f:
+                if ln.strip().upper().startswith("SET LOCALE"):
+                    return ln.split('"')[1] if '"' in ln else ln.split()[-1]
+    except (OSError, IndexError):
+        pass
+    return ""
+
+
+def _besoin_patch(s):
+    P = _fr_patch()
+    return P.fr(s, "jeu") or any(P.fr(s, k) for k in P.CLES_FR_EN if k not in ("voix", "interface"))
+
+
+def status(install_dir, extra=()):
+    """Etat des reglages FR pour l'interface : appliques ? encore valables ?"""
+    P = _fr_patch()
+    etat = _lire_etat()
+    s = P.normaliser(etat.get("settings"))
+    res = {"applied": False, "up_to_date": False, "server_changed": False, "needs_pack": False,
+           "last_applied": None, "message": "Réglages pas encore appliqués."}
+    if not install_dir or etat.get("install_dir", "").lower() != os.path.abspath(install_dir).lower():
+        return res
+    res["applied"] = True
+    res["last_applied"] = etat.get("applique_le")
+    raisons = []
+    if etat.get("empreinte") != empreinte_serveur(install_dir):
+        res["server_changed"] = True
+        raisons.append("le serveur a été mis à jour")
+    data = os.path.join(install_dir, "Data")
+    if _besoin_patch(s) and not os.path.exists(os.path.join(data, "patch-Z.MPQ")):
+        raisons.append("le patch FR a été effacé")
+    if etat.get("version_donnees") != version_donnees(extra):
+        raisons.append("de nouvelles traductions sont disponibles")
+    attendue = "frFR" if P.fr(s, "jeu") else "enUS"
+    if _locale_actuelle(install_dir) and _locale_actuelle(install_dir) != attendue:
+        raisons.append("la langue du jeu a été changée")
+    if any(P.fr(s, k) for k in P.BESOIN_PACK) and not pack_present(install_dir):
+        res["needs_pack"] = True
+        raisons.append("le pack FR a disparu")
+    res["up_to_date"] = not raisons
+    res["message"] = ("À jour." if not raisons else
+                      "À réappliquer : " + ", ".join(raisons) + ".")
+    return res
+
+
+def _corrections_interface(mpqread, data_dir, patchz, s, log):
+    """Correctifs de fichiers d'interface, refaits a chaque fois depuis les fichiers ACTUELS du
+    serveur (jamais une copie figee)."""
+    P = _fr_patch()
+    order = _patches_by_priority(data_dir)
+    if P.fr(s, "jeu"):
+        SBF = r"Interface\FrameXML\SpellBookFrame.lua"
+        d = _read_from_patches(mpqread, data_dir, SBF, order)
+        if d:
+            body = d.decode("utf-8", "replace")
+            prefix = "-- [EbonholdFR] noms de metiers FR + anti-taint\n"
+            for c, name in _PROF_NAMES.items():
+                prefix += 'if not %s then %s = "%s" end\n' % (c, c, name)
+            body = prefix + "\n" + body
+            for g in _SBF_GUARDS:
+                if body.count(g) == 1:
+                    body = body.replace(g, "if issecure() then " + g + " end")
+            patchz[SBF] = body.encode("utf-8")
+            log("Grimoire : noms des métiers en français.")
+    repl = {}
+    for en, frt in _TDB_REPL.items():
+        est_nom = en.startswith("name =")
+        if (est_nom and P.fr(s, "soultree_noms")) or (not est_nom and P.fr(s, "soultree_desc")):
+            repl[en] = frt
+    if repl:
+        TDB = r"Interface\AddOns\ProjectEbonhold\modules\skillTree\TalentDatabase.lua"
+        d = _read_from_patches(mpqread, data_dir, TDB, order)
+        if d:
+            body = d.decode("utf-8", "replace")
+            n = 0
+            for en, frt in repl.items():
+                if body.count(en) == 1:
+                    body = body.replace(en, frt)
+                    n += 1
+            if n:
+                patchz[TDB] = body.encode("utf-8")
+                log("Soul Tree : %d texte(s) d'interface traduits." % n)
+
+
+def _build_patchz_v2(data_dir, s, log, extra=()):
+    mpqread, mpqwrite, _ = _deps()
+    P = _fr_patch()
+    if not _besoin_patch(s):
+        _remove_patchz(data_dir)
+        log("Tout est en anglais : patch FR retiré.")
+        return 0
+    data = donnees_fr(extra)
+    log("Traductions : version %s (%d noms, %d descriptions)." % (
+        data.get("version"), len(data["names"]), len(data["descs"])))
+    fr_arch = []
+    if pack_present(os.path.dirname(data_dir)):
+        for m in FR_MPQS:
+            p = os.path.join(data_dir, "frFR", m)
+            if os.path.exists(p):
+                try:
+                    fr_arch.append(_open(mpqread, p))
+                except Exception:
+                    pass
+
+    def base(path):
+        for a in fr_arch:
+            try:
+                d = _read(a, path)
+                if d:
+                    return d
+            except Exception:
+                pass
+        return None
+
+    floor = min(_patch_priority(p) for p in TEXT_PATCHES)
+    order = [n for n in _patches_by_priority(data_dir) if _patch_priority(n) >= floor]
+    _close_archives()
+    patchz = {}
+    try:
+        seen = set()
+        for patch in TEXT_PATCHES:
+            sp = os.path.join(data_dir, patch)
+            a = _cached(mpqread, sp) if os.path.exists(sp) else None
+            if a is None:
+                continue
+            names = [n for n in _read(a, "(listfile)").decode("latin-1")
+                     .replace("\r\n", "\n").split("\n") if n.strip()]
+            for n in names:
+                low = n.lower()
+                if not low.endswith(".dbc") or low in seen:
+                    continue
+                seen.add(low)
+                raw = _read_from_patches(mpqread, data_dir, n, order) or _read(a, n)
+                fn = n.replace("/", "\\").split("\\")[-1]
+                st = {}
+                try:
+                    if fn.lower() == "spell.dbc":
+                        out = P.construire_spell(raw, base(n), data, s, st)
+                    else:
+                        out = P.construire_dbc(fn, raw, base(n), data, s, st)
+                except Exception as e:
+                    log("%s ignoré (%s)." % (fn, e))
+                    out = None
+                if out:
+                    patchz[n] = out
+                    if st.get("traduits"):
+                        log("%s : %d textes en français." % (fn, st["traduits"]))
+        _corrections_interface(mpqread, data_dir, patchz, s, log)
+    finally:
+        _close_archives()
+        for a in fr_arch:
+            try:
+                a.file.close()
+            except Exception:
+                pass
+    mpqwrite.create_mpq(os.path.join(data_dir, "patch-Z.MPQ"), patchz)
+    log("patch-Z.MPQ écrit (%d fichiers)." % len(patchz))
+    return len(patchz)
+
+
+def apply_v2(install_dir, settings, log, extra=(), deploy_fix=True):
+    """Applique les reglages FR / EN detailles (voir vendor/fr_patch.py : DEFAUTS)."""
     ok, err = is_available()
     if not ok:
         raise RuntimeError(err)
     if wow.game_running():
-        raise RuntimeError("Ferme d'abord le jeu (Wow.exe) : ses fichiers ne peuvent pas etre "
-                           "modifies pendant qu'il tourne.")
-    if base_fr and not pack_present(install_dir):
+        raise RuntimeError("Ferme d'abord le jeu (Wow.exe) : ses fichiers ne peuvent pas être "
+                           "modifiés pendant qu'il tourne.")
+    P = _fr_patch()
+    s = P.normaliser(settings)
+    manque = [k for k in P.BESOIN_PACK if P.fr(s, k)]
+    if manque and not pack_present(install_dir):
         raise RuntimeError(
-            "Le pack frFR (~2,4 Go) est requis pour mettre le jeu en francais. "
-            "Installe-le d'abord, ou laisse le Jeu en EN.")
+            "Le pack FR (2,6 Go) est nécessaire pour mettre en français : %s. Installe-le "
+            "d'abord, ou passe ces lignes en anglais." % ", ".join(
+                {"jeu": "le jeu de base", "voix": "les voix", "sorts_blizzard": "les sorts Blizzard"}[k] for k in manque))
     data = os.path.join(install_dir, "Data")
-    if base_fr:
+    jeu_fr = P.fr(s, "jeu")
+    if jeu_fr:
         _fix_realmlist(data)
-        _manage_voices(data, voices_fr, log)
-    _build_patchz(data, base_fr, spells_fr, other_fr, log)
-    _deploy_addon(install_dir, log)
-    _set_locale(install_dir, "frFR" if base_fr else "enUS")
-    log("Jeu=%s  Voix=%s  Sorts=%s  Reput=%s." % (
-        "FR" if base_fr else "EN", "FR" if voices_fr else "EN",
-        "FR" if spells_fr else "EN", "FR" if other_fr else "EN"))
+        _manage_voices(data, P.fr(s, "voix"), log)
+    _build_patchz_v2(data, s, log, extra)
+    if deploy_fix and jeu_fr:
+        _deploy_addon(install_dir, log)
+    _set_locale(install_dir, "frFR" if jeu_fr else "enUS")
+    import time
+    _ecrire_etat({
+        "install_dir": os.path.abspath(install_dir),
+        "settings": s,
+        "empreinte": empreinte_serveur(install_dir),
+        "version_donnees": version_donnees(extra),
+        "applique_le": time.strftime("%d/%m %H:%M"),
+    })
+    log("Réglages appliqués.")
