@@ -1,0 +1,113 @@
+{
+ "_lisez_moi": "Textes PROPRES A EBONHOLD des ecrans glue (connexion, choix du royaume, selection/creation de personnage), avec leur traduction. Chaque traduction n'est appliquee que si le texte anglais ACTUEL du serveur est exactement 'en' : si le serveur change un texte, sa nouvelle version anglaise reste affichee (et le rapport la signale a retraduire). Interface du jeu = vouvoiement, terminologie WoW FR officielle. Les textes Blizzard d'origine ne sont PAS ici : ils viennent du pack frFR (GlueStrings.lua de patch-frFR-3.MPQ).",
+ "version": "2026-10-20.1",
+ "GlueStrings": {
+  "ACCOUNT_NAME": {
+   "en": "Project-Ebonhold Account Name",
+   "fr": "Nom de compte Project-Ebonhold"
+  },
+  "ENTER_EMAIL": {
+   "en": "Enter your username",
+   "fr": "Saisissez votre nom d'utilisateur"
+  },
+  "LOGIN_MALFORMED_ACCOUNT_NAME": {
+   "en": "<html><body><p align=\"center\">The information you entered is invalid. Please make sure you are using your USERNAME and PASSWORD, not your email address. If you need help recovering a lost or stolen account or password, visit <a href=\"http://Project-Ebonhold.com/support\">http://Project-Ebonhold.com/support</a> for more information.</p></body></html>",
+   "fr": "<html><body><p align=\"center\">Les informations que vous avez saisies ne sont pas valides. Veuillez vérifier que vous utilisez bien votre NOM D'UTILISATEUR et votre MOT DE PASSE, et non votre adresse e-mail. Si vous avez besoin d'aide pour récupérer un compte ou un mot de passe perdu ou volé, rendez-vous sur <a href=\"http://Project-Ebonhold.com/support\">http://Project-Ebonhold.com/support</a> pour plus d'informations.</p></body></html>"
+  },
+  "LOGIN_UNKNOWN_ACCOUNT": {
+   "en": "<html><body><p align=\"center\">The information you entered is invalid. Please make sure you are using your USERNAME and PASSWORD, not your email address. If you need help recovering a lost or stolen account or password, visit <a href=\"http://Project-Ebonhold.com/support\">http://Project-Ebonhold.com/support</a> for more information.</p></body></html>",
+   "fr": "<html><body><p align=\"center\">Les informations que vous avez saisies ne sont pas valides. Veuillez vérifier que vous utilisez bien votre NOM D'UTILISATEUR et votre MOT DE PASSE, et non votre adresse e-mail. Si vous avez besoin d'aide pour récupérer un compte ou un mot de passe perdu ou volé, rendez-vous sur <a href=\"http://Project-Ebonhold.com/support\">http://Project-Ebonhold.com/support</a> pour plus d'informations.</p></body></html>"
+  },
+  "LOGIN_UNKNOWN_ACCOUNT_PIN": {
+   "en": "<html><body><p align=\"center\">The information you entered is invalid. Please make sure you are using your USERNAME and PASSWORD, not your email address. If you need help recovering a lost or stolen account or password, visit <a href=\"http://Project-Ebonhold.com/support\">http://Project-Ebonhold.com/support</a> for more information.</p></body></html>",
+   "fr": "<html><body><p align=\"center\">Les informations que vous avez saisies ne sont pas valides. Veuillez vérifier que vous utilisez bien votre NOM D'UTILISATEUR et votre MOT DE PASSE, et non votre adresse e-mail. Si vous avez besoin d'aide pour récupérer un compte ou un mot de passe perdu ou volé, rendez-vous sur <a href=\"http://Project-Ebonhold.com/support\">http://Project-Ebonhold.com/support</a> pour plus d'informations.</p></body></html>"
+  }
+ },
+ "_globales_post": "Globales definies par RealmList.lua du serveur (cartes Live / PTR du choix de royaume). A NE PAS traduire : REALM_CHOICE_LIVE_CATEGORY / REALM_CHOICE_PTR_CATEGORY / FORCED_CATEGORY_NAME (cles de correspondance avec les categories de royaumes).",
+ "globales_post": {
+  "REALM_CHOICE_LIVE_TITLE": {
+   "en": "Live Server",
+   "fr": "Serveur principal"
+  },
+  "REALM_CHOICE_LIVE_DESC": {
+   "en": "Where the real adventure happens. Join the full community on the stable, persistent realm",
+   "fr": "Là où se vit la véritable aventure. Rejoignez toute la communauté sur le royaume stable et permanent"
+  },
+  "REALM_CHOICE_PTR_TITLE": {
+   "en": "PTR (Test Realm)",
+   "fr": "PTR (royaume de test)"
+  },
+  "REALM_CHOICE_LIVE_STATUS": {
+   "en": "|cff44aaffRecommended|r",
+   "fr": "|cff44aaffRecommandé|r"
+  },
+  "REALM_CHOICE_PTR_STATUS": {
+   "en": "|cffff3030Test Realm|r",
+   "fr": "|cffff3030Royaume de test|r"
+  },
+  "REALM_CHOICE_PTR_DESC": {
+   "en": "Step onto the testing grounds. Preview upcoming content and balance changes before anyone else and help shape what's next - characters here are temporary and may be wiped at any time.\n\nNote: PTR patches are delivered through the launcher. Keep it installed and let it update to download new builds and keep your access to the test realm.",
+   "fr": "Entrez sur le terrain d'essai : découvrez avant tout le monde le contenu à venir et les changements d'équilibrage, et aidez à façonner la suite. Les personnages y sont temporaires et peuvent être effacés à tout moment.\n\nRemarque : les mises à jour du PTR passent par le launcher. Gardez-le installé et laissez-le se mettre à jour pour recevoir les nouvelles versions et conserver votre accès au royaume de test."
+  }
+ },
+ "dialogues": {
+  "CONFIRM_PTR_REALM": {
+   "text": {
+    "en": "You are about to connect to the Public Test Realm (PTR).\n\nThis is a testing environment, not the Live server. Characters and progress here are separate from Live and may be wiped at any time, and the PTR can be unstable.\n\nDo you want to continue to the PTR?",
+    "fr": "Vous êtes sur le point de vous connecter au royaume de test public (PTR).\n\nIl s'agit d'un environnement de test et non du serveur principal. Les personnages et la progression y sont distincts de ceux du serveur principal et peuvent être effacés à tout moment ; le PTR peut aussi être instable.\n\nVoulez-vous continuer vers le PTR ?"
+   },
+   "button1": {
+    "en": "Yes, I confirm",
+    "fr": "Oui, je confirme"
+   },
+   "button2": {
+    "en": "No",
+    "fr": "Non"
+   }
+  }
+ },
+ "cartes_royaume": {
+  "_note": "Textes ecrits en dur dans RealmList_SetupChoiceButton (corriges apres coup sur les FontString).",
+  "Unavailable": "Indisponible",
+  "character": "personnage",
+  "characters": "personnages"
+ },
+ "_alias_categories": "OPTION (--alias-categories). Les noms de categories de royaumes viennent de Cfg_Categories.dbc dans la langue du client : sur un client frFR, 'United States' s'appelle 'Etats-Unis'. Ce tableau n'est qu'un secours : le script le recalcule depuis les Cfg_Categories.dbc enUS et frFR du joueur (meme ID).",
+ "alias_categories": {
+  "United States": "États-Unis",
+  "Development": "Développement"
+ },
+ "_dialogues_dll": "OPTION (--dialogues-dll). Textes du script glue embarque dans ebonhold.dll (controle des patchs). Traduits a l'affichage via GlueDialog_Show, sans toucher a la logique du controle.",
+ "dialogues_dll": {
+  "boutons": {
+   "EBONHOLD_OUTDATED": {
+    "button1": {
+     "en": "Open Installation Guide",
+     "fr": "Ouvrir le guide d'installation"
+    },
+    "button2": {
+     "en": "Quit the Game",
+     "fr": "Quitter le jeu"
+    }
+   }
+  },
+  "textes": [
+   {
+    "en": "Your game installation is not up to date.\n\nIf you use the launcher, just restart your game with it and the update will start automatically.\n\nIf you installed manually, re-download the required files from the website, clear your cache, and restart the game.",
+    "fr": "Votre installation du jeu n'est pas à jour.\n\nSi vous utilisez le launcher, relancez simplement le jeu avec celui-ci : la mise à jour démarrera automatiquement.\n\nSi vous avez installé le jeu manuellement, téléchargez de nouveau les fichiers nécessaires depuis le site, videz votre cache et relancez le jeu."
+   },
+   {
+    "en": "You are trying to connect to the Public Test Realm, but your game is not up to date.\n\nThe PTR can only be updated with the launcher. Please close the game, run the launcher to download the latest test build, then reconnect.",
+    "fr": "Vous essayez de vous connecter au royaume de test public, mais votre jeu n'est pas à jour.\n\nLe PTR ne peut être mis à jour qu'avec le launcher. Veuillez fermer le jeu, lancer le launcher pour télécharger la dernière version de test, puis vous reconnecter."
+   },
+   {
+    "en": "Could not verify your game files. Please check your connection and try again later.",
+    "fr": "Impossible de vérifier les fichiers de votre jeu. Veuillez vérifier votre connexion et réessayer plus tard."
+   }
+  ],
+  "suffixe_liste": {
+   "en": "\n\nFiles to update: ",
+   "fr": "\n\nFichiers à mettre à jour : "
+  }
+ }
+}

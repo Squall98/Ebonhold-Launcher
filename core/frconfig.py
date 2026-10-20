@@ -604,6 +604,18 @@ def _build_patchz_v2(data_dir, s, log, extra=()):
                     if st.get("traduits"):
                         log("%s : %d textes en français." % (fn, st["traduits"]))
         _corrections_interface(mpqread, data_dir, patchz, s, log)
+        if P.fr(s, "jeu"):
+            # Ecrans de connexion, choix du royaume, selection et creation de personnage : surcouche
+            # gardee (aucun fichier du serveur remplace ; au moindre doute, rien n'est ajoute).
+            try:
+                import glue_fr                       # vendor/
+                fichiers, rapport = glue_fr.construire(
+                    data_dir, lambda p: _open(mpqread, p), log, alias_categories=True)
+                patchz.update(fichiers)
+                for alerte in rapport.get("alertes", [])[:3]:
+                    log("Écran de connexion : %s" % alerte)
+            except Exception as e:
+                log("Écran de connexion laissé en anglais (%s)." % e)
     finally:
         _close_archives()
         for a in fr_arch:
