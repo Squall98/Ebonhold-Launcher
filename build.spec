@@ -23,6 +23,10 @@ datas += [
     ("manifest.json", "."),
     ("assets", "assets"),
 ]
+# Cle du depot prive des signalements : fichier local, JAMAIS dans git (voir .gitignore).
+import os
+if os.path.isfile(os.path.join("secrets", "report.json")):
+    datas += [("secrets/report.json", "secrets")]
 hiddenimports += ["mpyq", "clr"]
 
 a = Analysis(

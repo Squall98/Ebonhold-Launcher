@@ -28,3 +28,6 @@ frFR.zip
 
 # Environnement de build local
 .venv/
+
+# Cle du depot prive des signalements (embarquee au build, jamais publiee)
+secrets/
