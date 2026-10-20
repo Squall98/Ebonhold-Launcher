@@ -1,6 +1,32 @@
 # Changelog
 
-## v1.0.11 — fiabilité et sécurité
+## v2.0.0 — nouveau launcher
+### Nouveautés
+- **Nouvelle interface** en 5 onglets : Accueil, Addons, Français, Aide, Réglages. Thème
+  Ebonhold, zoom (boutons et Ctrl + molette), assistant au premier lancement.
+- **Onglet Français** : 14 réglages FR/EN en 3 blocs (jeu Blizzard, contenu Ebonhold,
+  interface du serveur), préréglages « Recommandé », « Tout FR » et « Tout EN », option
+  « Afficher aussi le nom anglais ». Les sorts Blizzard gardent toujours leur nom FR
+  officiel. Les écrans de connexion, de choix du royaume et de création de personnage
+  passent en français. Après une mise à jour du serveur, les réglages sont réappliqués
+  tout seuls.
+- **Addon EbonholdFR 4.0** géré par l'onglet Français (installé ou retiré selon les
+  réglages) : traduction de l'interface du serveur. L'ancien correctif EbonholdFRFix y est
+  intégré et retiré automatiquement.
+- **Signaler un bug / Proposer une idée** depuis le launcher, sans compte : texte, captures
+  d'écran et vidéos, journal du launcher en option, infos du jeu jointes et anonymisées
+  (aucune info Windows). Un numéro de signalement est donné à la fin.
+- **Détection du jeu** : emplacements connus, registre et raccourcis, puis recherche sur le
+  PC si tu l'acceptes ; Ebonhold est reconnu parmi les autres serveurs privés.
+- **Bouton Jouer** avec vérifications (jeu déjà ouvert, français à refaire, addons à mettre
+  à jour) et « Corriger et jouer ».
+- **Aide** : FAQ et guide illustré intégrés.
+- **Packs** « Récolte » (GatherMate + GatherHud) et « Métiers » (Métiers+ + Ackis Recipe
+  List) ; versions des addons tiers figées sur une version testée.
+- **Traductions** : +1 088 descriptions et +361 noms, « Remplace <nœud> (Rang N) »
+  harmonisé dans le Soul Tree.
+
+### Fiabilité et sécurité
 - **Catalogue** : après une installation, le launcher ne revient plus à son catalogue
   embarqué (plus ancien). Le dernier catalogue en ligne est gardé sur le disque et sert
   au démarrage et hors ligne (« Catalogue (hors ligne) »).

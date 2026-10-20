@@ -8,7 +8,7 @@ Une version est lue comme la suite de ses nombres : 'v.1.25' -> (1, 25),
 """
 import re
 
-APP_VERSION = "1.0.11"
+APP_VERSION = "2.0.0"
 
 
 def _tuple(v):
