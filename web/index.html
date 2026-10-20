@@ -6,157 +6,499 @@
   <title>Ebonhold Launcher</title>
   <link rel="stylesheet" href="tabler/tabler-icons.min.css">
   <link rel="stylesheet" href="style.css">
+  <script>
+    // Zoom mémorisé appliqué AVANT le premier affichage (pas de « saut » au démarrage).
+    try { var z = parseFloat(localStorage.getItem("ebon_zoom")); if (z >= 0.8 && z <= 1.6) { document.documentElement.style.zoom = z; document.documentElement.style.setProperty("--zoom", z); } } catch (e) {}
+  </script>
 </head>
 <body>
   <div id="app">
-    <!-- Barre laterale -->
+    <!-- ============================================================ Barre latérale -->
     <aside class="sidebar">
-      <div class="brand"><i class="ti ti-flame"></i><span>EBONHOLD</span></div>
-      <nav>
-        <button class="nav-item active" data-tab="catalog"><i class="ti ti-layout-grid"></i>Catalogue<span class="nav-badge hidden" id="updBadge"></span></button>
-        <button class="nav-item" data-tab="installed"><i class="ti ti-download"></i>Installés</button>
-        <button class="nav-item" data-tab="news"><i class="ti ti-news"></i>Nouveautés</button>
-        <button class="nav-item" data-tab="links"><i class="ti ti-link"></i>Liens</button>
-        <button class="nav-item" data-tab="settings"><i class="ti ti-settings"></i>Réglages</button>
-      </nav>
-      <div class="wow-status" id="wowStatus">
-        <i class="ti ti-folder"></i><span id="wowPath">Dossier WoW…</span>
+      <div class="brand" title="Ebonhold FR — launcher communautaire">
+        <svg class="brand-rune" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M20 2 L37 20 L20 38 L3 20 Z" fill="none" stroke="currentColor" stroke-width="1.6" class="r-gold"/>
+          <path d="M20 31 V10 M20 19 L13 11.5 M20 19 L27 11.5 M14.5 27 L20 31 L25.5 27" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="r-ice"/>
+        </svg>
+        <div class="brand-words"><span class="brand-name">Ebonhold</span><span class="brand-fr">FR</span></div>
       </div>
+      <nav class="nav" aria-label="Onglets du launcher">
+        <button class="nav-item active" data-tab="home" aria-current="page"><i class="ti ti-home" aria-hidden="true"></i><span class="nav-lbl">Accueil</span></button>
+        <button class="nav-item" data-tab="addons"><i class="ti ti-puzzle" aria-hidden="true"></i><span class="nav-lbl">Addons</span><span class="nav-badge hidden" id="badgeAddons"></span></button>
+        <button class="nav-item" data-tab="fr"><i class="ti ti-language" aria-hidden="true"></i><span class="nav-lbl">Français</span><span class="nav-badge warn hidden" id="badgeFr" title="Réglages à réappliquer">!</span></button>
+        <button class="nav-item" data-tab="help"><i class="ti ti-lifebuoy" aria-hidden="true"></i><span class="nav-lbl">Aide</span></button>
+        <button class="nav-item" data-tab="settings"><i class="ti ti-settings" aria-hidden="true"></i><span class="nav-lbl">Réglages</span></button>
+      </nav>
+      <button class="side-game" id="sideGame" title="Dossier du jeu">
+        <span class="dot" aria-hidden="true"></span><span class="side-game-txt" id="sideGameTxt">Recherche du jeu…</span>
+      </button>
+      <div class="side-foot" id="sideFoot">Launcher communautaire</div>
     </aside>
 
-    <!-- Contenu -->
+    <!-- ============================================================ Contenu -->
     <main class="content">
       <header class="topbar">
-        <h1 id="tabTitle">Catalogue</h1>
+        <div class="topbar-titles">
+          <h1 id="tabTitle">Accueil</h1>
+          <p id="tabSub" class="topbar-sub">Tout ce qu'il faut pour jouer, au même endroit.</p>
+        </div>
         <div class="topbar-actions">
           <span class="source-pill" id="sourcePill"></span>
-          <button class="btn ghost" id="refreshBtn"><i class="ti ti-refresh"></i>Vérifier</button>
-          <button class="btn ghost hidden" id="updateAllBtn"><i class="ti ti-arrows-up"></i>Tout mettre à jour</button>
-          <button class="btn play hidden" id="playBtn"><i class="ti ti-player-play"></i>Jouer</button>
+          <button class="btn ghost sm" id="refreshBtn" title="Chercher les nouveautés en ligne"><i class="ti ti-refresh" aria-hidden="true"></i><span class="btn-lbl">Vérifier</span></button>
+          <button class="btn gold sm hidden" id="topPlay"><i class="ti ti-player-play" aria-hidden="true"></i>Jouer</button>
         </div>
       </header>
 
-      <section class="tab" id="tab-catalog">
-        <div id="bootLoading" class="boot-loading"><i class="ti ti-loader-2"></i> Chargement du catalogue…</div>
-        <div id="launcherUpdate" class="banner update hidden">
-          <div><div class="tag">MISE À JOUR DU LAUNCHER</div><div class="txt" id="launcherUpdateTxt"></div></div>
-          <button class="btn" id="launcherUpdateBtn"><i class="ti ti-download"></i>Télécharger</button>
+      <!-- ======================================================== ACCUEIL -->
+      <section class="tab" id="tab-home">
+        <div class="hero">
+          <div class="hero-txt">
+            <div class="hero-kicker"><i class="ti ti-snowflake" aria-hidden="true"></i>Ebonhold · en français</div>
+            <h2 class="hero-title" id="heroTitle">Bienvenue</h2>
+            <p class="hero-sub" id="heroSub">Chargement…</p>
+          </div>
+          <div class="hero-play">
+            <button class="btn-play" id="playBtn"><i class="ti ti-player-play" id="playIcon" aria-hidden="true"></i><span id="playLabel">Jouer</span></button>
+            <p class="hero-hint" id="playHint">Vérifie le français et les addons, puis lance le jeu.</p>
+          </div>
         </div>
-        <div id="banner" class="banner hidden"></div>
+
+        <div class="status-grid" id="statusGrid">
+          <div class="boot-loading"><i class="ti ti-loader-2 spin" aria-hidden="true"></i>Chargement…</div>
+        </div>
+
+        <h3 class="section-title"><i class="ti ti-news" aria-hidden="true"></i>Nouveautés</h3>
+        <div class="news" id="newsList"></div>
+        <button class="btn ghost sm hidden" id="newsMore"></button>
+      </section>
+
+      <!-- ======================================================== ADDONS -->
+      <section class="tab hidden" id="tab-addons">
         <div class="packs-row" id="packsRow"></div>
         <div class="cat-toolbar">
-          <div class="search"><i class="ti ti-search"></i><input type="text" id="searchInput" placeholder="Rechercher un mod…"></div>
-          <div class="chips-row">
-            <div class="chips" id="filterChips"></div>
-            <div class="view-toggle">
-              <button data-view="cards" title="Cartes"><i class="ti ti-layout-grid"></i></button>
-              <button data-view="list" title="Liste"><i class="ti ti-list"></i></button>
-              <button data-view="table" title="Tableau"><i class="ti ti-table"></i></button>
+          <div class="toolbar-top">
+            <label class="search"><i class="ti ti-search" aria-hidden="true"></i><input type="search" id="searchInput" placeholder="Rechercher un addon…" aria-label="Rechercher un addon" autocomplete="off"></label>
+            <div class="seg" id="stateFilter" role="group" aria-label="Filtrer">
+              <button data-state="all" class="active">Tous</button>
+              <button data-state="installed">Installés</button>
+              <button data-state="updates">Mises à jour</button>
+            </div>
+            <div class="view-toggle" role="group" aria-label="Affichage">
+              <button data-view="cards" title="Cartes" aria-label="Affichage en cartes"><i class="ti ti-layout-grid" aria-hidden="true"></i></button>
+              <button data-view="list" title="Liste" aria-label="Affichage en liste"><i class="ti ti-list" aria-hidden="true"></i></button>
+              <button data-view="table" title="Tableau" aria-label="Affichage en tableau"><i class="ti ti-table" aria-hidden="true"></i></button>
             </div>
           </div>
+          <div class="chips" id="filterChips"></div>
         </div>
-        <div class="grid" id="catalogGrid"></div>
-        <p class="empty hidden" id="catalogEmpty">Aucun mod ne correspond.</p>
+        <div class="addons-bar">
+          <span class="muted" id="addonsCount"></span>
+          <div class="addons-bar-btns">
+            <button class="btn amber sm hidden" id="updateAllBtn"><i class="ti ti-arrows-up" aria-hidden="true"></i>Tout mettre à jour</button>
+            <button class="btn ghost sm" id="openAddonsBtn"><i class="ti ti-folder" aria-hidden="true"></i>Dossier AddOns</button>
+          </div>
+        </div>
+        <div class="grid view-cards" id="catalogGrid"></div>
+        <p class="empty hidden" id="catalogEmpty">Aucun addon ne correspond.</p>
       </section>
 
-      <section class="tab hidden" id="tab-installed">
-        <div class="grid" id="installedGrid"></div>
-        <p class="empty" id="installedEmpty">Aucun module installé pour l'instant.</p>
+      <!-- ======================================================== FRANÇAIS -->
+      <section class="tab hidden" id="tab-fr">
+        <div class="fr-top">
+          <div class="notice warn"><i class="ti ti-alert-triangle" aria-hidden="true"></i><span><strong>Ferme le jeu</strong> avant d'appliquer.</span></div>
+          <div class="fr-state" id="frState"></div>
+        </div>
+        <div class="notice err hidden" id="frUnavailable"></div>
+
+        <h3 class="section-title"><i class="ti ti-wand" aria-hidden="true"></i>Préréglages</h3>
+        <div class="presets" id="frPresets"></div>
+
+        <div class="pack-box hidden" id="frPackBox"></div>
+
+        <div id="frBlocks"></div>
+
+        <div class="log-wrap hidden" id="frLogWrap">
+          <div class="log-head"><span><i class="ti ti-file-text" aria-hidden="true"></i>Journal</span><button class="link-btn" id="frLogClear">Effacer</button></div>
+          <pre class="log" id="frLog" aria-live="polite"></pre>
+        </div>
+
+        <div class="fr-bar">
+          <span class="fr-dirty" id="frDirty"></span>
+          <button class="btn ghost" id="frRevert"><i class="ti ti-arrow-back-up" aria-hidden="true"></i>Annuler les changements</button>
+          <button class="btn gold" id="frApply"><i class="ti ti-check" aria-hidden="true"></i>Appliquer</button>
+        </div>
       </section>
 
-      <section class="tab hidden" id="tab-news">
-        <div id="newsList" class="news"></div>
+      <!-- ======================================================== AIDE -->
+      <section class="tab hidden" id="tab-help">
+        <div class="help-tiles">
+          <button class="tile tile-bug" id="btnBug"><i class="ti ti-bug" aria-hidden="true"></i><span><strong>Signaler un bug</strong><small>Quelque chose ne marche pas ? Explique-le-nous.</small></span></button>
+          <button class="tile tile-idea" id="btnIdea"><i class="ti ti-bulb" aria-hidden="true"></i><span><strong>Proposer une idée</strong><small>Un outil ou un ajout qui te manque.</small></span></button>
+        </div>
+
+        <div class="seg big" id="helpSeg" role="group" aria-label="Rubriques de l'aide">
+          <button data-help="faq" class="active"><i class="ti ti-help-circle" aria-hidden="true"></i>Questions fréquentes</button>
+          <button data-help="guide"><i class="ti ti-book" aria-hidden="true"></i>Guide du launcher</button>
+        </div>
+
+        <!-- FAQ : <details> natifs, accessibles au clavier -->
+        <div class="faq" id="helpFaq">
+          <details>
+            <summary>Le jeu est repassé en anglais après une mise à jour du serveur</summary>
+            <div class="faq-a">
+              <p>Une mise à jour officielle remplace des fichiers du jeu. Au démarrage, le launcher s'en rend compte et <strong>réapplique tes réglages</strong> (un message s'affiche sur l'Accueil).</p>
+              <p>Sinon : ferme le jeu, onglet <strong>Français</strong>, puis <strong>Appliquer</strong>.</p>
+            </div>
+          </details>
+          <details>
+            <summary>« ebonhold.dll n'est pas conçu pour s'exécuter sous Windows », ou le jeu reste bloqué sur « PLAYING »</summary>
+            <div class="faq-a">
+              <p>Ce message vient du <strong>launcher officiel</strong> du serveur, pas de ce launcher-ci.</p>
+              <p>Lance plutôt le jeu avec le bouton <strong>Jouer</strong> d'ici : il ouvre directement <code>Wow.exe</code>.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Le pack FR ne s'installe pas</summary>
+            <div class="faq-a">
+              <p><strong>Place disque :</strong> le pack pèse 2,6 Go. Il faut environ 2,7 Go libres sur le disque du jeu, et autant sur <code>C:</code> pendant le téléchargement (si le jeu est sur <code>C:</code>, compte 5,5 Go).</p>
+              <p><strong>Antivirus :</strong> il peut bloquer le téléchargement. Autorise le launcher, puis relance l'installation depuis l'onglet Français.</p>
+              <p>Toujours bloqué ? <button class="link-btn" data-report="bug">Signale un bug</button> en joignant le journal.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Mon antivirus (ou Windows) bloque le launcher</summary>
+            <div class="faq-a">
+              <p>Le launcher est un petit programme communautaire, non signé : Windows et certains antivirus s'en méfient. Son code est public sur GitHub.</p>
+              <p><strong>Écran bleu de Windows :</strong> « Informations complémentaires », puis « Exécuter quand même ».</p>
+              <p><strong>Antivirus :</strong> ajoute une exception pour le dossier du launcher.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Un addon n'apparaît pas en jeu</summary>
+            <div class="faq-a">
+              <p>À l'écran de choix du personnage, clique sur <strong>AddOns</strong> (en bas à gauche) et coche <strong>« Charger les AddOns obsolètes »</strong>.</p>
+              <p>Puis <strong>ferme complètement le jeu</strong> et relance-le : un <code>/reload</code> ne suffit pas pour un nouvel addon.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Le launcher ne trouve pas mon jeu</summary>
+            <div class="faq-a">
+              <p>Onglet <strong>Réglages</strong>, puis « Détecter automatiquement ». Si rien n'est trouvé, accepte la recherche sur ton PC, ou choisis le dossier à la main avec « Changer… » (le dossier qui contient <code>Wow.exe</code>).</p>
+            </div>
+          </details>
+          <details>
+            <summary>Comment désinstaller ?</summary>
+            <div class="faq-a">
+              <p><strong>Un addon :</strong> clique dessus dans l'onglet Addons, puis « Désinstaller ».</p>
+              <p><strong>Le français :</strong> préréglage « Tout en anglais », puis Appliquer. Le pack FR reste dans <code>Data\frFR</code> : supprime ce dossier pour récupérer la place.</p>
+              <p><strong>Le launcher :</strong> supprime son dossier, et si tu veux ses réglages (voir la question suivante).</p>
+            </div>
+          </details>
+          <details>
+            <summary>Où sont mes réglages ?</summary>
+            <div class="faq-a">
+              <p>Les réglages du launcher et son journal sont dans <code>%APPDATA%\EbonholdLauncher</code> (colle ce chemin dans l'Explorateur).</p>
+              <p>Les addons sont dans le dossier du jeu, sous <code>Interface\AddOns</code> : bouton « Dossier AddOns » dans l'onglet Addons.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Guide : une page par onglet. Les images se remplacent dans web/aide/img/. -->
+        <div class="guide hidden" id="helpGuide">
+          <nav class="guide-nav" id="guideNav" aria-label="Pages du guide">
+            <button data-page="accueil" class="active"><i class="ti ti-home" aria-hidden="true"></i>Accueil</button>
+            <button data-page="addons"><i class="ti ti-puzzle" aria-hidden="true"></i>Addons</button>
+            <button data-page="francais"><i class="ti ti-language" aria-hidden="true"></i>Français</button>
+            <button data-page="aide"><i class="ti ti-lifebuoy" aria-hidden="true"></i>Aide</button>
+            <button data-page="reglages"><i class="ti ti-settings" aria-hidden="true"></i>Réglages</button>
+            <button data-page="assistant"><i class="ti ti-rocket" aria-hidden="true"></i>Assistant</button>
+          </nav>
+          <div class="guide-pages">
+            <article class="gpage" data-page="accueil">
+              <h3>L'accueil</h3>
+              <figure class="shot"><img src="aide/img/accueil.png" alt="Capture de l'onglet Accueil"><div class="shot-missing"><i class="ti ti-photo" aria-hidden="true"></i><span>Capture à venir</span><code>aide/img/accueil.png</code></div></figure>
+              <ul>
+                <li><strong>Jouer</strong> vérifie tout avant de lancer le jeu : le français, les mises à jour d'addons, un jeu déjà ouvert. S'il trouve un souci, il propose <strong>« Corriger et jouer »</strong>.</li>
+                <li>Les quatre cartes résument l'état du <strong>jeu</strong>, du <strong>français</strong>, des <strong>addons</strong> et du <strong>launcher</strong>. Un bouton apparaît quand il y a quelque chose à faire.</li>
+                <li><strong>Nouveautés</strong> : les dernières notes de version des addons.</li>
+              </ul>
+              <button class="btn ghost sm" data-goto="home"><i class="ti ti-arrow-right" aria-hidden="true"></i>Aller à l'Accueil</button>
+            </article>
+            <article class="gpage hidden" data-page="addons">
+              <h3>Les addons</h3>
+              <figure class="shot"><img src="aide/img/addons.png" alt="Capture de l'onglet Addons"><div class="shot-missing"><i class="ti ti-photo" aria-hidden="true"></i><span>Capture à venir</span><code>aide/img/addons.png</code></div></figure>
+              <ul>
+                <li><strong>Installer</strong> en un clic ; les mises à jour aussi, ou toutes d'un coup avec <strong>« Tout mettre à jour »</strong>.</li>
+                <li>Les <strong>packs</strong> regroupent des addons qui vont ensemble (Récolte, Métiers…).</li>
+                <li>Recherche, catégories, et trois affichages : cartes, liste, tableau.</li>
+                <li>Clique sur un addon pour voir sa fiche, son historique, et le <strong>désinstaller</strong>.</li>
+              </ul>
+              <button class="btn ghost sm" data-goto="addons"><i class="ti ti-arrow-right" aria-hidden="true"></i>Aller aux Addons</button>
+            </article>
+            <article class="gpage hidden" data-page="francais">
+              <h3>Le français</h3>
+              <figure class="shot"><img src="aide/img/francais.png" alt="Capture de l'onglet Français"><div class="shot-missing"><i class="ti ti-photo" aria-hidden="true"></i><span>Capture à venir</span><code>aide/img/francais.png</code></div></figure>
+              <ul>
+                <li>Choisis un <strong>préréglage</strong>, ou règle chaque ligne en <strong>FR</strong> ou <strong>EN</strong>.</li>
+                <li><strong>Recommandé</strong> : tout en français, sauf les noms Ebonhold (echoes, Soul Tree, affixes), gardés en anglais.</li>
+                <li>Le jeu de base, les voix et les sorts Blizzard en français demandent le <strong>pack FR (2,6 Go)</strong> : le launcher le télécharge pour toi.</li>
+                <li><strong>Ferme le jeu</strong>, puis <strong>Appliquer</strong>. Après une mise à jour officielle, le launcher réapplique tes réglages tout seul.</li>
+              </ul>
+              <button class="btn ghost sm" data-goto="fr"><i class="ti ti-arrow-right" aria-hidden="true"></i>Aller au Français</button>
+            </article>
+            <article class="gpage hidden" data-page="aide">
+              <h3>L'aide</h3>
+              <figure class="shot"><img src="aide/img/aide.png" alt="Capture de l'onglet Aide"><div class="shot-missing"><i class="ti ti-photo" aria-hidden="true"></i><span>Capture à venir</span><code>aide/img/aide.png</code></div></figure>
+              <ul>
+                <li><strong>Signaler un bug</strong> ou <strong>proposer une idée</strong> : décris en quelques phrases et ajoute des captures. Tu reçois un <strong>numéro</strong> à citer sur le Discord.</li>
+                <li>Le <strong>journal du launcher</strong> peut être joint : il aide à comprendre ce qui s'est passé.</li>
+                <li>Les <strong>questions fréquentes</strong> règlent les soucis les plus courants.</li>
+              </ul>
+            </article>
+            <article class="gpage hidden" data-page="reglages">
+              <h3>Les réglages</h3>
+              <figure class="shot"><img src="aide/img/reglages.png" alt="Capture de l'onglet Réglages"><div class="shot-missing"><i class="ti ti-photo" aria-hidden="true"></i><span>Capture à venir</span><code>aide/img/reglages.png</code></div></figure>
+              <ul>
+                <li><strong>Dossier du jeu</strong> : détection automatique, recherche sur ton PC (avec ton accord), ou choix à la main.</li>
+                <li><strong>Zoom</strong> : agrandis ou réduis tout le launcher (aussi avec <kbd>Ctrl</kbd> + molette).</li>
+                <li><strong>À propos</strong> : version du launcher et source du catalogue.</li>
+              </ul>
+              <button class="btn ghost sm" data-goto="settings"><i class="ti ti-arrow-right" aria-hidden="true"></i>Aller aux Réglages</button>
+            </article>
+            <article class="gpage hidden" data-page="assistant">
+              <h3>L'assistant de démarrage</h3>
+              <figure class="shot"><img src="aide/img/assistant.png" alt="Capture de l'assistant de démarrage"><div class="shot-missing"><i class="ti ti-photo" aria-hidden="true"></i><span>Capture à venir</span><code>aide/img/assistant.png</code></div></figure>
+              <ul>
+                <li>Au premier lancement, trois étapes : <strong>trouver le jeu</strong>, <strong>choisir la langue</strong>, <strong>choisir des packs d'addons</strong>.</li>
+                <li>Tu peux le passer, et le relancer quand tu veux depuis les Réglages.</li>
+              </ul>
+              <button class="btn ghost sm" data-wizard="1"><i class="ti ti-rocket" aria-hidden="true"></i>Relancer l'assistant</button>
+            </article>
+          </div>
+        </div>
+
+        <div class="help-links" id="helpLinks"></div>
       </section>
 
-      <section class="tab hidden" id="tab-links">
-        <div class="links-grid" id="linksGrid"></div>
-        <p class="empty hidden" id="linksEmpty">Aucun lien configuré.</p>
-      </section>
-
+      <!-- ======================================================== RÉGLAGES -->
       <section class="tab hidden" id="tab-settings">
-        <div class="card-panel">
-          <h2>Dossier d'installation Ebonhold</h2>
-          <p class="muted">Le launcher pose les addons dans <code>Interface\AddOns</code> et les patches dans <code>Data</code>.</p>
+        <div class="panel">
+          <h2><i class="ti ti-folder" aria-hidden="true"></i>Dossier du jeu</h2>
+          <p class="muted">Le dossier qui contient <code>Wow.exe</code>. Le launcher y pose les addons (<code>Interface\AddOns</code>) et le français (<code>Data</code>).</p>
           <div class="folder-row">
-            <input type="text" id="folderInput" readonly placeholder="Aucun dossier sélectionné">
-            <button class="btn" id="folderBtn"><i class="ti ti-folder-open"></i>Parcourir…</button>
+            <input type="text" id="folderInput" readonly placeholder="Aucun dossier choisi" aria-label="Dossier du jeu">
+            <button class="btn" id="folderBtn"><i class="ti ti-folder-open" aria-hidden="true"></i>Changer…</button>
           </div>
           <p class="folder-valid" id="folderValid"></p>
-          <button class="btn ghost" id="openAddonsBtn" style="margin-top:10px"><i class="ti ti-folder"></i>Ouvrir le dossier AddOns</button>
-        </div>
-        <div class="card-panel" id="frPanel">
-          <h2>Patch FR — jeu de base en français</h2>
-          <div class="fr-explain">
-            <p><i class="ti ti-language"></i> <strong>Addon EbonholdFR</strong> (dans le catalogue) → traduit le <strong>contenu custom</strong> du serveur : echoes, arbre de talents, affixes, tomes.</p>
-            <p><i class="ti ti-world"></i> <strong>Patch FR</strong> (ci-dessous) → traduit le <strong>jeu de base</strong> : sorts, hauts faits, titres, quêtes, menus.</p>
+          <div class="btn-row">
+            <button class="btn ghost" id="detectBtn"><i class="ti ti-radar" aria-hidden="true"></i>Détecter automatiquement</button>
           </div>
-          <p class="muted">Règle chaque catégorie puis applique. Le jeu doit être <strong>fermé</strong> pendant l'opération.</p>
-
-          <div id="frPack" class="fr-pack hidden">
-            <div><strong>Français complet (menus, quêtes, interface)</strong>
-              <div class="muted" id="frPackNote"></div>
-              <div class="muted" id="frPackProgress" style="margin-top:4px;color:var(--gold2)"></div>
-            </div>
-            <button class="btn" id="frPackBtn"><i class="ti ti-download"></i>Télécharger le pack FR</button>
-          </div>
-
-          <div id="frUnavailable" class="fr-warn hidden"></div>
-
-          <div id="frControls">
-            <div class="fr-row">
-              <label>Jeu <span class="muted">(interface, menus, quêtes, voix)</span></label>
-              <select id="frBase"><option value="FR">Français</option><option value="EN">Anglais</option></select>
-              <span class="fr-hint" id="frPackHint"></span>
-            </div>
-            <div class="fr-row">
-              <label>Voix <span class="muted">(si Jeu = FR)</span></label>
-              <select id="frVoices"><option value="FR">Français</option><option value="EN">Anglais</option></select>
-            </div>
-            <div class="fr-row">
-              <label>Sorts, talents &amp; echoes</label>
-              <select id="frSpells"><option value="FR">Français</option><option value="EN">Anglais</option></select>
-            </div>
-            <div class="fr-row">
-              <label>Réputations, hauts faits &amp; titres</label>
-              <select id="frOther"><option value="FR">Français</option><option value="EN">Anglais</option></select>
-            </div>
-
-            <div class="fr-actions">
-              <button class="btn ghost" id="frAllFr">Tout en français</button>
-              <button class="btn ghost" id="frAllEn">Tout en anglais</button>
-              <button class="btn" id="frApply"><i class="ti ti-check"></i>Appliquer</button>
-            </div>
-            <pre id="frLog" class="fr-log hidden"></pre>
-          </div>
+          <div class="finder" id="settingsFinder"></div>
         </div>
 
-        <div class="card-panel about">
-          <h2>À propos</h2>
-          <p class="muted">Ebonhold Launcher <span id="aboutVersion">v1.0.0</span> · <span id="aboutSource"></span></p>
+        <div class="panel">
+          <h2><i class="ti ti-zoom-in" aria-hidden="true"></i>Zoom de l'interface</h2>
+          <div class="zoom-ctl">
+            <button class="btn ghost icon" data-zoom="-1" aria-label="Réduire"><i class="ti ti-minus" aria-hidden="true"></i></button>
+            <output class="zoom-val" aria-live="polite">100 %</output>
+            <button class="btn ghost icon" data-zoom="1" aria-label="Agrandir"><i class="ti ti-plus" aria-hidden="true"></i></button>
+            <button class="btn ghost sm" data-zoom="0"><i class="ti ti-zoom-reset" aria-hidden="true"></i>100 %</button>
+          </div>
+          <p class="muted">Astuce : <kbd>Ctrl</kbd> + molette, ou <kbd>Ctrl</kbd> + <kbd>+</kbd> / <kbd>−</kbd> / <kbd>0</kbd>.</p>
+        </div>
+
+        <div class="panel">
+          <h2><i class="ti ti-rocket" aria-hidden="true"></i>Assistant de démarrage</h2>
+          <p class="muted">Refaire les trois étapes : dossier du jeu, langue, packs d'addons.</p>
+          <div class="btn-row"><button class="btn ghost" data-wizard="1"><i class="ti ti-rocket" aria-hidden="true"></i>Relancer l'assistant</button></div>
+        </div>
+
+        <div class="panel about">
+          <h2><i class="ti ti-info-circle" aria-hidden="true"></i>À propos</h2>
+          <dl class="about-list">
+            <dt>Version</dt><dd id="aboutVersion">—</dd>
+            <dt>Catalogue</dt><dd id="aboutSource">—</dd>
+          </dl>
+          <p class="muted">Launcher fait par la communauté française. Ce n'est <strong>pas</strong> le launcher officiel d'Ebonhold.</p>
+          <div class="btn-row">
+            <button class="btn ghost sm" data-openlog="1"><i class="ti ti-file-text" aria-hidden="true"></i>Ouvrir le journal</button>
+            <button class="btn ghost sm" id="aboutGithub"><i class="ti ti-brand-github" aria-hidden="true"></i>Code source</button>
+          </div>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- Fiche détaillée d'un mod -->
-  <div id="modal" class="modal-overlay hidden">
-    <div class="modal">
-      <button class="modal-close" id="modalClose" aria-label="Fermer"><i class="ti ti-x"></i></button>
-      <div class="modal-head">
-        <div class="modal-thumb" id="modalThumb"><i class="ti ti-puzzle"></i></div>
-        <div>
-          <h2 id="modalName">Mod</h2>
-          <div class="modal-sub" id="modalSub"></div>
-        </div>
+  <!-- ============================================================ Fiche d'un addon -->
+  <div id="productModal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pmName">
+    <div class="dialog">
+      <button class="dialog-close" data-close aria-label="Fermer"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <div class="pm-head">
+        <div class="pm-thumb" id="pmThumb"><i class="ti ti-puzzle" aria-hidden="true"></i></div>
+        <div><h2 id="pmName">Addon</h2><div class="muted" id="pmSub"></div></div>
       </div>
-      <p class="modal-desc" id="modalDesc"></p>
-      <div class="modal-actions" id="modalActions"></div>
-      <h3 class="modal-h3">Historique des versions</h3>
-      <div class="modal-history" id="modalHistory"></div>
+      <p class="pm-desc" id="pmDesc"></p>
+      <div class="btn-row" id="pmActions"></div>
+      <h3 class="mini-title">Historique des versions</h3>
+      <div class="pm-history" id="pmHistory"></div>
     </div>
   </div>
 
-  <div id="toasts"></div>
+  <!-- ============================================================ Avant de jouer -->
+  <div id="playModal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="playTitle">
+    <div class="dialog sm">
+      <button class="dialog-close" data-close aria-label="Fermer"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <h2 id="playTitle"><i class="ti ti-shield-check" aria-hidden="true"></i>Avant de jouer</h2>
+      <p class="muted" id="playIntro">Quelques points à régler :</p>
+      <ul class="issues" id="playIssues"></ul>
+      <div class="fix-progress hidden" id="playProgress">
+        <div class="fix-line"><i class="ti ti-loader-2 spin" aria-hidden="true"></i><span id="playProgressMsg">Correction en cours…</span></div>
+        <pre class="log small" id="playLog"></pre>
+      </div>
+      <p class="notice err hidden" id="playError"></p>
+      <div class="dialog-actions">
+        <button class="btn ghost" id="playAnyway"><i class="ti ti-player-play" aria-hidden="true"></i>Jouer quand même</button>
+        <button class="btn gold" id="playFix"><i class="ti ti-tools" aria-hidden="true"></i>Corriger et jouer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ Signalement (bug / idée) -->
+  <div id="reportModal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="repTitle">
+    <div class="dialog lg">
+      <button class="dialog-close" data-close aria-label="Fermer"><i class="ti ti-x" aria-hidden="true"></i></button>
+      <h2 id="repTitle"><i class="ti ti-bug" id="repTitleIcon" aria-hidden="true"></i><span id="repTitleTxt">Signaler un bug</span></h2>
+
+      <!-- Formulaire -->
+      <div id="repForm">
+        <div class="seg kind" id="repKind" role="radiogroup" aria-label="Type de message">
+          <button role="radio" data-kind="bug" aria-checked="true" class="active"><i class="ti ti-bug" aria-hidden="true"></i>Bug</button>
+          <button role="radio" data-kind="suggestion" aria-checked="false"><i class="ti ti-bulb" aria-hidden="true"></i>Idée</button>
+        </div>
+        <p class="notice warn hidden" id="repWait"></p>
+
+        <label class="field-lbl" for="repText" id="repTextLbl">Que s'est-il passé ?</label>
+        <textarea id="repText" rows="6" spellcheck="true"></textarea>
+        <div class="field-foot"><span class="field-err hidden" id="repErr" role="alert"></span><span class="counter" id="repCount">0 caractère</span></div>
+
+        <div class="field-lbl">Pièces jointes <span class="muted">(captures, vidéos)</span></div>
+        <div class="btn-row" style="margin-top:0"><button class="btn ghost" id="repPick"><i class="ti ti-paperclip" aria-hidden="true"></i>Ajouter des captures ou vidéos</button><span class="muted" id="repAttachCount"></span></div>
+        <div class="recent-wrap" id="repRecentWrap">
+          <div class="mini-title">Captures récentes <span class="muted">— coche celles à joindre</span></div>
+          <div class="recent" id="repRecent"></div>
+        </div>
+        <ul class="attach-list" id="repAttach"></ul>
+
+        <div class="log-opt">
+          <label class="check"><input type="checkbox" id="repLog" checked><span>Joindre le journal du launcher</span></label>
+          <p class="muted" id="repLogExplain">Le journal est le carnet de bord du launcher : il y note ce qu'il fait (installations, erreurs). Il aide à comprendre ton souci. Les chemins de tes dossiers sont anonymisés.</p>
+        </div>
+        <div class="preview-wrap">
+          <details class="preview" id="repPreview">
+            <summary>Voir ce qui sera envoyé</summary>
+            <p class="muted">En plus de ton message et des pièces jointes, ces infos sur le jeu et le launcher sont ajoutées :</p>
+            <pre class="log small selectable" id="repPreviewTxt">Chargement…</pre>
+          </details>
+        </div>
+
+        <div class="dialog-actions">
+          <button class="btn ghost" data-close>Annuler</button>
+          <button class="btn gold" id="repSend"><i class="ti ti-send" aria-hidden="true"></i>Envoyer</button>
+        </div>
+      </div>
+
+      <!-- Envoi en cours -->
+      <div id="repSending" class="rep-state hidden">
+        <i class="ti ti-loader-2 spin big" aria-hidden="true"></i>
+        <p id="repSendMsg">Envoi…</p>
+        <div class="bar"><i id="repBar"></i></div>
+      </div>
+
+      <!-- Envoyé -->
+      <div id="repDone" class="rep-state hidden">
+        <i class="ti ti-circle-check big ok" aria-hidden="true"></i>
+        <p class="rep-done-title" id="repDoneTitle"></p>
+        <p class="muted" id="repDoneSub"></p>
+        <div class="dialog-actions center">
+          <button class="btn ghost" id="repDiscord"><i class="ti ti-brand-discord" aria-hidden="true"></i>Ouvrir le Discord</button>
+          <button class="btn gold" data-close>Fermer</button>
+        </div>
+      </div>
+
+      <!-- Échec -->
+      <div id="repFail" class="rep-state hidden">
+        <i class="ti ti-alert-triangle big bad" aria-hidden="true"></i>
+        <p class="rep-done-title">L'envoi n'a pas abouti</p>
+        <p class="muted" id="repFailMsg"></p>
+        <div class="dialog-actions center">
+          <button class="btn ghost" data-close>Fermer</button>
+          <button class="btn gold" id="repRetry"><i class="ti ti-refresh" aria-hidden="true"></i>Réessayer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ Assistant de démarrage -->
+  <div id="wizard" class="wizard hidden" role="dialog" aria-modal="true" aria-labelledby="wizTitle">
+    <div class="wiz-shell">
+      <header class="wiz-head">
+        <div class="brand small">
+          <svg class="brand-rune" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 2 L37 20 L20 38 L3 20 Z" fill="none" stroke="currentColor" stroke-width="1.6" class="r-gold"/>
+            <path d="M20 31 V10 M20 19 L13 11.5 M20 19 L27 11.5 M14.5 27 L20 31 L25.5 27" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="r-ice"/>
+          </svg>
+          <div class="brand-words"><span class="brand-name">Ebonhold</span><span class="brand-fr">FR</span></div>
+        </div>
+        <ol class="stepper" id="wizSteps">
+          <li data-step="1"><span class="num">1</span><span class="lbl">Dossier du jeu</span></li>
+          <li data-step="2"><span class="num">2</span><span class="lbl">Langue</span></li>
+          <li data-step="3"><span class="num">3</span><span class="lbl">Addons</span></li>
+        </ol>
+        <button class="link-btn" id="wizSkip">Passer l'assistant</button>
+      </header>
+
+      <div class="wiz-body">
+        <!-- Étape 1 -->
+        <section class="wiz-step" data-step="1">
+          <h2 id="wizTitle">Où est ton jeu ?</h2>
+          <p class="muted">Le launcher a besoin du dossier qui contient <code>Wow.exe</code>.</p>
+          <div class="wiz-current hidden" id="wizCurrent"></div>
+          <div class="finder" id="wizFinder"></div>
+        </section>
+        <!-- Étape 2 -->
+        <section class="wiz-step hidden" data-step="2">
+          <h2>Quelle langue ?</h2>
+          <p class="muted">Tu pourras tout régler ligne par ligne plus tard, dans l'onglet Français.</p>
+          <div class="presets big" id="wizPresets"></div>
+          <div id="wizPackOpt"></div>
+        </section>
+        <!-- Étape 3 -->
+        <section class="wiz-step hidden" data-step="3">
+          <h2>Des addons pour bien démarrer ?</h2>
+          <p class="muted">Coche les packs que tu veux. Tu en trouveras d'autres dans l'onglet Addons.</p>
+          <div class="wiz-packs" id="wizPacks"></div>
+        </section>
+        <!-- Application -->
+        <section class="wiz-step hidden" data-step="run">
+          <h2 id="wizRunTitle">Installation…</h2>
+          <p class="muted" id="wizRunSub">Laisse le launcher ouvert, ça ne prend que quelques instants.</p>
+          <ul class="run-list" id="wizRun"></ul>
+          <div class="wiz-done hidden" id="wizDone">
+            <button class="btn-play" id="wizPlay"><i class="ti ti-player-play" aria-hidden="true"></i><span>Jouer</span></button>
+            <button class="btn ghost" id="wizHome">Aller à l'accueil</button>
+          </div>
+        </section>
+      </div>
+
+      <footer class="wiz-foot" id="wizFoot">
+        <button class="btn ghost" id="wizBack"><i class="ti ti-arrow-left" aria-hidden="true"></i>Retour</button>
+        <span class="wiz-hint" id="wizHint"></span>
+        <button class="btn gold" id="wizNext">Suivant<i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
