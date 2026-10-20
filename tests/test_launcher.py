@@ -93,9 +93,33 @@ class Catalogue(unittest.TestCase):
 
     def test_rechargement_garde_le_catalogue_en_ligne(self):
         a = api.Api()
+        # Pas de taches de fond : elles chercheraient le vrai jeu et ecriraient l'etat
+        # pendant les autres tests.
+        a._startup_done, a._detect_wow = True, lambda: None
         a._manifest, a._source = {"products": [], "launcher_version": "9.9.9"}, "remote"
         r = a.get_catalog(False)
         self.assertEqual(r["source"], "remote")      # avant : retour au catalogue embarque
+
+
+class ApiV2(unittest.TestCase):
+    def test_dossier_du_jeu(self):
+        a = api.Api()
+        self.assertFalse(a.set_wow_path(os.path.join(_TMP, "pas-un-jeu"))["ok"])
+        g = make_game("jeu-api")
+        self.assertTrue(a.set_wow_path(g)["ok"])
+        self.assertEqual(state.get_wow_path(), g)
+
+    def test_preferences(self):
+        a = api.Api()
+        self.assertTrue(a.set_pref("zoom", 1.25)["ok"])
+        self.assertEqual(a.get_prefs()["zoom"], 1.25)
+        self.assertFalse(a.set_pref("inconnue", 1)["ok"])
+
+    def test_signalement_verifie_avant_envoi(self):
+        a = api.Api()
+        r = a.send_report("bug", "court", [], True)
+        self.assertFalse(r["started"])
+        self.assertIn("10 caractères", r["error"])
 
 
 class Liens(unittest.TestCase):

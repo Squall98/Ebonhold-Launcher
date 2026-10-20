@@ -14,8 +14,12 @@ import time
 import urllib.parse
 import webbrowser
 
-from . import catalog, frconfig, frpack, installer, selfupdate, state, version, wow
+from . import catalog, frconfig, frpack, gamescan, installer, prefs, report, selfupdate, state, version, wow
 from .journal import log
+
+# Pieces jointes acceptees par la fenetre « Signaler » (images et videos).
+_ATTACH_FILTER = ("Images et vidéos (*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.webp;*.tga;"
+                  "*.mp4;*.webm;*.mov;*.mkv)",)
 
 # Produits geres par l'onglet Francais (installes / retires selon les reglages).
 FR_ADDON = "ebonholdfr"
@@ -73,6 +77,8 @@ class Api:
         self._worker = None
         self._startup_done = False
         self._fr_busy = threading.Lock()   # une seule application des reglages FR a la fois
+        self._scan_busy = threading.Lock()     # une seule recherche du jeu a la fois
+        self._report_busy = threading.Lock()   # un seul envoi de signalement a la fois
 
     # ----------------------------------------------------------- catalogue
     def get_catalog(self, check_remote=False):
@@ -114,8 +120,18 @@ class Api:
     def _detect_wow(self):
         """Detecte le dossier WoW en fond (peut scanner des disques) et rafraichit l'UI
         si on en trouve un. Jamais sur le chemin bloquant de get_catalog/_build_catalog."""
+        path = ""
         try:
-            path = wow.autodetect()
+            # Emplacements connus, registre, raccourcis (pas de parcours des disques : ca,
+            # c'est scan_games, apres accord du joueur). Ebonhold avec Wow.exe d'abord.
+            for c in gamescan.quick_detect():
+                if c.get("is_ebonhold") and c.get("has_exe") and wow.is_valid_install(c["path"]):
+                    path = c["path"]
+                    break
+        except Exception as e:
+            log("detection rapide du jeu impossible : %r" % e)
+        try:
+            path = path or wow.autodetect()
         except Exception:
             return
         if path and not state.get_wow_path():
@@ -202,7 +218,7 @@ class Api:
     def choose_folder(self):
         """Ouvre le selecteur natif de dossier et memorise le choix s'il est valide."""
         import webview
-        result = self._window.create_file_dialog(webview.FOLDER_DIALOG)
+        result = self._window.create_file_dialog(webview.FileDialog.FOLDER)
         if not result:
             return {"ok": False, "path": state.get_wow_path()}
         path = result[0]
@@ -211,6 +227,50 @@ class Api:
                     "error": "Ce dossier n'est pas une install Ebonhold (Data\\ introuvable)."}
         state.set_wow_path(path)
         return {"ok": True, "path": path}
+
+    def quick_detect(self):
+        """Installations trouvees sans parcourir les disques (instantane)."""
+        try:
+            return {"candidates": gamescan.quick_detect()}
+        except Exception as e:
+            log("detection rapide impossible : %r" % e)
+            return {"candidates": []}
+
+    def scan_games(self):
+        """Recherche du jeu sur les disques (apres accord du joueur) : onScanProgress puis onScanDone."""
+        if not self._scan_busy.acquire(blocking=False):
+            return {"started": False, "error": "Recherche déjà en cours."}
+
+        def worker():
+            cands = []
+            try:
+                cands = gamescan.scan(progress=lambda m: self._emit("onScanProgress", m))
+            except Exception as e:
+                log("recherche du jeu impossible : %r" % e)
+            finally:
+                self._scan_busy.release()
+            log("recherche du jeu : %d dossier(s) trouve(s)" % len(cands))
+            self._emit("onScanDone", cands)
+
+        threading.Thread(target=worker, daemon=True).start()
+        return {"started": True}
+
+    def set_wow_path(self, path):
+        """Dossier choisi dans la liste des installations trouvees."""
+        if not wow.is_valid_install(path):
+            return {"ok": False, "error": "Ce dossier n'est pas une installation du jeu (Data\\ introuvable)."}
+        state.set_wow_path(path)
+        log("dossier du jeu choisi")
+        if self._manifest is not None:
+            self._emit("onCatalogUpdate", self._build_catalog())
+        return {"ok": True, "path": path}
+
+    # ------------------------------------------------------------ preferences
+    def get_prefs(self):
+        return prefs.get()
+
+    def set_pref(self, key, value):
+        return prefs.set(key, value)
 
     # ----------------------------------------------------- install / update
     def install_product(self, product_id):
@@ -572,6 +632,88 @@ class Api:
 
         threading.Thread(target=worker, daemon=True).start()
         return {"started": True}
+
+    # ------------------------------------------- signaler un bug / une idee
+    def _report_extra(self):
+        """Infos du launcher jointes au signalement (anonymisees par report)."""
+        if not self._manifest:
+            self._manifest, self._source = catalog.fetch_offline()
+        extra = {"launcher_version": version.APP_VERSION, "catalog_source": self._source or ""}
+        try:
+            extra["addons"] = [{"name": r["name"], "version": r["installed_version"]}
+                               for r in self._build_catalog()["products"] if r["installed_version"]]
+        except Exception:
+            pass
+        try:
+            ok, _ = frconfig.is_available()
+            if ok:
+                extra["fr_settings"] = frconfig.reglages_enregistres()
+                wp = state.get_wow_path()
+                if wow.is_valid_install(wp):
+                    st = frconfig.status(wp, self._fr_extra(wp))
+                    extra["fr_state"] = {k: st.get(k) for k in ("applied", "up_to_date", "last_applied")}
+        except Exception:
+            pass
+        return extra
+
+    def report_info(self, kind):
+        return report.info(kind, state.get_wow_path(), self._report_extra())
+
+    def recent_captures(self):
+        try:
+            return {"items": report.recent_captures(state.get_wow_path())}
+        except Exception as e:
+            log("captures recentes illisibles : %r" % e)
+            return {"items": []}
+
+    def thumbnail(self, path):
+        try:
+            return {"data_url": report.thumbnail(path)}
+        except Exception:
+            return {"data_url": None}
+
+    def pick_attachments(self):
+        import webview
+        try:
+            res = self._window.create_file_dialog(webview.FileDialog.OPEN, allow_multiple=True,
+                                                  file_types=_ATTACH_FILTER)
+        except Exception as e:
+            log("selecteur de fichiers : %r" % e)
+            res = None
+        return {"paths": list(res or [])}
+
+    def send_report(self, kind, text, attachments, include_log):
+        """Envoi en arriere-plan : onReportProgress(pct, msg) puis onReportDone(ok, numero, msg)."""
+        err = report.precheck(kind, text, attachments)
+        if err:
+            return {"started": False, "error": err}
+        if not self._report_busy.acquire(blocking=False):
+            return {"started": False, "error": "Un envoi est déjà en cours."}
+        wow_path, extra = state.get_wow_path(), self._report_extra()
+
+        def worker():
+            try:
+                progress = _throttled(lambda p, m: self._emit("onReportProgress", p, m), 0.25)
+                r = report.send(kind, text, attachments, bool(include_log), wow_path, extra,
+                                progress=progress)
+            except Exception as e:
+                log("signalement : echec (%s)" % type(e).__name__)
+                r = {"ok": False, "number": None, "error": "Envoi impossible. Réessaie plus tard."}
+            finally:
+                self._report_busy.release()
+            self._emit("onReportDone", bool(r.get("ok")), r.get("number"),
+                       r.get("message") or r.get("error") or "")
+
+        threading.Thread(target=worker, daemon=True).start()
+        return {"started": True}
+
+    def open_log(self):
+        try:
+            subprocess.Popen(["notepad.exe", report._log_file()],
+                             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+            return {"ok": True}
+        except Exception as e:
+            return {"ok": False, "error": str(e)}
 
     # ------------------------------------------------------------- divers
     def js_log(self, msg):
