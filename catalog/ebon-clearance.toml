@@ -9,3 +9,6 @@ install_target = "addons"
 icon = "ti-trash"
 accent = "coral"
 description = "Nettoyez vos sacs à la vitesse de l'éclaire"
+
+# Version figee : un tiers ne passe chez les joueurs qu'apres validation (changer ce tag).
+tag = "v2.76.0"

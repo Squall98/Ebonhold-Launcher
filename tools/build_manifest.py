@@ -42,6 +42,7 @@ import tempfile
 import time
 import tomllib
 import urllib.error
+import urllib.parse
 import urllib.request
 import zipfile
 
@@ -57,7 +58,7 @@ UA = {"User-Agent": "EbonholdLauncher-catalog-builder"}
 KNOWN_KEYS = {
     "id", "name", "repo", "category", "install_target", "extract_root",
     "extract_roots", "filename", "asset", "icon", "accent", "description",
-    "long_description", "notes", "order",
+    "long_description", "notes", "order", "tag",
 }
 REQUIRED_KEYS = {"id", "name", "repo", "category", "install_target"}
 
@@ -228,7 +229,12 @@ def build_product(fiche):
         if not ROOT_RE.match(str(r)):
             raise ValueError("dossier racine invalide : %r" % r)
 
-    latest = api_get("/repos/%s/releases/latest" % repo)
+    # Version figee (addons tiers) : `tag = "v1.3.6"` dans la fiche. Une nouvelle version du
+    # tiers n'arrive chez les joueurs qu'apres validation (changement du tag dans la fiche).
+    if fiche.get("tag"):
+        latest = api_get("/repos/%s/releases/tags/%s" % (repo, urllib.parse.quote(str(fiche["tag"]), safe="")))
+    else:
+        latest = api_get("/repos/%s/releases/latest" % repo)
     asset = pick_asset(latest, fiche)
     if not asset:
         raise ValueError("aucun asset .zip/.mpq dans la derniere release de %s" % repo)

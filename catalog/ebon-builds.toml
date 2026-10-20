@@ -9,3 +9,6 @@ install_target = "addons"
 icon = "ti-wand"
 accent = "blue"
 description = "Gérez vos builds d'échoes en toute simplicité"
+
+# Version figee : un tiers ne passe chez les joueurs qu'apres validation (changer ce tag).
+tag = "v1.3.6"

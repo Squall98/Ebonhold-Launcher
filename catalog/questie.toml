@@ -9,3 +9,6 @@ install_target = "addons"
 icon = "ti-route"
 accent = "amber"
 description = "Une aide précieuse pour vos aventures en Azeroth"
+
+# Version figee : un tiers ne passe chez les joueurs qu'apres validation (changer ce tag).
+tag = "v1.6.4"
