@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.1 — « Signaler un bug » actif
+- **Signaler un bug / Proposer une idée** fonctionne : les envois arrivent dans le dépôt privé
+  des signalements (en 2.0.0, la fenêtre affichait « indisponible »).
+
 ## v2.0.0 — nouveau launcher
 ### Nouveautés
 - **Nouvelle interface** en 5 onglets : Accueil, Addons, Français, Aide, Réglages. Thème

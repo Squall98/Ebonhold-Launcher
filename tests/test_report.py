@@ -290,6 +290,19 @@ class AntiSpam(Base):
         self.assertEqual(report.wait_minutes(), 0)
 
 
+class JetonMasque(Base):
+    def test_aller_retour_et_config(self):
+        from core import secret
+        faux = "github_pat_" + "Ab9" * 25
+        x = secret.masquer(faux)
+        self.assertNotIn("github_pat_", x)
+        self.assertEqual(secret.demasquer(x), faux)
+        write_config({"repo": "Squall98/Ebonhold-Signalements", "branch": "main", "token_x": x})
+        self.assertEqual(report.load_config()["token"], faux)
+        write_config({"repo": "Squall98/Ebonhold-Signalements", "token_x": "pas du base64 !"})
+        self.assertIsNone(report.load_config())
+
+
 class Verifications(Base):
     def test_texte(self):
         self.assertIn("10 caractères", report.validate("bug", "  court   ", []))

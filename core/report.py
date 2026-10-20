@@ -34,7 +34,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from . import anonymize, gameinfo, paths, version
+from . import anonymize, gameinfo, paths, secret, version
 from .journal import log
 
 API = "https://api.github.com"
@@ -88,6 +88,11 @@ def load_config():
         return None
     repo = str(cfg.get("repo") or "").strip()
     token = str(cfg.get("token") or "").strip()
+    if not token and cfg.get("token_x"):          # launcher publie : jeton masque (voir secret.py)
+        try:
+            token = secret.demasquer(str(cfg["token_x"])).strip()
+        except (ValueError, UnicodeDecodeError):
+            token = ""
     branch = str(cfg.get("branch") or "").strip()
     if not re.match(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$", repo) or len(token) < 20:
         return None

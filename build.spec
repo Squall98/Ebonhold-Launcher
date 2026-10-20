@@ -24,9 +24,22 @@ datas += [
     ("assets", "assets"),
 ]
 # Cle du depot prive des signalements : fichier local, JAMAIS dans git (voir .gitignore).
+# L'exe n'embarque qu'une copie au jeton MASQUE (core/secret.py), generee ici dans build/.
+import json
 import os
+import sys
 if os.path.isfile(os.path.join("secrets", "report.json")):
-    datas += [("secrets/report.json", "secrets")]
+    sys.path.insert(0, os.path.abspath("core"))
+    import secret as _secret
+    with open(os.path.join("secrets", "report.json"), encoding="utf-8-sig") as _f:
+        _cfg = json.load(_f)
+    _jeton = str(_cfg.get("token") or "").strip()
+    if _jeton:
+        os.makedirs(os.path.join("build", "secrets"), exist_ok=True)
+        with open(os.path.join("build", "secrets", "report.json"), "w", encoding="utf-8") as _f:
+            json.dump({"repo": _cfg.get("repo", ""), "branch": _cfg.get("branch", ""),
+                       "token_x": _secret.masquer(_jeton)}, _f)
+        datas += [("build/secrets/report.json", "secrets")]
 hiddenimports += ["mpyq", "clr"]
 
 a = Analysis(
