@@ -508,6 +508,35 @@ def status(install_dir, extra=()):
     return res
 
 
+_GLOBALLOCALE = r"Interface\FrameXML\API_\C_GlobalLocale.lua"
+
+
+def _lua_chaine(t):
+    return '"' + t.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n").replace("\r", "") + '"'
+
+
+def correctif_globallocale(body, fr):
+    """C_GlobalLocale.lua du serveur : textes (grimoire, fiche perso, champs de bataille...) en
+    anglais, russe, chinois et espagnol seulement. Dans un client frFR ils valent tous nil
+    (erreurs Lua comme GameTooltip:SetText au survol du grimoire), et la boucle du serveur
+    efface meme les textes FR de Blizzard du meme nom. On garde la valeur de Blizzard, sinon
+    notre traduction, sinon l'anglais du serveur. None si le fichier n'a pas la forme attendue."""
+    cles = re.findall(r'^\s*\["([A-Za-z0-9_]+)"\]\s*=\s*\{', body, re.M)
+    if not cles or "PRETTY_LOCALIZATION" not in body:
+        return None
+    avant = ("-- [EbonholdFR] textes de Blizzard gardes avant la boucle du serveur\n"
+             "local EBFR_AVANT = {}\n"
+             "for _, k in ipairs({%s}) do EBFR_AVANT[k] = _G[k] end\n\n") % ", ".join(_lua_chaine(k) for k in cles)
+    textes = "\n".join("  [%s] = %s," % (_lua_chaine(k), _lua_chaine(v))
+                       for k, v in sorted(fr.items()) if k in cles)
+    apres = ("\n\n-- [EbonholdFR] pas de francais prevu par le serveur : Blizzard, sinon FR, sinon anglais\n"
+             "local EBFR_TEXTES = {\n%s\n}\n"
+             "for key, t in next, PRETTY_LOCALIZATION do\n"
+             "  if _G[key] == nil then _G[key] = EBFR_AVANT[key] or EBFR_TEXTES[key] or t.enUS end\n"
+             "end\n") % textes
+    return avant + body + apres
+
+
 def _corrections_interface(mpqread, data_dir, patchz, s, log):
     """Correctifs de fichiers d'interface, refaits a chaque fois depuis les fichiers ACTUELS du
     serveur (jamais une copie figee)."""
@@ -527,6 +556,16 @@ def _corrections_interface(mpqread, data_dir, patchz, s, log):
                     body = body.replace(g, "if issecure() then " + g + " end")
             patchz[SBF] = body.encode("utf-8")
             log("Grimoire : noms des métiers en français.")
+        d = _read_from_patches(mpqread, data_dir, _GLOBALLOCALE, order)
+        if d:
+            with open(os.path.join(_VENDOR, "globallocale_fr.json"), encoding="utf-8") as f:
+                fr = {k: v for k, v in json.load(f).items() if not k.startswith("_")}
+            body = correctif_globallocale(d.decode("utf-8", "surrogateescape"), fr)
+            if body:
+                patchz[_GLOBALLOCALE] = body.encode("utf-8", "surrogateescape")
+                log("Textes du serveur (grimoire, fiche du personnage, champs de bataille) en français.")
+            else:
+                log("Textes du serveur : fichier inattendu, laissés tels quels.")
     repl = {}
     for en, frt in _TDB_REPL.items():
         est_nom = en.startswith("name =")

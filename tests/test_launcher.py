@@ -101,6 +101,55 @@ class Catalogue(unittest.TestCase):
         self.assertEqual(r["source"], "remote")      # avant : retour au catalogue embarque
 
 
+SERVEUR_GLOBALLOCALE = '''local PRETTY_LOCALIZATION = {
+	["SHOW_UNASSIGNED_SPELL_BORDER"] = {
+		ruRU = "x", enUS = "Show Unassigned Spells", esES = "y"
+	},
+	["ITEM_SET_BONUS_GRAY"] = {
+		enUS = "(%d) Set: %s"
+	},
+	["BASE_CAPTURE_PATTERN"] = {
+		enUS = "%(Bases captured: (%d+)%)"
+	},
+};
+setmetatable(PRETTY_LOCALIZATION, {
+	__call = function(self, key)
+		if GetLocale() == "enUS" then return self[key].enUS end
+	end
+});
+for key in next, PRETTY_LOCALIZATION do
+	_G[key] = PRETTY_LOCALIZATION(key);
+end
+'''
+
+
+class GlobalesServeur(unittest.TestCase):
+    """Le C_GlobalLocale.lua du serveur ne prevoit pas le frFR : plus aucune globale nil."""
+
+    def test_correctif(self):
+        fr = {"SHOW_UNASSIGNED_SPELL_BORDER": "Afficher les sorts non placés", "INCONNUE": "x"}
+        out = frconfig.correctif_globallocale(SERVEUR_GLOBALLOCALE, fr)
+        self.assertIn("EBFR_AVANT", out)
+        self.assertNotIn("INCONNUE", out)
+        self.assertIsNone(frconfig.correctif_globallocale("print('autre fichier')", fr))
+        try:
+            from lupa import luajit21 as L
+        except ImportError:
+            self.skipTest("lupa absent")
+        for loc, attendu in (("frFR", "Afficher les sorts non placés"), ("enUS", "Show Unassigned Spells")):
+            lua = L.LuaRuntime()
+            lua.execute('GetLocale = function() return "%s" end ITEM_SET_BONUS_GRAY = "BLIZZ %%s"' % loc)
+            lua.execute(out)
+            g = lua.globals()
+            self.assertEqual(g.SHOW_UNASSIGNED_SPELL_BORDER, attendu)
+            self.assertEqual(g.BASE_CAPTURE_PATTERN, "%(Bases captured: (%d+)%)")     # anglais a defaut
+        self.assertEqual(g.ITEM_SET_BONUS_GRAY, "(%d) Set: %s")       # enUS : valeur du serveur
+        lua = L.LuaRuntime()
+        lua.execute('GetLocale = function() return "frFR" end ITEM_SET_BONUS_GRAY = "BLIZZ %s"')
+        lua.execute(out)
+        self.assertEqual(lua.globals().ITEM_SET_BONUS_GRAY, "BLIZZ %s")   # texte FR de Blizzard garde
+
+
 class ApiV2(unittest.TestCase):
     def test_dossier_du_jeu(self):
         a = api.Api()
