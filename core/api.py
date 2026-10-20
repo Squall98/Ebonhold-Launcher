@@ -14,6 +14,7 @@ import urllib.parse
 import webbrowser
 
 from . import catalog, frconfig, frpack, installer, selfupdate, state, version, wow
+from .journal import log
 
 # Liens que le launcher accepte d'ouvrir : du web, et seulement ces sites.
 _URL_HOSTS = ("github.com", "raw.githubusercontent.com", "squall98.github.io",
@@ -78,6 +79,7 @@ class Api:
         """
         if self._manifest is None:
             self._manifest, self._source = catalog.fetch_offline()
+            log("catalogue au demarrage : %s" % self._source)
         resp = self._build_catalog()
         if check_remote:
             threading.Thread(target=self._remote_refresh, daemon=True).start()
@@ -91,9 +93,12 @@ class Api:
         """Recupere le manifeste en ligne en fond ; pousse onCatalogUpdate si dispo."""
         try:
             man = catalog._load_remote()
-        except Exception:
+        except Exception as e:
+            log("catalogue en ligne injoignable : %r" % e)
             return  # hors-ligne ou repo injoignable -> on garde le local, sans bloquer
         self._manifest, self._source = man, "remote"
+        log("catalogue en ligne recu (%d produits, launcher %s)" % (
+            len(catalog.products(man)), catalog.launcher_version(man)))
         self._emit("onCatalogUpdate", self._build_catalog())
 
     def _detect_wow(self):
@@ -239,8 +244,10 @@ class Api:
         progress = _throttled(lambda pct, msg: self._emit("onProgress", product_id, pct, msg))
         try:
             installer.install(product, wow_path, progress)
+            log("installe : %s v%s" % (product_id, product["version"]))
             self._emit("onDone", product_id, True, "Installe (v%s)." % product["version"])
         except Exception as e:
+            log("echec installation %s : %r" % (product_id, e))
             self._emit("onDone", product_id, False, str(e))
 
     def uninstall_product(self, product_id):
@@ -299,11 +306,13 @@ class Api:
         def worker():
             progress = _throttled(lambda pct, msg: self._emit("onLauncherProgress", pct, msg), 0.25)
             try:
+                log("mise a jour du launcher : %s" % url)
                 selfupdate.download_and_swap(url, sha, progress)
                 self._emit("onLauncherReady")          # le JS demande la fermeture
                 if self._window is not None:
                     self._window.destroy()                # quitte pour liberer l'.exe
             except Exception as e:
+                log("echec mise a jour du launcher : %r" % e)
                 self._emit("onLauncherError", str(e))
 
         threading.Thread(target=worker, daemon=True).start()
@@ -342,12 +351,14 @@ class Api:
         def worker():
             progress = _throttled(lambda pct, msg: self._emit("onPackProgress", pct, msg), 0.25)
 
-            def log(msg):
+            def flog(msg):
+                log("pack FR : %s" % msg)
                 self._emit("onFrLog", msg)
             try:
-                frpack.install(wow_path, spec, progress, log)
+                frpack.install(wow_path, spec, progress, flog)
                 self._emit("onPackDone", True, "Pack frFR installe.")
             except Exception as e:
+                log("echec pack FR : %r" % e)
                 self._emit("onPackDone", False, str(e))
 
         threading.Thread(target=worker, daemon=True).start()
@@ -362,18 +373,25 @@ class Api:
             return {"started": False, "error": "Ferme d'abord le jeu (Wow.exe), puis recommence."}
 
         def worker():
-            def log(msg):
+            def flog(msg):
+                log("patch FR : %s" % msg)
                 self._emit("onFrLog", msg)
             try:
-                frconfig.apply(wow_path, base_fr, voices_fr, spells_fr, other_fr, log)
+                frconfig.apply(wow_path, base_fr, voices_fr, spells_fr, other_fr, flog)
                 self._emit("onFrDone", True, "Configuration appliquee. Lance le jeu.")
             except Exception as e:
+                log("echec patch FR : %r" % e)
                 self._emit("onFrDone", False, str(e))
 
         threading.Thread(target=worker, daemon=True).start()
         return {"started": True}
 
     # ------------------------------------------------------------- divers
+    def js_log(self, msg):
+        """Ligne de journal envoyee par l'interface (demarrage du pont, erreurs JS)."""
+        log("interface : %s" % str(msg)[:300])
+        return {"ok": True}
+
     def launch_game(self):
         """Lance l'executable du jeu depuis le dossier d'install."""
         wow_path = state.get_wow_path()

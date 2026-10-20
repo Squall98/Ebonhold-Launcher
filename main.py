@@ -12,6 +12,7 @@ import webview
 
 from core.api import Api
 from core import version
+from core.journal import log
 from core.paths import data_dir, resource
 
 WINDOW_TITLE = "Ebonhold Launcher"
@@ -63,6 +64,7 @@ def _fresh_webview_cache(wv_dir):
 
 
 def main():
+    log("demarrage du launcher v%s%s" % (version.APP_VERSION, "" if getattr(sys, "frozen", False) else " (dev)"))
     # AVANT TOUT : debloquer les fichiers de l'app (marque Internet) sinon .NET refuse de
     # charger ses DLL quand le launcher a ete telecharge -> crash. Doit tourner avant webview.start().
     _unblock_app_files()

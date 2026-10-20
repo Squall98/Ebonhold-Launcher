@@ -404,8 +404,23 @@ function bind(){
   $("#modalClose").addEventListener("click", closeModal);
   $("#modal").addEventListener("click", e => { if (e.target.id==="modal") closeModal(); });
 }
-let _bound = false, _started = false;
-function start(){ if (_started) return; _started = true; if (!_bound){ _bound=true; bind(); } reload(true); }
+let _bound = false, _started = false, _real = false;
+const T0 = Date.now();
+const bridgeReady = () => !!(window.pywebview && window.pywebview.api);
+function jsLog(msg){ try { if (bridgeReady() && window.pywebview.api.js_log) window.pywebview.api.js_log(msg); } catch(e){} }
+function start(){
+  if (_started) return; _started = true; _real = bridgeReady();
+  if (!_bound){ _bound=true; bind(); }
+  reload(true);
+  jsLog(_real ? `pont pret en ${((Date.now()-T0)/1000).toFixed(1)} s` : "pont absent : apercu (donnees d'exemple)");
+}
+// Le pont est arrive APRES le demarrage en mode apercu (PC lent, WebView2 qui s'initialise) :
+// on recharge tout avec la vraie API, catalogue en ligne compris. Avant, le launcher restait
+// sur « Catalogue local » et ne verifiait jamais le catalogue en ligne.
+function onBridge(){
+  if (!_started){ start(); return; }
+  if (!_real){ _real = true; jsLog(`pont arrive en retard (${((Date.now()-T0)/1000).toFixed(1)} s) : rechargement`); reload(true); }
+}
 
 // Le pont pywebview (window.pywebview.api) est injecté de façon asynchrone par WebView2,
 // et l'événement "pywebviewready" est lent/peu fiable. On SONDE donc activement la
@@ -413,8 +428,10 @@ function start(){ if (_started) return; _started = true; if (!_bound){ _bound=tr
 (function waitForBridge(){
   let tries = 0;
   const iv = setInterval(() => {
-    if (window.pywebview && window.pywebview.api){ clearInterval(iv); start(); }
-    else if (++tries >= 150){ clearInterval(iv); start(); }   // ~30s : filet (preview navigateur -> MOCK)
+    tries++;
+    if (bridgeReady()){ clearInterval(iv); onBridge(); }
+    else if (tries === 150 && !_started) start();   // ~30 s : apercu dans un navigateur (MOCK)
+    else if (tries >= 1500) clearInterval(iv);      // ~5 min : on arrete de sonder
   }, 200);
 })();
-window.addEventListener("pywebviewready", start);   // ceinture + bretelles
+window.addEventListener("pywebviewready", onBridge);   // ceinture + bretelles
