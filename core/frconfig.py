@@ -11,11 +11,12 @@ qui surcharge patch-5/6 sans les modifier.
 """
 import json
 import os
+import re
 import shutil
 import stat
 import sys
 
-from . import paths
+from . import paths, wow
 
 _VENDOR = paths.resource("vendor")
 if _VENDOR not in sys.path:
@@ -35,11 +36,47 @@ _load_error = None
 
 
 def _deps():
-    """Importe mpyq + outils embarques. Renvoie (mpyq, mpqwrite, dbc_localize) ou leve."""
-    import mpyq          # pip
+    """Importe le lecteur MPQ + outils embarques. Renvoie (lecteur, mpqwrite, dbc_localize)
+    ou leve. Le lecteur (vendor/mpqread, base sur mpyq) lit aussi les fichiers chiffres et
+    les compressions que mpyq seul refuse."""
+    import mpyq          # pip  # noqa: F401  (requis par mpqread)
+    import mpqread       # vendor/
     import mpqwrite      # vendor/
     import dbc_localize  # vendor/
-    return mpyq, mpqwrite, dbc_localize
+    return mpqread, mpqwrite, dbc_localize
+
+
+def _open(mpqread, path, listfile=False):
+    return mpqread.Archive(path, listfile=listfile)
+
+
+def _read(arc, inner):
+    try:
+        return arc.read(inner)
+    except Exception:
+        return arc.read_file(inner)
+
+
+def _patch_priority(name):
+    """Rang de chargement d'un patch du dossier Data : patch.MPQ, puis patch-2..9, puis
+    patch-A..Z. Plus le rang est haut, plus le fichier l'emporte. None si ce n'est pas un patch."""
+    m = re.match(r"^patch(?:-([0-9A-Za-z]))?\.mpq$", name, re.I)
+    if not m:
+        return None
+    c = m.group(1)
+    if c is None:
+        return 0
+    return int(c) if c.isdigit() else 10 + ord(c.upper()) - ord("A")
+
+
+def _patches_by_priority(data_dir):
+    """Patchs du serveur, du plus prioritaire au moins prioritaire. patch-Z (le notre) exclu."""
+    out = []
+    for n in os.listdir(data_dir):
+        p = _patch_priority(n)
+        if p is not None and n.upper() != "PATCH-Z.MPQ":
+            out.append((p, n))
+    return [n for _, n in sorted(out, reverse=True)]
 
 
 def is_available():
@@ -58,7 +95,8 @@ def is_available():
 # ------------------------------------------------------------------ helpers FR
 
 def _load_tr():
-    s = json.load(open(_STORE, encoding="utf-8"))
+    with open(_STORE, encoding="utf-8") as f:
+        s = json.load(f)
     tr = {}
     tr.update(s.get("names", {}))
     tr.update(s.get("descs", {}))
@@ -182,23 +220,49 @@ _TDB_REPL = {
     'computedDesc = "Increases your Stamina by %s."':
         'computedDesc = "Augmente votre Endurance de %s."',
     'computedDesc = "Increases your Strength, Agility, Intellect or Spirit by %s, whichever is highest."':
-        'computedDesc = "Augmente votre Force, Agilite, Intelligence ou Esprit de %s (la plus elevee)."',
+        'computedDesc = "Augmente votre Force, Agilité, Intelligence ou Esprit de %s (la plus élevée)."',
     'computedDesc = "Increases your attack power by %s or your spell power by %s, whichever is higher."':
-        'computedDesc = "Augmente votre puissance d\'attaque de %s ou des sorts de %s (la plus elevee)."',
-    'name = "Default Soul Tree"': 'name = "Arbre d\'ames par defaut"',
+        'computedDesc = "Augmente votre puissance d\'attaque de %s ou votre puissance des sorts de %s (la plus élevée)."',
+    'name = "Default Soul Tree"': 'name = "Arbre d\'âmes par défaut"',
     'description = "Universal soul tree for all classes"':
-        'description = "Arbre d\'ames universel pour toutes les classes"',
+        'description = "Arbre d\'âmes universel pour toutes les classes"',
 }
-_ROOT_PATCHES = ["patch-D.mpq", "patch-M.MPQ", "patch-8.MPQ", "patch-4.MPQ", "patch.MPQ"]
 
 
-def _read_from_patches(mpyq, data_dir, inner, patches):
+_ARCHIVES = {}
+
+
+def _close_archives():
+    """Relache les fichiers du jeu (sinon l'updater officiel ne pourrait plus les remplacer)."""
+    for arc in _ARCHIVES.values():
+        try:
+            arc.file.close()
+        except Exception:
+            pass
+    _ARCHIVES.clear()
+
+
+def _cached(mpqread, path):
+    """Archive ouverte une seule fois par construction (les gros patchs HD font plusieurs Go)."""
+    key = (path, os.path.getmtime(path))
+    if key not in _ARCHIVES:
+        try:
+            _ARCHIVES[key] = _open(mpqread, path)
+        except Exception:
+            _ARCHIVES[key] = None
+    return _ARCHIVES[key]
+
+
+def _read_from_patches(mpqread, data_dir, inner, patches):
+    """Lit `inner` dans le premier patch qui le contient (liste du plus prioritaire au moins
+    prioritaire) : c'est la version que le jeu utilise vraiment."""
     for rel in patches:
         p = os.path.join(data_dir, rel)
         if not os.path.exists(p):
             continue
         try:
-            d = mpyq.MPQArchive(p, listfile=False).read_file(inner)
+            arc = _cached(mpqread, p)
+            d = _read(arc, inner) if arc is not None else None
             if d:
                 return d
         except Exception:
@@ -206,9 +270,10 @@ def _read_from_patches(mpyq, data_dir, inner, patches):
     return None
 
 
-def _add_addon_fixes(mpyq, data_dir, patchz, log):
+def _add_addon_fixes(mpqread, data_dir, patchz, log):
+    order = _patches_by_priority(data_dir)
     SBF = r"Interface\FrameXML\SpellBookFrame.lua"
-    d = _read_from_patches(mpyq, data_dir, SBF, _ROOT_PATCHES)
+    d = _read_from_patches(mpqread, data_dir, SBF, order)
     if d:
         body = d.decode("utf-8", "replace")
         prefix = "-- [EbonholdFR] noms de metiers FR + anti-taint\n"
@@ -221,7 +286,7 @@ def _add_addon_fixes(mpyq, data_dir, patchz, log):
         patchz[SBF] = body.encode("utf-8")
         log("Fix metiers (SpellBookFrame) ajoute a patch-Z.")
     TDB = r"Interface\AddOns\ProjectEbonhold\modules\skillTree\TalentDatabase.lua"
-    d = _read_from_patches(mpyq, data_dir, TDB, ["patch-4.MPQ", "patch-M.MPQ", "patch-D.mpq"])
+    d = _read_from_patches(mpqread, data_dir, TDB, order)
     if d:
         body = d.decode("utf-8", "replace")
         n = 0
@@ -234,7 +299,7 @@ def _add_addon_fixes(mpyq, data_dir, patchz, log):
 
 
 def _build_patchz(data_dir, base_fr, spells_fr, other_fr, log):
-    mpyq, mpqwrite, dbc_localize = _deps()
+    mpqread, mpqwrite, dbc_localize = _deps()
     fr_col = 2 if base_fr else 0
     tr = _load_tr()
     want = {"spells": spells_fr, "other": other_fr}
@@ -244,35 +309,64 @@ def _build_patchz(data_dir, base_fr, spells_fr, other_fr, log):
             p = os.path.join(data_dir, "frFR", m)
             if os.path.exists(p):
                 try:
-                    fr_arch.append(mpyq.MPQArchive(p, listfile=False))
+                    fr_arch.append(_open(mpqread, p))
                 except Exception:
                     pass
 
     def find_base(path):
         for a in fr_arch:
             try:
-                d = a.read_file(path)
+                d = _read(a, path)
                 if d:
                     return d
             except Exception:
                 pass
         return None
 
+    # Un DBC peut exister dans plusieurs patchs : on prend toujours la version du patch le
+    # plus prioritaire (celle que le jeu charge), jamais une copie plus ancienne. Seuls les
+    # patchs qui passent DEVANT patch-5/6 comptent (patch.MPQ, patch-2/3 sont plus anciens).
+    floor = min(_patch_priority(p) for p in TEXT_PATCHES)
+    order = [n for n in _patches_by_priority(data_dir) if _patch_priority(n) >= floor]
+    _close_archives()
+    try:
+        patchz = _collect_patchz(data_dir, mpqread, dbc_localize, tr, want, base_fr, fr_col,
+                                 find_base, order, log)
+    finally:
+        _close_archives()
+        for a in fr_arch:
+            try:
+                a.file.close()
+            except Exception:
+                pass
+    if patchz:
+        mpqwrite.create_mpq(os.path.join(data_dir, "patch-Z.MPQ"), patchz)
+        log("patch-Z.MPQ ecrit (%d fichiers)." % len(patchz))
+    else:
+        _remove_patchz(data_dir)
+        log("patch-Z retire (rien a traduire).")
+
+
+def _collect_patchz(data_dir, mpqread, dbc_localize, tr, want, base_fr, fr_col, find_base, order, log):
     patchz = {}
+    seen = set()
     for patch in TEXT_PATCHES:
         sp = os.path.join(data_dir, patch)
         if not os.path.exists(sp):
             continue
-        a = mpyq.MPQArchive(sp)
-        names = [n for n in a.read_file("(listfile)").decode("latin-1")
+        a = _cached(mpqread, sp)
+        if a is None:
+            continue
+        names = [n for n in _read(a, "(listfile)").decode("latin-1")
                  .replace("\r\n", "\n").split("\n") if n.strip()]
         for n in names:
-            if not n.lower().endswith(".dbc"):
+            if not n.lower().endswith(".dbc") or n.lower() in seen:
                 continue
+            seen.add(n.lower())
             g_fr = want[_group_of(n)]
             if not base_fr and not g_fr:
                 continue
-            raw = a.read_file(n)
+            raw = _read_from_patches(mpqread, data_dir, n, order) or _read(a, n)
             use_base = base_fr and g_fr
             use_tr = tr if g_fr else {}
             base = find_base(n) if use_base else None
@@ -284,15 +378,10 @@ def _build_patchz(data_dir, base_fr, spells_fr, other_fr, log):
                 patchz[n] = merged
     if base_fr:                       # fixes interface custom (metiers, skill tree)
         try:
-            _add_addon_fixes(mpyq, data_dir, patchz, log)
+            _add_addon_fixes(mpqread, data_dir, patchz, log)
         except Exception as e:
             log("Fixes interface non ajoutes (%s)." % e)
-    if patchz:
-        mpqwrite.create_mpq(os.path.join(data_dir, "patch-Z.MPQ"), patchz)
-        log("patch-Z.MPQ ecrit (%d fichiers)." % len(patchz))
-    else:
-        _remove_patchz(data_dir)
-        log("patch-Z retire (rien a traduire).")
+    return patchz
 
 
 def apply(install_dir, base_fr, voices_fr, spells_fr, other_fr, log):
@@ -300,6 +389,9 @@ def apply(install_dir, base_fr, voices_fr, spells_fr, other_fr, log):
     ok, err = is_available()
     if not ok:
         raise RuntimeError(err)
+    if wow.game_running():
+        raise RuntimeError("Ferme d'abord le jeu (Wow.exe) : ses fichiers ne peuvent pas etre "
+                           "modifies pendant qu'il tourne.")
     if base_fr and not pack_present(install_dir):
         raise RuntimeError(
             "Le pack frFR (~2,4 Go) est requis pour mettre le jeu en francais. "

@@ -1,5 +1,30 @@
 # Changelog
 
+## v1.0.11 — fiabilité et sécurité
+- **Catalogue** : après une installation, le launcher ne revient plus à son catalogue
+  embarqué (plus ancien). Le dernier catalogue en ligne est gardé sur le disque et sert
+  au démarrage et hors ligne (« Catalogue (hors ligne) »).
+- **« Tout mettre à jour »** ne met à jour que ce qui est déjà installé (avant : il
+  installait tout le catalogue). Les installations passent une par une.
+- **Numéros de version** : `1.1.6-fr1` n'est plus lu comme 1.1.61 (une 1.1.7 est bien vue
+  comme plus récente).
+- **Auto-mise à jour** : seul le dossier `_internal` du launcher est remplacé ; les autres
+  fichiers du dossier où il est posé (Bureau, Téléchargements…) ne sont plus jamais
+  supprimés. L'empreinte SHA256 est obligatoire. Plus de notification à chaque paquet.
+- **Sécurité** : le texte des addons tiers (notes de version…) ne peut plus injecter de
+  code dans le launcher ; seuls les liens web des sites connus s'ouvrent.
+- **Installation des addons** : seuls les dossiers déclarés de l'addon sont extraits
+  (jamais `ProjectEbonhold`, `Blizzard_*` ou un autre addon glissé dans le zip) ; nouvel
+  essai automatique si la connexion coupe.
+- **Pack FR** : le téléchargement de 2,6 Go reprend là où il s'est arrêté si la
+  connexion coupe, la place libre est vérifiée avant, l'extraction se fait directement
+  dans le jeu (moitié moins de place en temporaire).
+- **Patch FR** : chaque fichier est lu dans le patch serveur le plus prioritaire (celui
+  que le jeu utilise vraiment), avec un lecteur MPQ plus robuste. Le launcher refuse de
+  toucher aux fichiers pendant que le jeu tourne. Correctif « double colonne » et
+  +6 descriptions du 11/09 enfin livrés, **+5 traductions** (Unstable Infusion, montures).
+- Exe plus léger (34 Mo au lieu de 48) ; tests automatiques (`tests/`).
+
 ## v1.0.10 — traduction FR à jour (nouvelle MAJ serveur)
 - Traduction FR embarquée mise à jour : **+205 noms & +296 descriptions** custom traduits
   (echoes, arbre de compétences, affixes de gravure) → **2060 noms + 2718 descriptions**.

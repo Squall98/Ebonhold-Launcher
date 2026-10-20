@@ -15,7 +15,7 @@ telechargeant l'asset de la release, pas besoin du fichier local :
 
 A partir d'un fichier local (le download_url devient le chemin local, pour du test) :
   python add_mod.py --id patch-w --name "Patch W" --category donnees --target data --version 1.0 \\
-      --file "V:/Project/Ebonhold/database/patch-W.MPQ" --icon ti-music --accent amber
+      --file "D:/Projets-WoW/Ebonhold/database/patch-W.MPQ" --icon ti-music --accent amber
 
 Le --category est libre (id d'une categorie du manifeste). Le --target decide ou vont les fichiers
 (addons -> Interface\\AddOns, data -> Data).

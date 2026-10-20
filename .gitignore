@@ -25,3 +25,6 @@ desktop.ini
 # Pack frFR local (2,4 Go) : ne jamais commiter
 frFR.zip
 *.zip
+
+# Environnement de build local
+.venv/

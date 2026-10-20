@@ -48,17 +48,34 @@ def download(url, dest_path, progress=_noop):
                 progress(int(done * 100 / total) if total else 0, "Copie...")
         return h.hexdigest()
 
+    import http.client
+    import time
+    import urllib.error
     import urllib.request
-    req = urllib.request.Request(url, headers={"User-Agent": "EbonholdLauncher"})
-    with urllib.request.urlopen(req, timeout=30) as r, open(dest_path, "wb") as fout:
-        total = int(r.headers.get("Content-Length", 0))
-        done = 0
-        for chunk in iter(lambda: r.read(1 << 16), b""):
-            fout.write(chunk)
-            h.update(chunk)
-            done += len(chunk)
-            progress(int(done * 100 / total) if total else 0, "Telechargement...")
-    return h.hexdigest()
+    last_err = None
+    for attempt in range(3):          # petits fichiers : en cas de coupure, on recommence
+        h = hashlib.sha256()
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "EbonholdLauncher"})
+            with urllib.request.urlopen(req, timeout=30) as r, open(dest_path, "wb") as fout:
+                total = int(r.headers.get("Content-Length", 0))
+                done = 0
+                for chunk in iter(lambda: r.read(1 << 16), b""):
+                    fout.write(chunk)
+                    h.update(chunk)
+                    done += len(chunk)
+                    progress(int(done * 100 / total) if total else 0, "Telechargement...")
+            if total and done < total:
+                raise IOError("telechargement incomplet")
+            return h.hexdigest()
+        except urllib.error.HTTPError as e:
+            if e.code < 500:              # 404, 403... : inutile de reessayer
+                raise RuntimeError("Fichier introuvable sur le serveur (HTTP %d)." % e.code)
+            last_err = e
+        except (OSError, urllib.error.URLError, http.client.HTTPException) as e:
+            last_err = e
+        time.sleep(1.5 * (attempt + 1))
+    raise RuntimeError("Telechargement impossible : %s" % last_err)
 
 
 def _verify(actual_sha, expected_sha):
@@ -89,9 +106,18 @@ def install(product, install_dir, progress=_noop):
         if product["install_target"] == "addons":
             # un addon peut poser PLUSIEURS dossiers (ex: GatherMate + GatherMate_Data).
             roots = product.get("extract_roots") or [product["extract_root"]]
-            backups = [_backup(os.path.join(dest_dir, r)) for r in roots]
+            for r in roots:
+                if _reserved(r):
+                    raise ValueError("Dossier reserve au jeu ou au serveur : %s" % r)
             with zipfile.ZipFile(blob) as z:
-                _safe_extract(z, dest_dir)
+                present = _zip_roots(z)
+                missing = [r for r in roots if r.lower() not in present]
+                if missing:
+                    raise ValueError("Archive inattendue : dossier %s absent du zip." % ", ".join(missing))
+                backups = [_backup(os.path.join(dest_dir, r)) for r in roots]
+                # Seuls les dossiers declares de l'addon sont extraits : jamais un autre
+                # addon, ni un dossier du jeu ou du serveur glisse dans le zip.
+                _safe_extract(z, dest_dir, roots)
             rel = [os.path.join("Interface", "AddOns", r) for r in roots]
         else:  # data : copie du MPQ
             fname = product["filename"]
@@ -176,14 +202,33 @@ def uninstall(product_id, install_dir, product=None):
 
 # ----------------------------------------------------------------- helpers
 
-def _safe_extract(zf, dest_dir):
-    """Extraction Zip avec garde anti 'Zip Slip' (chemins ../ hors du dossier cible)."""
+def _reserved(root):
+    """Dossiers qu'un addon du catalogue ne doit jamais remplacer : addon du serveur,
+    interface Blizzard, correctif FR pose par le launcher."""
+    r = str(root).lower()
+    return r == "projectebonhold" or r.startswith("blizzard_") or r == "ebonholdfrfix"
+
+
+def _zip_roots(zf):
+    return {n.replace("\\", "/").split("/", 1)[0].lower()
+            for n in zf.namelist() if "/" in n.replace("\\", "/")}
+
+
+def _safe_extract(zf, dest_dir, roots=None):
+    """Extraction Zip avec garde anti 'Zip Slip' (chemins ../ hors du dossier cible).
+    Si `roots` est donne, n'extrait que les entrees de ces dossiers racine."""
     dest_abs = os.path.abspath(dest_dir)
+    wanted = {r.lower() for r in roots} if roots else None
+    members = []
     for member in zf.namelist():
+        top = member.replace("\\", "/").split("/", 1)[0].lower()
+        if wanted is not None and top not in wanted:
+            continue
         out = os.path.abspath(os.path.join(dest_dir, member))
         if not (out == dest_abs or out.startswith(dest_abs + os.sep)):
             raise ValueError("Entree d'archive suspecte : %s" % member)
-    zf.extractall(dest_dir)
+        members.append(member)
+    zf.extractall(dest_dir, members=members)
 
 
 def _backup(target):

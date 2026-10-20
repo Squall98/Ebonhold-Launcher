@@ -56,7 +56,7 @@ https://raw.githubusercontent.com/Squall98/Ebonhold-Launcher/main/manifest.json
 Chaque produit déclare `install_target` (`addons` → `Interface\AddOns`, `data` → `Data`),
 sa `version`, son `download_url` et son `sha256` (vérification d'intégrité).
 
-> La version livrée pointe vers des fichiers **locaux** (`V:/Project/Ebonhold/releases/…`)
+> La version livrée pointe vers des fichiers **locaux** (`D:/Projets-WoW/Ebonhold/releases/…`)
 > pour permettre le test hors-ligne. Pour publier : remplacer les `download_url` par les
 > URLs des Releases GitHub et recalculer/garder les `sha256`.
 

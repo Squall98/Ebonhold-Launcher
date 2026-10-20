@@ -54,12 +54,25 @@ def data_dir(install_dir):
 
 
 def find_exe(install_dir):
-    """Renvoie le chemin de l'executable du jeu (Wow.exe / Ebonhold.exe) ou '' si absent."""
-    for name in ("Wow.exe", "WoW.exe", "Ebonhold.exe", "Project-Epoch.exe"):
+    """Renvoie le chemin de l'executable du jeu (Wow.exe) ou '' si absent."""
+    for name in ("Wow.exe", "WoW.exe"):
         p = os.path.join(install_dir, name)
         if os.path.exists(p):
             return p
     return ""
+
+
+def game_running():
+    """True si Wow.exe tourne (ecrire dans Data pendant que le jeu tourne echoue ou abime
+    les fichiers). En cas de doute (commande indisponible), on ne bloque pas."""
+    import subprocess
+    try:
+        out = subprocess.run(["tasklist", "/FI", "IMAGENAME eq Wow.exe", "/NH"],
+                             capture_output=True, text=True, timeout=10,
+                             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)).stdout
+    except Exception:
+        return False
+    return "wow.exe" in out.lower()
 
 
 def target_dir(install_dir, install_target):

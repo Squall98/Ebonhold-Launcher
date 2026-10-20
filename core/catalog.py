@@ -28,24 +28,66 @@ def _load_local():
         return json.load(f)
 
 
+_CACHE_FILE = os.path.join(paths.data_dir(), "manifest-cache.json")
+
+
+def _valid(man):
+    return isinstance(man, dict) and isinstance(man.get("products"), list)
+
+
 def _load_remote(timeout=5):
     import urllib.request
     req = urllib.request.Request(MANIFEST_URL, headers={"User-Agent": "EbonholdLauncher"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode("utf-8"))
+        man = json.loads(r.read().decode("utf-8"))
+    if not _valid(man):
+        raise ValueError("catalogue en ligne illisible")
+    _save_cache(man)
+    return man
+
+
+def _save_cache(man):
+    """Garde le dernier catalogue en ligne : il sert au prochain demarrage et hors ligne."""
+    tmp = _CACHE_FILE + ".tmp"
+    try:
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(man, f, ensure_ascii=False)
+        os.replace(tmp, _CACHE_FILE)
+    except OSError:
+        pass
+
+
+def _load_cache():
+    try:
+        with open(_CACHE_FILE, encoding="utf-8") as f:
+            man = json.load(f)
+        return man if _valid(man) else None
+    except (OSError, ValueError):
+        return None
+
+
+def fetch_offline():
+    """Catalogue sans reseau : le dernier catalogue en ligne garde sur le disque, sauf s'il
+    date d'avant cette version du launcher (le catalogue embarque est alors plus recent)."""
+    from . import version
+    local = _load_local()
+    cache = _load_cache()
+    if cache and not version.is_newer(launcher_version(local), launcher_version(cache)):
+        return cache, "cache"
+    return local, "local"
 
 
 def fetch(prefer_remote=True):
-    """Renvoie (manifest_dict, source) ou source vaut 'remote' ou 'local'.
+    """Renvoie (manifest_dict, source) ou source vaut 'remote', 'cache' ou 'local'.
 
-    Essaie le manifeste en ligne ; en cas d'echec reseau, retombe sur la copie locale.
+    Essaie le manifeste en ligne ; en cas d'echec reseau, retombe sur la copie hors ligne.
     """
     if prefer_remote:
         try:
             return _load_remote(), "remote"
         except Exception:
             pass
-    return _load_local(), "local"
+    return fetch_offline()
 
 
 def products(manifest):

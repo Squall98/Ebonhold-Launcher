@@ -50,13 +50,19 @@ let VIEW = (() => { try { return localStorage.getItem("ebon_view") || "cards"; }
 let SORT = {col:"name", dir:1};
 const $ = (s,r=document) => r.querySelector(s);
 const $$ = (s,r=document) => Array.from(r.querySelectorAll(s));
+// Tout texte venu du catalogue (noms, notes de version des addons tiers…) passe par esc()
+// avant d'entrer dans du HTML : une release piégée ne peut pas injecter de code dans le launcher.
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ACCENTS = ["purple","teal","coral","blue","amber","pink","green"];
+const safeIcon = s => /^ti-[a-z0-9-]+$/.test(s || "") ? s : "";
+const safeAccent = s => ACCENTS.includes(s) ? s : "";
 const TAB_TITLES = {catalog:"Catalogue", installed:"Mes installations", news:"Nouveautés", links:"Liens utiles", settings:"Réglages"};
 
 /* ------------------------------------------------------------------ toasts */
 function toast(msg, kind="info", title=""){
   const el = document.createElement("div");
   el.className = "toast "+kind;
-  el.innerHTML = (title?`<div class="tt">${title}</div>`:"")+msg;
+  el.innerHTML = (title?`<div class="tt">${esc(title)}</div>`:"")+esc(msg);
   $("#toasts").appendChild(el);
   setTimeout(() => { el.style.opacity="0"; setTimeout(()=>el.remove(),250); }, 3800);
 }
@@ -75,18 +81,19 @@ function switchTab(name){
 
 /* ------------------------------------------------------------------ helpers cartes */
 const DEFAULT_ACCENT = {traduction:"purple", interface:"teal", donnees:"coral"};
-const thumbAccent = p => "acc-" + (p.accent || DEFAULT_ACCENT[p.category] || "purple");
-const thumbIcon   = p => p.icon || "ti-puzzle";
+const thumbAccent = p => "acc-" + (safeAccent(p.accent) || DEFAULT_ACCENT[p.category] || "purple");
+const thumbIcon   = p => safeIcon(p.icon) || "ti-puzzle";
 function actionLabel(s){ return s==="uptodate"?"Installé ✓":s==="update"?"Mettre à jour":s==="repair"?"Réparer":"Installer"; }
-function metaLine(p){ return p.status==="update"?`v${p.installed_version} → v${p.version}`:p.status==="repair"?`v${p.version} · fichiers manquants`:`v${p.version}`; }
+function metaLine(p){ const v = esc(p.version), iv = esc(p.installed_version);
+  return p.status==="update"?`v${iv} → v${v}`:p.status==="repair"?`v${v} · fichiers manquants`:`v${v}`; }
 
 function cardHTML(p){
-  const uninstall = p.installed_version!==null ? `<button class="uninstall" data-uid="${p.id}">Désinstaller</button>` : "";
-  return `<div class="card" data-id="${p.id}">
+  const uninstall = p.installed_version!==null ? `<button class="uninstall" data-uid="${esc(p.id)}">Désinstaller</button>` : "";
+  return `<div class="card" data-id="${esc(p.id)}">
     <div class="thumb ${thumbAccent(p)}"><i class="ti ${thumbIcon(p)}"></i></div>
     <div class="body">
-      <div class="name">${p.name}</div>
-      <div class="desc">${p.description||""}</div>
+      <div class="name">${esc(p.name)}</div>
+      <div class="desc">${esc(p.description)}</div>
       <div class="meta">${metaLine(p)}</div>
       <div class="action"><button class="actbtn act-${p.status}" ${p.status==="uptodate"?"disabled":""}>${actionLabel(p.status)}</button></div>
       <div class="progress hidden"><i></i></div>
@@ -103,12 +110,12 @@ function bindCards(scope){
 
 /* ---- vues alternatives : liste compacte + tableau triable ---- */
 const catLabel = id => ((CATALOG && CATALOG.categories || []).find(c => c.id===id) || {}).label || id;
-const accentName = p => p.accent || DEFAULT_ACCENT[p.category] || "purple";
+const accentName = p => safeAccent(p.accent) || DEFAULT_ACCENT[p.category] || "purple";
 function rowHTML(p){
-  const uninstall = p.installed_version!==null ? `<button class="uninstall" data-uid="${p.id}">Désinstaller</button>` : "";
-  return `<div class="row" data-id="${p.id}">
+  const uninstall = p.installed_version!==null ? `<button class="uninstall" data-uid="${esc(p.id)}">Désinstaller</button>` : "";
+  return `<div class="row" data-id="${esc(p.id)}">
     <div class="thumb ${thumbAccent(p)}"><i class="ti ${thumbIcon(p)}"></i></div>
-    <div class="rbody"><div class="name">${p.name}</div><div class="desc">${p.description||""}</div></div>
+    <div class="rbody"><div class="name">${esc(p.name)}</div><div class="desc">${esc(p.description)}</div></div>
     <div class="rmeta">${metaLine(p)}</div>
     <div class="ract"><button class="actbtn act-${p.status}" ${p.status==="uptodate"?"disabled":""}>${actionLabel(p.status)}</button>${uninstall}</div>
   </div>`;
@@ -120,9 +127,9 @@ function sortList(list){
 }
 function tableHTML(list){
   const head = TCOLS.map(c => `<th data-col="${c.k}" class="${SORT.col===c.k?'sorted '+(SORT.dir>0?'asc':'desc'):''}">${c.l}</th>`).join("") + "<th></th>";
-  const rows = sortList(list).map(p => `<tr data-id="${p.id}">
-    <td class="tn"><i class="ti ${thumbIcon(p)}" style="color:var(--${accentName(p)},#aeb6cc)"></i><span>${p.name}</span></td>
-    <td class="tc">${catLabel(p.category)}</td>
+  const rows = sortList(list).map(p => `<tr data-id="${esc(p.id)}">
+    <td class="tn"><i class="ti ${thumbIcon(p)}" style="color:var(--${accentName(p)},#aeb6cc)"></i><span>${esc(p.name)}</span></td>
+    <td class="tc">${esc(catLabel(p.category))}</td>
     <td class="tv">${metaLine(p)}</td>
     <td class="ta"><button class="actbtn act-${p.status}" ${p.status==="uptodate"?"disabled":""}>${actionLabel(p.status)}</button></td>
   </tr>`).join("");
@@ -146,14 +153,14 @@ function setView(v){
 function renderChips(){
   const cats = [{id:"all",label:"Tous",icon:"ti-apps"}].concat(CATALOG.categories||[]);
   $("#filterChips").innerHTML = cats.map(c =>
-    `<button class="chip ${FILTER.cat===c.id?"active":""}" data-cat="${c.id}">${c.icon?'<i class="ti '+c.icon+'"></i>':''}${c.label}</button>`).join("");
+    `<button class="chip ${FILTER.cat===c.id?"active":""}" data-cat="${esc(c.id)}">${safeIcon(c.icon)?'<i class="ti '+safeIcon(c.icon)+'"></i>':''}${esc(c.label)}</button>`).join("");
   $$("#filterChips .chip").forEach(ch => ch.addEventListener("click", () => { FILTER.cat=ch.dataset.cat; renderChips(); renderGrid(); }));
 }
 function renderPacks(){
   const packs = CATALOG.packs||[];
-  $("#packsRow").innerHTML = packs.map(pk => `<div class="pack" data-pid="${pk.id}">
-    <div class="pico" style="background:var(--${pk.accent||'purple'})"><i class="ti ${pk.icon||'ti-package'}"></i></div>
-    <div class="pbody"><div class="pname">${pk.name}</div><div class="pdesc">${pk.description||""}</div>
+  $("#packsRow").innerHTML = packs.map(pk => `<div class="pack" data-pid="${esc(pk.id)}">
+    <div class="pico" style="background:var(--${safeAccent(pk.accent)||'purple'})"><i class="ti ${safeIcon(pk.icon)||'ti-package'}"></i></div>
+    <div class="pbody"><div class="pname">${esc(pk.name)}</div><div class="pdesc">${esc(pk.description)}</div>
       <div class="pcount">${pk.done}/${pk.total} installé${pk.total>1?"s":""}</div></div>
     <button class="${pk.status==='complete'?'complete':''}">${pk.status==='complete'?'Complet ✓':'Installer le pack'}</button>
   </div>`).join("");
@@ -184,7 +191,7 @@ function renderCatalog(){
 
   const upd = c.products.find(p => p.status==="update");
   const banner = $("#banner");
-  if (upd){ banner.innerHTML = `<div class="tag">NOUVELLE VERSION</div><div class="txt">${upd.name} v${upd.version} disponible</div>`; banner.classList.remove("hidden"); }
+  if (upd){ banner.innerHTML = `<div class="tag">NOUVELLE VERSION</div><div class="txt">${esc(upd.name)} v${esc(upd.version)} disponible</div>`; banner.classList.remove("hidden"); }
   else banner.classList.add("hidden");
 
   const lu = $("#launcherUpdate");
@@ -197,13 +204,15 @@ function renderCatalog(){
 
   $("#wowPath").textContent = c.wow_path || "Choisir le dossier WoW…";
   $("#wowStatus").classList.toggle("invalid", !c.wow_valid);
-  $("#sourcePill").textContent = c.source==="remote" ? "Catalogue en ligne" : "Catalogue local";
+  const SOURCES = {remote:["Catalogue en ligne","catalogue en ligne"], cache:["Catalogue (hors ligne)","dernier catalogue en ligne"], local:["Catalogue local","catalogue local"]};
+  const src = SOURCES[c.source] || SOURCES.local;
+  $("#sourcePill").textContent = src[0];
   $("#folderInput").value = c.wow_path || "";
   const fv = $("#folderValid");
   if (c.wow_path){ fv.textContent = c.wow_valid ? "Dossier Ebonhold valide." : "Ce dossier ne ressemble pas à une install Ebonhold."; fv.className="folder-valid "+(c.wow_valid?"ok":"bad"); }
   else fv.textContent="";
   $("#aboutVersion").textContent = "v"+c.launcher_version;
-  $("#aboutSource").textContent = c.source==="remote" ? "catalogue en ligne" : "catalogue local";
+  $("#aboutSource").textContent = src[1];
   api().has_game_exe().then(r => $("#playBtn").classList.toggle("hidden", !(r.present && c.wow_valid)));
 }
 
@@ -216,15 +225,15 @@ function renderInstalled(){
 function renderNews(){
   const items = CATALOG.products.filter(p => p.changelog_url || p.notes);
   $("#newsList").innerHTML = items.map(p => `<div class="item">
-    <div><div class="t">${p.name} v${p.version}</div><div class="s">${p.notes || (p.category)}</div></div>
-    ${p.changelog_url?`<button class="btn ghost" data-url="${p.changelog_url}"><i class="ti ti-external-link"></i>Changelog</button>`:""}
+    <div><div class="t">${esc(p.name)} v${esc(p.version)}</div><div class="s">${esc(p.notes || catLabel(p.category))}</div></div>
+    ${p.changelog_url?`<button class="btn ghost" data-url="${esc(p.changelog_url)}"><i class="ti ti-external-link"></i>Changelog</button>`:""}
   </div>`).join("");
   $$("#newsList button[data-url]").forEach(b => b.addEventListener("click", () => api().open_url(b.dataset.url)));
 }
 function renderLinks(){
   const links = CATALOG.links || [];
-  $("#linksGrid").innerHTML = links.map(l => `<div class="link-card" data-url="${l.url}">
-    <i class="ti ${l.icon||"ti-link"}"></i><span>${l.label}</span><i class="ti ti-external-link ext"></i></div>`).join("");
+  $("#linksGrid").innerHTML = links.map(l => `<div class="link-card" data-url="${esc(l.url)}">
+    <i class="ti ${safeIcon(l.icon)||"ti-link"}"></i><span>${esc(l.label)}</span><i class="ti ti-external-link ext"></i></div>`).join("");
   $("#linksEmpty").classList.toggle("hidden", links.length>0);
   $$("#linksGrid .link-card").forEach(c => c.addEventListener("click", () => api().open_url(c.dataset.url)));
 }
@@ -236,7 +245,7 @@ function openDetail(id){
   $("#modalSub").textContent = (CATALOG.categories.find(c=>c.id===p.category)||{}).label || p.category;
   $("#modalDesc").textContent = p.long_description || p.description || "";
   const th = $("#modalThumb"); th.className = "modal-thumb "+thumbAccent(p); th.innerHTML = `<i class="ti ${thumbIcon(p)}"></i>`;
-  $("#modalHistory").innerHTML = (p.history||[]).map(h => `<div class="hist"><div class="hv">v${h.version}</div><div class="hn">${h.notes||""}</div></div>`).join("") || `<div class="hn" style="color:var(--muted);font-size:12px">Pas d'historique.</div>`;
+  $("#modalHistory").innerHTML = (p.history||[]).map(h => `<div class="hist"><div class="hv">v${esc(h.version)}</div><div class="hn">${esc(h.notes)}</div></div>`).join("") || `<div class="hn" style="color:var(--muted);font-size:12px">Pas d'historique.</div>`;
   const acts = [];
   if (p.status!=="uptodate") acts.push(`<button class="act-${p.status}" data-act="install">${actionLabel(p.status)}</button>`);
   if (p.installed_version!==null) acts.push(`<button class="act-update" data-act="uninstall" style="background:#3a1d1d;color:#f0b3b3">Désinstaller</button>`);
@@ -298,7 +307,7 @@ window.onDone = async (id,ok,msg) => {
 };
 async function updateAll(){
   const r = await api().install_all();
-  filtered().filter(p=>p.status!=="uptodate").forEach(p => startCardProgress(p.id));
+  (r.ids || []).forEach(startCardProgress);
   if (r.count===0) toast("Tout est déjà à jour.","ok");
 }
 
@@ -310,7 +319,9 @@ async function updateLauncher(){
   else if (r.ok){ toast("Téléchargement de la mise à jour…","ok","Launcher"); }
   else toast(r.error||"Erreur.","err","Launcher");
 }
-window.onLauncherProgress = (pct,msg) => toast(`${msg} ${pct}%`,"info","Launcher");
+// Progression affichee dans le bandeau de mise a jour (une notification par paquet en
+// creait des centaines).
+window.onLauncherProgress = (pct,msg) => { $("#launcherUpdateTxt").textContent = `${msg} ${pct}%`; };
 window.onLauncherReady = () => toast("Mise à jour prête, redémarrage…","ok","Launcher");
 window.onLauncherError = (msg) => toast(msg,"err","Launcher");
 

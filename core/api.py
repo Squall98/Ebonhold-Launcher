@@ -6,11 +6,39 @@ leur progression au JS via window.evaluate_js(onProgress / onDone).
 """
 import json
 import os
+import queue
 import subprocess
 import threading
+import time
+import urllib.parse
 import webbrowser
 
 from . import catalog, frconfig, frpack, installer, selfupdate, state, version, wow
+
+# Liens que le launcher accepte d'ouvrir : du web, et seulement ces sites.
+_URL_HOSTS = ("github.com", "raw.githubusercontent.com", "squall98.github.io",
+              "discord.gg", "discord.com", "drive.google.com")
+
+
+def _url_ok(url):
+    try:
+        u = urllib.parse.urlparse(str(url))
+    except ValueError:
+        return False
+    host = (u.hostname or "").lower()
+    return u.scheme == "https" and any(host == h or host.endswith("." + h) for h in _URL_HOSTS)
+
+
+def _throttled(send, every=0.1):
+    """Limite une progression (pct, msg) a ~10 envois par seconde ; 100 % passe toujours."""
+    last = [0.0]
+
+    def progress(pct, msg):
+        now = time.monotonic()
+        if pct >= 100 or now - last[0] >= every:
+            last[0] = now
+            send(pct, msg)
+    return progress
 
 
 def _status(product, installed_version):
@@ -31,16 +59,25 @@ class Api:
         # blocage de plusieurs minutes). Les noms en _ sont ignores par get_functions().
         self._manifest = None
         self._source = None
+        # File d'installation : un seul produit a la fois (jamais deux ecritures en parallele
+        # dans AddOns ni dans state.json).
+        self._queue = queue.Queue()
+        self._queued = set()
+        self._qlock = threading.Lock()
+        self._worker = None
 
     # ----------------------------------------------------------- catalogue
     def get_catalog(self, check_remote=False):
-        """Retourne l'etat complet pour l'UI, INSTANTANEMENT (manifeste local embarque).
+        """Retourne l'etat complet pour l'UI, INSTANTANEMENT (sans reseau).
 
-        Aucun appel reseau sur ce chemin -> demarrage immediat, pas de "Ne repond pas".
+        Au premier appel : dernier catalogue en ligne garde sur le disque, sinon catalogue
+        embarque. Ensuite on GARDE le catalogue deja charge (un rechargement apres une
+        installation ne doit pas revenir au catalogue embarque, plus ancien).
         Si check_remote=True, on verifie le catalogue en ligne EN ARRIERE-PLAN (thread)
         et on pousse la mise a jour au JS via onCatalogUpdate quand elle est prete.
         """
-        self._manifest, self._source = catalog.fetch(prefer_remote=False)
+        if self._manifest is None:
+            self._manifest, self._source = catalog.fetch_offline()
         resp = self._build_catalog()
         if check_remote:
             threading.Thread(target=self._remote_refresh, daemon=True).start()
@@ -95,7 +132,7 @@ class Api:
             # Un mod installe dont des fichiers ont disparu -> a reparer.
             if installed_version is not None and wow_valid and installer.is_broken(p["id"], wow_path):
                 st = "repair"
-            if st != "uptodate":
+            if st in ("update", "repair"):   # "install" (jamais installe) n'est pas une MAJ
                 updates += 1
             row = {
                 "id": p["id"],
@@ -161,25 +198,50 @@ class Api:
 
     # ----------------------------------------------------- install / update
     def install_product(self, product_id):
-        """Lance l'installation/maj en arriere-plan. La progression arrive via onProgress/onDone."""
+        """Met l'installation/maj dans la file (traitee en arriere-plan, une a la fois).
+        La progression arrive via onProgress/onDone."""
         product = self._find(product_id)
         if product is None:
             return {"started": False, "error": "Produit inconnu."}
-        wow_path = state.get_wow_path()
-        if not wow.is_valid_install(wow_path):
+        if not wow.is_valid_install(state.get_wow_path()):
             return {"started": False, "error": "Choisis d'abord ton dossier Ebonhold."}
-
-        def worker():
-            def progress(pct, msg):
-                self._emit("onProgress", product_id, pct, msg)
-            try:
-                installer.install(product, wow_path, progress)
-                self._emit("onDone", product_id, True, "Installe (v%s)." % product["version"])
-            except Exception as e:
-                self._emit("onDone", product_id, False, str(e))
-
-        threading.Thread(target=worker, daemon=True).start()
+        with self._qlock:
+            if product_id not in self._queued:
+                self._queued.add(product_id)
+                self._queue.put(product_id)
+            if self._worker is None or not self._worker.is_alive():
+                self._worker = threading.Thread(target=self._run_queue, daemon=True)
+                self._worker.start()
         return {"started": True}
+
+    def _run_queue(self):
+        while True:
+            try:
+                product_id = self._queue.get(timeout=1)
+            except queue.Empty:
+                with self._qlock:
+                    if self._queue.empty():
+                        self._worker = None
+                        return
+                continue
+            try:
+                self._install_one(product_id)
+            finally:
+                with self._qlock:
+                    self._queued.discard(product_id)
+
+    def _install_one(self, product_id):
+        product = self._find(product_id)
+        wow_path = state.get_wow_path()
+        if product is None or not wow.is_valid_install(wow_path):
+            self._emit("onDone", product_id, False, "Produit ou dossier du jeu introuvable.")
+            return
+        progress = _throttled(lambda pct, msg: self._emit("onProgress", product_id, pct, msg))
+        try:
+            installer.install(product, wow_path, progress)
+            self._emit("onDone", product_id, True, "Installe (v%s)." % product["version"])
+        except Exception as e:
+            self._emit("onDone", product_id, False, str(e))
 
     def uninstall_product(self, product_id):
         wow_path = state.get_wow_path()
@@ -190,18 +252,15 @@ class Api:
             return {"ok": False, "error": str(e)}
 
     def install_all(self):
-        """Installe/MAJ tous les produits qui ne sont pas deja a jour (un par un)."""
+        """Met a jour (ou repare) les produits DEJA installes, un par un. N'installe jamais
+        un produit que le joueur n'a pas choisi."""
         if not self._manifest:
             self.get_catalog()
-        ids = []
-        for p in catalog.products(self._manifest):
-            entry = state.get_installed(p["id"])
-            iv = entry["version"] if entry else None
-            if _status(p, iv) != "uptodate":
-                ids.append(p["id"])
+        rows = self._build_catalog()["products"]
+        ids = [r["id"] for r in rows if r["status"] in ("update", "repair")]
         for pid in ids:
             self.install_product(pid)
-        return {"started": True, "count": len(ids)}
+        return {"started": True, "count": len(ids), "ids": ids}
 
     def install_pack(self, pack_id):
         """Installe/MAJ tous les produits d'un pack qui ne sont pas a jour."""
@@ -233,10 +292,12 @@ class Api:
         if not selfupdate.is_frozen():
             return {"ok": False, "mode": "dev", "url": url,
                     "error": "Disponible uniquement sur la version .exe ; page ouverte."}
+        if not url or not sha:
+            return {"ok": False, "mode": "exe",
+                    "error": "Mise a jour indisponible (catalogue incomplet). Reessaie plus tard."}
 
         def worker():
-            def progress(pct, msg):
-                self._emit("onLauncherProgress", pct, msg)
+            progress = _throttled(lambda pct, msg: self._emit("onLauncherProgress", pct, msg), 0.25)
             try:
                 selfupdate.download_and_swap(url, sha, progress)
                 self._emit("onLauncherReady")          # le JS demande la fermeture
@@ -253,7 +314,7 @@ class Api:
         ok, err = frconfig.is_available()
         wow_path = state.get_wow_path()
         if not self._manifest:
-            self._manifest, self._source = catalog.fetch(prefer_remote=False)
+            self._manifest, self._source = catalog.fetch_offline()
         fr = self._manifest.get("fr_config", {}) if self._manifest else {}
         spec = fr.get("pack_download") or {}
         return {
@@ -271,14 +332,16 @@ class Api:
         if not wow.is_valid_install(wow_path):
             return {"started": False, "error": "Choisis d'abord ton dossier Ebonhold."}
         if not self._manifest:
-            self._manifest, self._source = catalog.fetch(prefer_remote=False)
+            self._manifest, self._source = catalog.fetch_offline()
         spec = (self._manifest.get("fr_config", {}) or {}).get("pack_download") or {}
         if not (spec.get("url") or spec.get("parts")):
             return {"started": False, "error": "Aucune source de pack configuree."}
+        if wow.game_running():
+            return {"started": False, "error": "Ferme d'abord le jeu (Wow.exe), puis recommence."}
 
         def worker():
-            def progress(pct, msg):
-                self._emit("onPackProgress", pct, msg)
+            progress = _throttled(lambda pct, msg: self._emit("onPackProgress", pct, msg), 0.25)
+
             def log(msg):
                 self._emit("onFrLog", msg)
             try:
@@ -295,6 +358,8 @@ class Api:
         wow_path = state.get_wow_path()
         if not wow.is_valid_install(wow_path):
             return {"started": False, "error": "Choisis d'abord ton dossier Ebonhold."}
+        if wow.game_running():
+            return {"started": False, "error": "Ferme d'abord le jeu (Wow.exe), puis recommence."}
 
         def worker():
             def log(msg):
@@ -337,13 +402,16 @@ class Api:
             return {"ok": False, "error": str(e)}
 
     def open_url(self, url):
+        # Jamais un chemin local ni un programme : seulement une page web des sites connus.
+        if not _url_ok(url):
+            return {"ok": False, "error": "Lien refuse."}
         webbrowser.open(url)
         return {"ok": True}
 
     # ------------------------------------------------------------ helpers
     def _find(self, product_id):
         if not self._manifest:
-            self._manifest, self._source = catalog.fetch(prefer_remote=False)
+            self._manifest, self._source = catalog.fetch_offline()
         for p in catalog.products(self._manifest):
             if p["id"] == product_id:
                 return p
