@@ -202,13 +202,7 @@
       "icon": "ti-leaf",
       "accent": "green",
       "notes": "Affiche herbes, minerais, nuages de gaz et poissons sur la carte (WoW 3.3.5a). Contient GatherMate + GatherMate_Data (base de gisements). Installation via le launcher Ebonhold (Catalogue → Installer),",
-      "changelog_url": "https://github.com/Squall98/GatherMate/releases/tag/v1.25",
-      "history": [
-        {
-          "version": "1.25",
-          "notes": "Affiche herbes, minerais, nuages de gaz et poissons sur la carte (WoW 3.3.5a). Contient GatherMate + GatherMate_Data (base de gisements). Installation via le launcher Ebonhold (Catalogue → Installer),"
-        }
-      ]
+      "changelog_url": "https://github.com/Squall98/GatherMate/releases/tag/v1.25"
     },
     {
       "id": "advancedtradeskillwindow2",
@@ -254,17 +248,7 @@
       "icon": "ti-3d-cube-sphere",
       "accent": "teal",
       "notes": "Les textes ajoutés pour l'édition Ebonhold (option « Masquer l'icône minimap » et infobulle de l'icône) passent par la table de traduction : anglais par défaut, français sur un client frFR. Ils n'étai",
-      "changelog_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/tag/v1.2.0",
-      "history": [
-        {
-          "version": "1.2.0",
-          "notes": "Les textes ajoutés pour l'édition Ebonhold (option « Masquer l'icône minimap » et infobulle de l'icône) passent par la table de traduction : anglais par défaut, français sur un client frFR. Ils n'étai"
-        },
-        {
-          "version": "1.1.6-fr1",
-          "notes": "Version Ebonhold de GatherHud (HUD de recolte en vue 3D, WoW 3.3.5a)."
-        }
-      ]
+      "changelog_url": "https://github.com/Squall98/GatherHud-Ebonhold/releases/tag/v1.2.0"
     },
     {
       "id": "ebon-builds",
